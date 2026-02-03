@@ -4,18 +4,22 @@ import { useState } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-
-const navLinks = [
-    { name: "Home", href: "/" },
-    { name: "About Us", href: "#about" },
-    { name: "Gallery", href: "#gallery" },
-    { name: "Donations", href: "#donations" },
-    { name: "Events", href: "#events" },
-    { name: "Contact", href: "#contact" },
-];
+import { useLanguage } from "@/context/LanguageContext";
+import { translations } from "@/lib/translations";
 
 export default function Header() {
     const [isOpen, setIsOpen] = useState(false);
+    const { language, toggleLanguage } = useLanguage();
+    const t = translations[language].nav;
+
+    const navLinks = [
+        { name: t.home, href: "/" },
+        { name: t.about, href: "#about" },
+        { name: t.gallery, href: "#gallery" },
+        { name: t.donations, href: "#donations" },
+        { name: t.events, href: "#events" },
+        { name: t.contact, href: "#contact" },
+    ];
 
     return (
         <header className="fixed top-0 w-full z-50 bg-gradient-to-r from-primary-gradient-start to-primary-gradient-end text-white shadow-md border-b border-secondary/20">
@@ -51,8 +55,11 @@ export default function Header() {
 
                 {/* Right Section: Language Toggle (Small) */}
                 <div className="hidden md:block">
-                    <button className="text-[10px] font-bold tracking-widest border border-secondary/40 px-3 py-1 rounded text-secondary hover:bg-secondary hover:text-primary transition-all">
-                        KANNADA / ENGLISH
+                    <button
+                        onClick={toggleLanguage}
+                        className="text-[10px] font-bold tracking-widest border border-secondary/40 px-3 py-1 rounded text-secondary hover:bg-secondary hover:text-primary transition-all uppercase"
+                    >
+                        {t.toggleBtn}
                     </button>
                 </div>
 
@@ -86,8 +93,11 @@ export default function Header() {
                                 </Link>
                             ))}
                             <div className="pt-4 w-full">
-                                <button className="w-full py-3 bg-secondary/10 border border-secondary text-secondary rounded-full text-xs font-bold tracking-widest uppercase">
-                                    Switch to Kannada
+                                <button
+                                    onClick={() => { toggleLanguage(); setIsOpen(false); }}
+                                    className="w-full py-3 bg-secondary/10 border border-secondary text-secondary rounded-full text-xs font-bold tracking-widest uppercase"
+                                >
+                                    {t.toggleBtn}
                                 </button>
                             </div>
                         </nav>

@@ -2,8 +2,13 @@
 
 import { motion } from "framer-motion";
 import { ArrowRight, Calendar } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
+import { translations } from "@/lib/translations";
 
 export default function Hero() {
+    const { language } = useLanguage();
+    const t = translations[language].hero;
+
     return (
         <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-primary overflow-x-hidden pt-20">
             {/* Background Gradient & Pattern Overlay */}
@@ -20,33 +25,29 @@ export default function Hero() {
                 >
                     <div className="inline-flex items-center gap-2 px-3 py-1 border border-secondary/30 rounded-full bg-white/5 backdrop-blur-sm self-center lg:self-start mx-auto lg:mx-0">
                         <span className="w-2 h-2 bg-secondary rounded-full animate-pulse" />
-                        <span className="text-secondary text-[10px] tracking-widest uppercase font-bold">Est. 2024</span>
+                        <span className="text-secondary text-[10px] tracking-widest uppercase font-bold">{t.est}</span>
                     </div>
 
                     <div className="space-y-4">
                         <h1 className="text-4xl md:text-5xl lg:text-7xl font-serif font-medium leading-[1.1] text-white">
-                            Serving <span className="text-transparent bg-clip-text bg-gradient-to-r from-secondary-light to-secondary-dark">Dharma</span> <br />
-                            Spreading <span className="text-transparent bg-clip-text bg-gradient-to-r from-secondary-light to-secondary-dark">Devotion</span>
+                            {t.title_line1} <br />
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-secondary-light to-secondary-dark">{t.title_line2}</span>
                         </h1>
                         <div className="h-1 w-24 bg-gradient-to-r from-secondary to-transparent rounded-full mx-auto lg:mx-0" />
                     </div>
 
                     <p className="text-lg md:text-xl text-white/80 leading-relaxed font-sans max-w-lg mx-auto lg:mx-0">
-                        "Promoting Dharma & Social Welfare for a Better Society"
-                        <br />
-                        <span className="text-base text-secondary/90 mt-2 block font-medium">
-                            ಉತ್ತಮ ಸಮಾಜಕ್ಕಾಗಿ ಧರ್ಮ ಮತ್ತು ಸಾಮಾಜಿಕ ಕಲ್ಯಾಣವನ್ನು ಉತ್ತೇಜಿಸುವುದು
-                        </span>
+                        {t.quote}
                     </p>
 
                     <div className="flex flex-col sm:flex-row gap-5 justify-center lg:justify-start pt-2">
                         <button className="px-8 py-4 bg-gradient-to-r from-secondary to-secondary-dark hover:from-secondary-light hover:to-secondary text-primary-dark font-bold rounded-full shadow-[0_4px_14px_0_rgba(197,160,89,0.39)] hover:shadow-[0_6px_20px_rgba(197,160,89,0.23)] hover:-translate-y-1 transition-all flex items-center justify-center gap-2 text-sm uppercase tracking-wide">
-                            Donate Now
+                            {t.donateBtn}
                             <ArrowRight size={16} />
                         </button>
                         <button className="px-8 py-4 border border-secondary/30 bg-white/5 hover:bg-white/10 text-white font-medium rounded-full backdrop-blur-md transition-all flex items-center justify-center gap-2 text-sm uppercase tracking-wide">
                             <Calendar size={16} className="text-secondary" />
-                            Upcoming Events
+                            {t.eventsBtn}
                         </button>
                     </div>
                 </motion.div>

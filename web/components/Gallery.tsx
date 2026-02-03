@@ -1,8 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useLanguage } from "@/context/LanguageContext";
+import { translations } from "@/lib/translations";
 
 export default function Gallery() {
+    const { language } = useLanguage();
+    const t = translations[language].gallery;
+
     return (
         <section id="gallery" className="py-20 bg-primary text-white relative overflow-hidden">
             {/* Background Pattern */}
@@ -10,8 +15,8 @@ export default function Gallery() {
 
             <div className="container mx-auto px-4 lg:px-12 relative z-10">
                 <div className="text-center mb-12 space-y-4">
-                    <h2 className="text-3xl md:text-5xl font-serif font-bold text-white">Photo Gallery</h2>
-                    <p className="text-secondary font-medium">ಛಾಯಾಚಿತ್ರ ಗ್ಯಾಲರಿ</p>
+                    <h2 className="text-3xl md:text-5xl font-serif font-bold text-white">{t.title}</h2>
+                    <p className="text-secondary font-medium">{t.subtitle}</p>
                     <div className="w-16 h-1 bg-secondary mx-auto rounded-full" />
                 </div>
 
@@ -46,7 +51,7 @@ export default function Gallery() {
 
                 <div className="mt-12 text-center">
                     <button className="px-8 py-3 border border-secondary text-secondary hover:bg-secondary hover:text-primary font-bold rounded-full transition-all">
-                        View Full Gallery
+                        {t.viewBtn}
                     </button>
                 </div>
             </div>

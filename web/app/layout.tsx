@@ -19,6 +19,8 @@ export const metadata: Metadata = {
   description: "Serving Dharma · Spreading Devotion · Supporting Humanity",
 };
 
+import { LanguageProvider } from "@/context/LanguageContext";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -30,7 +32,9 @@ export default function RootLayout({
         className={`${cinzel.variable} ${poppins.variable} antialiased`}
         suppressHydrationWarning
       >
-        {children}
+        <LanguageProvider>
+          {children}
+        </LanguageProvider>
       </body>
     </html>
   );

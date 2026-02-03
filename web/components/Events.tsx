@@ -2,44 +2,30 @@
 
 import { motion } from "framer-motion";
 import { ArrowRight, Calendar, MapPin } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
+import { translations } from "@/lib/translations";
 
-const events = [
-    {
-        title: "Ganesh Puja",
-        date: "April 12, 2026",
-        location: "Main Temple Hall",
-        image: "bg-gradient-to-br from-orange-400 to-red-500",
-    },
-    {
-        title: "Annadanam Seva",
-        date: "April 20, 2026",
-        location: "Community Hall",
-        image: "bg-gradient-to-br from-yellow-400 to-orange-500",
-    },
-    {
-        title: "Rudra Homa",
-        date: "April 28, 2026",
-        location: "Yaga Shala",
-        image: "bg-gradient-to-br from-red-500 to-purple-600",
-    },
-];
+const bgImages = ["bg-gradient-to-br from-orange-400 to-red-500", "bg-gradient-to-br from-yellow-400 to-orange-500", "bg-gradient-to-br from-red-500 to-purple-600"];
 
 export default function Events() {
+    const { language } = useLanguage();
+    const t = translations[language].events;
+
     return (
         <section id="events" className="py-20 bg-surface">
             <div className="container mx-auto px-4 lg:px-12">
                 <div className="flex flex-col md:flex-row items-end justify-between mb-12 gap-6">
                     <div className="space-y-2 text-center md:text-left w-full md:w-auto">
-                        <h2 className="text-3xl md:text-5xl font-serif font-bold text-primary">Upcoming Events</h2>
-                        <p className="text-secondary-dark font-medium">ಮುಂಬರುವ ಕಾರ್ಯಕ್ರಮಗಳು</p>
+                        <h2 className="text-3xl md:text-5xl font-serif font-bold text-primary">{t.title}</h2>
+                        <p className="text-secondary-dark font-medium">{t.subtitle}</p>
                     </div>
                     <button className="hidden md:flex items-center gap-2 text-primary font-bold hover:text-secondary transition-colors underline-offset-4 hover:underline">
-                        View All Events <ArrowRight size={16} />
+                        {t.viewAll} <ArrowRight size={16} />
                     </button>
                 </div>
 
                 <div className="grid md:grid-cols-3 gap-8">
-                    {events.map((event, idx) => (
+                    {t.cards.map((event, idx) => (
                         <motion.div
                             key={idx}
                             initial={{ opacity: 0, y: 20 }}
@@ -49,7 +35,7 @@ export default function Events() {
                             className="group bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100 hover:shadow-2xl transition-all"
                         >
                             {/* Image Placeholder */}
-                            <div className={`h-48 w-full ${event.image} relative overflow-hidden`}>
+                            <div className={`h-48 w-full ${bgImages[idx]} relative overflow-hidden`}>
                                 <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-all" />
                                 <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-lg text-xs font-bold text-primary shadow-sm">
                                     UPCOMING
@@ -70,12 +56,12 @@ export default function Events() {
                                     </div>
                                     <div className="flex items-center gap-2">
                                         <MapPin size={14} className="text-secondary" />
-                                        <span>{event.location}</span>
+                                        <span>{event.loc}</span>
                                     </div>
                                 </div>
 
                                 <button className="w-full py-2.5 mt-2 rounded-xl border border-primary/10 text-primary font-bold hover:bg-primary hover:text-white transition-all text-sm">
-                                    Register Interest
+                                    {t.register}
                                 </button>
                             </div>
                         </motion.div>
@@ -84,7 +70,7 @@ export default function Events() {
 
                 <div className="mt-8 text-center md:hidden">
                     <button className="inline-flex items-center gap-2 text-primary font-bold hover:text-secondary transition-colors">
-                        View All Events <ArrowRight size={16} />
+                        {t.viewAll} <ArrowRight size={16} />
                     </button>
                 </div>
             </div>
