@@ -1,0 +1,64 @@
+@import "tailwindcss";
+
+@theme {
+  /* Colors */
+  --color-primary: #2E0249;
+  /* Deep Royal Purple */
+  --color-primary-light: #570A80;
+  --color-primary-dark: #1A002E;
+
+  --color-secondary: #D4AF37;
+  /* Metallic Gold */
+  --color-secondary-light: #F4C430;
+  /* Saffron-ish Gold */
+  --color-secondary-dark: #AA8C2C;
+
+  --color-accent-saffron: #FF9933;
+  --color-accent-lavender: #F3E5F5;
+
+  /* Fonts */
+  --font-sans: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-cinzel), ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+
+  /* Animations & Backgrounds */
+  --background-image-mandala: url('/assets/mandala-bg.svg');
+}
+
+/* Base Styles */
+:root {
+  --background: #FFFFFF;
+  --foreground: #2E0249;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: var(--font-sans);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-serif);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-accent-lavender);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-secondary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-secondary-dark);
+}
