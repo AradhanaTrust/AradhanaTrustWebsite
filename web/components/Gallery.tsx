@@ -1,8 +1,17 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { useLanguage } from "@/context/LanguageContext";
 import { translations } from "@/lib/translations";
+
+const galleryImages = [
+    "/assets/gallery-1.png", // Main
+    "/assets/gallery-2.png",
+    "/assets/gallery-3.png",
+    "/assets/gallery-4.png",
+    "/assets/gallery-5.png",
+];
 
 export default function Gallery() {
     const { language } = useLanguage();
@@ -28,14 +37,20 @@ export default function Gallery() {
                         viewport={{ once: true }}
                         className="col-span-2 row-span-2 bg-gray-800 rounded-2xl overflow-hidden relative group"
                     >
+                        <Image
+                            src={galleryImages[0]}
+                            alt="Temple Main"
+                            fill
+                            className="object-cover group-hover:scale-105 transition-transform duration-700"
+                        />
                         <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all" />
                         <div className="absolute bottom-4 left-4">
-                            <p className="text-white font-bold">Temple Premises</p>
+                            <p className="text-white font-bold text-lg drop-shadow-md">Temple Architecture</p>
                         </div>
                     </motion.div>
 
                     {/* Smaller Images */}
-                    {[1, 2, 3, 4].map((i) => (
+                    {galleryImages.slice(1).map((img, i) => (
                         <motion.div
                             key={i}
                             initial={{ opacity: 0, scale: 0.9 }}
@@ -44,6 +59,12 @@ export default function Gallery() {
                             viewport={{ once: true }}
                             className="bg-gray-700 rounded-2xl overflow-hidden relative group"
                         >
+                            <Image
+                                src={img}
+                                alt={`Gallery image ${i + 1}`}
+                                fill
+                                className="object-cover group-hover:scale-110 transition-transform duration-500"
+                            />
                             <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all" />
                         </motion.div>
                     ))}

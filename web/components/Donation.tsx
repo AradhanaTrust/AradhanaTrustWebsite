@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Copy, QrCode } from "lucide-react";
+import Image from "next/image";
 import { useLanguage } from "@/context/LanguageContext";
 import { translations } from "@/lib/translations";
 
@@ -47,8 +48,12 @@ export default function Donation() {
                         <h3 className="text-primary font-bold text-xl uppercase tracking-widest">{t.scanTitle}</h3>
 
                         <div className="aspect-square bg-gray-100 rounded-xl border-2 border-dashed border-gray-300 flex items-center justify-center relative overflow-hidden group">
-                            <QrCode size={120} className="text-gray-400 group-hover:scale-110 transition-transform duration-500" />
-                            <div className="absolute inset-0 bg-gradient-to-tr from-secondary/20 to-transparent pointer-events-none" />
+                            <Image
+                                src="/assets/donation-qr.png"
+                                alt="Donate QR Code"
+                                fill
+                                className="object-cover group-hover:scale-105 transition-transform duration-500"
+                            />
                         </div>
 
                         <button className="w-full py-3 bg-gradient-to-r from-secondary to-secondary-dark text-primary font-bold rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all">

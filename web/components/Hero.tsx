@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { ArrowRight, Calendar } from "lucide-react";
+import Image from "next/image";
 import { useLanguage } from "@/context/LanguageContext";
 import { translations } from "@/lib/translations";
 
@@ -63,11 +64,18 @@ export default function Hero() {
                     <div className="relative w-full max-w-md lg:max-w-lg h-full rounded-t-[200px] border-4 border-secondary/20 p-2">
                         <div className="w-full h-full rounded-t-[190px] overflow-hidden relative bg-gradient-to-b from-primary-light to-primary-dark group">
                             {/* Image Placeholder */}
-                            <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all duration-700" />
+                            <Image
+                                src="/assets/hero-bg.png"
+                                alt="Temple Gopuram"
+                                fill
+                                className="object-cover group-hover:scale-105 transition-transform duration-700"
+                                priority
+                            />
+                            <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all duration-700" />
 
                             <div className="absolute inset-0 flex flex-col items-center justify-end pb-20 text-center z-10">
-                                <span className="text-6xl mb-4 drop-shadow-[0_0_15px_rgba(255,255,255,0.5)]">🛕</span>
-                                <p className="text-white/60 font-serif tracking-widest text-xs uppercase">Temple Image Placeholder</p>
+                                {/* <span className="text-6xl mb-4 drop-shadow-[0_0_15px_rgba(255,255,255,0.5)]">🛕</span>
+                                <p className="text-white/60 font-serif tracking-widest text-xs uppercase">Temple Image Placeholder</p> */}
                             </div>
 
                             {/* Glow Effect */}

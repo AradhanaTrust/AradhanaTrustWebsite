@@ -2,10 +2,11 @@
 
 import { motion } from "framer-motion";
 import { ArrowRight, Calendar, MapPin } from "lucide-react";
+import Image from "next/image";
 import { useLanguage } from "@/context/LanguageContext";
 import { translations } from "@/lib/translations";
 
-const bgImages = ["bg-gradient-to-br from-orange-400 to-red-500", "bg-gradient-to-br from-yellow-400 to-orange-500", "bg-gradient-to-br from-red-500 to-purple-600"];
+const eventImages = ["/assets/event-ganesh.png", "/assets/event-annadanam.png", "/assets/event-homa.png"];
 
 export default function Events() {
     const { language } = useLanguage();
@@ -35,9 +36,15 @@ export default function Events() {
                             className="group bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100 hover:shadow-2xl transition-all"
                         >
                             {/* Image Placeholder */}
-                            <div className={`h-48 w-full ${bgImages[idx]} relative overflow-hidden`}>
+                            <div className="h-48 w-full relative overflow-hidden">
+                                <Image
+                                    src={eventImages[idx]}
+                                    alt={event.title}
+                                    fill
+                                    className="object-cover group-hover:scale-110 transition-transform duration-500"
+                                />
                                 <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-all" />
-                                <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-lg text-xs font-bold text-primary shadow-sm">
+                                <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-lg text-xs font-bold text-primary shadow-sm z-10">
                                     UPCOMING
                                 </div>
                             </div>
@@ -67,6 +74,7 @@ export default function Events() {
                         </motion.div>
                     ))}
                 </div>
+
 
                 <div className="mt-8 text-center md:hidden">
                     <button className="inline-flex items-center gap-2 text-primary font-bold hover:text-secondary transition-colors">
