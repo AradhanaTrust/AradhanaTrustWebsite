@@ -73,6 +73,13 @@ export const translations = {
             refund: "Refund Policy",
             copyright: "© 2026 Aradhana Dharmika Trust. All rights reserved.",
             designed: "Designed with Devotion.",
+            contactInfo: {
+                address: "No. 123, Temple Road, Malleshwaram, Bengaluru - 560003",
+                phone: "+91 98765 43210",
+                email: "contact@aradhanatrust.org",
+                whatsapp: "+91 98765 43210",
+                mapLabel: "Locate us on Google Maps"
+            }
         }
     },
     kn: {
@@ -149,6 +156,13 @@ export const translations = {
             refund: "ಮರುಪಾವತಿ ನೀತಿ",
             copyright: "© 2026 ಆರಾಧನಾ ಧಾರ್ಮಿಕ ಟ್ರಸ್ಟ್. ಎಲ್ಲಾ ಹಕ್ಕುಗಳನ್ನು ಕಾಯ್ದಿರಿಸಲಾಗಿದೆ.",
             designed: "ಭಕ್ತಿಯಿಂದ ವಿನ್ಯಾಸಗೊಳಿಸಲಾಗಿದೆ.",
+            contactInfo: {
+                address: "ನಂ. 123, ದೇವಾಲಯ ರಸ್ತೆ, ಮಲ್ಲೇಶ್ವರಂ, ಬೆಂಗಳೂರು - 560003",
+                phone: "+91 98765 43210",
+                email: "contact@aradhanatrust.org",
+                whatsapp: "+91 98765 43210",
+                mapLabel: "ಗೂಗಲ್ ಮ್ಯಾಪ್‌ನಲ್ಲಿ ನೋಡಿ"
+            }
         }
     }
 };
