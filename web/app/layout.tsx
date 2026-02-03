@@ -28,6 +28,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={`${cinzel.variable} ${poppins.variable} antialiased`}
+        suppressHydrationWarning
       >
         {children}
       </body>

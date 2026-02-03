@@ -18,40 +18,43 @@ export default function Header() {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <header className="fixed top-0 w-full z-50 bg-primary text-white border-b-2 border-secondary shadow-lg">
-            <div className="container mx-auto px-4 md:px-6 h-20 flex items-center justify-between">
+        <header className="fixed top-0 w-full z-50 bg-gradient-to-r from-primary-gradient-start to-primary-gradient-end text-white shadow-md border-b border-secondary/20">
+            <div className="container mx-auto px-4 lg:px-12 h-20 flex items-center justify-between">
                 {/* Logo Section */}
-                <Link href="/" className="flex items-center gap-2">
-                    {/* Placeholder for Logo */}
-                    <div className="w-10 h-10 bg-secondary rounded-full flex items-center justify-center text-primary font-bold">
-                        A
+                <Link href="/" className="flex items-center gap-3 group">
+                    <div className="w-10 h-10 bg-secondary rounded-full flex items-center justify-center text-primary font-bold shadow-[0_0_15px_rgba(197,160,89,0.3)] group-hover:shadow-[0_0_20px_rgba(197,160,89,0.6)] transition-all">
+                        <span className="text-xl">🕉️</span>
                     </div>
                     <div className="flex flex-col">
-                        <h1 className="text-xl md:text-2xl font-serif font-bold tracking-wide text-secondary">
-                            Aradhana
+                        <h1 className="text-lg md:text-xl font-serif font-bold tracking-wider text-white">
+                            ARADHANA
                         </h1>
-                        <span className="text-[10px] md:text-xs uppercase tracking-widest opacity-90">
+                        <span className="text-[10px] md:text-[11px] uppercase tracking-[0.2em] text-secondary font-medium">
                             Dharmika Trust
                         </span>
                     </div>
                 </Link>
 
-                {/* Desktop Navigation */}
-                <nav className="hidden md:flex items-center gap-8">
+                {/* Desktop Navigation - Centered & Premium */}
+                <nav className="hidden md:flex items-center gap-8 bg-white/5 px-8 py-2 rounded-full border border-white/10 backdrop-blur-sm">
                     {navLinks.map((link) => (
                         <Link
                             key={link.name}
                             href={link.href}
-                            className="relative text-sm font-medium hover:text-secondary transition-colors group"
+                            className="relative text-xs font-bold uppercase tracking-widest text-white/80 hover:text-secondary transition-colors group py-1"
                         >
                             {link.name}
-                            <span className="absolute left-0 bottom-[-4px] w-0 h-[2px] bg-secondary transition-all duration-300 group-hover:w-full" />
+                            <span className="absolute left-1/2 -translate-x-1/2 bottom-0 w-0 h-[1.5px] bg-secondary transition-all duration-300 group-hover:w-full" />
                         </Link>
                     ))}
-                    <button className="px-4 py-1.5 border border-secondary text-secondary rounded-full text-xs font-bold hover:bg-secondary hover:text-primary transition-all">
-                        KANNADA
-                    </button>
                 </nav>
+
+                {/* Right Section: Language Toggle (Small) */}
+                <div className="hidden md:block">
+                    <button className="text-[10px] font-bold tracking-widest border border-secondary/40 px-3 py-1 rounded text-secondary hover:bg-secondary hover:text-primary transition-all">
+                        KANNADA / ENGLISH
+                    </button>
+                </div>
 
                 {/* Mobile Menu Button */}
                 <button
@@ -62,29 +65,29 @@ export default function Header() {
                 </button>
             </div>
 
-            {/* Mobile Mobile Menu */}
+            {/* Mobile Menu */}
             <AnimatePresence>
                 {isOpen && (
                     <motion.div
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: "auto" }}
                         exit={{ opacity: 0, height: 0 }}
-                        className="md:hidden bg-primary-dark border-b border-white/10 overflow-hidden"
+                        className="md:hidden bg-primary border-b border-secondary/20 overflow-hidden"
                     >
-                        <nav className="flex flex-col p-4 space-y-4">
+                        <nav className="flex flex-col p-6 space-y-4 items-center">
                             {navLinks.map((link) => (
                                 <Link
                                     key={link.name}
                                     href={link.href}
                                     onClick={() => setIsOpen(false)}
-                                    className="text-white/80 hover:text-secondary font-medium"
+                                    className="text-white/90 hover:text-secondary font-serif text-lg tracking-wide"
                                 >
                                     {link.name}
                                 </Link>
                             ))}
-                            <div className="pt-2">
-                                <button className="px-4 py-2 border border-secondary text-secondary rounded w-full text-sm font-bold">
-                                    SWITCH TO KANNADA
+                            <div className="pt-4 w-full">
+                                <button className="w-full py-3 bg-secondary/10 border border-secondary text-secondary rounded-full text-xs font-bold tracking-widest uppercase">
+                                    Switch to Kannada
                                 </button>
                             </div>
                         </nav>
