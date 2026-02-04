@@ -37,7 +37,7 @@ This guide covers how to deploy the Aradhana Dharmika Trust website on Vercel's 
     | :--- | :--- |
     | `DATABASE_URL` | Connection string for your Database (e.g., from Neon/Supabase). Format: `postgres://user:pass@host/db` |
     | `NEXTAUTH_SECRET` | A random 32-character string used to encrypt sessions. Generate one here: [generate-secret.vercel.app](https://generate-secret.vercel.app/32) |
-    | `NEXTAUTH_URL` | The URL of your deployed site (e.g., `https://aradhana-trust.vercel.app`). *Note: For the initial deployment, you can leave this blank or update it after the first deploy.* |
+    | `NEXTAUTH_URL` | `https://aradhanadharmikatrust.org` (or your temporary `.vercel.app` link if testing first) |
 
 3.  **Database Setup (Postgres)**:
     - *Note: SQLite does not work on Vercel.* You need a cloud Postgres DB.
@@ -54,9 +54,39 @@ This guide covers how to deploy the Aradhana Dharmika Trust website on Vercel's 
 4.  **Deploy**:
     - Click **"Deploy"**.
     - Vercel will build your site. Wait ~1 minute.
-    - Success! Your site is live.
+    - Success! Your site is live using the temporary Vercel domain.
 
-## Domain Setup
-- Go to "Settings" -> "Domains".
-- Add your custom domain (e.g., `aradhanatrust.org`).
-- Update the DNS settings in your domain registrar (Hostinger/GoDaddy) to point to Vercel (CNAME record).
+## Domain Setup (aradhanadharmikatrust.org)
+Since your domain is not yet configured with DNS or SSL:
+
+1.  **Add Domain in Vercel:**
+    - Go to your Project -> **Settings** -> **Domains**.
+    - Enter `aradhanadharmikatrust.org` and click **Add**.
+    - It will say "Invalid Configuration" (Expected).
+
+2.  **Configure DNS (at Wix):**
+    - Log in to your Wix Dashboard.
+    - Go to **Settings** -> **Domains**.
+    - Click the header (3 dots) next to your domain -> **Manage DNS Records**.
+    - **A (Host) Record**:
+        - **Host Name**: `@` (or leave empty if Wix requires)
+        - **Value / Points to**: `76.76.21.21` (Vercel IP)
+        - *Note: Delete any existing A records pointing to Wix IPs.*
+    - **CNAME (Aliases) Record**:
+        - **Host Name**: `www`
+        - **Value / Points to**: `cname.vercel-dns.com`
+
+3.  **SSL/HTTPS:**
+    - **Vercel handles this automatically.**
+    - Once the DNS changes propagate (can take 1-48 hours), Vercel will automatically generate a free SSL certificate for you.
+    - You do **not** need to buy SSL separately.
+
+## Troubleshooting: "Deploy" Button Disabled?
+If the **Deploy** button is grayed out during setup, check these common issues:
+
+1.  **Environment Variables Not Added**:
+    - You must click the **"Add"** button after typing each Key/Value pair. If they are still in the text box, they are not saved.
+2.  **Root Directory Selection**:
+    - When selecting the `web` folder, make sure you **confirmed** the selection in the modal. It should display `web` next to the Root Directory label, not `./`.
+3.  **Framework Preset**:
+    - Ensure it says `Next.js`. If it says "Other", try selecting Next.js manually.
