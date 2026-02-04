@@ -20,13 +20,24 @@ This guide covers how to deploy the Aradhana Dharmika Trust website on Vercel's 
     - Select your GitHub repository (`AradhanaTrustWebsite`).
 
 2.  **Configure Project**:
-    - **Framework Preset**: Ensure "Next.js" is selected.
-    - **Root Directory**: Select `web` (since our Next.js app is inside the `web` folder).
-    - **Environment Variables**:
-        - Expand the "Environment Variables" section.
-        - Add `DATABASE_URL` (Instructions below).
-        - Add `NEXTAUTH_SECRET` (Generate one using `openssl rand -base64 32`).
-        - Add `NEXTAUTH_URL` (Set to your Vercel domain, e.g., `https://aradhana-trust.vercel.app`).
+    You will be asked to configure the "Import Project" settings. Use the following exact values:
+
+    | Setting | Value | Notes |
+    | :--- | :--- | :--- |
+    | **Framework Preset** | `Next.js` | Vercel usually detects this automatically. |
+    | **Root Directory** | `web` | **Important:** Click "Edit" and select the `web` folder. Do NOT use the root `./`. |
+    | **Build Command** | `next build` | Default value. Leave as is. |
+    | **Output Directory** | `.next` | Default value. Leave as is. |
+    | **Install Command** | `npm install` | Default value. Leave as is. |
+
+    **Environment Variables**:
+    Expand the "Environment Variables" section and add the following keys.
+
+    | Key | Value Description |
+    | :--- | :--- |
+    | `DATABASE_URL` | Connection string for your Database (e.g., from Neon/Supabase). Format: `postgres://user:pass@host/db` |
+    | `NEXTAUTH_SECRET` | A random 32-character string used to encrypt sessions. Generate one here: [generate-secret.vercel.app](https://generate-secret.vercel.app/32) |
+    | `NEXTAUTH_URL` | The URL of your deployed site (e.g., `https://aradhana-trust.vercel.app`). *Note: For the initial deployment, you can leave this blank or update it after the first deploy.* |
 
 3.  **Database Setup (Postgres)**:
     - *Note: SQLite does not work on Vercel.* You need a cloud Postgres DB.
