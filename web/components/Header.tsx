@@ -26,17 +26,7 @@ export default function Header() {
             <div className="container mx-auto px-4 lg:px-12 h-20 flex items-center justify-between">
                 {/* Logo Section */}
                 <Link href="/" className="flex items-center gap-3 group">
-                    <div className="w-10 h-10 bg-secondary rounded-full flex items-center justify-center text-primary font-bold shadow-[0_0_15px_rgba(197,160,89,0.3)] group-hover:shadow-[0_0_20px_rgba(197,160,89,0.6)] transition-all">
-                        <span className="text-xl">🕉️</span>
-                    </div>
-                    <div className="flex flex-col">
-                        <h1 className="text-lg md:text-xl font-serif font-bold tracking-wider text-white">
-                            ARADHANA
-                        </h1>
-                        <span className="text-[10px] md:text-[11px] uppercase tracking-[0.2em] text-secondary font-medium">
-                            Dharmika Trust
-                        </span>
-                    </div>
+                    <img src="/assets/Logo_Main.png" alt="Aradhana Dharmika Trust" className="h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105" />
                 </Link>
 
                 {/* Desktop Navigation - Centered & Premium */}

@@ -25,3 +25,6 @@ yarn-error.log*
 # IDEs
 .vscode/
 .idea/
+
+# Deployment Secrets
+deployment_secrets*

@@ -17,6 +17,9 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   title: "Aradhana Dharmika Trust",
   description: "Serving Dharma · Spreading Devotion · Supporting Humanity",
+  icons: {
+    icon: "/assets/Logo_Round.png",
+  },
 };
 
 import { LanguageProvider } from "@/context/LanguageContext";

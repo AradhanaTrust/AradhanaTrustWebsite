@@ -15,7 +15,7 @@ export default function Footer() {
                     {/* Brand */}
                     <div className="lg:col-span-2 space-y-6">
                         <div className="flex items-center gap-3">
-                            <div className="w-10 h-10 bg-gradient-to-br from-secondary to-secondary-dark rounded-xl flex items-center justify-center text-primary font-bold shadow-lg">A</div>
+                            <img src="/assets/Logo_Round.png" alt="Logo" className="w-12 h-12 object-contain shadow-lg rounded-full" />
                             <h2 className="font-serif font-bold text-2xl tracking-wide">ARADHANA</h2>
                         </div>
                         <p className="text-white/70 text-sm leading-relaxed max-w-sm">
