@@ -88,11 +88,11 @@ export default function Footer() {
                             <div className="absolute inset-0 pointer-events-none border border-white/10 rounded-2xl"></div>
                         </div>
                     </div>
+                </div>
 
-                    <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-white/40">
-                        <p>{t.copyright}</p>
-                        <p>{t.designed}</p>
-                    </div>
+                <div className="border-t border-white/5 pt-8 flex flex-col items-center justify-center gap-2 text-xs text-white/40 text-center">
+                    <p>{t.copyright}</p>
+                    <p>{t.designed}</p>
                 </div>
             </div>
         </footer>
