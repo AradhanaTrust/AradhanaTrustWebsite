@@ -90,9 +90,12 @@ export default function Footer() {
                     </div>
                 </div>
 
-                <div className="border-t border-white/5 pt-8 flex flex-col items-center justify-center gap-2 text-xs text-white/40 text-center">
+                <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 text-sm text-white/60 font-light tracking-wide">
                     <p>{t.copyright}</p>
-                    <p>{t.designed}</p>
+                    <div className="flex items-center gap-6">
+                        <a href="#" className="hover:text-secondary transition-colors">{t.privacy}</a>
+                        <a href="#" className="hover:text-secondary transition-colors">{t.terms}</a>
+                    </div>
                 </div>
             </div>
         </footer>
