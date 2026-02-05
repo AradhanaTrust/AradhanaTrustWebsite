@@ -11,9 +11,9 @@ export default function Hero() {
     const t = translations[language].hero;
 
     return (
-        <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-background pt-20 pb-20">
-            {/* Background Pattern */}
-            <div className="absolute inset-0 bg-[url('/assets/mandala-bg.svg')] opacity-[0.03] animate-spin-slow bg-cover bg-center pointer-events-none" />
+        <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-background pt-20 pb-28">
+            {/* Background Pattern - Premium Mandala */}
+            <div className="absolute inset-0 bg-mandala-premium animate-spin-slow pointer-events-none" />
 
             <div className="container mx-auto px-4 lg:px-12 relative z-10 grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
                 {/* Text Content - Left Side */}
@@ -23,10 +23,7 @@ export default function Hero() {
                     transition={{ duration: 0.8 }}
                     className="space-y-8 text-center lg:text-left"
                 >
-                    <div className="inline-flex items-center gap-3 px-4 py-1.5 border border-secondary/40 rounded-full bg-secondary/5 self-center lg:self-start mx-auto lg:mx-0">
-                        <span className="w-2 h-2 bg-secondary rounded-full animate-pulse" />
-                        <span className="text-secondary-dark text-[11px] tracking-[0.2em] uppercase font-bold">{t.est}</span>
-                    </div>
+
 
                     <div className="space-y-6">
                         <h1 className="text-4xl md:text-5xl lg:text-7xl font-serif font-medium leading-[1.1] text-primary-dark">
@@ -40,13 +37,13 @@ export default function Hero() {
                         {t.quote}
                     </p>
 
-                    <div className="flex flex-col sm:flex-row gap-5 justify-center lg:justify-start pt-4">
-                        <button className="px-8 py-4 bg-secondary hover:bg-secondary-dark text-white font-bold rounded-full shadow-[0_4px_14px_0_rgba(212,175,55,0.4)] hover:shadow-[0_6px_20px_rgba(212,175,55,0.3)] hover:-translate-y-1 transition-all flex items-center justify-center gap-2 text-sm uppercase tracking-wide">
+                    <div className="flex flex-col sm:flex-row gap-6 justify-center lg:justify-start pt-6">
+                        <button className="px-10 py-4 bg-gradient-to-r from-secondary to-secondary-dark hover:from-secondary-light hover:to-secondary text-white font-bold rounded-full shadow-[0_4px_20px_rgba(212,175,55,0.4)] hover:shadow-[0_6px_25px_rgba(212,175,55,0.5)] hover:-translate-y-1 transition-all flex items-center justify-center gap-3 text-sm uppercase tracking-widest border border-secondary/20">
                             {t.donateBtn}
-                            <ArrowRight size={16} />
+                            <ArrowRight size={18} />
                         </button>
-                        <button className="px-8 py-4 border border-secondary text-secondary-dark font-bold rounded-full hover:bg-secondary/5 transition-all flex items-center justify-center gap-2 text-sm uppercase tracking-wide">
-                            <Calendar size={16} />
+                        <button className="px-10 py-4 border border-secondary text-secondary-dark font-bold rounded-full hover:bg-secondary/5 transition-all flex items-center justify-center gap-3 text-sm uppercase tracking-widest hover:border-secondary">
+                            <Calendar size={18} />
                             {t.eventsBtn}
                         </button>
                     </div>
@@ -67,6 +64,7 @@ export default function Hero() {
                                 src="/assets/hero-bg.png"
                                 alt="Temple Gopuram"
                                 fill
+                                sizes="100vw"
                                 className="object-cover group-hover:scale-105 transition-transform duration-700"
                                 priority
                             />

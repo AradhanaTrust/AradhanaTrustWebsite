@@ -18,9 +18,9 @@ export default function Gallery() {
     const t = translations[language].gallery;
 
     return (
-        <section id="gallery" className="py-20 bg-background-ivory text-primary relative overflow-hidden border-t border-secondary/10">
+        <section id="gallery" className="py-20 bg-background-ivory text-primary relative overflow-hidden border-t border-secondary/10 texture-parchment">
             {/* Background Pattern */}
-            <div className="absolute inset-0 bg-[url('/assets/mandala-bg.svg')] opacity-[0.03] animate-spin-slow pointer-events-none" />
+            <div className="absolute inset-0 bg-mandala-premium animate-spin-slow pointer-events-none" />
 
             <div className="container mx-auto px-4 lg:px-12 relative z-10">
                 <div className="text-center mb-16 space-y-4">

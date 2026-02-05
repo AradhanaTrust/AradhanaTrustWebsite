@@ -59,6 +59,7 @@ export default function Donation() {
                                 src="/assets/donation-qr.png"
                                 alt="Donate QR Code"
                                 fill
+                                sizes="(max-width: 768px) 100vw, 300px"
                                 className="object-contain p-4 group-hover:scale-105 transition-transform duration-500"
                             />
                         </div>

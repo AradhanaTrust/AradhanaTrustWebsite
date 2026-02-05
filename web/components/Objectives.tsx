@@ -33,9 +33,10 @@ export default function Objectives() {
                                 viewport={{ once: true }}
                                 className="group bg-white rounded-xl p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_10px_30px_rgba(212,175,55,0.15)] hover:-translate-y-2 transition-all border border-secondary/20 flex flex-col items-center text-center space-y-4 cursor-pointer relative overflow-hidden"
                             >
+                                <div className="absolute inset-0 texture-parchment opacity-30 pointer-events-none" />
                                 <div className="absolute top-0 left-0 w-full h-1 bg-secondary opacity-0 group-hover:opacity-100 transition-opacity" />
 
-                                <div className={`w-14 h-14 rounded-full flex items-center justify-center bg-background-ivory border border-secondary/30 text-secondary-dark group-hover:bg-secondary group-hover:text-white transition-all duration-300`}>
+                                <div className={`w-14 h-14 rounded-full flex items-center justify-center bg-background-ivory border border-secondary/30 text-secondary-dark group-hover:bg-secondary group-hover:text-white transition-all duration-300 relative z-10`}>
                                     <Icon size={24} />
                                 </div>
                                 <div className="space-y-1">

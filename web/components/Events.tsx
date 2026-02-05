@@ -34,18 +34,21 @@ export default function Events() {
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{ delay: idx * 0.2 }}
                             viewport={{ once: true }}
-                            className="group bg-white rounded-t-full rounded-b-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all border border-secondary/10"
+                            className="group bg-white rounded-t-full rounded-b-2xl overflow-hidden shadow-sm hover:shadow-[0_10px_30px_rgba(212,175,55,0.2)] transition-all border border-secondary/10 relative"
                         >
+                            <div className="absolute inset-0 texture-parchment opacity-20 pointer-events-none z-10 mix-blend-multiply" />
+
                             {/* Image Placeholder */}
                             <div className="h-64 w-full relative overflow-hidden">
                                 <Image
                                     src={eventImages[idx]}
                                     alt={event.title}
                                     fill
+                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                     className="object-cover group-hover:scale-110 transition-transform duration-700"
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-60" />
-                                <div className="absolute top-4 right-4 bg-secondary text-primary-dark px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest shadow-md z-10">
+                                <div className="absolute top-4 right-4 bg-secondary text-primary-dark px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest shadow-md z-20">
                                     Upcoming
                                 </div>
                             </div>

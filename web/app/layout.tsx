@@ -32,7 +32,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${cinzel.variable} ${poppins.variable} antialiased`}
+        className={`${cinzel.variable} ${poppins.variable} antialiased texture-parchment`}
         suppressHydrationWarning
       >
         <LanguageProvider>
