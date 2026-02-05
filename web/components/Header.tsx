@@ -22,23 +22,27 @@ export default function Header() {
     ];
 
     return (
-        <header className="fixed top-0 w-full z-50 bg-background/90 backdrop-blur-md text-primary shadow-sm border-b border-secondary/20 transition-all duration-300">
+        <header className="fixed top-0 w-full z-50 bg-background/90 backdrop-blur-md text-primary shadow-sm border-b-4 border-double border-secondary/50 transition-all duration-300">
             <div className="container mx-auto px-4 lg:px-12 h-24 flex items-center justify-between">
                 {/* Logo Section */}
-                <Link href="/" className="flex items-center gap-3 group">
-                    <img src="/assets/Logo_Main.png" alt="Aradhana Dharmika Trust" className="h-16 w-auto object-contain transition-transform duration-300 group-hover:scale-105 filter drop-shadow-md" />
+                <Link href="/" className="flex items-center gap-3 group relative z-50">
+                    <img src="/assets/Logo_Main.png" alt="Aradhana Dharmika Trust" className="h-12 md:h-16 w-auto object-contain transition-transform duration-300 group-hover:scale-105 filter drop-shadow-sm" />
+                    <div className="flex flex-col justify-center">
+                        <span className="font-serif font-extrabold text-xl md:text-2xl tracking-normal text-[#5D4037] leading-none drop-shadow-sm">Aradhana</span>
+                        <span className="font-serif font-bold text-sm md:text-base tracking-wide text-[#795548] leading-tight">Dharmika Trust</span>
+                    </div>
                 </Link>
 
                 {/* Desktop Navigation - Centered & Premium */}
-                <nav className="hidden md:flex items-center gap-10">
+                <nav className="hidden md:flex items-center gap-12">
                     {navLinks.map((link) => (
                         <Link
                             key={link.name}
                             href={link.href}
-                            className="relative text-xs font-bold uppercase tracking-[0.15em] text-primary/80 hover:text-secondary-dark transition-colors group py-2"
+                            className="relative text-[11px] font-bold uppercase tracking-[0.2em] text-primary-dark/80 hover:text-secondary-dark transition-colors group py-2"
                         >
                             {link.name}
-                            <span className="absolute left-0 bottom-0 w-0 h-[1.5px] bg-secondary transition-all duration-300 group-hover:w-full" />
+                            <span className="absolute left-1/2 -translate-x-1/2 bottom-0 w-0 h-[2px] bg-gradient-to-r from-transparent via-secondary to-transparent transition-all duration-300 group-hover:w-full" />
                         </Link>
                     ))}
                 </nav>

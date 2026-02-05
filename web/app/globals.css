@@ -68,6 +68,44 @@ h6 {
   border-radius: 4px;
 }
 
+
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-secondary-dark);
+}
+
+/* V3 Utilities */
+@utility glass-panel {
+  background: rgba(253, 251, 247, 0.1);
+  /* Very low opacity for max blur visibility */
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 4px double rgba(212, 175, 55, 0.5);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+@utility texture-parchment {
+  background-color: var(--color-background-ivory);
+  background-image:
+    radial-gradient(at 40% 20%, hsla(38, 50%, 94%, 1) 0px, transparent 50%),
+    radial-gradient(at 80% 0%, hsla(38, 50%, 92%, 1) 0px, transparent 50%),
+    radial-gradient(at 0% 50%, hsla(38, 50%, 93%, 1) 0px, transparent 50%),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+}
+
+@utility bg-mandala-premium {
+  background-image: url('/assets/mandala-bg.svg');
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: overlay;
+  opacity: 0.05;
+}
+
+@utility text-balance {
+  text-wrap: balance;
+}
+
+@layer base {
+  body {
+    @apply antialiased tracking-wide;
+  }
 }
