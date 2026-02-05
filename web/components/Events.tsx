@@ -13,14 +13,15 @@ export default function Events() {
     const t = translations[language].events;
 
     return (
-        <section id="events" className="py-20 bg-surface">
+        <section id="events" className="py-20 bg-background-cream">
             <div className="container mx-auto px-4 lg:px-12">
                 <div className="flex flex-col md:flex-row items-end justify-between mb-12 gap-6">
-                    <div className="space-y-2 text-center md:text-left w-full md:w-auto">
-                        <h2 className="text-3xl md:text-5xl font-serif font-bold text-primary">{t.title}</h2>
-                        <p className="text-secondary-dark font-medium">{t.subtitle}</p>
+                    <div className="space-y-4 text-center md:text-left w-full md:w-auto">
+                        <h2 className="text-3xl md:text-5xl font-serif font-medium text-primary-dark">{t.title}</h2>
+                        <div className="h-0.5 w-20 bg-secondary md:mr-auto rounded-full mx-auto" />
+                        <p className="text-secondary-dark font-medium uppercase tracking-wider text-xs">{t.subtitle}</p>
                     </div>
-                    <button className="hidden md:flex items-center gap-2 text-primary font-bold hover:text-secondary transition-colors underline-offset-4 hover:underline">
+                    <button className="hidden md:flex items-center gap-2 text-primary-dark font-bold hover:text-secondary-dark transition-colors underline-offset-4 hover:underline uppercase tracking-widest text-sm">
                         {t.viewAll} <ArrowRight size={16} />
                     </button>
                 </div>
@@ -33,41 +34,39 @@ export default function Events() {
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{ delay: idx * 0.2 }}
                             viewport={{ once: true }}
-                            className="group bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100 hover:shadow-2xl transition-all"
+                            className="group bg-white rounded-t-full rounded-b-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all border border-secondary/10"
                         >
                             {/* Image Placeholder */}
-                            <div className="h-48 w-full relative overflow-hidden">
+                            <div className="h-64 w-full relative overflow-hidden">
                                 <Image
                                     src={eventImages[idx]}
                                     alt={event.title}
                                     fill
-                                    className="object-cover group-hover:scale-110 transition-transform duration-500"
+                                    className="object-cover group-hover:scale-110 transition-transform duration-700"
                                 />
-                                <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-all" />
-                                <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-lg text-xs font-bold text-primary shadow-sm z-10">
-                                    UPCOMING
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-60" />
+                                <div className="absolute top-4 right-4 bg-secondary text-primary-dark px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest shadow-md z-10">
+                                    Upcoming
                                 </div>
                             </div>
 
-                            <div className="p-6 space-y-4">
-                                <div className="flex items-start justify-between">
-                                    <h3 className="text-xl font-serif font-bold text-primary group-hover:text-secondary transition-colors">
-                                        {event.title}
-                                    </h3>
+                            <div className="p-8 space-y-6 relative">
+                                <div className="absolute -top-10 left-1/2 -translate-x-1/2 bg-surface-white border border-secondary/20 px-4 py-2 rounded-xl shadow-lg flex flex-col items-center">
+                                    <span className="text-xs font-bold text-secondary-dark uppercase">{event.date.split(" ")[0]}</span>
+                                    <span className="text-lg font-serif font-bold text-primary-dark">{event.date.split(" ")[1]}</span>
                                 </div>
 
-                                <div className="space-y-2 text-sm text-gray-600">
-                                    <div className="flex items-center gap-2">
-                                        <Calendar size={14} className="text-secondary" />
-                                        <span>{event.date}</span>
-                                    </div>
-                                    <div className="flex items-center gap-2">
+                                <div className="pt-2 text-center space-y-2">
+                                    <h3 className="text-xl font-serif font-bold text-primary-dark group-hover:text-secondary-dark transition-colors">
+                                        {event.title}
+                                    </h3>
+                                    <div className="flex items-center justify-center gap-2 text-sm text-primary/60">
                                         <MapPin size={14} className="text-secondary" />
                                         <span>{event.loc}</span>
                                     </div>
                                 </div>
 
-                                <button className="w-full py-2.5 mt-2 rounded-xl border border-primary/10 text-primary font-bold hover:bg-primary hover:text-white transition-all text-sm">
+                                <button className="w-full py-3 rounded-full border border-secondary text-secondary-dark font-bold hover:bg-secondary hover:text-white transition-all text-xs uppercase tracking-widest">
                                     {t.register}
                                 </button>
                             </div>
@@ -75,9 +74,8 @@ export default function Events() {
                     ))}
                 </div>
 
-
-                <div className="mt-8 text-center md:hidden">
-                    <button className="inline-flex items-center gap-2 text-primary font-bold hover:text-secondary transition-colors">
+                <div className="mt-12 text-center md:hidden">
+                    <button className="inline-flex items-center gap-2 text-primary-dark font-bold hover:text-secondary-dark transition-colors uppercase tracking-widest text-sm">
                         {t.viewAll} <ArrowRight size={16} />
                     </button>
                 </div>

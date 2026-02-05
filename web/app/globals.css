@@ -1,23 +1,28 @@
 @import "tailwindcss";
 
 @theme {
-  /* Colors - Reference UI Extracted */
-  --color-primary: #2E0249;
-  /* Deep Header Purple */
-  --color-primary-gradient-start: #4A0E68;
-  --color-primary-gradient-end: #1A002E;
-  --color-primary-dark: #1A002E;
+  /* Colors - V2 Ivory & Gold Palette */
+  --color-primary: #3E2723;
+  /* Deep Brown Text */
+  --color-primary-dark: #2D1A16;
+  /* Darker Brown */
 
-  --color-secondary: #C5A059;
-  /* Muted Premium Gold */
-  --color-secondary-light: #E5C579;
+  --color-secondary: #D4AF37;
+  /* Warm Gold */
+  --color-secondary-light: #F4C430;
+  /* Light Gold */
   --color-secondary-dark: #B8860B;
-  /* Darker for text legibility */
+  /* Dark Gold Accent */
+
+  --color-background-ivory: #FDFBF7;
+  /* Main Ivory Background */
+  --color-background-cream: #F5F0E6;
+  /* Slightly darker cream for sections */
+  --color-surface-white: #FFFFFF;
+  /* Pure white surface */
 
   --color-accent-saffron: #FF9933;
-  --color-accent-lavender: #F3E5F5;
-  --color-surface: #FDFCFA;
-  /* Warm White */
+  --color-border-gold: #D4AF37;
 
   /* Fonts */
   --font-sans: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
@@ -29,8 +34,8 @@
 
 /* Base Styles */
 :root {
-  --background: #FFFFFF;
-  --foreground: #2E0249;
+  --background: var(--color-background-ivory);
+  --foreground: var(--color-primary);
 }
 
 body {
@@ -46,15 +51,16 @@ h4,
 h5,
 h6 {
   font-family: var(--font-serif);
+  color: var(--color-primary-dark);
 }
 
-/* Custom Scrollbar */
+/* Custom Scrollbar - Gold Theme */
 ::-webkit-scrollbar {
   width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--color-accent-lavender);
+  background: var(--color-background-cream);
 }
 
 ::-webkit-scrollbar-thumb {
