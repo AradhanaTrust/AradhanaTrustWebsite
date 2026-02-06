@@ -13,9 +13,9 @@ export const translations = {
         },
         hero: {
             est: "EST. 2024",
-            title_line1: "Serving Dharma",
-            title_line2: "Spreading Devotion",
-            quote: "\"Promoting Dharma & Social Welfare for a Better Society\"",
+            title_line1: "Welcome to",
+            title_line2: "Aradhana Dharmika Trust",
+            quote: "Promoting Dharma, Spiritual Awareness, and Social Welfare",
             donateBtn: "Donate Now",
             eventsBtn: "Upcoming Events",
         },
