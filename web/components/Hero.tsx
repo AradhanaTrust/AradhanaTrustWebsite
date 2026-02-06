@@ -11,74 +11,80 @@ export default function Hero() {
     const t = translations[language].hero;
 
     return (
-        <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-background pt-20 pb-28">
-            {/* Background Pattern - Premium Mandala */}
-            <div className="absolute inset-0 bg-mandala-premium animate-spin-slow pointer-events-none" />
+        <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 pb-20">
+            {/* Background Image with Overlay */}
+            <div className="absolute inset-0 z-0">
+                <Image
+                    src="/assets/hero-bg-main.png"
+                    alt="Temple Riverside Background"
+                    fill
+                    className="object-cover object-[center_center]"
+                    priority
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-black/20" />
+            </div>
 
-            <div className="container mx-auto px-4 lg:px-12 relative z-10 grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-                {/* Text Content - Left Side */}
+            {/* Content Container */}
+            <div className="container mx-auto px-4 lg:px-12 relative z-10 flex flex-col items-center text-center space-y-8 max-w-4xl">
+
                 <motion.div
-                    initial={{ opacity: 0, x: -50 }}
-                    animate={{ opacity: 1, x: 0 }}
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8 }}
-                    className="space-y-8 text-center lg:text-left"
+                    className="space-y-6"
                 >
+                    <div className="h-1 w-24 bg-secondary rounded-full mx-auto" />
 
+                    <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif font-medium leading-tight text-white drop-shadow-lg">
+                        {t.title_line1} <br />
+                        <span className="text-secondary-light">{t.title_line2}</span>
+                    </h1>
 
-                    <div className="space-y-6">
-                        <h1 className="text-4xl md:text-5xl lg:text-7xl font-serif font-medium leading-[1.1] text-primary-dark">
-                            {t.title_line1} <br />
-                            <span className="text-secondary-dark">{t.title_line2}</span>
-                        </h1>
-                        <div className="h-1 w-32 bg-secondary rounded-full mx-auto lg:mx-0" />
-                    </div>
-
-                    <p className="text-lg md:text-xl text-primary/80 leading-relaxed font-sans max-w-lg mx-auto lg:mx-0 font-light">
+                    <p className="text-xl md:text-2xl text-white/90 font-light max-w-2xl mx-auto leading-relaxed drop-shadow-md">
                         {t.quote}
                     </p>
-
-                    <div className="flex flex-col sm:flex-row gap-6 justify-center lg:justify-start pt-6">
-                        <button className="px-10 py-4 bg-gradient-to-r from-secondary to-secondary-dark hover:from-secondary-light hover:to-secondary text-white font-bold rounded-full shadow-[0_4px_20px_rgba(212,175,55,0.4)] hover:shadow-[0_6px_25px_rgba(212,175,55,0.5)] hover:-translate-y-1 transition-all flex items-center justify-center gap-3 text-sm uppercase tracking-widest border border-secondary/20">
-                            {t.donateBtn}
-                            <ArrowRight size={18} />
-                        </button>
-                        <button className="px-10 py-4 border border-secondary text-secondary-dark font-bold rounded-full hover:bg-secondary/5 transition-all flex items-center justify-center gap-3 text-sm uppercase tracking-widest hover:border-secondary">
-                            <Calendar size={18} />
-                            {t.eventsBtn}
-                        </button>
-                    </div>
                 </motion.div>
 
-                {/* Illustration / Image Placeholder - Right Side with Arch Mask */}
                 <motion.div
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 1, delay: 0.2 }}
-                    className="relative h-[400px] md:h-[500px] lg:h-[650px] w-full flex items-center justify-center lg:justify-end"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.2 }}
+                    className="flex flex-col sm:flex-row gap-5 pt-4"
                 >
-                    {/* Arch Shape Container */}
-                    <div className="relative w-full max-w-md lg:max-w-lg h-full rounded-t-[200px] border-[6px] border-double border-secondary/30 p-3 bg-white/50 backdrop-blur-sm shadow-xl">
-                        <div className="w-full h-full rounded-t-[190px] overflow-hidden relative bg-gradient-to-b from-primary/5 to-primary/10 group grayscale-[10%] hover:grayscale-0 transition-all duration-700">
-                            {/* Image Placeholder */}
-                            <Image
-                                src="/assets/hero-bg.png"
-                                alt="Temple Gopuram"
-                                fill
-                                sizes="100vw"
-                                className="object-cover group-hover:scale-105 transition-transform duration-700"
-                                priority
-                            />
-                            {/* Inner Border Overlay */}
-                            <div className="absolute inset-0 border-[1px] border-white/20 rounded-t-[190px] m-2 pointer-events-none" />
-                        </div>
-                    </div>
+                    {/* Donate Button: Dark Brown Border, Gold Gap, Light Inner Line */}
+                    <button className="px-10 py-3 bg-gradient-to-b from-[#F2C96D] to-[#9E731C] text-white font-medium text-lg rounded-xl border border-[#4A3225] shadow-[inset_0_0_0_2px_#DFA848,inset_0_0_0_3px_#FFF5D1,0_4px_8px_rgba(0,0,0,0.3)] hover:shadow-[inset_0_0_0_2px_#DFA848,inset_0_0_0_3px_#FFF5D1,0_6px_12px_rgba(0,0,0,0.4)] hover:-translate-y-1 active:scale-95 transition-all duration-300 flex items-center justify-center gap-2 drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)]">
+                        {t.donateBtn}
+                    </button>
+
+                    {/* Events Button: Cream with Double Internal Frame */}
+                    {/* Shadow trick: inset 3px bg-color (gap), inset 4px border-color (inner line) */}
+                    <button className="px-10 py-3 bg-gradient-to-b from-[#FFFEF9] to-[#F3E5C5] text-[#4A3225] font-medium text-lg rounded-xl border border-[#CFA14E] shadow-[inset_0_0_0_2px_#FFFDF8,inset_0_0_0_3px_#CFA14E,0_2px_4px_rgba(0,0,0,0.05)] hover:shadow-[inset_0_0_0_2px_#FFFDF8,inset_0_0_0_3px_#CFA14E,0_4px_8px_rgba(0,0,0,0.1)] hover:-translate-y-1 active:scale-95 transition-all duration-300 flex items-center justify-center gap-2 group">
+                        {t.eventsBtn}
+                        <Calendar size={18} className="text-[#4A3225] group-hover:scale-105 transition-transform" />
+                    </button>
                 </motion.div>
             </div>
 
-            {/* Bottom Curved Separator */}
+            {/* Bottom Curved Separator with Double Gold Lines */}
             <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none z-20">
-                <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none" className="relative block w-[calc(118%)] h-[60px] fill-background-cream">
-                    <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"></path>
+                <svg className="relative block w-[calc(100%+1.3px)] h-[80px] md:h-[120px]" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                    {/* Actual Curve Implementation - Convex/Concave Elegant blend */}
+                    <path d="M0,120 L1200,120 L1200,60 C1050,90 900,100 750,90 C500,70 350,20 150,40 C100,45 50,55 0,70 Z" className="fill-background-ivory" stroke="none"></path>
+
+                    {/* Double Gold Lines */}
+                    {/* Outer/Thicker Line */}
+                    <path d="M0,70 C50,55 100,45 150,40 C350,20 500,70 750,90 C900,100 1050,90 1200,60" fill="none" stroke="url(#goldGradient)" strokeWidth="3" className="drop-shadow-sm"></path>
+
+                    {/* Inner/Thinner Line */}
+                    <path d="M0,78 C48,64 96,54 146,49 C348,29 498,79 746,99 C896,109 1048,99 1200,69" fill="none" stroke="#D4AF37" strokeWidth="1.5" opacity="0.8"></path>
+
+                    <defs>
+                        <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stopColor="#D4AF37" />
+                            <stop offset="50%" stopColor="#F4C430" />
+                            <stop offset="100%" stopColor="#B8860B" />
+                        </linearGradient>
+                    </defs>
                 </svg>
             </div>
         </section>
