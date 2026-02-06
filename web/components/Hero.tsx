@@ -67,16 +67,16 @@ export default function Hero() {
 
             {/* Bottom Curved Separator with Double Gold Lines */}
             <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none z-20">
-                <svg className="relative block w-[calc(100%+1.3px)] h-[80px] md:h-[120px]" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                    {/* Actual Curve Implementation - Convex/Concave Elegant blend */}
-                    <path d="M0,120 L1200,120 L1200,60 C1050,90 900,100 750,90 C500,70 350,20 150,40 C100,45 50,55 0,70 Z" className="fill-background-ivory" stroke="none"></path>
+                <svg className="relative block w-[calc(100%+1.3px)] h-[60px] md:h-[100px]" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                    {/* Main Fill (Cream/Background color of next section) */}
+                    <path d="M0,0 Q600,100 1200,0 L1200,120 L0,120 Z" className="fill-background-ivory" stroke="none"></path>
 
                     {/* Double Gold Lines */}
-                    {/* Outer/Thicker Line */}
-                    <path d="M0,70 C50,55 100,45 150,40 C350,20 500,70 750,90 C900,100 1050,90 1200,60" fill="none" stroke="url(#goldGradient)" strokeWidth="3" className="drop-shadow-sm"></path>
+                    {/* Upper Line (Darker Gold) */}
+                    <path d="M0,1.5 Q600,101.5 1200,1.5" fill="none" stroke="url(#goldGradient)" strokeWidth="3" className="drop-shadow-sm"></path>
 
-                    {/* Inner/Thinner Line */}
-                    <path d="M0,78 C48,64 96,54 146,49 C348,29 498,79 746,99 C896,109 1048,99 1200,69" fill="none" stroke="#D4AF37" strokeWidth="1.5" opacity="0.8"></path>
+                    {/* Lower Line (Lighter/Thinner) */}
+                    <path d="M0,12 Q600,112 1200,12" fill="none" stroke="#D4AF37" strokeWidth="1.5" opacity="0.6"></path>
 
                     <defs>
                         <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="0%">
