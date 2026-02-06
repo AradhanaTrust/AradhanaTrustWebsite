@@ -27,6 +27,7 @@
   /* Fonts */
   --font-sans: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
   --font-serif: var(--font-cinzel), ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-decorative: var(--font-cinzel-decorative), ui-serif, Georgia, serif;
 
   /* Animations & Backgrounds */
   --background-image-mandala: url('/assets/mandala-bg.svg');

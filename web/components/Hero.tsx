@@ -56,15 +56,28 @@ export default function Hero() {
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8 }}
-                    className="space-y-6"
+                    className="space-y-0"
                 >
 
-                    <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif font-medium leading-tight text-white drop-shadow-lg">
-                        {t.title_line1} <br />
-                        <span className="text-secondary-light">{t.title_line2}</span>
-                    </h1>
+                    <div className="flex flex-col items-center gap-2 md:gap-4">
+                        <span className="text-lg md:text-2xl lg:text-3xl font-serif font-medium text-[#5D4037] tracking-[0.2em] uppercase drop-shadow-sm">
+                            {t.title_line1}
+                        </span>
+                        <h1
+                            className="text-2xl md:text-4xl lg:text-5xl xl:text-6xl font-cinzel-decorative font-black leading-tight filter drop-shadow-[0_2px_2px_rgba(0,0,0,0.5)_0_0_15px_rgba(242,201,109,0.5)] px-4 pb-1"
+                            style={{
+                                backgroundImage: "linear-gradient(to bottom, #F2C96D, #9E731C)",
+                                WebkitBackgroundClip: "text",
+                                WebkitTextFillColor: "transparent",
+                                backgroundClip: "text",
+                                color: "transparent"
+                            }}
+                        >
+                            {t.title_line2}
+                        </h1>
+                    </div>
 
-                    <p className="text-xl md:text-2xl text-white/90 font-light max-w-2xl mx-auto leading-relaxed drop-shadow-md">
+                    <p className="text-lg md:text-2xl text-[#4A3225] font-sans font-medium max-w-3xl mx-auto leading-relaxed drop-shadow-sm">
                         {t.quote}
                     </p>
                 </motion.div>
