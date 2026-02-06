@@ -33,7 +33,7 @@ export default function Header() {
 
     return (
         <header className={`fixed top-0 w-full z-50 backdrop-blur-md text-primary shadow-sm border-b-4 border-double border-secondary/50 transition-all duration-500 ${scrolled ? "bg-background-cream/95 py-2" : "bg-background/80 py-4"}`}>
-            <div className="container mx-auto px-4 lg:px-12 h-20 flex items-center justify-between">
+            <div className="w-full px-4 lg:px-12 h-20 flex items-center justify-between">
                 {/* Logo Section */}
                 <Link href="/" className="flex items-center gap-2 md:gap-4 group relative z-50">
                     <img src="/assets/Logo_Main.png" alt="Aradhana Dharmika Trust" className="h-10 md:h-14 lg:h-20 w-auto object-contain transition-transform duration-300 group-hover:scale-105 filter drop-shadow-sm" />
