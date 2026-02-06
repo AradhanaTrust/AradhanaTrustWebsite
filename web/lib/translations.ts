@@ -21,7 +21,7 @@ export const translations = {
         },
         welcome: {
             sectionTitle: "About Us",
-            heading: "Welcome to Aradhana Dharmika Trust",
+            heading: "Aradhana Dharmika Trust: Where Devotion Meets Service",
             subheading: "\"Promoting Dharma, Spiritual Awareness, and Social Welfare\"",
             description: "Our mission is to preserve the sanctity of Sanatana Dharma while actively engaging in social welfare. From conducting Vedic rituals to providing Annadanam and educational support, we strive to build a community rooted in devotion and humanity.",
             learnMore: "Learn More",
@@ -106,7 +106,7 @@ export const translations = {
         },
         welcome: {
             sectionTitle: "ನಮ್ಮ ಬಗ್ಗೆ",
-            heading: "ಆರಾಧನಾ ಧಾರ್ಮಿಕ ಟ್ರಸ್ಟ್‌ಗೆ ಸುಸ್ವಾಗತ",
+            heading: "ಆರಾಧನಾ ಧಾರ್ಮಿಕ ಟ್ರಸ್ಟ್: ಭಕ್ತಿ ಮತ್ತು ಸೇವೆಯ ಸಂಗಮ",
             subheading: "\"ಧರ್ಮ, ಆಧ್ಯಾತ್ಮಿಕ ಅರಿವು ಮತ್ತು ಸಾಮಾಜಿಕ ಕಲ್ಯಾಣವನ್ನು ಉತ್ತೇಜಿಸುವುದು\"",
             description: "ಸನಾತನ ಧರ್ಮದ ಪಾವಿತ್ರ್ಯವನ್ನು ಕಾಪಾಡುವುದು ಮತ್ತು ಸಾಮಾಜಿಕ ಕಲ್ಯಾಣದಲ್ಲಿ ಸಕ್ರಿಯವಾಗಿ ತೊಡಗುವುದು ನಮ್ಮ ಉದ್ದೇಶ. ವೇದ ಪೂಜೆಗಳಿಂದ ಹಿಡಿದು ಅನ್ನದಾನ ಮತ್ತು ಶೈಕ್ಷಣಿಕ ಸಹಾಯದವರೆಗೆ, ನಾವು ಭಕ್ತಿ ಮತ್ತು ಮಾನವೀಯತೆಯ ತಳಹದಿಯ ಮೇಲೆ ಸಮುದಾಯವನ್ನು ಕಟ್ಟಲು ಶ್ರಮಿಸುತ್ತಿದ್ದೇವೆ.",
             learnMore: "ಹೆಚ್ಚಿನ ಮಾಹಿತಿ",

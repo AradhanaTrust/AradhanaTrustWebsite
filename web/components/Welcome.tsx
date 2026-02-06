@@ -24,7 +24,7 @@ export default function Welcome() {
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
                     viewport={{ once: true }}
-                    className="text-center max-w-4xl mx-auto space-y-8"
+                    className="text-center max-w-6xl mx-auto space-y-8"
                 >
                     <div className="flex items-center justify-center gap-4 text-secondary">
                         <span className="h-px w-16 bg-gradient-to-r from-transparent to-secondary" />
@@ -32,23 +32,32 @@ export default function Welcome() {
                         <span className="h-px w-16 bg-gradient-to-r from-secondary to-transparent" />
                     </div>
 
-                    <h2 className="text-3xl md:text-5xl font-serif font-medium text-primary-dark leading-tight">
+                    <h2 className="text-2xl md:text-4xl font-serif font-medium text-primary-dark leading-tight">
                         {t.heading}
                     </h2>
 
-                    <h3 className="text-lg md:text-xl font-medium text-secondary-dark/80 italic font-serif">
-                        {t.subheading}
-                    </h3>
+                    <div className="space-y-2">
+                        <h3 className="text-lg md:text-xl font-medium text-secondary-dark/80 italic font-serif">
+                            {translations["en"].welcome.subheading}
+                        </h3>
+                        <h3 className="text-lg md:text-xl font-medium text-secondary-dark/80 italic font-serif">
+                            {translations["kn"].welcome.subheading}
+                        </h3>
+                    </div>
 
-                    <div className="w-24 h-1 bg-gradient-to-r from-secondary-light to-secondary mx-auto rounded-full" />
+                    <div className="flex items-center justify-center gap-4 w-full max-w-md mx-auto opacity-80 py-3">
+                        <div className="h-px flex-1 bg-gradient-to-r from-transparent to-secondary"></div>
+                        <div className="w-2.5 h-2.5 bg-secondary rotate-45 shadow-sm"></div>
+                        <div className="h-px flex-1 bg-gradient-to-l from-transparent to-secondary"></div>
+                    </div>
 
-                    <p className="text-primary/70 leading-relaxed text-base md:text-lg font-light max-w-2xl mx-auto">
+                    <p className="text-primary/70 leading-relaxed text-base md:text-lg font-light max-w-4xl mx-auto">
                         {t.description}
                     </p>
 
                     <div className="pt-8">
-                        <button className="px-10 py-3.5 bg-background-ivory border border-secondary text-secondary-dark font-bold rounded-full hover:bg-secondary hover:text-white transition-all inline-flex items-center gap-2 shadow-[0_4px_10px_rgba(212,175,55,0.15)] uppercase tracking-wider text-sm">
-                            {t.learnMore} <ArrowRight size={16} />
+                        <button className="px-10 py-3 bg-gradient-to-b from-[#FFFEF9] to-[#F3E5C5] text-[#4A3225] font-medium text-lg rounded-xl border border-[#CFA14E] shadow-[inset_0_0_0_2px_#FFFDF8,inset_0_0_0_3px_#CFA14E,0_2px_4px_rgba(0,0,0,0.05)] hover:shadow-[inset_0_0_0_2px_#FFFDF8,inset_0_0_0_3px_#CFA14E,0_4px_8px_rgba(0,0,0,0.1)] hover:-translate-y-1 active:scale-95 transition-all duration-300 transform inline-flex items-center justify-center gap-2 group">
+                            {t.learnMore} <ArrowRight size={18} className="text-[#4A3225] group-hover:scale-105 transition-transform" />
                         </button>
                     </div>
                 </motion.div>
