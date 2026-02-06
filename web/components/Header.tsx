@@ -35,16 +35,16 @@ export default function Header() {
         <header className={`fixed top-0 w-full z-50 backdrop-blur-md text-primary shadow-sm border-b-4 border-double border-secondary/50 transition-all duration-500 ${scrolled ? "bg-background-cream/95 py-2" : "bg-background/80 py-4"}`}>
             <div className="container mx-auto px-4 lg:px-12 h-20 flex items-center justify-between">
                 {/* Logo Section */}
-                <Link href="/" className="flex items-center gap-4 group relative z-50">
-                    <img src="/assets/Logo_Main.png" alt="Aradhana Dharmika Trust" className="h-14 md:h-20 w-auto object-contain transition-transform duration-300 group-hover:scale-105 filter drop-shadow-sm" />
+                <Link href="/" className="flex items-center gap-2 md:gap-4 group relative z-50">
+                    <img src="/assets/Logo_Main.png" alt="Aradhana Dharmika Trust" className="h-10 md:h-14 lg:h-20 w-auto object-contain transition-transform duration-300 group-hover:scale-105 filter drop-shadow-sm" />
                     <div className="flex flex-col justify-center">
-                        <span className="font-cinzel-decorative font-black text-2xl md:text-3xl tracking-wide text-[#5D4037] leading-none drop-shadow-sm mb-1">{t.trustNameLine1}</span>
-                        <span className="font-cinzel-decorative font-black text-sm md:text-lg tracking-[0.15em] text-[#795548] leading-tight">{t.trustNameLine2}</span>
+                        <span className="font-cinzel-decorative font-black text-lg md:text-xl lg:text-3xl tracking-wide text-[#5D4037] leading-none drop-shadow-sm mb-1">{t.trustNameLine1}</span>
+                        <span className="font-cinzel-decorative font-black text-[10px] md:text-xs lg:text-lg tracking-[0.15em] text-[#795548] leading-tight">{t.trustNameLine2}</span>
                     </div>
                 </Link>
 
                 {/* Desktop Navigation - Centered & Premium */}
-                <nav className="hidden md:flex items-center gap-12">
+                <nav className="hidden lg:flex items-center gap-6 xl:gap-12">
                     {navLinks.map((link) => (
                         <Link
                             key={link.name}
@@ -58,7 +58,7 @@ export default function Header() {
                 </nav>
 
                 {/* Right Section: Language Toggle (Small) */}
-                <div className="hidden md:block">
+                <div className="hidden lg:block">
                     <button
                         onClick={toggleLanguage}
                         className="text-[10px] font-bold tracking-widest border border-secondary text-secondary-dark hover:bg-secondary hover:text-white px-4 py-2 rounded-full transition-all uppercase"
@@ -69,7 +69,7 @@ export default function Header() {
 
                 {/* Mobile Menu Button */}
                 <button
-                    className="md:hidden text-secondary-dark"
+                    className="lg:hidden text-secondary-dark"
                     onClick={() => setIsOpen(!isOpen)}
                 >
                     {isOpen ? <X size={28} /> : <Menu size={28} />}
@@ -83,7 +83,7 @@ export default function Header() {
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: "auto" }}
                         exit={{ opacity: 0, height: 0 }}
-                        className="md:hidden bg-background border-b border-secondary/20 overflow-hidden"
+                        className="lg:hidden bg-background border-b border-secondary/20 overflow-hidden"
                     >
                         <nav className="flex flex-col p-8 space-y-6 items-center text-center">
                             {navLinks.map((link) => (

@@ -64,7 +64,7 @@ export default function Hero() {
                             {t.title_line1}
                         </span>
                         <h1
-                            className="text-2xl md:text-4xl lg:text-5xl xl:text-6xl font-cinzel-decorative font-black leading-tight filter drop-shadow-[0_2px_2px_rgba(0,0,0,0.5)_0_0_15px_rgba(242,201,109,0.5)] px-4 pb-1"
+                            className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-cinzel-decorative font-black leading-tight filter drop-shadow-[0_2px_2px_rgba(0,0,0,0.5)_0_0_15px_rgba(242,201,109,0.5)] px-4 pb-1"
                             style={{
                                 backgroundImage: "linear-gradient(to bottom, #F2C96D, #9E731C)",
                                 WebkitBackgroundClip: "text",
