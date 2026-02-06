@@ -38,7 +38,7 @@ export default function Hero() {
             {/* Background Image with Overlay */}
             <div className="absolute inset-0 z-0">
                 <Image
-                    src="/assets/hero-bg-v2.png"
+                    src="/assets/hero-bg-main.png"
                     alt="Aradhana Dharmika Trust Background"
                     fill
                     className="object-cover object-[center_center]"
@@ -79,7 +79,14 @@ export default function Hero() {
 
                     <div className="w-full flex justify-center px-4">
                         <p className="text-lg md:text-2xl text-[#4A3225] font-sans font-medium w-fit mx-auto leading-relaxed drop-shadow-sm px-6 py-1 rounded-full bg-gradient-to-r from-[#FFF5D1]/30 via-[#F2C96D]/10 to-[#FFF5D1]/30 backdrop-blur-md border border-[#D4AF37]/30 shadow-sm">
-                            {t.quote}
+                            {t.quote.split("|").map((part, index, array) => (
+                                <span key={index}>
+                                    {part.trim()}
+                                    {index < array.length - 1 && (
+                                        <span className="mx-2 md:mx-3 text-[#D4AF37] font-serif">♦</span>
+                                    )}
+                                </span>
+                            ))}
                         </p>
                     </div>
 
@@ -89,7 +96,7 @@ export default function Hero() {
                         <div className="h-[3px] flex-1 bg-gradient-to-r from-transparent via-[#D4AF37] to-[#B8860B] rounded-full"></div>
 
                         {/* Center Flower Motif */}
-                        <div className="shrink-0 relative w-8 h-8 md:w-12 md:h-12">
+                        <div className="shrink-0 relative w-6 h-6 md:w-10 md:h-10">
                             <svg viewBox="0 0 40 40" className="w-full h-full drop-shadow-sm filter drop-shadow-[0_1px_1px_rgba(0,0,0,0.3)]">
                                 <g transform="translate(20,20)">
                                     {/* 4 Diamond Petals (Cardinal) */}
