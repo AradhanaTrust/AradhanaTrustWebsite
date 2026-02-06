@@ -77,9 +77,11 @@ export default function Hero() {
                         </h1>
                     </div>
 
-                    <p className="text-lg md:text-2xl text-[#4A3225] font-sans font-medium max-w-3xl mx-auto leading-relaxed drop-shadow-sm">
-                        {t.quote}
-                    </p>
+                    <div className="w-full flex justify-center px-4">
+                        <p className="text-lg md:text-2xl text-[#4A3225] font-sans font-medium w-fit mx-auto leading-relaxed drop-shadow-sm px-6 py-1 rounded-full bg-gradient-to-r from-[#FFF5D1]/30 via-[#F2C96D]/10 to-[#FFF5D1]/30 backdrop-blur-md border border-[#D4AF37]/30 shadow-sm">
+                            {t.quote}
+                        </p>
+                    </div>
 
                     {/* Decorative Separator - Below Subtitle */}
                     <div className="flex items-center justify-center w-full max-w-sm md:max-w-2xl lg:max-w-4xl mx-auto mt-2 mb-2 gap-3 md:gap-4 opacity-90">
