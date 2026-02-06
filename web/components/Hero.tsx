@@ -64,7 +64,7 @@ export default function Hero() {
                             {t.title_line1}
                         </span>
                         <h1
-                            className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-cinzel-decorative font-black leading-tight filter drop-shadow-[0_2px_2px_rgba(0,0,0,0.5)_0_0_15px_rgba(242,201,109,0.5)] px-4 pb-1"
+                            className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-cinzel-decorative font-black leading-tight filter drop-shadow-[0_2px_2px_rgba(0,0,0,0.5)_0_0_15px_rgba(242,201,109,0.5)] px-4"
                             style={{
                                 backgroundImage: "linear-gradient(to bottom, #F2C96D, #9E731C)",
                                 WebkitBackgroundClip: "text",
@@ -80,6 +80,38 @@ export default function Hero() {
                     <p className="text-lg md:text-2xl text-[#4A3225] font-sans font-medium max-w-3xl mx-auto leading-relaxed drop-shadow-sm">
                         {t.quote}
                     </p>
+
+                    {/* Decorative Separator - Below Subtitle */}
+                    <div className="flex items-center justify-center w-full max-w-sm md:max-w-2xl lg:max-w-4xl mx-auto mt-2 mb-2 gap-3 md:gap-4 opacity-90">
+                        {/* Left Line */}
+                        <div className="h-[3px] flex-1 bg-gradient-to-r from-transparent via-[#D4AF37] to-[#B8860B] rounded-full"></div>
+
+                        {/* Center Flower Motif */}
+                        <div className="shrink-0 relative w-8 h-8 md:w-12 md:h-12">
+                            <svg viewBox="0 0 40 40" className="w-full h-full drop-shadow-sm filter drop-shadow-[0_1px_1px_rgba(0,0,0,0.3)]">
+                                <g transform="translate(20,20)">
+                                    {/* 4 Diamond Petals (Cardinal) */}
+                                    <path d="M0,0 L4.5,-10 L0,-20 L-4.5,-10 Z" fill="#D4AF37" stroke="#B8860B" strokeWidth="0.5" transform="rotate(0)" />
+                                    <path d="M0,0 L4.5,-10 L0,-20 L-4.5,-10 Z" fill="#D4AF37" stroke="#B8860B" strokeWidth="0.5" transform="rotate(90)" />
+                                    <path d="M0,0 L4.5,-10 L0,-20 L-4.5,-10 Z" fill="#D4AF37" stroke="#B8860B" strokeWidth="0.5" transform="rotate(180)" />
+                                    <path d="M0,0 L4.5,-10 L0,-20 L-4.5,-10 Z" fill="#D4AF37" stroke="#B8860B" strokeWidth="0.5" transform="rotate(270)" />
+
+                                    {/* Center */}
+                                    <circle cx="0" cy="0" r="5" fill="#FFF8E1" stroke="#B8860B" strokeWidth="1" />
+                                    <circle cx="0" cy="0" r="3" fill="url(#flowerGradient)" />
+                                </g>
+                                <defs>
+                                    <radialGradient id="flowerGradient">
+                                        <stop offset="0%" stopColor="#F4C430" />
+                                        <stop offset="100%" stopColor="#B8860B" />
+                                    </radialGradient>
+                                </defs>
+                            </svg>
+                        </div>
+
+                        {/* Right Line */}
+                        <div className="h-[3px] flex-1 bg-gradient-to-l from-transparent via-[#D4AF37] to-[#B8860B] rounded-full"></div>
+                    </div>
                 </motion.div>
 
                 <motion.div
@@ -89,13 +121,13 @@ export default function Hero() {
                     className="flex flex-col sm:flex-row gap-5 pt-4"
                 >
                     {/* Donate Button: Lighter Border (Matched to Events), Gold Gap, Light Inner Line */}
-                    <button className="px-10 py-3 bg-gradient-to-b from-[#F2C96D] to-[#9E731C] text-white font-medium text-lg rounded-xl border border-[#CFA14E] shadow-[inset_0_0_0_2px_#DFA848,inset_0_0_0_3px_#FFF5D1,0_4px_8px_rgba(0,0,0,0.3)] hover:shadow-[inset_0_0_0_2px_#DFA848,inset_0_0_0_3px_#FFF5D1,0_6px_12px_rgba(0,0,0,0.4)] hover:-translate-y-1 active:scale-95 transition-all duration-300 flex items-center justify-center gap-2 drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)]">
+                    <button className="px-10 py-3 bg-gradient-to-b from-[#F2C96D] to-[#9E731C] text-white font-medium text-lg rounded-xl border border-[#CFA14E] shadow-[inset_0_0_0_2px_#DFA848,inset_0_0_0_3px_#FFF5D1,0_4px_8px_rgba(0,0,0,0.3)] hover:shadow-[inset_0_0_0_2px_#DFA848,inset_0_0_0_3px_#FFF5D1,0_6px_12px_rgba(0,0,0,0.4)] hover:-translate-y-1 active:scale-95 transition-all duration-300 transform flex items-center justify-center gap-2 drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)]">
                         {t.donateBtn}
                     </button>
 
                     {/* Events Button: Cream with Double Internal Frame */}
                     {/* Shadow trick: inset 3px bg-color (gap), inset 4px border-color (inner line) */}
-                    <button className="px-10 py-3 bg-gradient-to-b from-[#FFFEF9] to-[#F3E5C5] text-[#4A3225] font-medium text-lg rounded-xl border border-[#CFA14E] shadow-[inset_0_0_0_2px_#FFFDF8,inset_0_0_0_3px_#CFA14E,0_2px_4px_rgba(0,0,0,0.05)] hover:shadow-[inset_0_0_0_2px_#FFFDF8,inset_0_0_0_3px_#CFA14E,0_4px_8px_rgba(0,0,0,0.1)] hover:-translate-y-1 active:scale-95 transition-all duration-300 flex items-center justify-center gap-2 group">
+                    <button className="px-10 py-3 bg-gradient-to-b from-[#FFFEF9] to-[#F3E5C5] text-[#4A3225] font-medium text-lg rounded-xl border border-[#CFA14E] shadow-[inset_0_0_0_2px_#FFFDF8,inset_0_0_0_3px_#CFA14E,0_2px_4px_rgba(0,0,0,0.05)] hover:shadow-[inset_0_0_0_2px_#FFFDF8,inset_0_0_0_3px_#CFA14E,0_4px_8px_rgba(0,0,0,0.1)] hover:-translate-y-1 active:scale-95 transition-all duration-300 transform flex items-center justify-center gap-2 group">
                         {t.eventsBtn}
                         <Calendar size={18} className="text-[#4A3225] group-hover:scale-105 transition-transform" />
                     </button>
@@ -103,7 +135,7 @@ export default function Hero() {
             </div>
 
             {/* Bottom Curved Separator with Double Gold Lines */}
-            <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none z-20">
+            <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none z-20 pointer-events-none">
                 <svg className="relative block w-[calc(100%+1.3px)] h-[160px] md:h-[280px]" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 280" preserveAspectRatio="none">
                     {/* Main Fill (Cream/Background color of next section) */}
                     <motion.path d={pathMain} className="fill-background-ivory" stroke="none"></motion.path>
@@ -127,9 +159,15 @@ export default function Hero() {
                 {/* Scroll Down Indicator - Center of Curve */}
                 <div
                     onClick={handleScroll}
-                    className="absolute bottom-8 left-1/2 -translate-x-1/2 z-40 flex flex-col items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity duration-300"
+                    className="absolute bottom-6 left-1/2 -translate-x-1/2 z-40 pointer-events-auto flex flex-col items-center cursor-pointer hover:opacity-80 transition-opacity duration-300"
                 >
-                    <ChevronDown className="text-[#F4C430] w-10 h-10 animate-bounce drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]" />
+                    {/* Glassmorphic Pill */}
+                    <div className="px-5 py-2 rounded-full bg-gradient-to-r from-[#FFF5D1]/40 via-[#F2C96D]/20 to-[#FFF5D1]/40 backdrop-blur-md border border-[#D4AF37]/50 shadow-[0_4px_10px_rgba(0,0,0,0.1)] mb-2">
+                        <span className="text-[10px] md:text-xs font-bold tracking-[0.2em] text-[#5D4037] uppercase drop-shadow-sm">
+                            Scroll Down
+                        </span>
+                    </div>
+                    <ChevronDown className="text-[#F4C430] w-8 h-8 md:w-10 md:h-10 animate-bounce drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]" />
                 </div>
             </div>
         </section>
