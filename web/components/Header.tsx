@@ -35,7 +35,14 @@ export default function Header() {
         <header className={`fixed top-0 w-full z-50 backdrop-blur-md text-primary shadow-sm border-b-4 border-double border-secondary/50 transition-all duration-500 ${scrolled ? "bg-background-cream/95 py-2" : "bg-background/80 py-4"}`}>
             <div className="w-full px-4 lg:px-12 h-20 flex items-center justify-between">
                 {/* Logo Section */}
-                <Link href="/" className="flex items-center gap-2 md:gap-3 lg:gap-4 group relative z-50">
+                <Link
+                    href="/"
+                    onClick={(e) => {
+                        e.preventDefault();
+                        window.scrollTo({ top: 0, behavior: "smooth" });
+                    }}
+                    className="flex items-center gap-2 md:gap-3 lg:gap-4 group relative z-[100] cursor-pointer"
+                >
                     <img src="/assets/Logo_Main.png" alt="Aradhana Dharmika Trust" className="h-9 md:h-12 lg:h-16 xl:h-20 w-auto object-contain transition-transform duration-300 group-hover:scale-105 filter drop-shadow-sm" />
                     <div className="flex flex-col justify-center">
                         <span className="font-cinzel-decorative font-black text-lg md:text-xl lg:text-2xl xl:text-3xl tracking-wide text-[#5D4037] leading-none drop-shadow-sm mb-1">{t.trustNameLine1}</span>

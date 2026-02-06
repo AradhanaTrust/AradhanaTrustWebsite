@@ -27,9 +27,9 @@ export default function Welcome() {
                     className="text-center max-w-6xl mx-auto space-y-8"
                 >
                     <div className="flex items-center justify-center gap-4 text-secondary">
-                        <span className="h-px w-16 bg-gradient-to-r from-transparent to-secondary" />
-                        <span className="font-serif uppercase tracking-[0.2em] text-xs font-bold text-secondary-dark">{t.sectionTitle}</span>
-                        <span className="h-px w-16 bg-gradient-to-r from-secondary to-transparent" />
+                        <span className="h-[1.5px] w-24 bg-gradient-to-r from-transparent to-secondary" />
+                        <span className="font-serif uppercase tracking-[0.2em] text-sm md:text-base font-bold text-secondary-dark">{t.sectionTitle}</span>
+                        <span className="h-[1.5px] w-24 bg-gradient-to-r from-secondary to-transparent" />
                     </div>
 
                     <h2 className="text-2xl md:text-4xl font-serif font-medium text-primary-dark leading-tight">
