@@ -109,3 +109,7 @@ h6 {
     @apply antialiased tracking-wide;
   }
 }
+
+.font-cinzel-decorative {
+  font-family: var(--font-cinzel-decorative), "Times New Roman", serif;
+}

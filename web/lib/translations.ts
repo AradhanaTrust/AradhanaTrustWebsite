@@ -8,6 +8,8 @@ export const translations = {
             events: "Events",
             contact: "Contact",
             toggleBtn: "ಕನ್ನಡ", // Button shows the target language (Kannada)
+            trustNameLine1: "Aradhana",
+            trustNameLine2: "Dharmika Trust"
         },
         hero: {
             est: "EST. 2024",
@@ -91,6 +93,8 @@ export const translations = {
             events: "ಕಾರ್ಯಕ್ರಮಗಳು",
             contact: "ಸಂಪರ್ಕ",
             toggleBtn: "ENGLISH", // Button shows the target language (English)
+            trustNameLine1: "ಆರಾಧನಾ",
+            trustNameLine2: "ಧಾರ್ಮಿಕ ಟ್ರಸ್ಟ್"
         },
         hero: {
             est: "ಸ್ಥಾಪನೆ 2024",

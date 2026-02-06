@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Cinzel, Poppins } from "next/font/google";
+import { Cinzel, Poppins, Cinzel_Decorative } from "next/font/google";
 import "./globals.css";
 
 const cinzel = Cinzel({
@@ -12,6 +12,12 @@ const poppins = Poppins({
   subsets: ["latin"],
   variable: "--font-poppins",
   weight: ["400", "500", "600"],
+});
+
+const cinzelDecorative = Cinzel_Decorative({
+  subsets: ["latin"],
+  variable: "--font-cinzel-decorative",
+  weight: ["400", "700", "900"],
 });
 
 export const metadata: Metadata = {
@@ -32,7 +38,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${cinzel.variable} ${poppins.variable} antialiased texture-parchment`}
+        className={`${cinzel.variable} ${poppins.variable} ${cinzelDecorative.variable} antialiased texture-parchment`}
         suppressHydrationWarning
       >
         <LanguageProvider>
