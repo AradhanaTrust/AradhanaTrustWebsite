@@ -41,15 +41,19 @@ export const translations = {
             viewAllEvents: "View All Events",
         },
         events: {
-            title: "Upcoming Events",
+            sectionTitle: "Events",
+            pill: "Upcoming Events",
+            title: "Celebrations of Faith",
             subtitle: "Join us in devotion",
             viewAll: "View All Events",
             register: "Register Interest",
             cards: [
                 { title: "Ganesh Puja", date: "April 12, 2026", loc: "Main Temple Hall" },
                 { title: "Annadanam Seva", date: "April 20, 2026", loc: "Community Hall" },
-                { title: "Rudra Homa", date: "April 28, 2026", loc: "Yaga Shala" },
-            ]
+                { title: "Maha Shivaratri", date: "May 15, 2026", loc: "Temple Grounds" },
+                { title: "Rama Navami", date: "June 02, 2026", loc: "Main Temple Hall" },
+                { title: "Hanuman Jayanthi", date: "June 18, 2026", loc: "Community Hall" },
+            ],
         },
         donation: {
             badge: "Support Our Cause",
@@ -128,15 +132,19 @@ export const translations = {
             viewAllEvents: "ಎಲ್ಲಾ ಕಾರ್ಯಕ್ರಮಗಳನ್ನು ನೋಡಿ",
         },
         events: {
-            title: "ಮುಂಬರುವ ಕಾರ್ಯಕ್ರಮಗಳು",
+            sectionTitle: "ಕಾರ್ಯಕ್ರಮಗಳು",
+            pill: "ಮುಂದಿನ ಕಾರ್ಯಕ್ರಮಗಳು",
+            title: "ನಂಬಿಕೆಯ ಸಂಭ್ರಮ",
             subtitle: "ಭಕ್ತಿಯಲ್ಲಿ ನಮ್ಮೊಂದಿಗೆ ಸೇರಿ",
-            viewAll: "ಎಲ್ಲಾ ಕಾರ್ಯಕ್ರಮಗಳನ್ನು ನೋಡಿ",
-            register: "ನೋಂದಾಯಿಸಿ",
+            viewAll: "ಎಲ್ಲಾ ಕಾರ್ಯಕ್ರಮಗಳನ್ನು ವೀಕ್ಷಿಸಿ",
+            register: "ಆಸಕ್ತಿ ವ್ಯಕ್ತಪಡಿಸಿ",
             cards: [
                 { title: "ಗಣೇಶ ಪೂಜೆ", date: "ಏಪ್ರಿಲ್ 12, 2026", loc: "ಮುಖ್ಯ ದೇವಾಲಯ ಸಭಾಂಗಣ" },
-                { title: "ಅನ್ನದಾನ ಸೇವೆ", date: "ಏಪ್ರಿಲ್ 20, 2026", loc: "ಸಮುದಾಯ ಭವನ್" },
-                { title: "ರುದ್ರ ಹೋಮ", date: "ಏಪ್ರಿಲ್ 28, 2026", loc: "ಯಾಗ ಶಾಲೆ" },
-            ]
+                { title: "ಅನ್ನದಾನ ಸೇವೆ", date: "ಏಪ್ರಿಲ್ 20, 2026", loc: "ಸಮುದಾಯ ಭವನ" },
+                { title: "ಮಹಾ ಶಿವರಾತ್ರಿ", date: "ಮೇ 15, 2026", loc: "ದೇವಸ್ಥಾನದ ಆವರಣ" },
+                { title: "ರಾಮ ನವಮಿ", date: "ಜೂನ್ 02, 2026", loc: "ಮುಖ್ಯ ದೇವಾಲಯ ಸಭಾಂಗಣ" },
+                { title: "ಹನುಮಾನ್ ಜಯಂತಿ", date: "ಜೂನ್ 18, 2026", loc: "ಸಮುದಾಯ ಭವನ" },
+            ],
         },
         donation: {
             badge: "ನಮ್ಮ ಕಾರ್ಯಕ್ಕೆ ಬೆಂಬಲ ನೀಡಿ",
