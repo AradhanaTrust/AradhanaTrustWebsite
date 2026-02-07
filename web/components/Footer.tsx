@@ -9,18 +9,18 @@ export default function Footer() {
     const t = translations[language].footer;
 
     return (
-        <footer className="bg-background-cream text-primary border-t border-secondary/20 pt-8 pb-8">
+        <footer className="bg-background-cream text-primary border-t border-secondary/20 pt-8 pb-6">
             <div className="container mx-auto px-4 lg:px-12">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1.5fr_0.8fr_1fr_1.7fr] gap-8 lg:gap-8 mb-12">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1.9fr_0.7fr_0.9fr_1.5fr] gap-8 lg:gap-8 mb-4">
                     {/* Brand */}
-                    <div className="space-y-6">
+                    <div className="space-y-4">
                         <div className="flex items-start gap-4">
                             <img src="/assets/Logo_Round.png" alt="Logo" className="w-24 h-24 object-contain shadow-lg rounded-full" />
                             <div className="flex flex-col -space-y-1">
                                 <h2 className="font-cinzel-decorative font-bold text-4xl tracking-wide text-[#4A3225] leading-none py-1">
                                     Aradhana
                                 </h2>
-                                <h2 className="font-cinzel-decorative font-bold text-3xl tracking-wide text-[#4A3225] leading-none py-1">
+                                <h2 className="font-cinzel-decorative font-bold text-3xl tracking-wide text-[#4A3225] leading-none py-1 whitespace-nowrap">
                                     Dharmika Trust
                                 </h2>
                             </div>
@@ -102,7 +102,7 @@ export default function Footer() {
                                 src="https://maps.google.com/maps?q=Kodihalli%20Village,%20Malur%20Taluk,%20Kolar%20District%20563160,%20Karnataka,%20India&t=&z=14&ie=UTF8&iwloc=&output=embed"
                                 width="100%"
                                 height="100%"
-                                style={{ border: 0, filter: 'grayscale(100%) opacity(0.8)' }}
+                                style={{ border: 0, filter: 'contrast(1.1) saturate(1.1) sepia(0.15) opacity(0.9)' }}
                                 allowFullScreen
                                 loading="lazy"
                                 referrerPolicy="no-referrer-when-downgrade"
@@ -113,11 +113,11 @@ export default function Footer() {
                     </div>
                 </div>
 
-                <div className="border-t border-secondary/10 pt-8 flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 text-sm text-primary/50 font-light tracking-wide">
+                <div className="border-t border-secondary/10 pt-4 flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 text-sm font-medium tracking-wide text-[#B8860B]">
                     <p>{t.copyright}</p>
                     <div className="flex items-center gap-6">
-                        <a href="#" className="hover:text-secondary-dark transition-colors">{t.privacy}</a>
-                        <a href="#" className="hover:text-secondary-dark transition-colors">{t.terms}</a>
+                        <a href="#" className="hover:text-gray-800 transition-colors font-semibold">{t.privacy}</a>
+                        <a href="#" className="hover:text-gray-800 transition-colors font-semibold">{t.terms}</a>
                     </div>
                 </div>
             </div>
