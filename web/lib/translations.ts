@@ -28,7 +28,8 @@ export const translations = {
         },
         objectives: {
             title: "Our Objectives",
-            subtitle: "Our Core Mission",
+            subtitle: "Our Sacred Mission",
+            description: "Upholding Dharma • Celebrating Culture • Serving Humanity",
             cards: [
                 { title: "Temple Activities", desc: "" },
                 { title: "Annadanam", desc: "" },
@@ -36,7 +37,8 @@ export const translations = {
                 { title: "Spiritual Education", desc: "" },
                 { title: "Social Welfare", desc: "" },
                 { title: "Cultural Programs", desc: "" },
-            ]
+            ],
+            viewAllEvents: "View All Events",
         },
         events: {
             title: "Upcoming Events",
@@ -113,7 +115,8 @@ export const translations = {
         },
         objectives: {
             title: "ನಮ್ಮ ಉದ್ದೇಶಗಳು",
-            subtitle: "ನಮ್ಮ ಪ್ರಮುಖ ಗುರಿಗಳು",
+            subtitle: "ನಮ್ಮ ಪವಿತ್ರ ಕಾರ್ಯಗಳು",
+            description: "ಧರ್ಮ ರಕ್ಷಣೆ • ಸಂಸ್ಕೃತಿ ಆಚರಣೆ • ಮಾನವೀಯ ಸೇವೆ",
             cards: [
                 { title: "ದೇವಾಲಯ ಕಾರ್ಯಕ್ರಮಗಳು", desc: "" },
                 { title: "ಅನ್ನದಾನ", desc: "" },
@@ -121,7 +124,8 @@ export const translations = {
                 { title: "ಆಧ್ಯಾತ್ಮಿಕ ಶಿಕ್ಷಣ", desc: "" },
                 { title: "ಸಮಾಜ ಸೇವೆ", desc: "" },
                 { title: "ಸಾಂಸ್ಕೃತಿಕ ಕಾರ್ಯಕ್ರಮಗಳು", desc: "" },
-            ]
+            ],
+            viewAllEvents: "ಎಲ್ಲಾ ಕಾರ್ಯಕ್ರಮಗಳನ್ನು ನೋಡಿ",
         },
         events: {
             title: "ಮುಂಬರುವ ಕಾರ್ಯಕ್ರಮಗಳು",
