@@ -11,7 +11,7 @@ export default function Footer() {
     return (
         <footer className="bg-background-cream text-primary border-t border-secondary/20 pt-8 pb-8">
             <div className="container mx-auto px-4 lg:px-12">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1fr] gap-8 lg:gap-8 mb-12">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1.5fr_0.8fr_1fr_1.7fr] gap-8 lg:gap-8 mb-12">
                     {/* Brand */}
                     <div className="space-y-6">
                         <div className="flex items-start gap-4">
@@ -97,9 +97,9 @@ export default function Footer() {
                     {/* Map */}
                     <div className="space-y-6">
                         <h4 className="font-serif font-bold text-secondary-dark tracking-widest text-xs uppercase">Location</h4>
-                        <div className="w-full h-40 bg-background-ivory rounded-2xl overflow-hidden border border-secondary/20 relative group shadow-lg">
+                        <div className="w-full h-52 bg-background-ivory rounded-2xl overflow-hidden border border-secondary/20 relative group shadow-lg">
                             <iframe
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d248849.886539092!2d77.49085261355655!3d12.953959988118836!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1670c9b44e6d%3A0xf8dfc3e8517e4fe0!2sBengaluru%2C%20Karnataka!5e0!3m2!1sen!2sin!4v1709667547564!5m2!1sen!2sin"
+                                src="https://maps.google.com/maps?q=Kodihalli%20Village,%20Malur%20Taluk,%20Kolar%20District%20563160,%20Karnataka,%20India&t=&z=14&ie=UTF8&iwloc=&output=embed"
                                 width="100%"
                                 height="100%"
                                 style={{ border: 0, filter: 'grayscale(100%) opacity(0.8)' }}
