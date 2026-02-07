@@ -13,17 +13,17 @@ export default function Footer() {
     return (
         <footer className="bg-background-cream text-primary border-t border-secondary/20 pt-8 pb-6">
             <div className="container mx-auto px-4 lg:px-12">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1.65fr_1fr_1fr_1.6fr] gap-8 lg:gap-8 mb-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1.5fr_0.9fr_0.9fr_2fr] gap-8 lg:gap-8 mb-4">
                     {/* Brand */}
                     <div className="space-y-4">
-                        <div className="flex items-start gap-4">
+                        <div className="flex items-center gap-4">
                             <img src="/assets/Logo_Round.png" alt="Logo" className="w-24 h-24 object-contain shadow-lg rounded-full" />
                             <div className="flex flex-col -space-y-1">
                                 <h2 className="font-cinzel-decorative font-bold text-4xl tracking-wide text-[#4A3225] leading-none py-1">
-                                    Aradhana
+                                    {translations[language].nav.trustNameLine1}
                                 </h2>
                                 <h2 className="font-cinzel-decorative font-bold text-3xl tracking-wide text-[#4A3225] leading-none py-1 whitespace-nowrap">
-                                    Dharmika Trust
+                                    {translations[language].nav.trustNameLine2}
                                 </h2>
                             </div>
                         </div>
@@ -97,8 +97,8 @@ export default function Footer() {
                     </div>
 
                     {/* Map */}
-                    <div className="space-y-6">
-                        <h4 className="font-serif font-bold text-secondary-dark tracking-widest text-xs uppercase">Location</h4>
+                    <div className="space-y-6 lg:ml-12">
+                        <h4 className="font-serif font-bold text-secondary-dark tracking-widest text-xs uppercase">{translations[language].aboutPage.locationTitle}</h4>
                         <div className="w-full h-52 bg-background-ivory rounded-2xl overflow-hidden border border-secondary/20 relative group shadow-lg">
                             <iframe
                                 src="https://maps.google.com/maps?q=Kodihalli%20Village,%20Malur%20Taluk,%20Kolar%20District%20563160,%20Karnataka,%20India&t=&z=14&ie=UTF8&iwloc=&output=embed"

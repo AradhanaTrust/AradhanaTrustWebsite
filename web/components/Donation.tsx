@@ -23,9 +23,9 @@ export default function Donation() {
 
 
             <div className="container mx-auto px-4 lg:px-12 relative z-10 text-primary-dark">
-                <div className="grid lg:grid-cols-2 gap-16 items-center">
+                <div className="grid lg:grid-cols-2 gap-16 items-center max-w-7xl mx-auto">
 
-                    <div className="space-y-8 text-center lg:text-left">
+                    <div className="space-y-8 text-center max-w-md mx-auto">
                         <div className="inline-block px-4 py-1.5 bg-secondary/10 border border-secondary/30 rounded-full text-secondary-dark text-[10px] font-bold tracking-[0.2em] uppercase mb-2">
                             {t.badge}
                         </div>
@@ -38,7 +38,7 @@ export default function Donation() {
                             {t.text}
                         </p>
 
-                        <div className="pt-4 flex flex-col gap-4 max-w-md mx-auto lg:mx-0">
+                        <div className="pt-4 flex flex-col gap-4">
                             <div
                                 onClick={handleCopy}
                                 className="bg-white p-5 rounded-xl border border-secondary/20 flex items-center justify-between group cursor-pointer hover:shadow-lg transition-all shadow-sm active:scale-95"

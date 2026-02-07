@@ -70,23 +70,21 @@ export default function AboutPage() {
                             {/* Decorative Quote */}
                             <div className="flex items-center justify-center gap-4 text-[#B8860B]/80 font-medium">
                                 <span className="h-[1px] w-12 bg-gradient-to-r from-transparent to-[#B8860B]" />
-                                <span className="font-serif italic tracking-wider text-sm md:text-base text-[#8D6E63]">Dharmo Rakshati Rakshitah</span>
+                                <span className="font-serif italic tracking-wider text-sm md:text-base text-[#8D6E63]">{translations[language].aboutPage.motto}</span>
                                 <span className="h-[1px] w-12 bg-gradient-to-l from-transparent to-[#B8860B]" />
                             </div>
 
                             {/* Main Heading - Updated Size & Color */}
                             <h1 className="font-cinzel-decorative font-bold leading-tight drop-shadow-sm filter">
                                 <span className="block text-4xl md:text-5xl lg:text-6xl text-[#D4AF37]">
-                                    About Aradhana
+                                    {translations[language].aboutPage.heroTitle1}
                                 </span>
                                 <span className="block text-2xl md:text-3xl lg:text-4xl text-[#D4AF37] mt-2 tracking-widest">
-                                    DHARMIKA TRUST
+                                    {translations[language].aboutPage.heroTitle2}
                                 </span>
                             </h1>
 
-                            <p className="font-serif text-lg md:text-xl text-[#5D4037] w-full leading-relaxed font-medium px-4 lg:px-0">
-                                "Dedicated to the preservation of <span className="text-[#D4AF37] font-bold">Sanatana Dharma</span>, serving humanity through <span className="text-[#D4AF37] font-bold">Seva</span>, and nurturing <span className="text-[#D4AF37] font-bold">Sanskara</span>."
-                            </p>
+                            <p className="font-serif text-lg md:text-xl text-[#5D4037] w-full leading-relaxed font-medium px-4 lg:px-0" dangerouslySetInnerHTML={{ __html: `"${translations[language].aboutPage.heroDescription}"` }} />
 
                             {/* Registration Number Badge */}
                             <div className="inline-block">
@@ -177,16 +175,14 @@ export default function AboutPage() {
                             <div className="absolute bottom-0 right-0 w-16 h-16 border-b-4 border-r-4 border-[#CFA14E] rounded-br-3xl opacity-50" />
 
                             <div className="text-center mb-8">
-                                <h2 className="font-cinzel-decorative font-bold text-3xl md:text-4xl text-[#4A3225] mb-2">Our Origins</h2>
-                                <p className="text-[#CFA14E] font-serif italic text-lg">Kodihalli Village, Malur Taluk</p>
+                                <h2 className="font-cinzel-decorative font-bold text-3xl md:text-4xl text-[#4A3225] mb-2">{translations[language].aboutPage.originsTitle}</h2>
+                                <p className="text-[#CFA14E] font-serif italic text-lg">{translations[language].aboutPage.originsSubtitle}</p>
                             </div>
 
                             <div className="space-y-6 text-lg text-[#5D4037] leading-relaxed font-medium text-justify md:text-center">
+                                <p dangerouslySetInnerHTML={{ __html: translations[language].aboutPage.originsPara1 }} />
                                 <p>
-                                    Aradhana Dharmika Trust was established with a sacred resolve: to bridge the gap between ancient vedic traditions and modern social responsibility. Rooted in the serene, spiritual soil of <strong>Kodihalli Village</strong> in Kolar District, we strive to be a beacon of hope, spirituality, and sustenance.
-                                </p>
-                                <p>
-                                    Our journey began with a simple yet profound realization – that true devotion involves not just ritualistic worship, but also the service of living beings. Guided by this principle, we maintain temples, conduct Vedic rituals for universal welfare, and ensure that no one in our vicinity goes hungry.
+                                    {translations[language].aboutPage.originsPara2}
                                 </p>
                             </div>
                         </div>
@@ -204,7 +200,7 @@ export default function AboutPage() {
 
                     <div className="container mx-auto px-4 lg:px-12 relative z-10 pt-12">
                         <div className="text-center mb-16">
-                            <h2 className="font-cinzel-decorative font-bold text-4xl text-[#4A3225] mb-4">Our Guiding Light</h2>
+                            <h2 className="font-cinzel-decorative font-bold text-4xl text-[#4A3225] mb-4">{translations[language].aboutPage.guidingLightTitle}</h2>
                             <div className="max-w-xs mx-auto h-1 bg-gradient-to-r from-transparent via-[#CFA14E] to-transparent" />
                         </div>
 
@@ -219,10 +215,8 @@ export default function AboutPage() {
                                 <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 bg-gradient-to-br from-[#F3E5C5] to-white rounded-full border-4 border-white shadow-xl flex items-center justify-center">
                                     <Milestone size={32} className="text-[#5D4037]" />
                                 </div>
-                                <h3 className="font-cinzel-decorative font-bold text-2xl text-[#8D6E63] mb-6">Our Mission</h3>
-                                <p className="text-primary/70 leading-relaxed">
-                                    To promote the values of <strong>Sanatana Dharma</strong> through satsangs, pravachanas, and spiritual study circles. We aim to foster a community that is spiritually awakened and socially responsible.
-                                </p>
+                                <h3 className="font-cinzel-decorative font-bold text-2xl text-[#8D6E63] mb-6">{translations[language].aboutPage.missionTitle}</h3>
+                                <p className="text-primary/70 leading-relaxed" dangerouslySetInnerHTML={{ __html: translations[language].aboutPage.missionContent }} />
                             </motion.div>
 
                             {/* Vision Card */}
@@ -235,9 +229,9 @@ export default function AboutPage() {
                                 <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 bg-gradient-to-br from-[#F3E5C5] to-white rounded-full border-4 border-white shadow-xl flex items-center justify-center">
                                     <BookOpen size={32} className="text-[#5D4037]" />
                                 </div>
-                                <h3 className="font-cinzel-decorative font-bold text-2xl text-[#8D6E63] mb-6">Our Vision</h3>
+                                <h3 className="font-cinzel-decorative font-bold text-2xl text-[#8D6E63] mb-6">{translations[language].aboutPage.visionTitle}</h3>
                                 <p className="text-primary/70 leading-relaxed">
-                                    To encourage value-based education and cultural learning, ensuring the transmission of our rich spiritual heritage to future generations while serving society without discrimination.
+                                    {translations[language].aboutPage.visionContent}
                                 </p>
                             </motion.div>
                         </div>
@@ -282,16 +276,16 @@ export default function AboutPage() {
                             whileInView={{ opacity: 1 }}
                             className="text-center mb-16"
                         >
-                            <h2 className="font-cinzel-decorative font-bold text-4xl text-[#4A3225] mb-4">Our Impact Areas</h2>
+                            <h2 className="font-cinzel-decorative font-bold text-4xl text-[#4A3225] mb-4">{translations[language].aboutPage.impactTitle}</h2>
                             <div className="w-24 h-1 bg-[#CFA14E] mx-auto rounded-full" />
                         </motion.div>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                             {[
-                                { title: "Annadanam", image: "/assets/obj_annadanam.png", desc: "Providing nutritious meals to the needy." },
-                                { title: "Education", image: "/assets/obj_education.png", desc: "Supporting students with scholarships & materials." },
-                                { title: "Culture", image: "/assets/obj_culture.png", desc: "Preserving traditional arts and music." },
-                                { title: "Welfare", image: "/assets/obj_welfare.png", desc: "Community health and social support." },
+                                { key: "annadanam", image: "/assets/obj_annadanam.png" },
+                                { key: "education", image: "/assets/obj_education.png" },
+                                { key: "culture", image: "/assets/obj_culture.png" },
+                                { key: "welfare", image: "/assets/obj_welfare.png" },
                             ].map((item, idx) => (
                                 <motion.div
                                     key={idx}
@@ -304,13 +298,13 @@ export default function AboutPage() {
                                     <div className="relative z-10 w-full h-24 flex items-center justify-center mb-4">
                                         <img
                                             src={item.image}
-                                            alt={item.title}
+                                            alt={item.key}
                                             className="max-h-full w-auto object-contain drop-shadow-md group-hover:scale-110 transition-transform duration-500 rounded-lg"
                                         />
                                     </div>
 
-                                    <h3 className="font-cinzel-decorative font-bold text-xl text-[#5D4037] mb-3 relative z-10 group-hover:text-[#8B5E3C] transition-colors">{item.title}</h3>
-                                    <p className="text-sm text-primary/70 relative z-10 font-medium leading-relaxed">{item.desc}</p>
+                                    <h3 className="font-cinzel-decorative font-bold text-xl text-[#5D4037] mb-3 relative z-10 group-hover:text-[#8B5E3C] transition-colors">{t.aboutPage.impacts[item.key as 'annadanam' | 'education' | 'culture' | 'welfare'].title}</h3>
+                                    <p className="text-sm text-primary/70 relative z-10 font-medium leading-relaxed">{t.aboutPage.impacts[item.key as 'annadanam' | 'education' | 'culture' | 'welfare'].desc}</p>
                                 </motion.div>
                             ))}
                         </div>
@@ -321,13 +315,13 @@ export default function AboutPage() {
                 <section className="py-24 bg-[#F3E5C5]/30 text-center relative overflow-hidden border-t border-[#D4AF37]/20">
                     <div className="absolute inset-0 bg-[url('/assets/mandala-bg.svg')] opacity-5 animate-spin-slow pointer-events-none mix-blend-multiply" />
                     <div className="container mx-auto px-4 relative z-10">
-                        <h2 className="font-cinzel-decorative font-bold text-3xl md:text-5xl text-[#5D4037] mb-6">Be a Part of Our Journey</h2>
+                        <h2 className="font-cinzel-decorative font-bold text-3xl md:text-5xl text-[#5D4037] mb-6">{translations[language].aboutPage.ctaTitle}</h2>
                         <p className="text-[#8D6E63] text-lg max-w-2xl mx-auto mb-10 font-medium">
-                            Your contribution helps us sustain these noble initiatives. Join hands with us to serve Dharma and Humanity.
+                            {translations[language].aboutPage.ctaDescription}
                         </p>
                         <Link href="/#donations">
                             <span className="px-10 py-3 bg-gradient-to-b from-[#D4AF37] to-[#B8860B] text-white font-medium text-lg rounded-xl border border-[#CFA14E] shadow-[inset_0_0_0_2px_#F4C430,inset_0_0_0_3px_#FFF5D1,0_4px_8px_rgba(0,0,0,0.15)] hover:shadow-[inset_0_0_0_2px_#F4C430,inset_0_0_0_3px_#FFF5D1,0_6px_12px_rgba(0,0,0,0.2)] hover:-translate-y-1 active:scale-95 transition-all duration-300 transform flex items-center justify-center gap-2 drop-shadow-md cursor-pointer inline-flex">
-                                Contribute Now
+                                {translations[language].aboutPage.ctaButton}
                             </span>
                         </Link>
                     </div>
