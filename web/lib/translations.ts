@@ -64,8 +64,8 @@ export const translations = {
             accepted: "Accepted: GPay, PhonePe, Paytm, Cards",
         },
         gallery: {
-            title: "Photo Gallery",
-            subtitle: "Glimpses of Devotion",
+            title: "Timeless Moments of Grace",
+            subtitle: "Photo Gallery",
             viewBtn: "View Full Gallery",
         },
         footer: {
@@ -155,8 +155,8 @@ export const translations = {
             accepted: "ಸ್ವೀಕರಿಸಲಾಗುವುದು: GPay, PhonePe, Paytm, Cards",
         },
         gallery: {
-            title: "ಛಾಯಾಚಿತ್ರ ಗ್ಯಾಲರಿ",
-            subtitle: "ಭಕ್ತಿಯ ಕ್ಷಣಗಳು",
+            title: "ಚಿರಂತನ ದೈವಿಕ ಕ್ಷಣಗಳು",
+            subtitle: "ಛಾಯಾಚಿತ್ರ ಗ್ಯಾಲರಿ",
             viewBtn: "ಪೂರ್ಣ ಗ್ಯಾಲರಿ ವೀಕ್ಷಿಸಿ",
         },
         footer: {
