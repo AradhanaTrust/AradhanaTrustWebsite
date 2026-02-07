@@ -4,17 +4,15 @@ import { motion } from "framer-motion";
 import { BookOpen, Calendar, HandHeart, Home, Music, Users, Utensils } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { translations } from "@/lib/translations";
-
-const icons = [Home, Utensils, BookOpen, Music, Users, HandHeart];
-const colors = ["bg-orange-100 text-orange-600", "bg-yellow-100 text-yellow-600", "bg-purple-100 text-purple-600", "bg-blue-100 text-blue-600", "bg-green-100 text-green-600", "bg-pink-100 text-pink-600"];
+import GoldCurveSeparator from "./GoldCurveSeparator";
 
 export default function Objectives() {
     const { language } = useLanguage();
     const t = translations[language].objectives;
 
     return (
-        <section className="py-20 bg-background border-t border-secondary/10">
-            <div className="w-full max-w-[1800px] mx-auto px-4 lg:px-12">
+        <section className="py-20 bg-background border-t border-secondary/10 relative">
+            <div className="w-full max-w-[1800px] mx-auto px-4 lg:px-12 pb-8">
                 <div className="text-center mb-16 space-y-6">
                     <div className="flex items-center justify-center gap-4 text-secondary">
                         <span className="h-[1.5px] w-24 bg-gradient-to-r from-transparent to-secondary" />
@@ -29,11 +27,7 @@ export default function Objectives() {
                         {t.description}
                     </p>
 
-                    <div className="flex items-center justify-center gap-4 w-full max-w-md mx-auto opacity-80 py-3">
-                        <div className="h-px flex-1 bg-gradient-to-r from-transparent to-secondary"></div>
-                        <div className="w-2.5 h-2.5 bg-secondary rotate-45 shadow-sm"></div>
-                        <div className="h-px flex-1 bg-gradient-to-l from-transparent to-secondary"></div>
-                    </div>
+
                 </div>
 
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
@@ -84,6 +78,9 @@ export default function Objectives() {
                     </button>
                 </div>
             </div>
+
+            {/* Separator - Transitions to Donation (Cream) */}
+            <GoldCurveSeparator fillColor="fill-[#F5F0E6]" />
         </section>
     );
 }

@@ -6,6 +6,8 @@ import Image from "next/image";
 import { useLanguage } from "@/context/LanguageContext";
 import { translations } from "@/lib/translations";
 
+import GoldCurveSeparator from "./GoldCurveSeparator";
+
 const eventImages = ["/assets/event-ganesh.png", "/assets/event-annadanam.png", "/assets/event-homa.png"];
 
 export default function Events() {
@@ -13,7 +15,7 @@ export default function Events() {
     const t = translations[language].events;
 
     return (
-        <section id="events" className="py-20 bg-background-cream">
+        <section id="events" className="py-20 bg-background-cream relative">
             <div className="container mx-auto px-4 lg:px-12">
                 <div className="flex flex-col md:flex-row items-end justify-between mb-12 gap-6">
                     <div className="space-y-4 text-center md:text-left w-full md:w-auto">
@@ -83,6 +85,9 @@ export default function Events() {
                     </button>
                 </div>
             </div>
-        </section>
+
+            {/* Separator - Transitions to Gallery (Ivory) */}
+            <GoldCurveSeparator fillColor="fill-[#FDFBF7]" />
+        </section >
     );
 }

@@ -53,10 +53,10 @@ export const translations = {
         },
         donation: {
             badge: "Support Our Cause",
-            title: "Your Contribution Sustains Dharma",
-            text: "All donations are tax-exempt under 80G. Your support helps us perform Annadanam, maintain the temple, and conduct cultural activities.",
-            scanTitle: "Scan to Donate",
-            razorpayBtn: "Donate via Razorpay",
+            title: "Preserving Our\nSpiritual Heritage",
+            text: "Your contributions play a vital role in sustaining daily Vedic rituals, providing Annadanam to devotees, and preserving our ancient culture through educational and spiritual programs.",
+            scanTitle: "Make a Divine Offering",
+            razorpayBtn: "Donate Now",
             accepted: "Accepted: GPay, PhonePe, Paytm, Cards",
         },
         gallery: {
@@ -140,10 +140,10 @@ export const translations = {
         },
         donation: {
             badge: "ನಮ್ಮ ಕಾರ್ಯಕ್ಕೆ ಬೆಂಬಲ ನೀಡಿ",
-            title: "ನಿಮ್ಮ ದೇಣಿಗೆ ಧರ್ಮವನ್ನು ಉಳಿಸುತ್ತದೆ",
-            text: "ಎಲ್ಲಾ ದೇಣಿಗೆಗಳು 80G ಅಡಿಯಲ್ಲಿ ತೆರಿಗೆ ವಿನಾಯಿತಿ ಹೊಂದಿವೆ. ಅನ್ನದಾನ, ದೇವಾಲಯ ನಿರ್ವಹಣೆ ಮತ್ತು ಸಾಂಸ್ಕೃತಿಕ ಚಟುವಟಿಕೆಗಳನ್ನು ನಡೆಸಲು ನಿಮ್ಮ ಸಹಾಯ ನಮಗೆ ಅತ್ಯಗತ್ಯ.",
-            scanTitle: "ದೇಣಿಗೆ ನೀಡಲು ಸ್ಕ್ಯಾನ್ ಮಾಡಿ",
-            razorpayBtn: "ರೇಜರ್‌ಪೇ ಮೂಲಕ ದೇಣಿಗೆ ನೀಡಿ",
+            title: "ನಮ್ಮ ಪವಿತ್ರ\nಸಂಪ್ರದಾಯಗಳ ರಕ್ಷಣೆ",
+            text: "ನಿಮ್ಮ ದೇಣಿಗೆಯು ನಿತ್ಯ ಪೂಜೆಗಳು, ಭಕ್ತಾದಿಗಳಿಗೆ ಅನ್ನದಾನ ಮತ್ತು ನಮ್ಮ ಪ್ರಾಚೀನ ಸಂಸ್ಕೃತಿಯನ್ನು ಉಳಿಸುವ ಶೈಕ್ಷಣಿಕ ಕಾರ್ಯಕ್ರಮಗಳಿಗೆ ಅತ್ಯಮೂಲ್ಯವಾಗಿದೆ.",
+            scanTitle: "ದೈವಿಕ ಕಾಣಿಕೆ ನೀಡಿ",
+            razorpayBtn: "ಈಗಲೇ ದೇಣಿಗೆ ನೀಡಿ",
             accepted: "ಸ್ವೀಕರಿಸಲಾಗುವುದು: GPay, PhonePe, Paytm, Cards",
         },
         gallery: {
