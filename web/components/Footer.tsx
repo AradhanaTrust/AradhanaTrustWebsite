@@ -17,10 +17,10 @@ export default function Footer() {
                         <div className="flex items-center gap-4">
                             <img src="/assets/Logo_Round.png" alt="Logo" className="w-20 h-20 object-contain shadow-lg rounded-full" />
                             <div className="flex flex-col">
-                                <h2 className="font-cinzel-decorative font-bold text-2xl tracking-wide text-primary-dark leading-none">
+                                <h2 className="font-cinzel-decorative font-bold text-3xl tracking-wide text-primary-dark leading-none">
                                     Aradhana
                                 </h2>
-                                <h2 className="font-cinzel-decorative font-bold text-xl tracking-wide text-primary-dark leading-none">
+                                <h2 className="font-cinzel-decorative font-bold text-2xl tracking-wide text-primary-dark leading-none">
                                     Dharmika Trust
                                 </h2>
                             </div>
