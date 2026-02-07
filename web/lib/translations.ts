@@ -82,11 +82,15 @@ export const translations = {
             copyright: "© 2026 Aradhana Dharmika Trust. All rights reserved.",
             designed: "Designed with Devotion.",
             contactInfo: {
-                address: "No. 123, Temple Road, Malleshwaram, Bengaluru - 560003",
+                address: "Kodihalli Village, Malur Taluk, Kolar District – 563160, Karnataka, India",
                 phone: "+91 98765 43210",
                 email: "contact@aradhanatrust.org",
                 whatsapp: "+91 98765 43210",
                 mapLabel: "Locate us on Google Maps"
+            },
+            registration: {
+                title: "Registration",
+                number: "Registration Number: MLR-4-00502-2025/26"
             }
         }
     },
@@ -173,11 +177,15 @@ export const translations = {
             copyright: "© 2026 ಆರಾಧನಾ ಧಾರ್ಮಿಕ ಟ್ರಸ್ಟ್. ಎಲ್ಲಾ ಹಕ್ಕುಗಳನ್ನು ಕಾಯ್ದಿರಿಸಲಾಗಿದೆ.",
             designed: "ಭಕ್ತಿಯಿಂದ ವಿನ್ಯಾಸಗೊಳಿಸಲಾಗಿದೆ.",
             contactInfo: {
-                address: "ನಂ. 123, ದೇವಾಲಯ ರಸ್ತೆ, ಮಲ್ಲೇಶ್ವರಂ, ಬೆಂಗಳೂರು - 560003",
+                address: "ಕೋಡಿಹಳ್ಳಿ ಗ್ರಾಮ, ಮಾಲೂರು ತಾಲೂಕು, ಕೋಲಾರ ಜಿಲ್ಲೆ – 563160, ಕರ್ನಾಟಕ, ಭಾರತ",
                 phone: "+91 98765 43210",
                 email: "contact@aradhanatrust.org",
                 whatsapp: "+91 98765 43210",
                 mapLabel: "ಗೂಗಲ್ ಮ್ಯಾಪ್‌ನಲ್ಲಿ ನೋಡಿ"
+            },
+            registration: {
+                title: "ನೋಂದಣಿ",
+                number: "ನೋಂದಣಿ ಸಂಖ್ಯೆ: MLR-4-00502-2025/26"
             }
         }
     }

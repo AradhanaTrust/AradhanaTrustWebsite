@@ -14,13 +14,27 @@ export default function Footer() {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-12 mb-12">
                     {/* Brand */}
                     <div className="lg:col-span-2 space-y-6">
-                        <div className="flex items-center gap-3">
-                            <img src="/assets/Logo_Round.png" alt="Logo" className="w-12 h-12 object-contain shadow-lg rounded-full" />
-                            <h2 className="font-serif font-bold text-2xl tracking-wide text-primary-dark">ARADHANA</h2>
+                        <div className="flex items-center gap-4">
+                            <img src="/assets/Logo_Round.png" alt="Logo" className="w-20 h-20 object-contain shadow-lg rounded-full" />
+                            <div className="flex flex-col">
+                                <h2 className="font-cinzel-decorative font-bold text-2xl tracking-wide text-primary-dark leading-none">
+                                    ARADHANA
+                                </h2>
+                                <h2 className="font-cinzel-decorative font-bold text-xl tracking-wide text-primary-dark leading-none">
+                                    DHARMIKA TRUST
+                                </h2>
+                            </div>
                         </div>
                         <p className="text-primary/70 text-sm leading-relaxed max-w-sm font-medium">
                             {t.desc}
                         </p>
+
+                        {/* Registration Details */}
+                        <div className="bg-secondary/5 p-4 rounded-xl border border-secondary/10 max-w-sm">
+                            <h4 className="font-serif font-bold text-secondary-dark tracking-widest text-xs uppercase mb-1">{t.registration.title}</h4>
+                            <p className="text-primary/80 text-sm font-medium font-mono">{t.registration.number}</p>
+                        </div>
+
                         <div className="flex gap-4">
                             {/* Social Placeholders */}
                             <div className="w-8 h-8 rounded-full bg-secondary/10 hover:bg-secondary hover:text-white text-secondary-dark flex items-center justify-center transition-all cursor-pointer">
