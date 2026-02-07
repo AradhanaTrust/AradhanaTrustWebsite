@@ -18,10 +18,10 @@ export default function Footer() {
                             <img src="/assets/Logo_Round.png" alt="Logo" className="w-20 h-20 object-contain shadow-lg rounded-full" />
                             <div className="flex flex-col">
                                 <h2 className="font-cinzel-decorative font-bold text-2xl tracking-wide text-primary-dark leading-none">
-                                    ARADHANA
+                                    Aradhana
                                 </h2>
                                 <h2 className="font-cinzel-decorative font-bold text-xl tracking-wide text-primary-dark leading-none">
-                                    DHARMIKA TRUST
+                                    Dharmika Trust
                                 </h2>
                             </div>
                         </div>
