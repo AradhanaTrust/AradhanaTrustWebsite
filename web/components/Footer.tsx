@@ -11,7 +11,7 @@ export default function Footer() {
     return (
         <footer className="bg-background-cream text-primary border-t border-secondary/20 pt-8 pb-6">
             <div className="container mx-auto px-4 lg:px-12">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1.8fr_1fr_1fr_1.6fr] gap-8 lg:gap-8 mb-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1.65fr_1fr_1fr_1.6fr] gap-8 lg:gap-8 mb-4">
                     {/* Brand */}
                     <div className="space-y-4">
                         <div className="flex items-start gap-4">
