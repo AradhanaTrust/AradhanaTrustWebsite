@@ -25,7 +25,7 @@ export default function Header() {
     const navLinks = [
         { name: t.home, href: "/" },
         { name: t.about, href: "/about" },
-        { name: t.gallery, href: "#gallery" },
+        { name: t.gallery, href: "/gallery" },
         { name: t.donations, href: "#donations" },
         { name: t.events, href: "#events" },
         { name: t.contact, href: "#contact" },

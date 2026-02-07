@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowRight, ChevronLeft, ChevronRight, ImageIcon } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { translations } from "@/lib/translations";
@@ -142,10 +143,12 @@ export default function Gallery() {
 
                 {/* View Gallery Button (Premium) */}
                 <div className="flex justify-center">
-                    <button className="px-10 py-3 bg-gradient-to-b from-[#FFFEF9] to-[#F3E5C5] text-[#4A3225] font-medium text-lg rounded-xl border border-[#CFA14E] shadow-[inset_0_0_0_2px_#FFFDF8,inset_0_0_0_3px_#CFA14E,0_2px_4px_rgba(0,0,0,0.05)] hover:shadow-[inset_0_0_0_2px_#FFFDF8,inset_0_0_0_3px_#CFA14E,0_4px_8px_rgba(0,0,0,0.1)] hover:-translate-y-1 active:scale-95 transition-all duration-300 transform flex items-center justify-center gap-2 group">
-                        {t.viewBtn}
-                        <ImageIcon size={18} className="text-[#4A3225] group-hover:scale-105 transition-transform" />
-                    </button>
+                    <Link href="/gallery">
+                        <button className="px-10 py-3 bg-gradient-to-b from-[#FFFEF9] to-[#F3E5C5] text-[#4A3225] font-medium text-lg rounded-xl border border-[#CFA14E] shadow-[inset_0_0_0_2px_#FFFDF8,inset_0_0_0_3px_#CFA14E,0_2px_4px_rgba(0,0,0,0.05)] hover:shadow-[inset_0_0_0_2px_#FFFDF8,inset_0_0_0_3px_#CFA14E,0_4px_8px_rgba(0,0,0,0.1)] hover:-translate-y-1 active:scale-95 transition-all duration-300 transform flex items-center justify-center gap-2 group">
+                            {t.viewBtn}
+                            <ImageIcon size={18} className="text-[#4A3225] group-hover:scale-105 transition-transform" />
+                        </button>
+                    </Link>
                 </div>
             </div>
         </section>

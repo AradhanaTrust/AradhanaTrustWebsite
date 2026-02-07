@@ -68,6 +68,33 @@ export const translations = {
             subtitle: "Photo Gallery",
             viewBtn: "View Full Gallery",
         },
+        galleryPage: {
+            title: "Sacred Moments",
+            subtitle: "Photo Gallery",
+            categories: {
+                all: "All",
+                templeEvents: "Temple Events",
+                deityDarshan: "Deity Darshan",
+                annadanam: "Annadanam",
+                cultural: "Cultural Programs",
+                welfare: "Social Welfare"
+            },
+            imageTitles: {
+                templeCeremony: "Temple Ceremony",
+                divineDarshan: "Divine Darshan",
+                foodDistribution: "Food Distribution Service",
+                culturalEvent: "Cultural Event",
+                communityService: "Community Service",
+                ganeshPuja: "Ganesh Puja",
+                communityAnnadanam: "Community Annadanam",
+                sacredHoma: "Sacred Homa"
+            },
+            viewImage: "View Image",
+            close: "Close",
+            previous: "Previous",
+            next: "Next",
+            showing: "Showing"
+        },
         footer: {
             desc: "Preserving our heritage, promoting spiritual values, and serving humanity through Dharma.",
             quickLinks: "QUICK LINKS",
@@ -162,6 +189,33 @@ export const translations = {
             title: "ಚಿರಂತನ ದೈವಿಕ ಕ್ಷಣಗಳು",
             subtitle: "ಛಾಯಾಚಿತ್ರ ಗ್ಯಾಲರಿ",
             viewBtn: "ಪೂರ್ಣ ಗ್ಯಾಲರಿ ವೀಕ್ಷಿಸಿ",
+        },
+        galleryPage: {
+            title: "ಪವಿತ್ರ ಕ್ಷಣಗಳು",
+            subtitle: "ಛಾಯಾಚಿತ್ರ ಗ್ಯಾಲರಿ",
+            categories: {
+                all: "ಎಲ್ಲಾ",
+                templeEvents: "ದೇವಾಲಯ ಕಾರ್ಯಕ್ರಮಗಳು",
+                deityDarshan: "ದೇವರ ದರ್ಶನ",
+                annadanam: "ಅನ್ನದಾನ",
+                cultural: "ಸಾಂಸ್ಕೃತಿಕ ಕಾರ್ಯಕ್ರಮಗಳು",
+                welfare: "ಸಮಾಜ ಸೇವೆ"
+            },
+            imageTitles: {
+                templeCeremony: "ದೇವಾಲಯ ಸಮಾರಂಭ",
+                divineDarshan: "ದೈವಿಕ ದರ್ಶನ",
+                foodDistribution: "ಆಹಾರ ವಿತರಣಾ ಸೇವೆ",
+                culturalEvent: "ಸಾಂಸ್ಕೃತಿಕ ಕಾರ್ಯಕ್ರಮ",
+                communityService: "ಸಮುದಾಯ ಸೇವೆ",
+                ganeshPuja: "ಗಣೇಶ ಪೂಜೆ",
+                communityAnnadanam: "ಸಮುದಾಯ ಅನ್ನದಾನ",
+                sacredHoma: "ಪವಿತ್ರ ಹೋಮ"
+            },
+            viewImage: "ಚಿತ್ರ ವೀಕ್ಷಿಸಿ",
+            close: "ಮುಚ್ಚಿ",
+            previous: "ಹಿಂದಿನದು",
+            next: "ಮುಂದಿನದು",
+            showing: "ತೋರಿಸಲಾಗುತ್ತಿದೆ"
         },
         footer: {
             desc: "ನಮ್ಮ ಪರಂಪರೆಯನ್ನು ಕಾಪಾಡುವುದು, ಆಧ್ಯಾತ್ಮಿಕ ಮೌಲ್ಯಗಳನ್ನು ಉತ್ತೇಜಿಸುವುದು ಮತ್ತು ಧರ್ಮದ ಮೂಲಕ ಮಾನವೀಯತೆಯನ್ನು ಸೇವಿಸುವುದು.",
