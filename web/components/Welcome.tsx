@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 import { useLanguage } from "@/context/LanguageContext";
 import { translations } from "@/lib/translations";
 
@@ -56,9 +57,11 @@ export default function Welcome() {
                     </p>
 
                     <div className="pt-8">
-                        <button className="px-10 py-3 bg-gradient-to-b from-[#FFFEF9] to-[#F3E5C5] text-[#4A3225] font-medium text-lg rounded-xl border border-[#CFA14E] shadow-[inset_0_0_0_2px_#FFFDF8,inset_0_0_0_3px_#CFA14E,0_2px_4px_rgba(0,0,0,0.05)] hover:shadow-[inset_0_0_0_2px_#FFFDF8,inset_0_0_0_3px_#CFA14E,0_4px_8px_rgba(0,0,0,0.1)] hover:-translate-y-1 active:scale-95 transition-all duration-300 transform inline-flex items-center justify-center gap-2 group">
-                            {t.learnMore} <ArrowRight size={18} className="text-[#4A3225] group-hover:scale-105 transition-transform" />
-                        </button>
+                        <Link href="/about">
+                            <button className="px-10 py-3 bg-gradient-to-b from-[#FFFEF9] to-[#F3E5C5] text-[#4A3225] font-medium text-lg rounded-xl border border-[#CFA14E] shadow-[inset_0_0_0_2px_#FFFDF8,inset_0_0_0_3px_#CFA14E,0_2px_4px_rgba(0,0,0,0.05)] hover:shadow-[inset_0_0_0_2px_#FFFDF8,inset_0_0_0_3px_#CFA14E,0_4px_8px_rgba(0,0,0,0.1)] hover:-translate-y-1 active:scale-95 transition-all duration-300 transform inline-flex items-center justify-center gap-2 group">
+                                {t.learnMore} <ArrowRight size={18} className="text-[#4A3225] group-hover:scale-105 transition-transform" />
+                            </button>
+                        </Link>
                     </div>
                 </motion.div>
             </div>

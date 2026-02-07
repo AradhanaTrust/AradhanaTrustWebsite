@@ -64,7 +64,7 @@ export default function Footer() {
                     <div className="space-y-6 lg:justify-self-center">
                         <h4 className="font-serif font-bold text-secondary-dark tracking-widest text-xs uppercase">{t.quickLinks}</h4>
                         <ul className="space-y-3 text-sm text-primary/70">
-                            <li><a href="#" className="hover:text-secondary-dark transition-colors flex items-center gap-2"><span className="w-1 h-1 bg-secondary rounded-full"></span>{t.about}</a></li>
+                            <li><Link href="/about" className="hover:text-secondary-dark transition-colors flex items-center gap-2"><span className="w-1 h-1 bg-secondary rounded-full"></span>{t.about}</Link></li>
                             <li><a href="#" className="hover:text-secondary-dark transition-colors flex items-center gap-2"><span className="w-1 h-1 bg-secondary rounded-full"></span>{t.events}</a></li>
                             <li><a href="#" className="hover:text-secondary-dark transition-colors flex items-center gap-2"><span className="w-1 h-1 bg-secondary rounded-full"></span>{t.donate}</a></li>
                             <li><a href="#" className="hover:text-secondary-dark transition-colors flex items-center gap-2"><span className="w-1 h-1 bg-secondary rounded-full"></span>{t.contact}</a></li>
