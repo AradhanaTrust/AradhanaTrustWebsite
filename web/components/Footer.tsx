@@ -4,6 +4,8 @@ import { useLanguage } from "@/context/LanguageContext";
 import { translations } from "@/lib/translations";
 import { Mail, MapPin, Phone } from "lucide-react";
 
+import Link from "next/link";
+
 export default function Footer() {
     const { language } = useLanguage();
     const t = translations[language].footer;
@@ -116,8 +118,8 @@ export default function Footer() {
                 <div className="border-t border-secondary/10 pt-4 flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 text-sm font-medium tracking-wide text-[#B8860B]">
                     <p>{t.copyright}</p>
                     <div className="flex items-center gap-6">
-                        <a href="#" className="hover:text-gray-800 transition-colors font-semibold">{t.privacy}</a>
-                        <a href="#" className="hover:text-gray-800 transition-colors font-semibold">{t.terms}</a>
+                        <Link href="/privacy-policy" className="hover:text-gray-800 transition-colors font-semibold">{t.privacy}</Link>
+                        <Link href="/terms-conditions" className="hover:text-gray-800 transition-colors font-semibold">{t.terms}</Link>
                     </div>
                 </div>
             </div>
