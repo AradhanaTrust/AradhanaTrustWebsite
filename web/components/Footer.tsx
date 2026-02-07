@@ -9,18 +9,18 @@ export default function Footer() {
     const t = translations[language].footer;
 
     return (
-        <footer className="bg-background-cream text-primary border-t border-secondary/20 pt-16 pb-8">
+        <footer className="bg-background-cream text-primary border-t border-secondary/20 pt-8 pb-8">
             <div className="container mx-auto px-4 lg:px-12">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-12 mb-12">
                     {/* Brand */}
-                    <div className="lg:col-span-2 space-y-6">
+                    <div className="lg:col-span-2 space-y-4">
                         <div className="flex items-center gap-4">
-                            <img src="/assets/Logo_Round.png" alt="Logo" className="w-20 h-20 object-contain shadow-lg rounded-full" />
-                            <div className="flex flex-col">
-                                <h2 className="font-cinzel-decorative font-bold text-3xl tracking-wide text-primary-dark leading-none">
+                            <img src="/assets/Logo_Round.png" alt="Logo" className="w-24 h-24 object-contain shadow-lg rounded-full" />
+                            <div className="flex flex-col -space-y-1">
+                                <h2 className="font-cinzel-decorative font-bold text-4xl tracking-wide text-[#4A3225] leading-none py-1">
                                     Aradhana
                                 </h2>
-                                <h2 className="font-cinzel-decorative font-bold text-2xl tracking-wide text-primary-dark leading-none">
+                                <h2 className="font-cinzel-decorative font-bold text-3xl tracking-wide text-[#4A3225] leading-none py-1">
                                     Dharmika Trust
                                 </h2>
                             </div>
@@ -30,9 +30,8 @@ export default function Footer() {
                         </p>
 
                         {/* Registration Details */}
-                        <div className="bg-secondary/5 p-4 rounded-xl border border-secondary/10 max-w-sm">
-                            <h4 className="font-serif font-bold text-secondary-dark tracking-widest text-xs uppercase mb-1">{t.registration.title}</h4>
-                            <p className="text-primary/80 text-sm font-medium font-mono">{t.registration.number}</p>
+                        <div className="bg-secondary/5 p-3 rounded-lg border border-secondary/10 max-w-sm inline-block shadow-sm">
+                            <p className="text-[#5D4037] text-xs font-bold font-mono tracking-wide">{t.registration.number}</p>
                         </div>
 
                         <div className="flex gap-4">
