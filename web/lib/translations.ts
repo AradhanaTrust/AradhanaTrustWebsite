@@ -68,6 +68,127 @@ export const translations = {
             subtitle: "Photo Gallery",
             viewBtn: "View Full Gallery",
         },
+        donatePage: {
+            hero: {
+                badge: "Serve Dharma Through Giving",
+                title: "Support Our Sacred Mission",
+                subtitle: "Your contribution helps preserve tradition, nourish souls, and spread spiritual wisdom",
+                donateBtn: "Make a Donation"
+            },
+            categories: {
+                title: "Choose Your Cause",
+                subtitle: "Where Your Contribution Makes a Difference",
+                annadanam: {
+                    name: "Annadanam Seva",
+                    desc: "Provide nutritious prasadam to devotees and those in need. Feed the hungry and earn divine merit.",
+                    impact: "₹500 feeds 50 people"
+                },
+                temple: {
+                    name: "Temple Maintenance",
+                    desc: "Support daily pujas, upkeep of sacred spaces, and preservation of our spiritual heritage.",
+                    impact: "Keep traditions alive"
+                },
+                education: {
+                    name: "Education Support",
+                    desc: "Empower students with scholarships, Vedic education, and value-based learning programs.",
+                    impact: "Shape future generations"
+                },
+                cultural: {
+                    name: "Cultural Programs",
+                    desc: "Sponsor festivals, pravachanas, satsangs, and traditional arts to preserve our rich heritage.",
+                    impact: "Celebrate our culture"
+                },
+                gauseva: {
+                    name: "Gau Seva",
+                    desc: "Care for sacred cows with shelter, food, and medical attention. Honor Gomata.",
+                    impact: "Protect and serve"
+                },
+                general: {
+                    name: "General Contribution",
+                    desc: "Support wherever the need is greatest. Your donation will be used wisely for maximum impact.",
+                    impact: "Trust-driven giving"
+                }
+            },
+            donationForm: {
+                title: "Make Your Contribution",
+                subtitle: "Every Donation Counts",
+                amountLabel: "Select Amount",
+                customAmount: "Custom Amount",
+                categoryLabel: "Choose Category",
+                selectCategory: "Select a category",
+                donorInfo: "Donor Information",
+                name: "Full Name",
+                namePlaceholder: "Enter your name",
+                email: "Email Address",
+                emailPlaceholder: "your@email.com",
+                phone: "Phone Number",
+                phonePlaceholder: "+91 98765 43210",
+                referredBy: "Referred By",
+                referredByPlaceholder: "Name of person who referred you",
+                address: "Address",
+                addressPlaceholder: "Your full address",
+                organisation: "Organisation",
+                organisationPlaceholder: "Company or Organization Name",
+                frequency: "Donation Frequency",
+                oneTime: "One-time",
+                monthly: "Monthly",
+                submitBtn: "Proceed to Payment",
+                processing: "Processing..."
+            },
+            taxExemption: {
+                title: "Tax Benefits",
+                subtitle: "80G Exemption Available",
+                desc: "All donations to Aradhana Dharmika Trust are eligible for tax deduction under Section 80G of the Income Tax Act. You will receive a digital certificate immediately after your donation.",
+                features: [
+                    "Instant 80G certificate",
+                    "Digital & physical receipts",
+                    "Annual donation statement",
+                    "PAN-based tracking"
+                ]
+            },
+            impact: {
+                title: "Your Impact in Numbers",
+                subtitle: "Together We've Achieved",
+                stats: [
+                    { value: "50,000+", label: "Meals Served" },
+                    { value: "100+", label: "Students Supported" },
+                    { value: "15+", label: "Festivals Celebrated" },
+                    { value: "25+", label: "Cows Protected" }
+                ]
+            },
+            faqs: {
+                title: "Frequently Asked Questions",
+                items: [
+                    {
+                        q: "How will my donation be used?",
+                        a: "Your donation directly supports the category you choose. All funds are transparently allocated and audited regularly."
+                    },
+                    {
+                        q: "Will I receive a tax exemption certificate?",
+                        a: "Yes! All donations are eligible for 80G tax benefits. You'll receive an instant digital certificate via email."
+                    },
+                    {
+                        q: "Can I donate in someone else's name?",
+                        a: "Absolutely. You can dedicate your donation in memory or honor of loved ones."
+                    },
+                    {
+                        q: "Are recurring donations safe?",
+                        a: "Yes, all transactions are processed through secure payment gateways. You can cancel anytime."
+                    },
+                    {
+                        q: "How do I track my donations?",
+                        a: "You'll receive instant email confirmations and can contact us anytime for donation history."
+                    }
+                ]
+            },
+            paymentMethods: {
+                title: "Secure Payment Options",
+                upi: "UPI Payment",
+                cards: "Credit/Debit Cards",
+                netbanking: "Net Banking",
+                wallet: "Digital Wallets"
+            }
+        },
         aboutPage: {
             motto: "Dharmo Rakshati Rakshitah",
             heroTitle1: "About Aradhana",
@@ -312,6 +433,127 @@ export const translations = {
             title: "ಚಿರಂತನ ದೈವಿಕ ಕ್ಷಣಗಳು",
             subtitle: "ಛಾಯಾಚಿತ್ರ ಗ್ಯಾಲರಿ",
             viewBtn: "ಪೂರ್ಣ ಗ್ಯಾಲರಿ ವೀಕ್ಷಿಸಿ",
+        },
+        donatePage: {
+            hero: {
+                badge: "ದಾನದ ಮೂಲಕ ಧರ್ಮವನ್ನು ಉಳಿಸಿ",
+                title: "ನಮ್ಮ ಪವಿತ್ರ ಕಾರ್ಯಕ್ಕೆ ಬೆಂಬಲ ನೀಡಿ",
+                subtitle: "ನಿಮ್ಮ ದಾನವು ಸಂಪ್ರದಾಯ, ಆತ್ಮ ಪೋಷಣೆ ಮತ್ತು ಆಧ್ಯಾತ್ಮಿಕ ಜ್ಞಾನವನ್ನು ಹರಡಲು ಸಹಾಯ ಮಾಡುತ್ತದೆ",
+                donateBtn: "ದಾನ ಮಾಡಿ"
+            },
+            categories: {
+                title: "ನಿಮ್ಮ ಉದ್ದೇಶ ಆಯ್ಕೆಮಾಡಿ",
+                subtitle: "ನಿಮ್ಮ ದಾನ ಪ್ರಭಾವ ಬೀರುವ ಸ್ಥಳ",
+                annadanam: {
+                    name: "ಅನ್ನದಾನ ಸೇವೆ",
+                    desc: "ಭಕ್ತಾದಿಗಳು ಮತ್ತು ಅಗತ್ಯವಿರುವವರಿಗೆ ಪೌಷ್ಟಿಕ ಪ್ರಸಾದವನ್ನು ನೀಡಿ. ಹಸಿದವರಿಗೆ ಆಹಾರ ನೀಡಿ ಮತ್ತು ದೈವಿಕ ಪುಣ್ಯ ಗಳಿಸಿ.",
+                    impact: "₹500 50 ಜನರಿಗೆ ಊಟ"
+                },
+                temple: {
+                    name: "ದೇವಾಲಯ ನಿರ್ವಹಣೆ",
+                    desc: "ನಿತ್ಯ ಪೂಜೆಗಳು, ಪವಿತ್ರ ಸ್ಥಳಗಳ ಸಂರಕ್ಷಣೆ ಮತ್ತು ನಮ್ಮ ಆಧ್ಯಾತ್ಮಿಕ ಪರಂಪರೆಯ ರಕ್ಷಣೆಗೆ ಬೆಂಬಲ ನೀಡಿ.",
+                    impact: "ಸಂಪ್ರದಾಯಗಳನ್ನು ಜೀವಂತವಾಗಿಡಿ"
+                },
+                education: {
+                    name: "ಶಿಕ್ಷಣ ಬೆಂಬಲ",
+                    desc: "ವಿದ್ಯಾರ್ಥಿವೇತನ, ವೈದಿಕ ಶಿಕ್ಷಣ ಮತ್ತು ಮೌಲ್ಯ-ಆಧಾರಿತ ಕಲಿಕೆಯ ಕಾರ್ಯಕ್ರಮಗಳೊಂದಿಗೆ ವಿದ್ಯಾರ್ಥಿಗಳನ್ನು ಶಕ್ತಿಗೊಳಿಸಿ.",
+                    impact: "ಭಾವಿ ಪೀಳಿಗೆಯನ್ನು ರೂಪಿಸಿ"
+                },
+                cultural: {
+                    name: "ಸಾಂಸ್ಕೃತಿಕ ಕಾರ್ಯಕ್ರಮಗಳು",
+                    desc: "ನಮ್ಮ ಶ್ರೀಮಂತ ಪರಂಪರೆಯನ್ನು ಉಳಿಸಲು ಹಬ್ಬಗಳು, ಪ್ರವಚನಗಳು, ಸತ್ಸಂಗಗಳು ಮತ್ತು ಸಾಂಪ್ರದಾಯಿಕ ಕಲೆಗಳನ್ನು ಪ್ರಾಯೋಜಿಸಿ.",
+                    impact: "ನಮ್ಮ ಸಂಸ್ಕೃತಿ ಆಚರಿಸಿ"
+                },
+                gauseva: {
+                    name: "ಗೌ ಸೇವೆ",
+                    desc: "ಆಶ್ರಯ, ಆಹಾರ ಮತ್ತು ವೈದ್ಯಕೀಯ ಗಮನದೊಂದಿಗೆ ಪವಿತ್ರ ಹಸುಗಳನ್ನು ನೋಡಿಕೊಳ್ಳಿ. ಗೋಮಾತೆಗೆ ಗೌರವ ನೀಡಿ.",
+                    impact: "ರಕ್ಷಿಸಿ ಮತ್ತು ಸೇವೆ ಮಾಡಿ"
+                },
+                general: {
+                    name: "ಸಾಮಾನ್ಯ ನಿಧಿ",
+                    desc: "ಅಗತ್ಯ ಹೆಚ್ಚು ಇರುವಲ್ಲಿ ಬೆಂಬಲ ನೀಡಿ. ನಿಮ್ಮ ದಾನವನ್ನು ಗರಿಷ್ಠ ಪರಿಣಾಮಕ್ಕಾಗಿ ಬುದ್ಧಿವಂತಿಕೆಯಿಂದ ಬಳಸಲಾಗುತ್ತದೆ.",
+                    impact: "ನಂಬಿಕೆ-ಆಧಾರಿತ ದಾನ"
+                }
+            },
+            donationForm: {
+                title: "ನಿಮ್ಮ ದಾನ ನೀಡಿ",
+                subtitle: "ಪ್ರತಿ ದಾನವೂ ಮುಖ್ಯ",
+                amountLabel: "ಮೊತ್ತ ಆಯ್ಕೆಮಾಡಿ",
+                customAmount: "ಕಸ್ಟಮ್ ಮೊತ್ತ",
+                categoryLabel: "ವರ್ಗ ಆಯ್ಕೆಮಾಡಿ",
+                selectCategory: "ವರ್ಗವನ್ನು ಆಯ್ಕೆಮಾಡಿ",
+                donorInfo: "ದಾನಿಗಳ ಮಾಹಿತಿ",
+                name: "ಪೂರ್ಣ ಹೆಸರು",
+                namePlaceholder: "ನಿಮ್ಮ ಹೆಸರನ್ನು ನಮೂದಿಸಿ",
+                email: "ಇಮೇಲ್ ವಿಳಾಸ",
+                emailPlaceholder: "your@email.com",
+                phone: "ಫೋನ್ ಸಂಖ್ಯೆ",
+                phonePlaceholder: "+91 98765 43210",
+                referredBy: "ಶಿಫಾರಸು ಮಾಡಿದವರು",
+                referredByPlaceholder: "ನಿಮ್ಮನ್ನು ಶಿಫಾರಸು ಮಾಡಿದವರ ಹೆಸರು",
+                address: "ವಿಳಾಸ",
+                addressPlaceholder: "ನಿಮ್ಮ ಪೂರ್ಣ ವಿಳಾಸ",
+                organisation: "ಸಂಸ್ಥೆ",
+                organisationPlaceholder: "ಕಂಪನಿ ಅಥವಾ ಸಂಸ್ಥೆಯ ಹೆಸರು",
+                frequency: "ದಾನ ಆವರ್ತನ",
+                oneTime: "ಒಂದು-ಬಾರಿ",
+                monthly: "ಮಾಸಿಕ",
+                submitBtn: "ಪಾವತಿಗೆ ಮುಂದುವರಿಯಿರಿ",
+                processing: "ಪ್ರಕ್ರಿಯೆಗೊಳಿಸಲಾಗುತ್ತಿದೆ..."
+            },
+            taxExemption: {
+                title: "ತೆರಿಗೆ ಪ್ರಯೋಜನಗಳು",
+                subtitle: "80G ವಿನಾಯತಿ ಲಭ್ಯ",
+                desc: "ಆರಾಧನಾ ಧಾರ್ಮಿಕ ಟ್ರಸ್ಟ್‌ಗೆ ಎಲ್ಲಾ ದಾನಗಳು ಆದಾಯ ತೆರಿಗೆ ಕಾಯ್ದೆಯ ವಿಭಾಗ 80G ಅಡಿಯಲ್ಲಿ ತೆರಿಗೆ ಕಡಿತಕ್ಕೆ ಅರ್ಹವಾಗಿವೆ. ನಿಮ್ಮ ದಾನದ ನಂತರ ತಕ್ಷಣ ಡಿಜಿಟಲ್ ಪ್ರಮಾಣಪತ್ರವನ್ನು ಸ್ವೀಕರಿಸುತ್ತೀರಿ.",
+                features: [
+                    "ತ್ವರಿತ 80G ಪ್ರಮಾಣಪತ್ರ",
+                    "ಡಿಜಿಟಲ್ ಮತ್ತು ಭೌತಿಕ ರಸೀದಿಗಳು",
+                    "ವಾರ್ಷಿಕ ದಾನ ಹೇಳಿಕೆ",
+                    "PAN-ಆಧಾರಿತ ಟ್ರ್ಯಾಕಿಂಗ್"
+                ]
+            },
+            impact: {
+                title: "ಸಂಖ್ಯೆಗಳಲ್ಲಿ ನಿಮ್ಮ ಪ್ರಭಾವ",
+                subtitle: "ಒಟ್ಟಾಗಿ ನಾವು ಸಾಧಿಸಿದ್ದು",
+                stats: [
+                    { value: "50,000+", label: "ಊಟಗಳು ನೀಡಲಾಗಿದೆ" },
+                    { value: "100+", label: "ವಿದ್ಯಾರ್ಥಿಗಳಿಗೆ ಬೆಂಬಲ" },
+                    { value: "15+", label: "ಹಬ್ಬಗಳು ಆಚರಿಸಲಾಗಿದೆ" },
+                    { value: "25+", label: "ಗೋಗಳು ರಕ್ಷಿಸಲಾಗಿದೆ" }
+                ]
+            },
+            faqs: {
+                title: "ಪದೇ ಪದೇ ಕೇಳಲಾಗುವ ಪ್ರಶ್ನೆಗಳು",
+                items: [
+                    {
+                        q: "ನನ್ನ ದಾನವನ್ನು ಹೇಗೆ ಬಳಸಲಾಗುತ್ತದೆ?",
+                        a: "ನಿಮ್ಮ ದಾನವು ನೀವು ಆಯ್ಕೆಮಾಡಿದ ವರ್ಗವನ್ನು ನೇರವಾಗಿ ಬೆಂಬಲಿಸುತ್ತದೆ. ಎಲ್ಲಾ ನಿಧಿಗಳನ್ನು ಪಾರದರ್ಶಕವಾಗಿ ನಿಯೋಜಿಸಲಾಗುತ್ತದೆ ಮತ್ತು ನಿಯಮಿತವಾಗಿ ಆಡಿಟ್ ಮಾಡಲಾಗುತ್ತದೆ."
+                    },
+                    {
+                        q: "ನನಗೆ ತೆರಿಗೆ ವಿನಾಯತಿ ಪ್ರಮಾಣಪತ್ರ ಸಿಗುತ್ತದೆಯೇ?",
+                        a: "ಹೌದು! ಎಲ್ಲಾ ದಾನಗಳು 80G ತೆರಿಗೆ ಪ್ರಯೋಜನಗಳಿಗೆ ಅರ್ಹವಾಗಿವೆ. ನೀವು ಇಮೇಲ್ ಮೂಲಕ ತ್ವರಿತ ಡಿಜಿಟಲ್ ಪ್ರಮಾಣಪತ್ರವನ್ನು ಸ್ವೀಕರಿಸುತ್ತೀರಿ."
+                    },
+                    {
+                        q: "ನಾನು ಬೇರೆಯವರ ಹೆಸರಿನಲ್ಲಿ ದಾನ ಮಾಡಬಹುದೇ?",
+                        a: "ಖಂಡಿತವಾಗಿಯೂ. ನೀವು ಪ್ರೀತಿಪಾತ್ರರ ನೆನಪು ಅಥವಾ ಗೌರವಾರ್ಥವಾಗಿ ನಿಮ್ಮ ದಾನವನ್ನು ಸಮರ್ಪಿಸಬಹುದು."
+                    },
+                    {
+                        q: "ಪುನರಾವರ್ತಿತ ದಾನಗಳು ಸುರಕ್ಷಿತವೇ?",
+                        a: "ಹೌದು, ಎಲ್ಲಾ ವಹಿವಾಟುಗಳನ್ನು ಸುರಕ್ಷಿತ ಪಾವತಿ ಗೇಟ್‌ವೇಗಳ ಮೂಲಕ ಪ್ರಕ್ರಿಯೆಗೊಳಿಸಲಾಗುತ್ತದೆ. ನೀವು ಯಾವಾಗ ಬೇಕಾದರೂ ರದ್ದುಗೊಳಿಸಬಹುದು."
+                    },
+                    {
+                        q: "ನನ್ನ ದಾನಗಳನ್ನು ನಾನು ಹೇಗೆ ಟ್ರ್ಯಾಕ್ ಮಾಡಬಹುದು?",
+                        a: "ನೀವು ತ್ವರಿತ ಇಮೇಲ್ ದೃಢೀಕರಣಗಳನ್ನು ಸ್ವೀಕರಿಸುತ್ತೀರಿ ಮತ್ತು ದಾನ ಇತಿಹಾಸಕ್ಕಾಗಿ ಯಾವಾಗ ಬೇಕಾದರೂ ನಮ್ಮನ್ನು ಸಂಪರ್ಕಿಸಬಹುದು."
+                    }
+                ]
+            },
+            paymentMethods: {
+                title: "ಸುರಕ್ಷಿತ ಪಾವತಿ ಆಯ್ಕೆಗಳು",
+                upi: "UPI ಪಾವತಿ",
+                cards: "ಕ್ರೆಡಿಟ್/ಡೆಬಿಟ್ ಕಾರ್ಡ್‌ಗಳು",
+                netbanking: "ನೆಟ್ ಬ್ಯಾಂಕಿಂಗ್",
+                wallet: "ಡಿಜಿಟಲ್ ವಾಲೆಟ್‌ಗಳು"
+            }
         },
         aboutPage: {
             motto: "ಧರ್ಮೋ ರಕ್ಷತಿ ರಕ್ಷಿತಃ",
