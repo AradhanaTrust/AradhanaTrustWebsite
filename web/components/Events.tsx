@@ -4,24 +4,24 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Calendar, MapPin, ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { useLanguage } from "@/context/LanguageContext";
 import { translations } from "@/lib/translations";
+import { events } from "@/lib/events-data";
+import { getEventTranslation } from "@/lib/event-utils";
 
 import GoldCurveSeparator from "./GoldCurveSeparator";
-
-const eventImages = [
-    "/assets/event-ganesh.png",
-    "/assets/event-annadanam.png",
-    "/assets/event-homa.png",
-    "/assets/obj_temple.png", // Reuse for demo
-    "/assets/obj_culture.png"  // Reuse for demo
-];
 
 export default function Events() {
     const { language } = useLanguage();
     const t = translations[language].events;
     const [currentIndex, setCurrentIndex] = useState(0);
     const [visibleCards, setVisibleCards] = useState(3);
+
+    // Get only upcoming events and sort by date (nearest first)
+    const upcomingEvents = events
+        .filter(e => e.isUpcoming)
+        .sort((a, b) => a.date.getTime() - b.date.getTime());
 
     // Simple responsive handler
     useEffect(() => {
@@ -35,7 +35,7 @@ export default function Events() {
         return () => window.removeEventListener("resize", handleResize);
     }, []);
 
-    const maxIndex = Math.max(0, t.cards.length - visibleCards);
+    const maxIndex = Math.max(0, upcomingEvents.length - visibleCards);
 
     const nextSlide = () => {
         setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
@@ -105,11 +105,11 @@ export default function Events() {
                             animate={{ x: `-${currentIndex * (100 / visibleCards)}%` }}
                             transition={{ type: "spring", stiffness: 300, damping: 30 }}
                         >
-                            {t.cards.map((event, idx) => {
-                                const imgIndex = idx % eventImages.length;
+                            {upcomingEvents.map((event, idx) => {
+                                const translatedEvent = getEventTranslation(event, language);
                                 return (
                                     <motion.div
-                                        key={idx}
+                                        key={event.id}
                                         style={{ minWidth: `calc((100% - ${(visibleCards - 1) * 16}px) / ${visibleCards})` }} /* Gap 16px (gap-4) */
                                         className="relative group flex-shrink-0"
                                     >
@@ -119,8 +119,8 @@ export default function Events() {
                                             {/* Image: Shortened h-36 */}
                                             <div className="h-36 w-full relative overflow-hidden border-b border-[#CFA14E]/50 flex-shrink-0">
                                                 <Image
-                                                    src={eventImages[imgIndex]}
-                                                    alt={event.title}
+                                                    src={event.image}
+                                                    alt={translatedEvent.title}
                                                     fill
                                                     sizes="(max-width: 768px) 100vw, 25vw"
                                                     className="object-cover group-hover:scale-110 transition-transform duration-700"
@@ -134,24 +134,26 @@ export default function Events() {
                                             <div className="p-5 space-y-3 relative z-20 flex-1 flex flex-col items-center text-center">
                                                 {/* Date Badge */}
                                                 <div className="absolute -top-6 left-1/2 -translate-x-1/2 bg-[#FFFEF9] border border-[#CFA14E] px-3 py-1 rounded-lg shadow-md flex flex-col items-center min-w-[70px]">
-                                                    <span className="text-[10px] font-bold text-secondary-dark uppercase">{event.date.split(" ")[0]}</span>
-                                                    <span className="text-xl font-serif font-bold text-primary-dark">{event.date.split(" ")[1].replace(",", "")}</span>
+                                                    <span className="text-[10px] font-bold text-secondary-dark uppercase">{event.date.toLocaleDateString('en-US', { month: 'short' })}</span>
+                                                    <span className="text-xl font-serif font-bold text-primary-dark">{event.date.getDate()}</span>
                                                 </div>
 
                                                 <div className="pt-4 space-y-2 flex-1 w-full flex flex-col justify-center">
                                                     <h3 className="text-lg font-serif font-bold text-primary-dark group-hover:text-[#8B5E3C] transition-colors line-clamp-2 leading-tight min-h-[3rem] flex items-center justify-center">
-                                                        {event.title}
+                                                        {translatedEvent.title}
                                                     </h3>
                                                     <div className="flex items-center justify-center gap-1.5 text-xs text-[#5D4037]/80">
                                                         <MapPin size={12} className="text-[#CFA14E]" />
-                                                        <span className="line-clamp-1">{event.loc}</span>
+                                                        <span className="line-clamp-1">{translatedEvent.location}</span>
                                                     </div>
                                                 </div>
 
                                                 {/* Button: Enlarged width & text */}
-                                                <button className="mt-2 w-auto px-8 py-2.5 bg-gradient-to-b from-[#FFFEF9] to-[#F3E5C5] text-[#4A3225] font-bold text-xs rounded-lg border border-[#CFA14E] shadow-[inset_0_0_0_2px_#FFFDF8,inset_0_0_0_3px_#CFA14E,0_2px_4px_rgba(0,0,0,0.05)] hover:shadow-[inset_0_0_0_2px_#FFFDF8,inset_0_0_0_3px_#CFA14E,0_4px_8px_rgba(0,0,0,0.1)] hover:-translate-y-0.5 active:scale-95 transition-all duration-300 transform uppercase tracking-widest">
-                                                    {t.register}
-                                                </button>
+                                                <Link href="/events">
+                                                    <button className="mt-2 w-auto px-8 py-2.5 bg-gradient-to-b from-[#FFFEF9] to-[#F3E5C5] text-[#4A3225] font-bold text-xs rounded-lg border border-[#CFA14E] shadow-[inset_0_0_0_2px_#FFFDF8,inset_0_0_0_3px_#CFA14E,0_2px_4px_rgba(0,0,0,0.05)] hover:shadow-[inset_0_0_0_2px_#FFFDF8,inset_0_0_0_3px_#CFA14E,0_4px_8px_rgba(0,0,0,0.1)] hover:-translate-y-0.5 active:scale-95 transition-all duration-300 transform uppercase tracking-widest">
+                                                        {t.register}
+                                                    </button>
+                                                </Link>
                                             </div>
                                         </div>
                                     </motion.div>
@@ -162,10 +164,12 @@ export default function Events() {
                 </div>
 
                 <div className="flex justify-center mt-6"> {/* Reduced mt-12 -> mt-6 */}
-                    <button className="px-10 py-3 bg-gradient-to-b from-[#FFFEF9] to-[#F3E5C5] text-[#4A3225] font-medium text-lg rounded-xl border border-[#CFA14E] shadow-[inset_0_0_0_2px_#FFFDF8,inset_0_0_0_3px_#CFA14E,0_2px_4px_rgba(0,0,0,0.05)] hover:shadow-[inset_0_0_0_2px_#FFFDF8,inset_0_0_0_3px_#CFA14E,0_4px_8px_rgba(0,0,0,0.1)] hover:-translate-y-1 active:scale-95 transition-all duration-300 transform flex items-center justify-center gap-2 group">
-                        {t.viewAll}
-                        <Calendar size={18} className="text-[#4A3225] group-hover:scale-105 transition-transform" />
-                    </button>
+                    <Link href="/events">
+                        <button className="px-10 py-3 bg-gradient-to-b from-[#FFFEF9] to-[#F3E5C5] text-[#4A3225] font-medium text-lg rounded-xl border border-[#CFA14E] shadow-[inset_0_0_0_2px_#FFFDF8,inset_0_0_0_3px_#CFA14E,0_2px_4px_rgba(0,0,0,0.05)] hover:shadow-[inset_0_0_0_2px_#FFFDF8,inset_0_0_0_3px_#CFA14E,0_4px_8px_rgba(0,0,0,0.1)] hover:-translate-y-1 active:scale-95 transition-all duration-300 transform flex items-center justify-center gap-2 group">
+                            {t.viewAll}
+                            <Calendar size={18} className="text-[#4A3225] group-hover:scale-105 transition-transform" />
+                        </button>
+                    </Link>
                 </div>
             </div>
 

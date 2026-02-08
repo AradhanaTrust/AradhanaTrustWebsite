@@ -6,8 +6,10 @@ import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/context/LanguageContext";
 import { translations } from "@/lib/translations";
-import { Heart, Users, BookOpen, Sparkles, Leaf, HandHeart, Check, ChevronDown, ChevronUp } from "lucide-react";
+import { Heart, Users, BookOpen, Sparkles, Leaf, HandHeart, Check, ChevronDown, ChevronUp, ArrowRight, Copy } from "lucide-react";
 import GoldCurveSeparator from "@/components/GoldCurveSeparator";
+import { donationConfig } from "@/lib/donation-config";
+import Image from "next/image";
 
 export default function DonatePage() {
     const { language } = useLanguage();
@@ -17,8 +19,15 @@ export default function DonatePage() {
     const [selectedCategory, setSelectedCategory] = useState("");
     const [donationType, setDonationType] = useState<"one-time" | "monthly">("one-time");
     const [expandedFAQ, setExpandedFAQ] = useState<number | null>(null);
+    const [copied, setCopied] = useState(false);
 
-    const amounts = [500, 1000, 2500, 5000, 10000];
+    const handleCopy = () => {
+        navigator.clipboard.writeText(donationConfig.upiId);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+    };
+
+    const amounts = [100, 500, 1000, 5000];
 
     const categoryIcons: Record<string, any> = {
         annadanam: Heart,
@@ -41,39 +50,99 @@ export default function DonatePage() {
         <>
             <Header />
 
-            {/* Hero Section */}
-            {/* Hero Section */}
-            <section className="relative pt-40 pb-24 overflow-hidden">
-                {/* Background Image with Overlay */}
-                <div className="absolute inset-0 z-0 pointer-events-none">
-                    <div className="absolute inset-0 bg-[url('/assets/temple_hero_bg.png')] bg-cover bg-center" />
-                    <div className="absolute inset-0 bg-gradient-to-b from-[#F3E5C5]/70 via-[#F3E5C5]/40 to-[#F3E5C5]/70" />
+            {/* Hero Section - Matching About Us/Events Layout */}
+            <div className="relative pt-32 pb-48 lg:pt-40 lg:pb-32 overflow-hidden bg-[#FDFBF7] min-h-[85vh] flex items-center">
+                {/* Background - Mandala Overlay Only */}
+                <div className="absolute inset-0 z-0">
+                    <div className="absolute inset-0 bg-[url('/assets/mandala-bg.svg')] bg-[length:600px_600px] bg-center opacity-5 animate-spin-slow pointer-events-none mix-blend-multiply" />
                 </div>
 
-                <div className="container mx-auto px-4 lg:px-12 relative z-10 text-center flex items-center min-h-[60vh]">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6 }}
-                        className="space-y-6 max-w-4xl mx-auto w-full"
-                    >
-                        <div className="inline-block px-4 py-1.5 bg-secondary/10 border border-secondary/30 rounded-full text-secondary-dark text-[10px] font-bold tracking-[0.2em] uppercase">
-                            {t.hero.badge}
-                        </div>
-                        <h1 className="font-cinzel-decorative font-bold text-4xl md:text-5xl lg:text-6xl text-[#4A3225] leading-tight">
-                            {t.hero.title}
-                        </h1>
-                        <p className="text-lg md:text-xl text-primary/70 max-w-3xl mx-auto leading-relaxed">
-                            {t.hero.subtitle}
-                        </p>
-                        <a href="#donate-form">
-                            <button className="px-10 py-4 bg-gradient-to-b from-[#D4AF37] to-[#B8860B] text-white font-medium text-lg rounded-xl border border-[#CFA14E] shadow-[inset_0_0_0_2px_#F4C430,inset_0_0_0_3px_#FFF5D1,0_4px_8px_rgba(0,0,0,0.15)] hover:shadow-[inset_0_0_0_2px_#F4C430,inset_0_0_0_3px_#FFF5D1,0_6px_12px_rgba(0,0,0,0.2)] hover:-translate-y-1 active:scale-95 transition-all duration-300 transform">
-                                {t.hero.donateBtn}
-                            </button>
-                        </a>
-                    </motion.div>
+                {/* Gradient Overlay for Text Readability */}
+                <div className="absolute inset-0 bg-gradient-to-b from-[#FDFBF7]/0 via-[#FDFBF7]/30 to-[#FDFBF7]/90 pointer-events-none" />
+
+                <div className="container mx-auto px-4 lg:px-12 relative z-10 w-full">
+                    <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-4 lg:gap-0 items-center lg:pr-12 lg:pl-12">
+
+                        {/* LEFT CONTENT - Text */}
+                        <motion.div
+                            initial={{ opacity: 0, x: -30 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.8 }}
+                            className="text-center space-y-6 order-2 lg:order-1 flex flex-col items-center justify-center h-full"
+                        >
+                            {/* Decorative Quote */}
+                            <div className="flex items-center justify-center gap-4 text-[#B8860B]/80 font-medium">
+                                <span className="h-[1px] w-12 bg-gradient-to-r from-transparent to-[#B8860B]" />
+                                <span className="font-serif italic tracking-wider text-sm md:text-base text-[#8D6E63]">{t.hero.badge}</span>
+                                <span className="h-[1px] w-12 bg-gradient-to-l from-transparent to-[#B8860B]" />
+                            </div>
+
+                            {/* Main Heading */}
+                            <h1 className="font-cinzel-decorative font-bold leading-tight drop-shadow-sm filter">
+                                <span className="block text-4xl md:text-5xl lg:text-6xl text-[#D4AF37]">
+                                    {t.hero.title}
+                                </span>
+                            </h1>
+
+                            <p className="font-serif text-lg md:text-xl text-[#5D4037] w-full leading-relaxed font-medium px-4 lg:px-0">
+                                {t.hero.subtitle}
+                            </p>
+
+                            {/* UPI ID Display with Copy */}
+                            <div
+                                onClick={handleCopy}
+                                className="bg-white/80 backdrop-blur-sm p-4 rounded-xl border-2 border-[#D4AF37]/30 flex items-center justify-between group cursor-pointer hover:shadow-lg transition-all shadow-sm active:scale-95 max-w-sm mx-auto w-full"
+                            >
+                                <div className="text-left">
+                                    <p className="text-xs text-[#8D6E63] uppercase tracking-widest font-bold">UPI ID</p>
+                                    <p className="text-lg font-mono font-bold text-[#4A3225]">{donationConfig.upiId}</p>
+                                </div>
+                                <div className={`p-2 rounded-lg transition-colors ${copied ? "bg-green-100 text-green-600" : "bg-[#D4AF37]/10 text-[#B8860B] group-hover:bg-[#D4AF37] group-hover:text-white"}`}>
+                                    {copied ? <Check size={20} /> : <Copy size={20} />}
+                                </div>
+                            </div>
+
+                            {/* CTA Button */}
+                            <a href="#donate-form">
+                                <button className="min-h-[44px] px-10 py-4 bg-gradient-to-b from-[#F2C96D] to-[#9E731C] text-white font-medium text-lg rounded-xl border border-[#CFA14E] shadow-[inset_0_0_0_2px_#DFA848,inset_0_0_0_3px_#FFF5D1,0_4px_8px_rgba(0,0,0,0.3)] hover:shadow-[inset_0_0_0_2px_#DFA848,inset_0_0_0_3px_#FFF5D1,0_6px_12px_rgba(0,0,0,0.4)] hover:-translate-y-1 drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)] active:scale-95 transition-all duration-300 transform flex items-center gap-2">
+                                    {t.hero.donateBtn}
+                                    <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                                </button>
+                            </a>
+                        </motion.div>
+
+                        <motion.div
+                            initial={{ opacity: 0, x: 30 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.8, delay: 0.2 }}
+                            className="relative w-full order-1 lg:order-2 flex justify-center lg:justify-end items-center"
+                        >
+                            {/* QR Code Container - Square Frame matching Home Page */}
+                            <div className="relative w-full max-w-sm">
+                                {/* Outer Glow */}
+                                <div className="absolute inset-4 rounded-xl bg-[#D4AF37]/20 blur-xl" />
+
+                                {/* Main QR Code Container */}
+                                <div className="relative aspect-square w-full bg-background-ivory rounded-xl border-4 border-double border-[#D4AF37]/30 flex items-center justify-center overflow-hidden shadow-2xl">
+                                    <Image
+                                        src={donationConfig.qrCodeImage}
+                                        alt="Donation QR Code"
+                                        fill
+                                        sizes="(max-width: 768px) 100vw, 400px"
+                                        className="object-contain p-4"
+                                    />
+                                </div>
+
+                                {/* Decorative Corner Element */}
+                                <div className="absolute -top-4 -right-4 w-12 h-12 bg-[#FDFBF7] border-2 border-[#D4AF37] rounded-full flex items-center justify-center shadow-lg z-30">
+                                    <Heart className="text-[#D4AF37] w-6 h-6" />
+                                </div>
+                            </div>
+                        </motion.div>
+
+                    </div>
                 </div>
-            </section>
+            </div>
 
             <GoldCurveSeparator />
 
@@ -132,7 +201,7 @@ export default function DonatePage() {
                             {/* Amount Selection */}
                             <div className="mb-10 relative z-10">
                                 <label className="block text-lg font-semibold text-[#5D4037] mb-4 tracking-wide">{t.donationForm.amountLabel}</label>
-                                <div className="grid grid-cols-3 md:grid-cols-5 gap-4 mb-4">
+                                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
                                     {amounts.map(amount => (
                                         <button
                                             key={amount}
@@ -140,7 +209,7 @@ export default function DonatePage() {
                                                 setSelectedAmount(amount);
                                                 setCustomAmount(amount.toString());
                                             }}
-                                            className={`py-4 rounded-xl font-bold text-lg border transition-all duration-300 backdrop-blur-sm ${selectedAmount === amount
+                                            className={`py-3 rounded-xl font-bold text-base border transition-all duration-300 backdrop-blur-sm ${selectedAmount === amount
                                                 ? 'bg-gradient-to-b from-[#D4AF37] to-[#B8860B] text-white border-[#D4AF37] shadow-lg scale-105'
                                                 : 'bg-white/60 text-[#5D4037] border-white/40 hover:border-[#D4AF37] hover:bg-white/80'
                                                 }`}
@@ -234,9 +303,9 @@ export default function DonatePage() {
 
                             {/* Submit Button */}
                             <div className="text-center mt-8">
-                                <button className="relative z-10 w-full md:w-auto px-12 py-4 bg-gradient-to-r from-[#D4AF37] to-[#B8860B] text-white font-bold text-lg rounded-full shadow-lg hover:shadow-[#D4AF37]/50 hover:-translate-y-1 transition-all duration-300 border border-white/20 flex items-center justify-center gap-2 mx-auto group">
-                                    {t.donationForm.submitBtn}
-                                    <span className="group-hover:translate-x-1 transition-transform">→</span>
+                                <button className="relative z-10 w-full md:w-auto px-16 py-4 bg-gradient-to-r from-[#D4AF37] to-[#B8860B] text-white font-semibold text-base rounded-full shadow-lg hover:shadow-[#D4AF37]/50 hover:-translate-y-1 transition-all duration-300 border border-white/20 flex items-center justify-center gap-3 mx-auto group">
+                                    Proceed
+                                    <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                                 </button>
                                 <p className="text-[#5D4037]/60 text-xs mt-4 flex items-center justify-center gap-1">
                                     <Sparkles size={12} />
@@ -271,7 +340,7 @@ export default function DonatePage() {
                             >
                                 <div className="absolute inset-0 bg-gradient-to-br from-white/30 to-transparent pointer-events-none" />
                                 <div className="relative z-10">
-                                    <div className="text-2xl md:text-5xl font-bold text-[#D4AF37] mb-2 truncate">{stat.value}</div>
+                                    <div className="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold text-[#D4AF37] mb-2">{stat.value}</div>
                                     <div className="text-[10px] md:text-sm text-[#5D4037] font-bold uppercase tracking-wider leading-tight">{stat.label}</div>
                                 </div>
                             </motion.div>

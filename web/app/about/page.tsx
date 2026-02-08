@@ -319,7 +319,7 @@ export default function AboutPage() {
                         <p className="text-[#8D6E63] text-lg max-w-2xl mx-auto mb-10 font-medium">
                             {translations[language].aboutPage.ctaDescription}
                         </p>
-                        <Link href="/#donations">
+                        <Link href="/donate#donate-form">
                             <span className="px-10 py-3 bg-gradient-to-b from-[#D4AF37] to-[#B8860B] text-white font-medium text-lg rounded-xl border border-[#CFA14E] shadow-[inset_0_0_0_2px_#F4C430,inset_0_0_0_3px_#FFF5D1,0_4px_8px_rgba(0,0,0,0.15)] hover:shadow-[inset_0_0_0_2px_#F4C430,inset_0_0_0_3px_#FFF5D1,0_6px_12px_rgba(0,0,0,0.2)] hover:-translate-y-1 active:scale-95 transition-all duration-300 transform flex items-center justify-center gap-2 drop-shadow-md cursor-pointer inline-flex">
                                 {translations[language].aboutPage.ctaButton}
                             </span>

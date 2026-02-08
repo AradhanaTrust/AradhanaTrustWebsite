@@ -1,5 +1,7 @@
 "use client";
 
+import { useState, useEffect } from "react";
+import Link from "next/link";
 import { motion, useScroll, useTransform, useMotionTemplate } from "framer-motion";
 import { ArrowRight, Calendar, ChevronDown } from "lucide-react";
 import Image from "next/image";
@@ -70,7 +72,8 @@ export default function Hero() {
                                 WebkitBackgroundClip: "text",
                                 WebkitTextFillColor: "transparent",
                                 backgroundClip: "text",
-                                color: "transparent"
+                                color: "transparent",
+                                WebkitTextStroke: "2px #3E2723"
                             }}
                         >
                             {t.title_line2}
@@ -130,16 +133,20 @@ export default function Hero() {
                     className="flex flex-col sm:flex-row gap-5 pt-4"
                 >
                     {/* Donate Button: Lighter Border (Matched to Events), Gold Gap, Light Inner Line */}
-                    <button className="min-h-[44px] px-10 py-3 bg-gradient-to-b from-[#F2C96D] to-[#9E731C] text-white font-medium text-lg rounded-xl border border-[#CFA14E] shadow-[inset_0_0_0_2px_#DFA848,inset_0_0_0_3px_#FFF5D1,0_4px_8px_rgba(0,0,0,0.3)] hover:shadow-[inset_0_0_0_2px_#DFA848,inset_0_0_0_3px_#FFF5D1,0_6px_12px_rgba(0,0,0,0.4)] hover:-translate-y-1 active:scale-95 transition-all duration-300 transform flex items-center justify-center gap-2 drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)]">
-                        {t.donateBtn}
-                    </button>
+                    <Link href="/donate">
+                        <button className="min-h-[44px] px-10 py-3 bg-gradient-to-b from-[#F2C96D] to-[#9E731C] text-white font-medium text-lg rounded-xl border border-[#CFA14E] shadow-[inset_0_0_0_2px_#DFA848,inset_0_0_0_3px_#FFF5D1,0_4px_8px_rgba(0,0,0,0.3)] hover:shadow-[inset_0_0_0_2px_#DFA848,inset_0_0_0_3px_#FFF5D1,0_6px_12px_rgba(0,0,0,0.4)] hover:-translate-y-1 active:scale-95 transition-all duration-300 transform flex items-center justify-center gap-2 drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)]">
+                            {t.donateBtn}
+                        </button>
+                    </Link>
 
                     {/* Events Button: Cream with Double Internal Frame */}
                     {/* Shadow trick: inset 3px bg-color (gap), inset 4px border-color (inner line) */}
-                    <button className="min-h-[44px] px-10 py-3 bg-gradient-to-b from-[#FFFEF9] to-[#F3E5C5] text-[#4A3225] font-medium text-lg rounded-xl border border-[#CFA14E] shadow-[inset_0_0_0_2px_#FFFDF8,inset_0_0_0_3px_#CFA14E,0_2px_4px_rgba(0,0,0,0.05)] hover:shadow-[inset_0_0_0_2px_#FFFDF8,inset_0_0_0_3px_#CFA14E,0_4px_8px_rgba(0,0,0,0.1)] hover:-translate-y-1 active:scale-95 transition-all duration-300 transform flex items-center justify-center gap-2 group">
-                        {t.eventsBtn}
-                        <Calendar size={20} className="text-[#4A3225] group-hover:scale-105 transition-transform" />
-                    </button>
+                    <Link href="/events">
+                        <button className="min-h-[44px] px-10 py-3 bg-gradient-to-b from-[#FFFEF9] to-[#F3E5C5] text-[#4A3225] font-medium text-lg rounded-xl border border-[#CFA14E] shadow-[inset_0_0_0_2px_#FFFDF8,inset_0_0_0_3px_#CFA14E,0_2px_4px_rgba(0,0,0,0.05)] hover:shadow-[inset_0_0_0_2px_#FFFDF8,inset_0_0_0_3px_#CFA14E,0_4px_8px_rgba(0,0,0,0.1)] hover:-translate-y-1 active:scale-95 transition-all duration-300 transform flex items-center justify-center gap-2 group">
+                            {t.eventsBtn}
+                            <Calendar size={20} className="text-[#4A3225] group-hover:scale-105 transition-transform" />
+                        </button>
+                    </Link>
                 </motion.div>
             </div>
 

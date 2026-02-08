@@ -4,8 +4,10 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Copy, QrCode, Check } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { useLanguage } from "@/context/LanguageContext";
 import { translations } from "@/lib/translations";
+import { donationConfig } from "@/lib/donation-config";
 
 export default function Donation() {
     const { language } = useLanguage();
@@ -13,7 +15,7 @@ export default function Donation() {
     const [copied, setCopied] = React.useState(false);
 
     const handleCopy = () => {
-        navigator.clipboard.writeText("aradhana@upi");
+        navigator.clipboard.writeText(donationConfig.upiId);
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);
     };
@@ -45,7 +47,7 @@ export default function Donation() {
                             >
                                 <div className="text-left">
                                     <p className="text-xs text-secondary-dark uppercase tracking-widest font-bold">UPI ID</p>
-                                    <p className="text-lg font-mono font-bold text-primary">aradhana@upi</p>
+                                    <p className="text-lg font-mono font-bold text-primary">{donationConfig.upiId}</p>
                                 </div>
                                 <div className={`p-2 rounded-lg transition-colors ${copied ? "bg-green-100 text-green-600" : "bg-secondary/10 text-secondary-dark group-hover:bg-secondary group-hover:text-white"}`}>
                                     {copied ? <Check size={20} /> : <Copy size={20} />}
@@ -66,7 +68,7 @@ export default function Donation() {
 
                         <div className="aspect-square bg-background-ivory rounded-xl border-4 border-double border-secondary/30 flex items-center justify-center relative overflow-hidden group p-2">
                             <Image
-                                src="/assets/donation-qr.png"
+                                src={donationConfig.qrCodeImage}
                                 alt="Donate QR Code"
                                 fill
                                 sizes="(max-width: 768px) 100vw, 400px"
@@ -75,9 +77,11 @@ export default function Donation() {
                         </div>
 
                         <div className="space-y-3">
-                            <button className="w-full py-4 bg-gradient-to-b from-[#F2C96D] to-[#9E731C] text-white font-medium text-lg rounded-xl border border-[#CFA14E] shadow-[inset_0_0_0_2px_#DFA848,inset_0_0_0_3px_#FFF5D1,0_4px_8px_rgba(0,0,0,0.3)] hover:shadow-[inset_0_0_0_2px_#DFA848,inset_0_0_0_3px_#FFF5D1,0_6px_12px_rgba(0,0,0,0.4)] hover:-translate-y-1 active:scale-95 transition-all duration-300 transform flex items-center justify-center gap-2 drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)] uppercase tracking-wider">
-                                {t.razorpayBtn}
-                            </button>
+                            <Link href="/donate">
+                                <button className="w-full py-4 bg-gradient-to-b from-[#F2C96D] to-[#9E731C] text-white font-medium text-lg rounded-xl border border-[#CFA14E] shadow-[inset_0_0_0_2px_#DFA848,inset_0_0_0_3px_#FFF5D1,0_4px_8px_rgba(0,0,0,0.3)] hover:shadow-[inset_0_0_0_2px_#DFA848,inset_0_0_0_3px_#FFF5D1,0_6px_12px_rgba(0,0,0,0.4)] hover:-translate-y-1 active:scale-95 transition-all duration-300 transform flex items-center justify-center gap-2 drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)] uppercase tracking-wider">
+                                    {t.razorpayBtn}
+                                </button>
+                            </Link>
 
                             <p className="text-xs text-primary/40 font-medium tracking-wide">
                                 {t.accepted}

@@ -27,8 +27,8 @@ export default function Header() {
         { name: t.about, href: "/about" },
         { name: t.gallery, href: "/gallery" },
         { name: t.donations, href: "/donate" },
-        { name: t.events, href: "#events" },
-        { name: t.contact, href: "#contact" },
+        { name: t.events, href: "/events" },
+        { name: t.contact, href: "/contact" },
     ];
 
     return (
@@ -37,13 +37,9 @@ export default function Header() {
                 {/* Logo Section */}
                 <Link
                     href="/"
-                    onClick={(e) => {
-                        e.preventDefault();
-                        window.scrollTo({ top: 0, behavior: "smooth" });
-                    }}
-                    className="flex items-center gap-2 md:gap-3 lg:gap-4 group relative z-[100] cursor-pointer"
+                    className="flex items-center gap-2 md:gap-3 lg:gap-4 group relative z-[100] cursor-pointer flex-1 lg:flex-initial justify-center lg:justify-start"
                 >
-                    <img src="/assets/Logo_Main.png" alt="Aradhana Dharmika Trust" className="h-9 md:h-12 lg:h-16 xl:h-20 w-auto object-contain transition-transform duration-300 group-hover:scale-105 filter drop-shadow-sm" />
+                    <img src="/assets/Logo_Main.png" alt="Aradhana Dharmika Trust" className="h-10 md:h-12 lg:h-16 xl:h-20 w-auto object-contain transition-transform duration-300 group-hover:scale-105 filter drop-shadow-sm" />
                     <div className="flex flex-col justify-center">
                         <span className="font-cinzel-decorative font-black text-lg md:text-xl lg:text-2xl xl:text-3xl tracking-wide text-[#5D4037] leading-none drop-shadow-sm mb-1">{t.trustNameLine1}</span>
                         <span className="font-cinzel-decorative font-black text-xs md:text-sm lg:text-base xl:text-lg tracking-[0.15em] text-[#795548] leading-tight">{t.trustNameLine2}</span>

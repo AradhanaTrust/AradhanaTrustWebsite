@@ -363,6 +363,206 @@ export const translations = {
                 title: "Registration",
                 number: "Registration Number: MLR-4-00502-2025/26"
             }
+        },
+        eventsPage: {
+            hero: {
+                tagline: "Celebrations of Faith",
+                title1: "Sacred Events",
+                title2: "& FESTIVALS",
+                description: "Join us in devotion and celebration as we honor our spiritual traditions through vibrant festivals and sacred gatherings."
+            },
+            buttons: {
+                upcomingEvents: "Upcoming Events",
+                pastEvents: "Past Events",
+                registerNow: "Register Now",
+                viewDetails: "View Details"
+            }
+        },
+        contact: {
+            hero: {
+                tagline: "We're Here to Serve You",
+                title: "Contact Us",
+                description: "Reach out for puja bookings, donations, events, or general inquiries. We're here to help and guide you on your spiritual journey."
+            },
+            info: {
+                phoneEmail: {
+                    title: "Phone & Email",
+                    office: "Temple Office",
+                    pujaBooking: "Puja Bookings",
+                    email: "Email",
+                    whatsapp: "WhatsApp"
+                },
+                visit: {
+                    title: "Visit Us",
+                    address: "Address",
+                    addressLine1: "Aradhana Dharmika Trust",
+                    addressLine2: "Kodihalli Village, Malur Taluk",
+                    addressLine3: "Kolar District – 563160",
+                    addressLine4: "Karnataka, India",
+                    getDirections: "Get Directions",
+                    landmark: "Near Malur, Kolar District"
+                },
+                timings: {
+                    title: "Temple Timings",
+                    darshan: "Darshan Hours",
+                    morning: "Morning: 6:00 AM - 12:00 PM",
+                    evening: "Evening: 4:00 PM - 8:00 PM",
+                    office: "Office Hours",
+                    officeTime: "Monday - Saturday: 9:00 AM - 5:00 PM",
+                    closed: "Closed on Sundays & Special Festival Days"
+                }
+            },
+            form: {
+                title: "Send Us a Message",
+                subtitle: "Have a question or need assistance? Fill out the form below and we'll get back to you within 24 hours.",
+                name: "Your Name",
+                namePlaceholder: "Enter your full name",
+                email: "Your Email",
+                emailPlaceholder: "Enter your email address",
+                phone: "Phone Number",
+                phonePlaceholder: "Enter your phone number (optional)",
+                subject: "Subject",
+                subjectPlaceholder: "Select inquiry type",
+                subjects: {
+                    general: "General Inquiry",
+                    puja: "Puja Booking",
+                    donation: "Donation Query",
+                    event: "Event Information",
+                    volunteer: "Volunteer Opportunity",
+                    other: "Other"
+                },
+                message: "Your Message",
+                messagePlaceholder: "Tell us how we can help you...",
+                submit: "Send Message",
+                success: "Thank you for reaching out! We'll respond within 24 hours.",
+                error: "Something went wrong. Please try again or call us directly."
+            },
+            quickContact: {
+                title: "Quick Links",
+                puja: {
+                    title: "Puja Services",
+                    desc: "Book special pujas and sevas for your family"
+                },
+                donate: {
+                    title: "Make a Donation",
+                    desc: "Support our mission and community service"
+                },
+                events: {
+                    title: "Upcoming Events",
+                    desc: "Join us for festivals and celebrations"
+                },
+                volunteer: {
+                    title: "Volunteer",
+                    desc: "Serve the community and gain blessings"
+                }
+            }
+        },
+        eventContent: {
+            // Common Locations
+            locations: {
+                mainTemple: "Aradhana Dharmika Trust Temple",
+                mainHall: "Main Temple Hall",
+                communityHall: "Community Hall",
+                templePremises: "Temple Premises",
+                templeComplex: "Entire Temple Complex",
+                hanumanTemple: "Hanuman Temple, Temple Premises",
+                shivaMandap: "Shiva Mandap"
+            },
+            // Common Speakers
+            speakers: {
+                panditVenkatesh: "Pandit Venkatesh Bhat",
+                anjaneya: "HG Anjaneya Das",
+                ganapatiSharma: "Pandit Ganapati Sharma",
+                multiple: "Multiple Guest Speakers",
+                lakshmiPrasad: "Pandit Lakshmi Prasad",
+                raghavendra: "Swami Raghavendra",
+                shivacharya: "Acharya Shiva Prasad"
+            },
+            // Event: Ugadi 2026
+            ugadi2026: {
+                title: "Ugadi - Kannada New Year",
+                description: "Celebrate the auspicious Kannada New Year with traditional pachadi, special pooja, and cultural programs.",
+                longDescription: "Ugadi marks the beginning of a new year for the people of Karnataka, Andhra Pradesh, and Telangana. Join us for a grand celebration featuring the preparation of Ugadi Pachadi (a symbolic mixture of six tastes), special temple decorations with mango leaves and flowers, and traditional music and dance performances. The day begins with an oil bath, followed by the reading of Panchanga (yearly predictions) and special prayers for prosperity.",
+                agenda: [
+                    { time: "6:00 AM", activity: "Abhigamana & Oil Bath Tradition" },
+                    { time: "8:00 AM", activity: "Ugadi Pachadi Preparation" },
+                    { time: "9:30 AM", activity: "Panchanga Reading" },
+                    { time: "11:00 AM", activity: "Prasadam Distribution" }
+                ]
+            },
+            // Event: Hanuman Jayanti 2026
+            hanuman2026: {
+                title: "Hanuman Jayanti",
+                description: "Celebrate Lord Hanuman's birthday with Hanuman Chalisa recitation, abhishek, and special bhajans.",
+                longDescription: "Hanuman Jayanti celebrates the birth of Lord Hanuman, the devoted disciple of Lord Rama. The day-long celebration includes continuous recitation of Hanuman Chalisa, abhishek with panchamrita, special decorations, and bhajan sandhya in the evening. Devotees seek blessings for strength, courage, and devotion.",
+                agenda: [
+                    { time: "5:00 AM", activity: "Morning Abhishek & Suprabhatham" },
+                    { time: "7:00 AM", activity: "Hanuman Chalisa Parayanam" },
+                    { time: "12:00 PM", activity: "Maha Prasadam" },
+                    { time: "6:00 PM", activity: "Bhajan Sandhya & Arti" }
+                ]
+            },
+            // Event: Ganesh Chaturthi 2026
+            ganesh2026: {
+                title: "Ganesh Chaturthi",
+                description: "Ten-day celebration of Lord Ganesha with daily rituals, cultural programs, and grand visarjan.",
+                longDescription: "Ganesh Chaturthi is Karnataka's most vibrant festival, celebrating Lord Ganesha's birth. Our ten-day celebration features daily special poojas, cultural programs, devotional music, and ends with a grand immersion ceremony. Each day brings unique offerings and special abhisheks to Vighneshwara.",
+                agenda: [
+                    { time: "7:00 AM", activity: "Ganapati Sthapana & Prana Prathistha" },
+                    { time: "10:00 AM", activity: "Special Abhishek" },
+                    { time: "6:00 PM", activity: "Cultural Program" },
+                    { time: "8:00 PM", activity: "Maha Arti" }
+                ]
+            },
+            // Event: Dasara 2026
+            dasara2026: {
+                title: "Navaratri & Dasara Celebrations",
+                description: "Nine nights of Devi worship culminating in Vijayadashami with special South Indian traditions.",
+                longDescription: "Experience the grandeur of Dasara, Karnataka's state festival, with nine nights dedicated to Goddess Durga. Following Mysore Dasara traditions, we celebrate with daily abhisheks, classical music concerts, traditional Bharatanatyam performances, and Ayudha Pooja on the ninth day. The tenth day features Vijayadashami celebrations.",
+                agenda: [
+                    { time: "6:00 AM", activity: "Morning Devi Pooja" },
+                    { time: "11:00 AM", activity: "Kumkumarchane" },
+                    { time: "7:00 PM", activity: "Cultural Program" },
+                    { time: "8:30 PM", activity: "Maha Arti" }
+                ]
+            },
+            // Event: Deepavali 2026
+            deepavali2026: {
+                title: "Deepavali - Festival of Lights",
+                description: "Grand Deepavali celebration with Lakshmi Pooja, thousands of diyas, and fireworks.",
+                longDescription: "Deepavali, the festival of lights, symbolizes the victory of light over darkness. Join us for special Lakshmi Pooja, lighting of traditional oil lamps across the temple, distribution of sweets, and a magnificent display of lights. The evening includes traditional rangoli competition, bhajans, and safe community fireworks.",
+                agenda: [
+                    { time: "4:00 AM", activity: "Abhyang Snan (Oil Bath)" },
+                    { time: "6:00 PM", activity: "Lakshmi Pooja" },
+                    { time: "7:30 PM", activity: "Diya Lighting Ceremony" },
+                    { time: "9:00 PM", activity: "Community Festivities" }
+                ]
+            },
+            // Event: Rama Navami 2025
+            ramaNavami2025: {
+                title: "Rama Navami",
+                description: "Celebrate Lord Rama's birthday with Ramayana parayanam, special abhishek, and cultural programs.",
+                longDescription: "Rama Navami celebrates the birth of Lord Rama, the seventh avatar of Lord Vishnu. Join us for a day filled with devotion, including continuous Ramayana recitation, elaborate decorations, special abhishek, and traditional music performances. The celebration includes prasadam distribution and storytelling for children.",
+                agenda: [
+                    { time: "6:00 AM", activity: "Suprabhatham & Morning Pooja" },
+                    { time: "10:00 AM", activity: "Ramayana Parayanam" },
+                    { time: "12:00 PM", activity: "Special Abhishek" },
+                    { time: "6:00 PM", activity: "Bhajan & Arti" }
+                ]
+            },
+            // Event: Maha Shivaratri 2025
+            shivaratri2025: {
+                title: "Maha Shivaratri",
+                description: "All-night vigil with continuous abhishek, Rudra homam, and devotional programs.",
+                longDescription: "Maha Shivaratri is the most auspicious night dedicated to Lord Shiva. Devotees observe fasting and participate in night-long worship with continuous abhishek every three hours, chanting of Om Namah Shivaya, Rudra homam, and bhajan sandhya. The celebration culminates with early morning pooja and prasadam distribution.",
+                agenda: [
+                    { time: "6:00 PM", activity: "First Prahar Abhishek" },
+                    { time: "9:00 PM", activity: "Second Prahar Abhishek" },
+                    { time: "12:00 AM", activity: "Third Prahar Abhishek" },
+                    { time: "3:00 AM", activity: "Fourth Prahar Abhishek" },
+                    { time: "6:00 AM", activity: "Morning Arti & Prasadam" }
+                ]
+            }
         }
     },
     kn: {
@@ -728,6 +928,206 @@ export const translations = {
             registration: {
                 title: "ನೋಂದಣಿ",
                 number: "ನೋಂದಣಿ ಸಂಖ್ಯೆ: MLR-4-00502-2025/26"
+            }
+        },
+        eventsPage: {
+            hero: {
+                tagline: "ನಂಬಿಕೆಯ ಆಚರಣೆಗಳು",
+                title1: "ಪವಿತ್ರ ಕಾರ್ಯಕ್ರಮಗಳು",
+                title2: "ಮತ್ತು ಹಬ್ಬಗಳು",
+                description: "ರೋಮಾಂಚಕಾರಿ ಹಬ್ಬಗಳು ಮತ್ತು ಪವಿತ್ರ ಸಮಾವೇಶಗಳ ಮೂಲಕ ನಮ್ಮ ಆಧ್ಯಾತ್ಮಿಕ ಸಂಪ್ರದಾಯಗಳನ್ನು ಗೌರವಿಸುವಾಗ ಭಕ್ತಿ ಮತ್ತು ಆಚರಣೆಯಲ್ಲಿ ನಮ್ಮೊಂದಿಗೆ ಸೇರಿ."
+            },
+            buttons: {
+                upcomingEvents: "ಮುಂಬರುವ ಕಾರ್ಯಕ್ರಮಗಳು",
+                pastEvents: "ಹಿಂದಿನ ಕಾರ್ಯಕ್ರಮಗಳು",
+                registerNow: "ಈಗ ನೋಂದಾಯಿಸಿ",
+                viewDetails: "ವಿವರಗಳನ್ನು ವೀಕ್ಷಿಸಿ"
+            }
+        },
+        contact: {
+            hero: {
+                tagline: "ನಾವು ನಿಮಗೆ ಸೇವೆ ಸಲ್ಲಿಸಲು ಇಲ್ಲಿದ್ದೇವೆ",
+                title: "ನಮ್ಮನ್ನು ಸಂಪರ್ಕಿಸಿ",
+                description: "ಪೂಜೆ ಬುಕ್ಕಿಂಗ್, ದಾನ, ಕಾರ್ಯಕ್ರಮಗಳು ಅಥವಾ ಸಾಮಾನ್ಯ ವಿಚಾರಣೆಗಳಿಗಾಗಿ ನಮ್ಮನ್ನು ಸಂಪರ್ಕಿಸಿ. ನಿಮ್ಮ ಆಧ್ಯಾತ್ಮಿಕ ಪ್ರಯಾಣದಲ್ಲಿ ಸಹಾಯ ಮತ್ತು ಮಾರ್ಗದರ್ಶನ ನೀಡಲು ನಾವು ಇಲ್ಲಿದ್ದೇವೆ."
+            },
+            info: {
+                phoneEmail: {
+                    title: "ದೂರವಾಣಿ ಮತ್ತು ಇಮೇಲ್",
+                    office: "ದೇವಾಲಯ ಕಚೇರಿ",
+                    pujaBooking: "ಪೂಜೆ ಬುಕ್ಕಿಂಗ್",
+                    email: "ಇಮೇಲ್",
+                    whatsapp: "ವಾಟ್ಸಾಪ್"
+                },
+                visit: {
+                    title: "ನಮ್ಮನ್ನು ಭೇಟಿ ಮಾಡಿ",
+                    address: "ವಿಳಾಸ",
+                    addressLine1: "ಆರಾಧನಾ ಧಾರ್ಮಿಕ ಟ್ರಸ್ಟ್",
+                    addressLine2: "ಕೋಡಿಹಳ್ಳಿ ಗ್ರಾಮ, ಮಾಳೂರು ತಾಲ್ಲೂಕು",
+                    addressLine3: "ಕೋಲಾರ ಜಿಲ್ಲೆ – 563160",
+                    addressLine4: "ಕರ್ನಾಟಕ, ಭಾರತ",
+                    getDirections: "ನಿರ್ದೇಶನಗಳನ್ನು ಪಡೆಯಿರಿ",
+                    landmark: "ಮಾಳೂರು ಹತ್ತಿರ, ಕೋಲಾರ ಜಿಲ್ಲೆ"
+                },
+                timings: {
+                    title: "ದೇವಾಲಯ ಸಮಯ",
+                    darshan: "ದರ್ಶನ ಸಮಯ",
+                    morning: "ಬೆಳಿಗ್ಗೆ: 6:00 AM - 12:00 PM",
+                    evening: "ಸಂಜೆ: 4:00 PM - 8:00 PM",
+                    office: "ಕಚೇರಿ ಸಮಯ",
+                    officeTime: "ಸೋಮವಾರ - ಶನಿವಾರ: 9:00 AM - 5:00 PM",
+                    closed: "ಭಾನುವಾರ ಮತ್ತು ವಿಶೇಷ ಹಬ್ಬಗಳಲ್ಲಿ ಮುಚ್ಚಲಾಗಿದೆ"
+                }
+            },
+            form: {
+                title: "ನಮಗೆ ಸಂದೇಶ ಕಳುಹಿಸಿ",
+                subtitle: "ನಿಮಗೆ ಪ್ರಶ್ನೆ ಅಥವಾ ಸಹಾಯ ಬೇಕೇ? ಕೆಳಗಿನ ಫಾರಂ ಅನ್ನು ಭರ್ತಿ ಮಾಡಿ ಮತ್ತು ನಾವು 24 ಗಂಟೆಗಳೊಳಗೆ ನಿಮಗೆ ಪ್ರತ್ಯುತ್ತರ ನೀಡುತ್ತೇವೆ.",
+                name: "ನಿಮ್ಮ ಹೆಸರು",
+                namePlaceholder: "ನಿಮ್ಮ ಪೂರ್ಣ ಹೆಸರನ್ನು ನಮೂದಿಸಿ",
+                email: "ನಿಮ್ಮ ಇಮೇಲ್",
+                emailPlaceholder: "ನಿಮ್ಮ ಇಮೇಲ್ ವಿಳಾಸವನ್ನು ನಮೂದಿಸಿ",
+                phone: "ದೂರವಾಣಿ ಸಂಖ್ಯೆ",
+                phonePlaceholder: "ನಿಮ್ಮ ದೂರವಾಣಿ ಸಂಖ್ಯೆಯನ್ನು ನಮೂದಿಸಿ (ಐಚ್ಛಿಕ)",
+                subject: "ವಿಷಯ",
+                subjectPlaceholder: "ವಿಚಾರಣೆ ಪ್ರಕಾರವನ್ನು ಆಯ್ಕೆಮಾಡಿ",
+                subjects: {
+                    general: "ಸಾಮಾನ್ಯ ವಿಚಾರಣೆ",
+                    puja: "ಪೂಜೆ ಬುಕ್ಕಿಂಗ್",
+                    donation: "ದಾನ ವಿಚಾರಣೆ",
+                    event: "ಕಾರ್ಯಕ್ರಮ ಮಾಹಿತಿ",
+                    volunteer: "ಸ್ವಯಂಸೇವಕ ಅವಕಾಶ",
+                    other: "ಇತರೆ"
+                },
+                message: "ನಿಮ್ಮ ಸಂದೇಶ",
+                messagePlaceholder: "ನಾವು ನಿಮಗೆ ಹೇಗೆ ಸಹಾಯ ಮಾಡಬಹುದು ಎಂದು ನಮಗೆ ತಿಳಿಸಿ...",
+                submit: "ಸಂದೇಶ ಕಳುಹಿಸಿ",
+                success: "ನಮ್ಮನ್ನು ಸಂಪರ್ಕಿಸಿದ್ದಕ್ಕಾಗಿ ಧನ್ಯವಾದಗಳು! ನಾವು 24 ಗಂಟೆಗಳೊಳಗೆ ಪ್ರತ್ಯುತ್ತರ ನೀಡುತ್ತೇವೆ.",
+                error: "ಏನೋ ತಪ್ಪಾಗಿದೆ. ದಯವಿಟ್ಟು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ ಅಥವಾ ನೇರವಾಗಿ ಕರೆ ಮಾಡಿ."
+            },
+            quickContact: {
+                title: "ತ್ವರಿತ ಲಿಂಕ್‌ಗಳು",
+                puja: {
+                    title: "ಪೂಜೆ ಸೇವೆಗಳು",
+                    desc: "ನಿಮ್ಮ ಕುಟುಂಬಕ್ಕಾಗಿ ವಿಶೇಷ ಪೂಜೆಗಳು ಮತ್ತು ಸೇವೆಗಳನ್ನು ಬುಕ್ ಮಾಡಿ"
+                },
+                donate: {
+                    title: "ದಾನ ಮಾಡಿ",
+                    desc: "ನಮ್ಮ ಧ್ಯೇಯ ಮತ್ತು ಸಮುದಾಯ ಸೇವೆಯನ್ನು ಬೆಂಬಲಿಸಿ"
+                },
+                events: {
+                    title: "ಮುಂಬರುವ ಕಾರ್ಯಕ್ರಮಗಳು",
+                    desc: "ಹಬ್ಬಗಳು ಮತ್ತು ಆಚರಣೆಗಳಿಗಾಗಿ ನಮ್ಮೊಂದಿಗೆ ಸೇರಿ"
+                },
+                volunteer: {
+                    title: "ಸ್ವಯಂಸೇವಕರಾಗಿ",
+                    desc: "ಸಮುದಾಯಕ್ಕೆ ಸೇವೆ ಸಲ್ಲಿಸಿ ಮತ್ತು ಆಶೀರ್ವಾದ ಪಡೆಯಿರಿ"
+                }
+            }
+        },
+        eventContent: {
+            // Common Locations
+            locations: {
+                mainTemple: "ಆರಾಧನಾ ಧಾರ್ಮಿಕ ಟ್ರಸ್ಟ್ ದೇವಾಲಯ",
+                mainHall: "ಮುಖ್ಯ ದೇವಾಲಯ ಸಭಾಂಗಣ",
+                communityHall: "ಸಮುದಾಯ ಸಭಾಂಗಣ",
+                templePremises: "ದೇವಾಲಯ ಆವರಣ",
+                templeComplex: "ಸಂಪೂರ್ಣ ದೇವಾಲಯ ಸಂಕೀರ್ಣ",
+                hanumanTemple: "ಹನುಮಾನ್ ದೇವಾಲಯ, ದೇವಾಲಯ ಆವರಣ",
+                shivaMandap: "ಶಿವ ಮಂಡಪ"
+            },
+            // Common Speakers
+            speakers: {
+                panditVenkatesh: "ಪಂಡಿತ್ ವೆಂಕಟೇಶ್ ಭಟ್",
+                anjaneya: "ಎಚ್ಜಿ ಆಂಜನೇಯ ದಾಸ್",
+                ganapatiSharma: "ಪಂಡಿತ್ ಗಣಪತಿ ಶರ್ಮಾ",
+                multiple: "ಅನೇಕ ಅತಿಥಿ ವಕ್ತಾರರು",
+                lakshmiPrasad: "ಪಂಡಿತ್ ಲಕ್ಷ್ಮೀ ಪ್ರಸಾದ್",
+                raghavendra: "ಸ್ವಾಮಿ ರಾಘವೇಂದ್ರ",
+                shivacharya: "ಆಚಾರ್ಯ ಶಿವ ಪ್ರಸಾದ್"
+            },
+            // Event: Ugadi 2026
+            ugadi2026: {
+                title: "ಯುಗಾದಿ - ಕನ್ನಡ ಹೊಸ ವರ್ಷ",
+                description: "ಸಾಂಪ್ರದಾಯಿಕ ಪಚ್ಚಡಿ, ವಿಶೇಷ ಪೂಜೆ ಮತ್ತು ಸಾಂಸ್ಕೃತಿಕ ಕಾರ್ಯಕ್ರಮಗಳೊಂದಿಗೆ ಶುಭ ಕನ್ನಡ ಹೊಸ ವರ್ಷವನ್ನು ಆಚರಿಸಿ.",
+                longDescription: "ಯುಗಾದಿ ಕರ್ನಾಟಕ, ಆಂಧ್ರಪ್ರದೇಶ ಮತ್ತು ತೆಲಂಗಾಣದ ಜನರಿಗೆ ಹೊಸ ವರ್ಷದ ಆರಂಭವನ್ನು ಸೂಚಿಸುತ್ತದೆ. ಯುಗಾದಿ ಪಚ್ಚಡಿ (ಆರು ರುಚಿಗಳ ಸಾಂಕೇತಿಕ ಮಿಶ್ರಣ) ತಯಾರಿಕೆ, ಮಾವಿನ ಎಲೆಗಳು ಮತ್ತು ಹೂವುಗಳೊಂದಿಗೆ ವಿಶೇಷ ದೇವಾಲಯ ಅಲಂಕಾರಗಳು, ಮತ್ತು ಸಾಂಪ್ರದಾಯಿಕ ಸಂಗೀತ ಮತ್ತು ನೃತ್ಯ ಪ್ರದರ್ಶನಗಳನ್ನು ಒಳಗೊಂಡ ಭವ್ಯ ಆಚರಣೆಗೆ ನಮ್ಮೊಂದಿಗೆ ಸೇರಿ. ದಿನವು ತೈಲ ಸ್ನಾನದೊಂದಿಗೆ ಪ್ರಾರಂಭವಾಗುತ್ತದೆ, ನಂತರ ಪಂಚಾಂಗ ಪಠಣ (ವಾರ್ಷಿಕ ಭವಿಷ್ಯ) ಮತ್ತು ಸಮೃದ್ಧಿಗಾಗಿ ವಿಶೇಷ ಪ್ರಾರ್ಥನೆಗಳು.",
+                agenda: [
+                    { time: "6:00 AM", activity: "ಅಭಿಗಮನ ಮತ್ತು ತೈಲ ಸ್ನಾನ ಸಂಪ್ರದಾಯ" },
+                    { time: "8:00 AM", activity: "ಯುಗಾದಿ ಪಚ್ಚಡಿ ತಯಾರಿಕೆ" },
+                    { time: "9:30 AM", activity: "ಪಂಚಾಂಗ ಪಠಣ" },
+                    { time: "11:00 AM", activity: "ಪ್ರಸಾದ ವಿತರಣೆ" }
+                ]
+            },
+            // Event: Hanuman Jayanti 2026
+            hanuman2026: {
+                title: "ಹನುಮಾನ್ ಜಯಂತಿ",
+                description: "ಹನುಮಾನ್ ಚಾಲೀಸಾ ಪಠಣ, ಅಭಿಷೇಕ ಮತ್ತು ವಿಶೇಷ ಭಜನೆಗಳೊಂದಿಗೆ ಭಗವಾನ್ ಹನುಮಾನ್ ಹುಟ್ಟುಹಬ್ಬವನ್ನು ಆಚರಿಸಿ.",
+                longDescription: "ಹನುಮಾನ್ ಜಯಂತಿ ಭಗವಾನ್ ರಾಮನ ನಿಷ್ಠಾವಂತ ಶಿಷ್ಯ ಭಗವಾನ್ ಹನುಮಾನ್‌ರ ಜನ್ಮವನ್ನು ಆಚರಿಸುತ್ತದೆ. ಇಡೀ ದಿನದ ಆಚರಣೆಯು ಹನುಮಾನ್ ಚಾಲೀಸಾದ ನಿರಂತರ ಪಠಣ, ಪಂಚಾಮೃತದೊಂದಿಗೆ ಅಭಿಷೇಕ, ವಿಶೇಷ ಅಲಂಕಾರಗಳು ಮತ್ತು ಸಂಜೆ ಭಜನ ಸಂಧ್ಯೆಯನ್ನು ಒಳಗೊಂಡಿದೆ. ಭಕ್ತರು ಶಕ್ತಿ, ಧೈರ್ಯ ಮತ್ತು ಭಕ್ತಿಗಾಗಿ ಆಶೀರ್ವಾದವನ್ನು ಪಡೆಯುತ್ತಾರೆ.",
+                agenda: [
+                    { time: "5:00 AM", activity: "ಬೆಳಗಿನ ಅಭಿಷೇಕ ಮತ್ತು ಸುಪ್ರಭಾತಂ" },
+                    { time: "7:00 AM", activity: "ಹನುಮಾನ್ ಚಾಲೀಸಾ ಪಾರಾಯಣಂ" },
+                    { time: "12:00 PM", activity: "ಮಹಾ ಪ್ರಸಾದಂ" },
+                    { time: "6:00 PM", activity: "ಭಜನ ಸಂಧ್ಯೆ ಮತ್ತು ಆರತಿ" }
+                ]
+            },
+            // Event: Ganesh Chaturthi 2026
+            ganesh2026: {
+                title: "ಗಣೇಶ ಚತುರ್ಥಿ",
+                description: "ದೈನಂದಿನ ಆಚರಣೆಗಳು, ಸಾಂಸ್ಕೃತಿಕ ಕಾರ್ಯಕ್ರಮಗಳು ಮತ್ತು ಭವ್ಯ ವಿಸರ್ಜನೆಯೊಂದಿಗೆ ಭಗವಾನ್ ಗಣೇಶನ ಹತ್ತು ದಿನಗಳ ಆಚರಣೆ.",
+                longDescription: "ಗಣೇಶ ಚತುರ್ಥಿ ಕರ್ನಾಟಕದ ಅತ್ಯಂತ ರೋಮಾಂಚಕಾರಿ ಹಬ್ಬವಾಗಿದ್ದು, ಭಗವಾನ್ ಗಣೇಶನ ಜನ್ಮವನ್ನು ಆಚರಿಸುತ್ತದೆ. ನಮ್ಮ ಹತ್ತು ದಿನಗಳ ಆಚರಣೆಯು ದೈನಂದಿನ ವಿಶೇಷ ಪೂಜೆಗಳು, ಸಾಂಸ್ಕೃತಿಕ ಕಾರ್ಯಕ್ರಮಗಳು, ಭಕ್ತಿಗೀತೆಗಳನ್ನು ಒಳಗೊಂಡಿದೆ ಮತ್ತು ಭವ್ಯ ವಿಸರ್ಜನೆ ಸಮಾರಂಭದೊಂದಿಗೆ ಕೊನೆಗೊಳ್ಳುತ್ತದೆ. ಪ್ರತಿ ದಿನವೂ ವಿಘ್ನೇಶ್ವರನಿಗೆ ವಿಶಿಷ್ಟ ಕಾಣಿಕೆಗಳು ಮತ್ತು ವಿಶೇಷ ಅಭಿಷೇಕಗಳನ್ನು ತರುತ್ತದೆ.",
+                agenda: [
+                    { time: "7:00 AM", activity: "ಗಣಪತಿ ಸ್ಥಾಪನಾ ಮತ್ತು ಪ್ರಾಣ ಪ್ರತಿಷ್ಠೆ" },
+                    { time: "10:00 AM", activity: "ವಿಶೇಷ ಅಭಿಷೇಕ" },
+                    { time: "6:00 PM", activity: "ಸಾಂಸ್ಕೃತಿಕ ಕಾರ್ಯಕ್ರಮ" },
+                    { time: "8:00 PM", activity: "ಮಹಾ ಆರತಿ" }
+                ]
+            },
+            // Event: Dasara 2026
+            dasara2026: {
+                title: "ನವರಾತ್ರಿ ಮತ್ತು ದಸರಾ ಆಚರಣೆಗಳು",
+                description: "ದಕ್ಷಿಣ ಭಾರತೀಯ ಸಂಪ್ರದಾಯಗಳೊಂದಿಗೆ ವಿಜಯದಶಮಿಯಲ್ಲಿ ಪರಾಕಾಷ್ಠೆಯನ್ನು ತಲುಪುವ ದೇವಿ ಆರಾಧನೆಯ ಒಂಬತ್ತು ರಾತ್ರಿಗಳು.",
+                longDescription: "ದೇವಿ ದುರ್ಗೆಗೆ ಸಮರ್ಪಿತವಾದ ಒಂಬತ್ತು ರಾತ್ರಿಗಳೊಂದಿಗೆ ಕರ್ನಾಟಕದ ರಾಜ್ಯ ಹಬ್ಬವಾದ ದಸರಾದ ವೈಭವವನ್ನು ಅನುಭವಿಸಿ. ಮೈಸೂರು ದಸರಾ ಸಂಪ್ರದಾಯಗಳನ್ನು ಅನುಸರಿಸಿ, ನಾವು ದೈನಂದಿನ ಅಭಿಷೇಕಗಳು, ಶಾಸ್ತ್ರೀಯ ಸಂಗೀತ ಸಂಗೀತ ಕಚೇರಿಗಳು, ಸಾಂಪ್ರದಾಯಿಕ ಭರತನಾಟ್ಯಂ ಪ್ರದರ್ಶನಗಳು ಮತ್ತು ಒಂಬತ್ತನೇ ದಿನದಂದು ಆಯುಧ ಪೂಜೆಯೊಂದಿಗೆ ಆಚರಿಸುತ್ತೇವೆ. ಹತ್ತನೇ ದಿನ ವಿಜಯದಶಮಿ ಆಚರಣೆಗಳನ್ನು ಒಳಗೊಂಡಿದೆ.",
+                agenda: [
+                    { time: "6:00 AM", activity: "ಬೆಳಗಿನ ದೇವಿ ಪೂಜೆ" },
+                    { time: "11:00 AM", activity: "ಕುಂಕುಮಾರ್ಚನೆ" },
+                    { time: "7:00 PM", activity: "ಸಾಂಸ್ಕೃತಿಕ ಕಾರ್ಯಕ್ರಮ" },
+                    { time: "8:30 PM", activity: "ಮಹಾ ಆರತಿ" }
+                ]
+            },
+            // Event: Deepavali 2026
+            deepavali2026: {
+                title: "ದೀಪಾವಳಿ - ಬೆಳಕಿನ ಹಬ್ಬ",
+                description: "ಲಕ್ಷ್ಮೀ ಪೂಜೆ, ಸಾವಿರಾರು ದೀಪಗಳು ಮತ್ತು ಪಟಾಕಿಗಳೊಂದಿಗೆ ಭವ್ಯ ದೀಪಾವಳಿ ಆಚರಣೆ.",
+                longDescription: "ಬೆಳಕಿನ ಹಬ್ಬವಾದ ದೀಪಾವಳಿಯು ಕತ್ತಲೆಯ ಮೇಲೆ ಬೆಳಕಿನ ವಿಜಯವನ್ನು ಸಂಕೇತಿಸುತ್ತದೆ. ವಿಶೇಷ ಲಕ್ಷ್ಮೀ ಪೂಜೆ, ದೇವಾಲಯದಾದ್ಯಂತ ಸಾಂಪ್ರದಾಯಿಕ ಎಣ್ಣೆ ದೀಪಗಳನ್ನು ಬೆಳಗುವುದು, ಸಿಹಿತಿಂಡಿಗಳ ವಿತರಣೆ ಮತ್ತು ಬೆಳಕಿನ ಭವ್ಯ ಪ್ರದರ್ಶನಕ್ಕಾಗಿ ನಮ್ಮೊಂದಿಗೆ ಸೇರಿ. ಸಂಜೆಯು ಸಾಂಪ್ರದಾಯಿಕ ರಂಗೋಲಿ ಸ್ಪರ್ಧೆ, ಭಜನೆಗಳು ಮತ್ತು ಸುರಕ್ಷಿತ ಸಮುದಾಯ ಪಟಾಕಿಗಳನ್ನು ಒಳಗೊಂಡಿದೆ.",
+                agenda: [
+                    { time: "4:00 AM", activity: "ಅಭ್ಯಂಗ ಸ್ನಾನ (ತೈಲ ಸ್ನಾನ)" },
+                    { time: "6:00 PM", activity: "ಲಕ್ಷ್ಮೀ ಪೂಜೆ" },
+                    { time: "7:30 PM", activity: "ದೀಪಗಳನ್ನು ಬೆಳಗುವ ಸಮಾರಂಭ" },
+                    { time: "9:00 PM", activity: "ಸಮುದಾಯ ಹಬ್ಬಗಳು" }
+                ]
+            },
+            // Event: Rama Navami 2025
+            ramaNavami2025: {
+                title: "ರಾಮ ನವಮಿ",
+                description: "ರಾಮಾಯಣ ಪಾರಾಯಣ, ವಿಶೇಷ ಅಭಿಷೇಕ ಮತ್ತು ಸಾಂಸ್ಕೃತಿಕ ಕಾರ್ಯಕ್ರಮಗಳೊಂದಿಗೆ ಭಗವಾನ್ ರಾಮನ ಹುಟ್ಟುಹಬ್ಬವನ್ನು ಆಚರಿಸಿ.",
+                longDescription: "ಭಗವಾನ್ ವಿಷ್ಣುವಿನ ಏಳನೇ ಅವತಾರವಾದ ಭಗವಾನ್ ರಾಮನ ಜನ್ಮವನ್ನು ರಾಮ ನವಮಿ ಆಚರಿಸುತ್ತದೆ. ನಿರಂತರ ರಾಮಾಯಣ ಪಠಣ, ವಿಸ್ತಾರವಾದ ಅಲಂಕಾರಗಳು, ವಿಶೇಷ ಅಭಿಷೇಕ ಮತ್ತು ಸಾಂಪ್ರದಾಯಿಕ ಸಂಗೀತ ಪ್ರದರ್ಶನಗಳನ್ನು ಒಳಗೊಂಡ ಭಕ್ತಿಯಿಂದ ತುಂಬಿದ ದಿನಕ್ಕಾಗಿ ನಮ್ಮೊಂದಿಗೆ ಸೇರಿ. ಆಚರಣೆಯು ಪ್ರಸಾದ ವಿತರಣೆ ಮತ್ತು ಮಕ್ಕಳಿಗೆ ಕಥೆ ಹೇಳುವಿಕೆಯನ್ನು ಒಳಗೊಂಡಿದೆ.",
+                agenda: [
+                    { time: "6:00 AM", activity: "ಸುಪ್ರಭಾತಂ ಮತ್ತು ಬೆಳಗಿನ ಪೂಜೆ" },
+                    { time: "10:00 AM", activity: "ರಾಮಾಯಣ ಪಾರಾಯಣಂ" },
+                    { time: "12:00 PM", activity: "ವಿಶೇಷ ಅಭಿಷೇಕ" },
+                    { time: "6:00 PM", activity: "ಭಜನ ಮತ್ತು ಆರತಿ" }
+                ]
+            },
+            // Event: Maha Shivaratri 2025
+            shivaratri2025: {
+                title: "ಮಹಾ ಶಿವರಾತ್ರಿ",
+                description: "ನಿರಂತರ ಅಭಿಷೇಕ, ರುದ್ರ ಹೋಮ ಮತ್ತು ಭಕ್ತಿ ಕಾರ್ಯಕ್ರಮಗಳೊಂದಿಗೆ ರಾತ್ರಿಯಿಡೀ ಜಾಗರಣೆ.",
+                longDescription: "ಮಹಾಶಿವರಾತ್ರಿಯು ಭಗವಾನ್ ಶಿವನಿಗೆ ಸಮರ್ಪಿತವಾದ ಅತ್ಯಂತ ಶುಭಕರವಾದ ರಾತ್ರಿಯಾಗಿದೆ. ಭಕ್ತರು ಉಪವಾಸವನ್ನು ಆಚರಿಸುತ್ತಾರೆ ಮತ್ತು ಪ್ರತಿ ಮೂರು ಗಂಟೆಗಳಿಗೊಮ್ಮೆ ನಿರಂತರ ಅಭಿಷೇಕ, ಓಂ ನಮಃ ಶಿವಾಯ ಪಠಣ, ರುದ್ರ ಹೋಮ ಮತ್ತು ಭಜನ ಸಂಧ್ಯೆಯೊಂದಿಗೆ ರಾತ್ರಿಯಿಡೀ ಪೂಜೆಯಲ್ಲಿ ಭಾಗವಹಿಸುತ್ತಾರೆ. ಆಚರಣೆಯು ಮುಂಜಾನೆ ಪೂಜೆ ಮತ್ತು ಪ್ರಸಾದ ವಿತರಣೆಯೊಂದಿಗೆ ಕೊನೆಗೊಳ್ಳುತ್ತದೆ.",
+                agenda: [
+                    { time: "6:00 PM", activity: "ಮೊದಲ ಪ್ರಹರ ಅಭಿಷೇಕ" },
+                    { time: "9:00 PM", activity: "ಎರಡನೇ ಪ್ರಹರ ಅಭಿಷೇಕ" },
+                    { time: "12:00 AM", activity: "ಮೂರನೇ ಪ್ರಹರ ಅಭಿಷೇಕ" },
+                    { time: "3:00 AM", activity: "ನಾಲ್ಕನೇ ಪ್ರಹರ ಅಭಿಷೇಕ" },
+                    { time: "6:00 AM", activity: "ಬೆಳಗಿನ ಆರತಿ ಮತ್ತು ಪ್ರಸಾದ" }
+                ]
             }
         }
     }
