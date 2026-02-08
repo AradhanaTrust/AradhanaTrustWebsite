@@ -1,13 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform, useMotionTemplate } from "framer-motion";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import GoldCurveSeparator from "@/components/GoldCurveSeparator";
 import { useLanguage } from "@/context/LanguageContext";
 import { translations } from "@/lib/translations";
-import { Phone, Mail, MapPin, Clock, Send, Calendar, MessageSquare, Users, Heart, Sparkles } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, Send, Calendar, MessageSquare, Users, Heart, Sparkles, Flower, ChevronDown } from "lucide-react";
 import Link from "next/link";
 
 export default function ContactPage() {
@@ -36,71 +36,135 @@ export default function ContactPage() {
         setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
     };
 
+    // Scroll Animation Logic (Matching Home Page)
+    const { scrollY } = useScroll();
+
+    // Transform scroll to curve control point Y
+    // Range: 0px scroll -> Deep curve (320), 300px scroll -> Flat (190)
+    const curveControlY = useTransform(scrollY, [0, 300], [320, 190]);
+
+    const curveControlY_Line1 = useTransform(curveControlY, (y) => y + 1.5);
+    const curveControlY_Line2 = useTransform(curveControlY, (y) => y + 12);
+
+    const pathMain = useMotionTemplate`M0,190 Q600,${curveControlY} 1200,190 L1200,280 L0,280 Z`;
+    const pathLine1 = useMotionTemplate`M0,191.5 Q600,${curveControlY_Line1} 1200,191.5`;
+    const pathLine2 = useMotionTemplate`M0,202 Q600,${curveControlY_Line2} 1200,202`;
+
+    const handleScroll = () => {
+        window.scrollTo({
+            top: window.innerHeight,
+            behavior: "smooth",
+        });
+    };
+
     return (
         <>
             <Header />
 
-            {/* Hero Section */}
-            <section className="relative min-h-[500px] flex items-center justify-center overflow-hidden bg-gradient-to-b from-[#FFF9E6] to-[#FFFDF9] pt-24">
-                {/* Background Pattern */}
-                <div className="absolute inset-0 opacity-5">
-                    <div className="absolute inset-0" style={{
-                        backgroundImage: `radial-gradient(circle at 20px 20px, #D4AF37 1px, transparent 0)`,
-                        backgroundSize: '40px 40px'
-                    }} />
+            {/* HERO SECTION - Refined V5 Layout */}
+            <div className="relative pt-32 pb-48 lg:pt-40 lg:pb-32 overflow-hidden bg-[#FDFBF7] min-h-[85vh] flex items-center">
+                {/* Background - Mandala Overlay Only */}
+                <div className="absolute inset-0 z-0">
+                    <div className="absolute inset-0 bg-[url('/assets/mandala-bg.svg')] bg-[length:600px_600px] bg-center opacity-5 animate-spin-slow pointer-events-none mix-blend-multiply" />
                 </div>
 
-                <div className="relative container mx-auto px-6 py-16 lg:py-20">
-                    <div className="grid lg:grid-cols-2 gap-12 items-center">
-                        {/* LEFT TEXT */}
+                {/* Gradient Overlay for Text Readability */}
+                <div className="absolute inset-0 bg-gradient-to-b from-[#FDFBF7]/0 via-[#FDFBF7]/30 to-[#FDFBF7]/90 pointer-events-none" />
+
+                <div className="container mx-auto px-4 lg:px-12 relative z-10 w-full">
+                    {/* Adjusted Grid: Reduced gap further (gap-0 to gap-4) and added symmetric padding (pl-12 pr-12) */}
+                    <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-4 lg:gap-0 items-center lg:pr-12 lg:pl-12">
+
+                        {/* LEFT CONTENT - Centered Text */}
                         <motion.div
                             initial={{ opacity: 0, x: -30 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ duration: 0.8 }}
-                            className="text-center lg:text-left space-y-6"
+                            className="text-center space-y-6 order-1 lg:order-1 flex flex-col items-center justify-center h-full"
                         >
-                            {/* Tagline */}
-                            <div className="flex items-center justify-center lg:justify-start gap-4 text-[#B8860B]/80 font-medium">
+                            {/* Decorative Quote */}
+                            <div className="flex items-center justify-center gap-4 text-[#B8860B]/80 font-medium">
                                 <span className="h-[1px] w-12 bg-gradient-to-r from-transparent to-[#B8860B]" />
                                 <span className="font-serif italic tracking-wider text-sm md:text-base text-[#8D6E63]">{t.hero.tagline}</span>
                                 <span className="h-[1px] w-12 bg-gradient-to-l from-transparent to-[#B8860B]" />
                             </div>
 
-                            {/* Main Heading */}
-                            <h1 className="font-cinzel-decorative font-bold text-4xl md:text-5xl lg:text-6xl text-[#D4AF37] leading-tight drop-shadow-sm">
-                                {t.hero.title}
+                            {/* Main Heading - Updated Size & Color */}
+                            <h1 className="font-cinzel-decorative font-bold leading-tight drop-shadow-sm filter">
+                                <span className="block text-4xl md:text-5xl lg:text-6xl text-[#D4AF37]">
+                                    {t.hero.title}
+                                </span>
                             </h1>
 
-                            <p className="font-serif text-lg md:text-xl text-[#5D4037] leading-relaxed font-medium">
+                            <p className="font-serif text-lg md:text-xl text-[#5D4037] w-full leading-relaxed font-medium px-4 lg:px-0">
                                 {t.hero.description}
                             </p>
                         </motion.div>
 
-                        {/* RIGHT IMAGE */}
+                        {/* RIGHT CONTENT - Temple Arch Image - Reduced Size */}
                         <motion.div
                             initial={{ opacity: 0, x: 30 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ duration: 0.8, delay: 0.2 }}
-                            className="relative h-[300px] md:h-[400px] flex justify-center lg:justify-end items-center"
+                            className="relative h-[300px] md:h-[400px] lg:h-[450px] w-full order-2 lg:order-2 flex justify-center lg:justify-end items-center"
                         >
+                            {/* Temple Arch Container */}
                             <div className="relative w-full max-w-sm h-full">
+                                {/* Outer Glow/Shadow */}
                                 <div className="absolute inset-4 rounded-t-full bg-[#D4AF37]/20 blur-xl transform translate-y-4" />
+
+                                {/* Main Image Container with Temple Border */}
                                 <div className="relative h-full w-full rounded-t-full overflow-hidden border-[6px] border-double border-[#D4AF37]/40 shadow-2xl bg-[#FFFDF9]">
+                                    {/* Inner Gold Border */}
                                     <div className="absolute inset-2 rounded-t-full border-2 border-[#D4AF37] pointer-events-none z-20 opacity-60" />
+
                                     <img
                                         src="/assets/event-ganesh.png"
                                         alt="Temple"
                                         className="w-full h-full object-cover object-center hover:scale-105 transition-transform duration-1000"
                                     />
+
+                                    {/* Vignette for Depth */}
                                     <div className="absolute inset-0 bg-gradient-to-t from-[#5D4037]/40 via-transparent to-transparent pointer-events-none z-10" />
+                                </div>
+
+                                {/* Decorative Keystone Element - Flower Pattern for Nature Feel */}
+                                <div className="absolute -top-6 left-1/2 -translate-x-1/2 w-12 h-12 bg-[#FDFBF7] border-2 border-[#D4AF37] rounded-full flex items-center justify-center shadow-lg z-30">
+                                    <Flower className="text-[#D4AF37] w-7 h-7" />
                                 </div>
                             </div>
                         </motion.div>
                     </div>
                 </div>
-            </section>
 
-            <GoldCurveSeparator />
+                {/* Scroll Down Indicator - Pushed Up slightly */}
+                <div className="absolute bottom-8 lg:bottom-12 left-0 w-full overflow-hidden leading-none z-20 pointer-events-none">
+                    <svg className="relative block w-[calc(100%+1.3px)] h-[120px] md:h-[200px]" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 280" preserveAspectRatio="none">
+                        {/* Main Fill */}
+                        <motion.path d={pathMain} className="fill-[#FFFDF9]" stroke="none"></motion.path>
+
+                        {/* Double Gold Lines */}
+                        <motion.path d={pathLine1} fill="none" stroke="url(#goldGradient)" strokeWidth="3" className="drop-shadow-sm"></motion.path>
+                        <motion.path d={pathLine2} fill="none" stroke="#D4AF37" strokeWidth="1.5" opacity="0.6"></motion.path>
+
+                        <defs>
+                            <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stopColor="#D4AF37" />
+                                <stop offset="50%" stopColor="#F4C430" />
+                                <stop offset="100%" stopColor="#B8860B" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+
+                    {/* Scroll Indicator - Adjusted alignment */}
+                    <div
+                        onClick={handleScroll}
+                        className="absolute bottom-10 left-1/2 -translate-x-1/2 z-40 pointer-events-auto cursor-pointer hover:opacity-80 transition-opacity duration-300"
+                    >
+                        <ChevronDown className="text-[#B8860B] w-8 h-8 animate-bounce drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]" />
+                    </div>
+                </div>
+            </div>
 
             {/* Contact Information Grid */}
             <section className="bg-[#FFFDF9] py-20">

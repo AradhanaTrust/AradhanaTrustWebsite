@@ -380,7 +380,7 @@ export const translations = {
         },
         contact: {
             hero: {
-                tagline: "We're Here to Serve You",
+                tagline: "We're Here to Help You",
                 title: "Contact Us",
                 description: "Reach out for puja bookings, donations, events, or general inquiries. We're here to help and guide you on your spiritual journey."
             },
@@ -946,7 +946,7 @@ export const translations = {
         },
         contact: {
             hero: {
-                tagline: "ನಾವು ನಿಮಗೆ ಸೇವೆ ಸಲ್ಲಿಸಲು ಇಲ್ಲಿದ್ದೇವೆ",
+                tagline: "ನಿಮಗೆ ಸಹಾಯ ಮಾಡಲು ನಾವು ಇಲ್ಲಿದ್ದೇವೆ",
                 title: "ನಮ್ಮನ್ನು ಸಂಪರ್ಕಿಸಿ",
                 description: "ಪೂಜೆ ಬುಕ್ಕಿಂಗ್, ದಾನ, ಕಾರ್ಯಕ್ರಮಗಳು ಅಥವಾ ಸಾಮಾನ್ಯ ವಿಚಾರಣೆಗಳಿಗಾಗಿ ನಮ್ಮನ್ನು ಸಂಪರ್ಕಿಸಿ. ನಿಮ್ಮ ಆಧ್ಯಾತ್ಮಿಕ ಪ್ರಯಾಣದಲ್ಲಿ ಸಹಾಯ ಮತ್ತು ಮಾರ್ಗದರ್ಶನ ನೀಡಲು ನಾವು ಇಲ್ಲಿದ್ದೇವೆ."
             },

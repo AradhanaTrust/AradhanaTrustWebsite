@@ -65,9 +65,9 @@ export default function Footer() {
                         <h4 className="font-serif font-bold text-secondary-dark tracking-widest text-[11px] md:text-xs uppercase">{t.quickLinks}</h4>
                         <ul className="space-y-3.5 md:space-y-3 text-sm md:text-base text-primary/70">
                             <li><Link href="/about" className="hover:text-secondary-dark transition-colors flex items-center gap-2"><span className="w-1 h-1 bg-secondary rounded-full"></span>{t.about}</Link></li>
-                            <li><a href="#" className="hover:text-secondary-dark transition-colors flex items-center gap-2"><span className="w-1 h-1 bg-secondary rounded-full"></span>{t.events}</a></li>
-                            <li><a href="#" className="hover:text-secondary-dark transition-colors flex items-center gap-2"><span className="w-1 h-1 bg-secondary rounded-full"></span>{t.donate}</a></li>
-                            <li><a href="#" className="hover:text-secondary-dark transition-colors flex items-center gap-2"><span className="w-1 h-1 bg-secondary rounded-full"></span>{t.contact}</a></li>
+                            <li><Link href="/events" className="hover:text-secondary-dark transition-colors flex items-center gap-2"><span className="w-1 h-1 bg-secondary rounded-full"></span>{t.events}</Link></li>
+                            <li><Link href="/donate" className="hover:text-secondary-dark transition-colors flex items-center gap-2"><span className="w-1 h-1 bg-secondary rounded-full"></span>{t.donate}</Link></li>
+                            <li><Link href="/contact" className="hover:text-secondary-dark transition-colors flex items-center gap-2"><span className="w-1 h-1 bg-secondary rounded-full"></span>{t.contact}</Link></li>
                         </ul>
                     </div>
 

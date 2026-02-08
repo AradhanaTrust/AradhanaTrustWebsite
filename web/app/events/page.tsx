@@ -49,7 +49,7 @@ export default function EventsPage() {
                             initial={{ opacity: 0, x: -30 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ duration: 0.8 }}
-                            className="text-center space-y-6 order-2 lg:order-1 flex flex-col items-center justify-center h-full"
+                            className="text-center space-y-6 order-1 lg:order-1 flex flex-col items-center justify-center h-full"
                         >
                             {/* Decorative Line */}
                             <div className="flex items-center justify-center gap-4 text-[#B8860B]/80 font-medium">
@@ -100,7 +100,7 @@ export default function EventsPage() {
                             initial={{ opacity: 0, x: 30 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ duration: 0.8, delay: 0.2 }}
-                            className="relative h-[300px] md:h-[400px] lg:h-[450px] w-full order-1 lg:order-2 flex justify-center lg:justify-end items-center"
+                            className="relative h-[300px] md:h-[400px] lg:h-[450px] w-full order-2 lg:order-2 flex justify-center lg:justify-end items-center"
                         >
                             {/* Image Container with Temple Border */}
                             <div className="relative w-full max-w-sm h-full">

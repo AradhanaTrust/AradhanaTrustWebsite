@@ -66,14 +66,13 @@ export default function Hero() {
                             {t.title_line1}
                         </span>
                         <h1
-                            className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-cinzel-decorative font-black leading-tight filter drop-shadow-[0_2px_2px_rgba(0,0,0,0.5)_0_0_15px_rgba(242,201,109,0.5)] px-4"
+                            className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-cinzel-decorative font-black leading-tight filter drop-shadow-[0_2px_2px_rgba(0,0,0,0.5)_0_0_15px_rgba(242,201,109,0.5)] px-4 md:[-webkit-text-stroke:2px_#3E2723]"
                             style={{
                                 backgroundImage: "linear-gradient(to bottom, #F2C96D, #9E731C)",
                                 WebkitBackgroundClip: "text",
                                 WebkitTextFillColor: "transparent",
                                 backgroundClip: "text",
-                                color: "transparent",
-                                WebkitTextStroke: "2px #3E2723"
+                                color: "transparent"
                             }}
                         >
                             {t.title_line2}
@@ -134,7 +133,7 @@ export default function Hero() {
                 >
                     {/* Donate Button: Lighter Border (Matched to Events), Gold Gap, Light Inner Line */}
                     <Link href="/donate">
-                        <button className="min-h-[44px] px-10 py-3 bg-gradient-to-b from-[#F2C96D] to-[#9E731C] text-white font-medium text-lg rounded-xl border border-[#CFA14E] shadow-[inset_0_0_0_2px_#DFA848,inset_0_0_0_3px_#FFF5D1,0_4px_8px_rgba(0,0,0,0.3)] hover:shadow-[inset_0_0_0_2px_#DFA848,inset_0_0_0_3px_#FFF5D1,0_6px_12px_rgba(0,0,0,0.4)] hover:-translate-y-1 active:scale-95 transition-all duration-300 transform flex items-center justify-center gap-2 drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)]">
+                        <button className="min-h-[44px] px-6 md:px-10 py-3 bg-gradient-to-b from-[#F2C96D] to-[#9E731C] text-white font-medium text-lg rounded-xl border border-[#CFA14E] shadow-[inset_0_0_0_2px_#DFA848,inset_0_0_0_3px_#FFF5D1,0_4px_8px_rgba(0,0,0,0.3)] hover:shadow-[inset_0_0_0_2px_#DFA848,inset_0_0_0_3px_#FFF5D1,0_6px_12px_rgba(0,0,0,0.4)] hover:-translate-y-1 active:scale-95 transition-all duration-300 transform flex items-center justify-center gap-2 drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)]">
                             {t.donateBtn}
                         </button>
                     </Link>
@@ -142,7 +141,7 @@ export default function Hero() {
                     {/* Events Button: Cream with Double Internal Frame */}
                     {/* Shadow trick: inset 3px bg-color (gap), inset 4px border-color (inner line) */}
                     <Link href="/events">
-                        <button className="min-h-[44px] px-10 py-3 bg-gradient-to-b from-[#FFFEF9] to-[#F3E5C5] text-[#4A3225] font-medium text-lg rounded-xl border border-[#CFA14E] shadow-[inset_0_0_0_2px_#FFFDF8,inset_0_0_0_3px_#CFA14E,0_2px_4px_rgba(0,0,0,0.05)] hover:shadow-[inset_0_0_0_2px_#FFFDF8,inset_0_0_0_3px_#CFA14E,0_4px_8px_rgba(0,0,0,0.1)] hover:-translate-y-1 active:scale-95 transition-all duration-300 transform flex items-center justify-center gap-2 group">
+                        <button className="min-h-[44px] px-6 md:px-10 py-3 bg-gradient-to-b from-[#FFFEF9] to-[#F3E5C5] text-[#4A3225] font-medium text-lg rounded-xl border border-[#CFA14E] shadow-[inset_0_0_0_2px_#FFFDF8,inset_0_0_0_3px_#CFA14E,0_2px_4px_rgba(0,0,0,0.05)] hover:shadow-[inset_0_0_0_2px_#FFFDF8,inset_0_0_0_3px_#CFA14E,0_4px_8px_rgba(0,0,0,0.1)] hover:-translate-y-1 active:scale-95 transition-all duration-300 transform flex items-center justify-center gap-2 group">
                             {t.eventsBtn}
                             <Calendar size={20} className="text-[#4A3225] group-hover:scale-105 transition-transform" />
                         </button>
