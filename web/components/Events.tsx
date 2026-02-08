@@ -101,9 +101,20 @@ export default function Events() {
                     {/* Track */}
                     <div className="overflow-hidden px-1 py-4 -my-4">
                         <motion.div
-                            className="flex gap-4" /* Consistent tight gap */
+                            className="flex gap-6 touch-pan-y"
                             animate={{ x: `-${currentIndex * (100 / visibleCards)}%` }}
                             transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                            drag="x"
+                            dragConstraints={{ left: 0, right: 0 }}
+                            dragElastic={0.2}
+                            onDragEnd={(e, { offset, velocity }) => {
+                                const swipe = offset.x;
+                                if (swipe < -50) {
+                                    nextSlide();
+                                } else if (swipe > 50) {
+                                    prevSlide();
+                                }
+                            }}
                         >
                             {upcomingEvents.map((event, idx) => {
                                 const translatedEvent = getEventTranslation(event, language);

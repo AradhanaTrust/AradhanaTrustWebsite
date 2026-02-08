@@ -62,7 +62,7 @@ export default function ContactPage() {
             <Header />
 
             {/* HERO SECTION - Refined V5 Layout */}
-            <div className="relative pt-32 pb-48 lg:pt-40 lg:pb-32 overflow-hidden bg-[#FDFBF7] min-h-[85vh] flex items-center">
+            <div className="relative pt-32 pb-80 lg:pt-40 lg:pb-32 overflow-hidden bg-[#FDFBF7] min-h-[85vh] flex items-center">
                 {/* Background - Mandala Overlay Only */}
                 <div className="absolute inset-0 z-0">
                     <div className="absolute inset-0 bg-[url('/assets/mandala-bg.svg')] bg-[length:600px_600px] bg-center opacity-5 animate-spin-slow pointer-events-none mix-blend-multiply" />
@@ -139,10 +139,10 @@ export default function ContactPage() {
 
                 {/* Scroll Down Indicator - Pushed Up slightly */}
 
+                <GoldCurveSeparator />
             </div>
 
             {/* Contact Information Grid */}
-            <GoldCurveSeparator />
             <section className="bg-[#FFFDF9] py-20">
                 <div className="container mx-auto px-6">
                     <div className="grid md:grid-cols-3 gap-8">
