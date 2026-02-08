@@ -46,7 +46,7 @@ export default function Header() {
                     <img src="/assets/Logo_Main.png" alt="Aradhana Dharmika Trust" className="h-9 md:h-12 lg:h-16 xl:h-20 w-auto object-contain transition-transform duration-300 group-hover:scale-105 filter drop-shadow-sm" />
                     <div className="flex flex-col justify-center">
                         <span className="font-cinzel-decorative font-black text-lg md:text-xl lg:text-2xl xl:text-3xl tracking-wide text-[#5D4037] leading-none drop-shadow-sm mb-1">{t.trustNameLine1}</span>
-                        <span className="font-cinzel-decorative font-black text-[10px] md:text-xs lg:text-sm xl:text-lg tracking-[0.15em] text-[#795548] leading-tight">{t.trustNameLine2}</span>
+                        <span className="font-cinzel-decorative font-black text-xs md:text-sm lg:text-base xl:text-lg tracking-[0.15em] text-[#795548] leading-tight">{t.trustNameLine2}</span>
                     </div>
                 </Link>
 

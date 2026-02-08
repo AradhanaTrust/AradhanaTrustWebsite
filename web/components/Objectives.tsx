@@ -20,17 +20,17 @@ export default function Objectives() {
                         <span className="h-[1.5px] w-24 bg-gradient-to-r from-secondary to-transparent" />
                     </div>
 
-                    <h2 className="text-2xl md:text-4xl font-serif font-medium text-primary-dark leading-tight">
+                    <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-serif font-medium text-primary-dark leading-tight">
                         {t.subtitle}
                     </h2>
-                    <p className="text-lg md:text-xl text-secondary-dark italic font-serif mt-3 max-w-3xl mx-auto">
+                    <p className="text-base md:text-lg lg:text-xl text-secondary-dark italic font-serif mt-3 max-w-3xl mx-auto">
                         {t.description}
                     </p>
 
 
                 </div>
 
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6">
                     {t.cards.map((obj, idx) => {
                         // Map images to objectives (using generated ones + placeholders for now)
                         const images = [
