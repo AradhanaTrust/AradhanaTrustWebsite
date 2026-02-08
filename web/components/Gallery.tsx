@@ -91,13 +91,13 @@ export default function Gallery() {
                             animate={{ x: `-${currentIndex * (100 / visibleCards)}%` }}
                             transition={{ type: "spring", stiffness: 300, damping: 30 }}
                             drag="x"
-                            dragConstraints={{ left: 0, right: 0 }}
-                            dragElastic={0.2}
+                            dragConstraints={{ left: -1000, right: 1000 }}
+                            dragElastic={1}
                             onDragEnd={(e, { offset, velocity }) => {
                                 const swipe = offset.x;
-                                if (swipe < -50) {
+                                if (swipe < -50 || velocity.x < -500) {
                                     nextSlide();
-                                } else if (swipe > 50) {
+                                } else if (swipe > 50 || velocity.x > 500) {
                                     prevSlide();
                                 }
                             }}

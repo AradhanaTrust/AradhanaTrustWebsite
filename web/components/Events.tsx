@@ -11,12 +11,15 @@ import { events } from "@/lib/events-data";
 import { getEventTranslation } from "@/lib/event-utils";
 
 import GoldCurveSeparator from "./GoldCurveSeparator";
+import EventDetailModal from "./EventDetailModal";
+import type { Event } from "@/lib/events-data";
 
 export default function Events() {
     const { language } = useLanguage();
     const t = translations[language].events;
     const [currentIndex, setCurrentIndex] = useState(0);
     const [visibleCards, setVisibleCards] = useState(3);
+    const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
 
     // Get only upcoming events and sort by date (nearest first)
     const upcomingEvents = events
@@ -105,13 +108,13 @@ export default function Events() {
                             animate={{ x: `-${currentIndex * (100 / visibleCards)}%` }}
                             transition={{ type: "spring", stiffness: 300, damping: 30 }}
                             drag="x"
-                            dragConstraints={{ left: 0, right: 0 }}
-                            dragElastic={0.2}
+                            dragConstraints={{ left: -1000, right: 1000 }}
+                            dragElastic={1}
                             onDragEnd={(e, { offset, velocity }) => {
                                 const swipe = offset.x;
-                                if (swipe < -50) {
+                                if (swipe < -50 || velocity.x < -500) {
                                     nextSlide();
-                                } else if (swipe > 50) {
+                                } else if (swipe > 50 || velocity.x > 500) {
                                     prevSlide();
                                 }
                             }}
@@ -160,11 +163,12 @@ export default function Events() {
                                                 </div>
 
                                                 {/* Button: Enlarged width & text */}
-                                                <Link href="/events">
-                                                    <button className="mt-2 w-auto px-8 py-2.5 bg-gradient-to-b from-[#FFFEF9] to-[#F3E5C5] text-[#4A3225] font-bold text-xs rounded-lg border border-[#CFA14E] shadow-[inset_0_0_0_2px_#FFFDF8,inset_0_0_0_3px_#CFA14E,0_2px_4px_rgba(0,0,0,0.05)] hover:shadow-[inset_0_0_0_2px_#FFFDF8,inset_0_0_0_3px_#CFA14E,0_4px_8px_rgba(0,0,0,0.1)] hover:-translate-y-0.5 active:scale-95 transition-all duration-300 transform uppercase tracking-widest">
-                                                        {t.register}
-                                                    </button>
-                                                </Link>
+                                                <button
+                                                    onClick={() => setSelectedEvent(event)}
+                                                    className="mt-2 w-auto px-8 py-2.5 bg-gradient-to-b from-[#FFFEF9] to-[#F3E5C5] text-[#4A3225] font-bold text-xs rounded-lg border border-[#CFA14E] shadow-[inset_0_0_0_2px_#FFFDF8,inset_0_0_0_3px_#CFA14E,0_2px_4px_rgba(0,0,0,0.05)] hover:shadow-[inset_0_0_0_2px_#FFFDF8,inset_0_0_0_3px_#CFA14E,0_4px_8px_rgba(0,0,0,0.1)] hover:-translate-y-0.5 active:scale-95 transition-all duration-300 transform uppercase tracking-widest"
+                                                >
+                                                    {t.register}
+                                                </button>
                                             </div>
                                         </div>
                                     </motion.div>
@@ -182,10 +186,21 @@ export default function Events() {
                         </button>
                     </Link>
                 </div>
+
+                {/* Event Details Modal */}
+                <AnimatePresence>
+                    {selectedEvent && (
+                        <EventDetailModal
+                            event={selectedEvent}
+                            onClose={() => setSelectedEvent(null)}
+                        />
+                    )}
+                </AnimatePresence>
+
             </div>
 
             {/* Separator - Transitions to Gallery (Ivory) */}
             <GoldCurveSeparator fillColor="fill-[#FDFBF7]" />
-        </section >
+        </section>
     );
 }
