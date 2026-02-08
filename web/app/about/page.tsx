@@ -2,7 +2,7 @@
 
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { motion, useScroll, useTransform, useMotionTemplate } from "framer-motion";
+import { motion } from "framer-motion";
 import GoldCurveSeparator from "@/components/GoldCurveSeparator";
 import { BookOpen, Milestone, ChevronDown, Flower } from "lucide-react";
 import Link from "next/link";
@@ -20,20 +20,6 @@ export default function AboutPage() {
     const { language } = useLanguage();
     const t = translations[language];
 
-    // Scroll Animation Logic (Matching Home Page)
-    const { scrollY } = useScroll();
-
-    // Transform scroll to curve control point Y
-    // Range: 0px scroll -> Deep curve (320), 300px scroll -> Flat (190)
-    // Adjusted slightly for About Page height if needed, but keeping consistent
-    const curveControlY = useTransform(scrollY, [0, 300], [320, 190]);
-
-    const curveControlY_Line1 = useTransform(curveControlY, (y) => y + 1.5);
-    const curveControlY_Line2 = useTransform(curveControlY, (y) => y + 12);
-
-    const pathMain = useMotionTemplate`M0,190 Q600,${curveControlY} 1200,190 L1200,280 L0,280 Z`;
-    const pathLine1 = useMotionTemplate`M0,191.5 Q600,${curveControlY_Line1} 1200,191.5`;
-    const pathLine2 = useMotionTemplate`M0,202 Q600,${curveControlY_Line2} 1200,202`;
 
     const handleScroll = () => {
         window.scrollTo({
@@ -133,33 +119,15 @@ export default function AboutPage() {
                     </div>
                 </div>
 
-                {/* Scroll Down Indicator - Pushed Up slightly */}
-                <div className="absolute bottom-8 lg:bottom-12 left-0 w-full overflow-hidden leading-none z-20 pointer-events-none">
-                    <svg className="relative block w-[calc(100%+1.3px)] h-[120px] md:h-[200px]" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 280" preserveAspectRatio="none">
-                        {/* Main Fill */}
-                        <motion.path d={pathMain} className="fill-[#FFFDF9]" stroke="none"></motion.path>
-
-                        {/* Double Gold Lines */}
-                        <motion.path d={pathLine1} fill="none" stroke="url(#goldGradient)" strokeWidth="3" className="drop-shadow-sm"></motion.path>
-                        <motion.path d={pathLine2} fill="none" stroke="#D4AF37" strokeWidth="1.5" opacity="0.6"></motion.path>
-
-                        <defs>
-                            <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                                <stop offset="0%" stopColor="#D4AF37" />
-                                <stop offset="50%" stopColor="#F4C430" />
-                                <stop offset="100%" stopColor="#B8860B" />
-                            </linearGradient>
-                        </defs>
-                    </svg>
-
-                    {/* Scroll Indicator - Adjusted alignment */}
-                    <div
-                        onClick={handleScroll}
-                        className="absolute bottom-10 left-1/2 -translate-x-1/2 z-40 pointer-events-auto cursor-pointer hover:opacity-80 transition-opacity duration-300"
-                    >
-                        <ChevronDown className="text-[#B8860B] w-8 h-8 animate-bounce drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]" />
-                    </div>
+                {/* Scroll Down Indicator */}
+                <div
+                    onClick={handleScroll}
+                    className="absolute bottom-12 left-1/2 -translate-x-1/2 z-40 pointer-events-auto cursor-pointer hover:opacity-80 transition-opacity duration-300"
+                >
+                    <ChevronDown className="text-[#B8860B] w-8 h-8 animate-bounce drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]" />
                 </div>
+
+                <GoldCurveSeparator fillColor="fill-[#FFFDF9]" />
             </div>
 
             <div className="flex-grow bg-[#FFFDF9]">
