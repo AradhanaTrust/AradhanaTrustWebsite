@@ -129,7 +129,7 @@ export default function Hero() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.2 }}
-                    className="flex flex-col sm:flex-row gap-5 pt-4"
+                    className="flex flex-col sm:flex-row gap-5 pt-4 items-center"
                 >
                     {/* Donate Button: Lighter Border (Matched to Events), Gold Gap, Light Inner Line */}
                     <Link href="/donate">

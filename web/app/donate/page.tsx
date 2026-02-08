@@ -51,7 +51,7 @@ export default function DonatePage() {
             <Header />
 
             {/* Hero Section - Matching About Us/Events Layout */}
-            <div className="relative pt-32 pb-48 lg:pt-40 lg:pb-32 overflow-hidden bg-[#FDFBF7] min-h-[85vh] flex items-center">
+            <div className="relative pt-32 pb-64 lg:pt-40 lg:pb-32 overflow-hidden bg-[#FDFBF7] min-h-[85vh] flex items-center">
                 {/* Background - Mandala Overlay Only */}
                 <div className="absolute inset-0 z-0">
                     <div className="absolute inset-0 bg-[url('/assets/mandala-bg.svg')] bg-[length:600px_600px] bg-center opacity-5 animate-spin-slow pointer-events-none mix-blend-multiply" />

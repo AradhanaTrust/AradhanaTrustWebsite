@@ -73,7 +73,7 @@ export default function ContactPage() {
 
                 <div className="container mx-auto px-4 lg:px-12 relative z-10 w-full">
                     {/* Adjusted Grid: Reduced gap further (gap-0 to gap-4) and added symmetric padding (pl-12 pr-12) */}
-                    <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-4 lg:gap-0 items-center lg:pr-12 lg:pl-12">
+                    <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-12 lg:gap-0 items-center lg:pr-12 lg:pl-12">
 
                         {/* LEFT CONTENT - Centered Text */}
                         <motion.div
@@ -138,35 +138,11 @@ export default function ContactPage() {
                 </div>
 
                 {/* Scroll Down Indicator - Pushed Up slightly */}
-                <div className="absolute bottom-8 lg:bottom-12 left-0 w-full overflow-hidden leading-none z-20 pointer-events-none">
-                    <svg className="relative block w-[calc(100%+1.3px)] h-[120px] md:h-[200px]" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 280" preserveAspectRatio="none">
-                        {/* Main Fill */}
-                        <motion.path d={pathMain} className="fill-[#FFFDF9]" stroke="none"></motion.path>
 
-                        {/* Double Gold Lines */}
-                        <motion.path d={pathLine1} fill="none" stroke="url(#goldGradient)" strokeWidth="3" className="drop-shadow-sm"></motion.path>
-                        <motion.path d={pathLine2} fill="none" stroke="#D4AF37" strokeWidth="1.5" opacity="0.6"></motion.path>
-
-                        <defs>
-                            <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                                <stop offset="0%" stopColor="#D4AF37" />
-                                <stop offset="50%" stopColor="#F4C430" />
-                                <stop offset="100%" stopColor="#B8860B" />
-                            </linearGradient>
-                        </defs>
-                    </svg>
-
-                    {/* Scroll Indicator - Adjusted alignment */}
-                    <div
-                        onClick={handleScroll}
-                        className="absolute bottom-10 left-1/2 -translate-x-1/2 z-40 pointer-events-auto cursor-pointer hover:opacity-80 transition-opacity duration-300"
-                    >
-                        <ChevronDown className="text-[#B8860B] w-8 h-8 animate-bounce drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]" />
-                    </div>
-                </div>
             </div>
 
             {/* Contact Information Grid */}
+            <GoldCurveSeparator />
             <section className="bg-[#FFFDF9] py-20">
                 <div className="container mx-auto px-6">
                     <div className="grid md:grid-cols-3 gap-8">

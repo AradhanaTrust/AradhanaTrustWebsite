@@ -73,10 +73,10 @@ export default function EventsPage() {
                             </p>
 
                             {/* Toggle Buttons - Matching Hero Button Style */}
-                            <div className="flex gap-4 justify-center pt-4">
+                            <div className="flex gap-4 justify-center pt-4 pb-10 lg:pb-0">
                                 <button
                                     onClick={() => setShowUpcoming(true)}
-                                    className={`min-h-[44px] px-8 py-3 font-medium text-base rounded-xl border transition-all duration-300 transform flex items-center justify-center gap-2 ${showUpcoming
+                                    className={`min-h-[44px] px-6 py-3 font-medium text-base rounded-xl border transition-all duration-300 transform flex items-center justify-center gap-2 ${showUpcoming
                                         ? 'bg-gradient-to-b from-[#F2C96D] to-[#9E731C] text-white border-[#CFA14E] shadow-[inset_0_0_0_2px_#DFA848,inset_0_0_0_3px_#FFF5D1,0_4px_8px_rgba(0,0,0,0.3)] hover:shadow-[inset_0_0_0_2px_#DFA848,inset_0_0_0_3px_#FFF5D1,0_6px_12px_rgba(0,0,0,0.4)] hover:-translate-y-1 drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)]'
                                         : 'bg-gradient-to-b from-[#FFFEF9] to-[#F3E5C5] text-[#4A3225] border-[#CFA14E] shadow-[inset_0_0_0_2px_#FFFDF8,inset_0_0_0_3px_#CFA14E,0_2px_4px_rgba(0,0,0,0.05)] hover:shadow-[inset_0_0_0_2px_#FFFDF8,inset_0_0_0_3px_#CFA14E,0_4px_8px_rgba(0,0,0,0.1)] hover:-translate-y-1'
                                         }`}
@@ -85,7 +85,7 @@ export default function EventsPage() {
                                 </button>
                                 <button
                                     onClick={() => setShowUpcoming(false)}
-                                    className={`min-h-[44px] px-8 py-3 font-medium text-base rounded-xl border transition-all duration-300 transform flex items-center justify-center gap-2 ${!showUpcoming
+                                    className={`min-h-[44px] px-6 py-3 font-medium text-base rounded-xl border transition-all duration-300 transform flex items-center justify-center gap-2 ${!showUpcoming
                                         ? 'bg-gradient-to-b from-[#F2C96D] to-[#9E731C] text-white border-[#CFA14E] shadow-[inset_0_0_0_2px_#DFA848,inset_0_0_0_3px_#FFF5D1,0_4px_8px_rgba(0,0,0,0.3)] hover:shadow-[inset_0_0_0_2px_#DFA848,inset_0_0_0_3px_#FFF5D1,0_6px_12px_rgba(0,0,0,0.4)] hover:-translate-y-1 drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)]'
                                         : 'bg-gradient-to-b from-[#FFFEF9] to-[#F3E5C5] text-[#4A3225] border-[#CFA14E] shadow-[inset_0_0_0_2px_#FFFDF8,inset_0_0_0_3px_#CFA14E,0_2px_4px_rgba(0,0,0,0.05)] hover:shadow-[inset_0_0_0_2px_#FFFDF8,inset_0_0_0_3px_#CFA14E,0_4px_8px_rgba(0,0,0,0.1)] hover:-translate-y-1'
                                         }`}
