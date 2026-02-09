@@ -3,8 +3,11 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
+
+// ==================== Authentication Models ====================
 
 model Account {
   id                 String  @id @default(cuid())
@@ -31,19 +34,28 @@ model Session {
   userId       String
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 }
 
 model User {
   id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
+  name          String
+  email         String    @unique
+  password      String    // bcrypt hashed
   emailVerified DateTime?
   image         String?
-  role          String    @default("USER") // "ADMIN" or "USER"
+  role          Role      @default(SECONDARY_ADMIN)
   accounts      Account[]
   sessions      Session[]
   donations     Donation[]
   createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+enum Role {
+  PRIMARY_ADMIN
+  SECONDARY_ADMIN
 }
 
 model VerificationToken {
@@ -53,6 +65,8 @@ model VerificationToken {
 
   @@unique([identifier, token])
 }
+
+// ==================== Existing Event/Donation Models ====================
 
 model Event {
   id          String   @id @default(cuid())
@@ -73,4 +87,57 @@ model Donation {
   userId    String?
   user      User?     @relation(fields: [userId], references: [id])
   createdAt DateTime @default(now())
+}
+
+// ==================== Admin Dashboard Models ====================
+
+model DonationRecord {
+  id           String   @id @default(cuid())
+  donorName    String
+  email        String?
+  phone        String?
+  amount       Float
+  category     String   // Annadanam, Temple, Education, Cultural, Gauseva, General
+  method       String   // UPI, Card, Cash, Cheque
+  date         DateTime @default(now())
+  receiptNo    String   @unique
+  status       String   @default("completed") // completed, pending, failed
+  address      String?
+  organisation String?
+  panNumber    String?  // For 80G certificate
+  frequency    String   @default("one-time") // one-time, monthly
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model EventRegistration {
+  id          String   @id @default(cuid())
+  eventId     String   // References events-data.ts event ID
+  eventTitle  String   // Cached for quick display
+  name        String
+  email       String
+  phone       String?
+  attendees   Int      @default(1)
+  status      String   @default("registered") // registered, confirmed, attended, cancelled
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([eventId])
+  @@index([email])
+}
+
+model ContactSubmission {
+  id          String   @id @default(cuid())
+  name        String
+  email       String
+  phone       String?
+  subject     String   // General, Puja Booking, Donation, Event, Volunteer, Other
+  message     String
+  status      String   @default("new") // new, in-progress, resolved
+  response    String?  // Admin response
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([status])
+  @@index([createdAt])
 }
