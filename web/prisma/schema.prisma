@@ -147,3 +147,12 @@ model ContactSubmission {
   @@index([status])
   @@index([createdAt])
 }
+
+model GalleryImage {
+  id          String   @id @default(cuid())
+  title       String
+  category    String   // Temple Events, Deity Darshan, Annadanam, Cultural Programs, Social Welfare
+  imageUrl    String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}

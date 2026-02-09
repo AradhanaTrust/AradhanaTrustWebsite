@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 
 import { useSession } from "next-auth/react";
 import DashboardLayout from "@/components/admin/DashboardLayout";
@@ -21,7 +22,8 @@ export default function AdminDashboard() {
     const [stats, setStats] = useState({
         totalDonations: "₹0",
         donationsThisMonth: "₹0",
-        newDevotees: 0,
+        totalDonors: 0,
+        newDonors: 0,
         upcomingEvents: 0,
         registrations: 0,
         recentDonations: [] as any[]
@@ -47,7 +49,8 @@ export default function AdminDashboard() {
                     setStats({
                         totalDonations: formatCurrency(data.totalDonations),
                         donationsThisMonth: formatCurrency(data.donationsThisMonth),
-                        newDevotees: data.newDevotees,
+                        totalDonors: data.totalDonors,
+                        newDonors: data.newDonors,
                         upcomingEvents: data.upcomingEvents,
                         registrations: data.registrations,
                         recentDonations: data.recentDonations.map((d: any) => ({
@@ -83,6 +86,8 @@ export default function AdminDashboard() {
                         </p>
                     </div>
 
+
+
                     {/* KPI Cards */}
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                         {/* Total Donations */}
@@ -91,30 +96,30 @@ export default function AdminDashboard() {
                                 <div className="p-3 bg-secondary/10 rounded-lg">
                                     <IndianRupee className="w-6 h-6 text-secondary-dark" />
                                 </div>
-                                <div className="flex items-center gap-1 text-green-600 text-sm font-semibold">
-                                    <TrendingUp className="w-4 h-4" />
-                                    <span>+12%</span>
-                                </div>
                             </div>
-                            <h3 className="text-2xl font-bold text-primary-dark">{stats.donationsThisMonth}</h3>
+                            <h3 className="text-2xl font-bold text-primary-dark">
+                                {isLoading ? "..." : stats.donationsThisMonth}
+                            </h3>
                             <p className="text-sm text-primary/60 mt-1">This Month</p>
-                            <p className="text-xs text-primary/40 mt-2">Total: {stats.totalDonations}</p>
+                            <p className="text-xs text-primary/40 mt-2">
+                                Total: {isLoading ? "..." : stats.totalDonations}
+                            </p>
                         </div>
 
-                        {/* New Devotees */}
+                        {/* Total Donors */}
                         <div className="bg-surface-white border-2 border-secondary/20 rounded-xl p-6 hover:shadow-lg hover:border-secondary/40 transition-all">
                             <div className="flex items-center justify-between mb-4">
                                 <div className="p-3 bg-accent-saffron/10 rounded-lg">
                                     <UsersIcon className="w-6 h-6 text-accent-saffron" />
                                 </div>
-                                <div className="flex items-center gap-1 text-green-600 text-sm font-semibold">
-                                    <TrendingUp className="w-4 h-4" />
-                                    <span>+8%</span>
-                                </div>
                             </div>
-                            <h3 className="text-2xl font-bold text-primary-dark">{stats.newDevotees}</h3>
-                            <p className="text-sm text-primary/60 mt-1">New Devotees</p>
-                            <p className="text-xs text-primary/40 mt-2">This month</p>
+                            <h3 className="text-2xl font-bold text-primary-dark">
+                                {isLoading ? "..." : stats.totalDonors}
+                            </h3>
+                            <p className="text-sm text-primary/60 mt-1">Total Donors</p>
+                            <p className="text-xs text-primary/40 mt-2">
+                                {stats.newDonors} active this month
+                            </p>
                         </div>
 
                         {/* Upcoming Events */}
@@ -124,7 +129,9 @@ export default function AdminDashboard() {
                                     <Calendar className="w-6 h-6 text-primary-dark" />
                                 </div>
                             </div>
-                            <h3 className="text-2xl font-bold text-primary-dark">{stats.upcomingEvents}</h3>
+                            <h3 className="text-2xl font-bold text-primary-dark">
+                                {isLoading ? "..." : stats.upcomingEvents}
+                            </h3>
                             <p className="text-sm text-primary/60 mt-1">Upcoming Events</p>
                             <p className="text-xs text-primary/40 mt-2">Next 30 days</p>
                         </div>
@@ -135,12 +142,10 @@ export default function AdminDashboard() {
                                 <div className="p-3 bg-secondary-light/10 rounded-lg">
                                     <FileText className="w-6 h-6 text-secondary-light" />
                                 </div>
-                                <div className="flex items-center gap-1 text-green-600 text-sm font-semibold">
-                                    <TrendingUp className="w-4 h-4" />
-                                    <span>+15%</span>
-                                </div>
                             </div>
-                            <h3 className="text-2xl font-bold text-primary-dark">{stats.registrations}</h3>
+                            <h3 className="text-2xl font-bold text-primary-dark">
+                                {isLoading ? "..." : stats.registrations}
+                            </h3>
                             <p className="text-sm text-primary/60 mt-1">Event Registrations</p>
                             <p className="text-xs text-primary/40 mt-2">All time</p>
                         </div>
@@ -152,9 +157,9 @@ export default function AdminDashboard() {
                             <h3 className="text-lg font-cinzel-decorative font-bold text-primary-dark">
                                 Recent Donations
                             </h3>
-                            <a href="/admin/donations" className="text-sm text-secondary-dark hover:text-secondary font-semibold">
+                            <Link href="/admin/donations" className="text-sm text-secondary-dark hover:text-secondary font-semibold">
                                 View All →
-                            </a>
+                            </Link>
                         </div>
                         <div className="overflow-x-auto">
                             <table className="w-full">
@@ -186,18 +191,18 @@ export default function AdminDashboard() {
 
                     {/* Quick Actions */}
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                        <button className="p-4 bg-secondary text-surface-white rounded-lg hover:bg-secondary-dark transition-all font-semibold">
+                        <Link href="/admin/donations" className="block p-4 bg-secondary text-surface-white rounded-lg hover:bg-secondary-dark transition-all font-semibold text-center">
                             + Add Donation
-                        </button>
-                        <button className="p-4 bg-secondary/10 text-secondary-dark border-2 border-secondary/30 rounded-lg hover:bg-secondary/20 transition-all font-semibold">
+                        </Link>
+                        <Link href="/admin/events" className="block p-4 bg-secondary/10 text-secondary-dark border-2 border-secondary/30 rounded-lg hover:bg-secondary/20 transition-all font-semibold text-center">
                             + Create Event
-                        </button>
-                        <button className="p-4 bg-primary/10 text-primary-dark border-2 border-primary/30 rounded-lg hover:bg-primary/20 transition-all font-semibold">
+                        </Link>
+                        <Link href="/admin/donations" className="block p-4 bg-primary/10 text-primary-dark border-2 border-primary/30 rounded-lg hover:bg-primary/20 transition-all font-semibold text-center">
                             📊 Generate Report
-                        </button>
-                        <button className="p-4 bg-accent-saffron/10 text-accent-saffron border-2 border-accent-saffron/30 rounded-lg hover:bg-accent-saffron/20 transition-all font-semibold">
+                        </Link>
+                        <Link href="/admin/users" className="block p-4 bg-accent-saffron/10 text-accent-saffron border-2 border-accent-saffron/30 rounded-lg hover:bg-accent-saffron/20 transition-all font-semibold text-center">
                             👥 Manage Users
-                        </button>
+                        </Link>
                     </div>
                 </div>
             ) : (

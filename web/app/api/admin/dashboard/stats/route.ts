@@ -1,9 +1,7 @@
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/lib/auth";
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
+import { prisma } from "@/lib/prisma";
 
 export async function GET() {
     try {
@@ -27,12 +25,19 @@ export async function GET() {
             _sum: { amount: true }
         });
 
-        // 2. New Devotees (Users created this month)
-        const newUsersCount = await prisma.user.count({
+        // 2. Total Donors (Unique Donor Names)
+        const uniqueDonors = await prisma.donationRecord.groupBy({
+            by: ['donorName'],
+        });
+        const totalDonorsCount = uniqueDonors.length;
+
+        const thisMonthDonations = await prisma.donationRecord.groupBy({
+            by: ['donorName'],
             where: {
-                createdAt: { gte: firstDayOfMonth }
+                date: { gte: firstDayOfMonth }
             }
         });
+        const newDonorsThisMonth = thisMonthDonations.length;
 
         // 3. Upcoming Events
         const upcomingEventsCount = await prisma.event.count({
@@ -60,7 +65,8 @@ export async function GET() {
         const stats = {
             totalDonations: allDonations._sum.amount || 0,
             donationsThisMonth: monthDonations._sum.amount || 0,
-            newDevotees: newUsersCount,
+            totalDonors: totalDonorsCount,
+            newDonors: newDonorsThisMonth,
             upcomingEvents: upcomingEventsCount,
             registrations: totalRegistrations,
             recentDonations: recentDonations.map((d: any) => ({

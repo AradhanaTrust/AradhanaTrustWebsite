@@ -1,3 +1,4 @@
+import { prisma } from "@/lib/prisma";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import Welcome from "@/components/Welcome";
@@ -7,7 +8,17 @@ import Donation from "@/components/Donation";
 import Gallery from "@/components/Gallery";
 import Footer from "@/components/Footer";
 
-export default function Home() {
+export const dynamic = "force-dynamic";
+
+export default async function Home() {
+  const dbImages = await prisma.galleryImage.findMany({
+    take: 10,
+    orderBy: { createdAt: "desc" },
+    select: { imageUrl: true },
+  });
+
+  const imageUrls = dbImages.map((img) => img.imageUrl);
+
   return (
     <main className="min-h-screen bg-background">
       <Header />
@@ -16,7 +27,7 @@ export default function Home() {
       <Objectives />
       <Donation />
       <Events />
-      <Gallery />
+      <Gallery dbImages={imageUrls} />
       <Footer />
     </main>
   );
