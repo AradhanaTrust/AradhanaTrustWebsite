@@ -12,10 +12,10 @@ async function main() {
 
     // Create Primary Admin
     const primaryAdmin = await prisma.user.upsert({
-        where: { email: 'admin@aradhanatrust.org' },
+        where: { email: 'admin@aradhanadharmikatrust.org' },
         update: {},
         create: {
-            email: 'admin@aradhanatrust.org',
+            email: 'admin@aradhanadharmikatrust.org',
             name: 'Primary Administrator',
             password: primaryAdminPassword,
             role: 'PRIMARY_ADMIN',
@@ -27,10 +27,10 @@ async function main() {
 
     // Create Secondary Admin
     const secondaryAdmin = await prisma.user.upsert({
-        where: { email: 'events@aradhanatrust.org' },
+        where: { email: 'events@aradhanadharmikatrust.org' },
         update: {},
         create: {
-            email: 'events@aradhanatrust.org',
+            email: 'events@aradhanadharmikatrust.org',
             name: 'Events Coordinator',
             password: secondaryAdminPassword,
             role: 'SECONDARY_ADMIN',
@@ -164,8 +164,8 @@ async function main() {
 
     console.log('\n🎉 Database seeding completed successfully!');
     console.log('\n📧 Admin Credentials:');
-    console.log('Primary Admin: admin@aradhanatrust.org / Admin@2026');
-    console.log('Secondary Admin: events@aradhanatrust.org / Events@2026');
+    console.log('Primary Admin: admin@aradhanadharmikatrust.org / Admin@2026');
+    console.log('Secondary Admin: events@aradhanadharmikatrust.org / Events@2026');
     console.log('\n⚠️  IMPORTANT: Change these passwords in production!');
 }
 

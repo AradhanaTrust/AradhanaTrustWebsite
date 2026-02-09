@@ -155,7 +155,7 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
                                             className="w-full pl-12 pr-4 py-3 bg-background-cream border-2 border-secondary/20 rounded-lg
                                focus:border-secondary focus:outline-none focus:ring-2 focus:ring-secondary/20
                                text-primary-dark placeholder:text-primary/40 transition-all"
-                                            placeholder="yourname@example.com"
+                                            placeholder="admin@aradhanadharmikatrust.org"
                                             disabled={isLoading}
                                         />
                                     </div>

@@ -17,7 +17,7 @@ export default function UsersPage() {
         {
             id: "1",
             name: "Primary Administrator",
-            email: "admin@aradhanatrust.org",
+            email: "admin@aradhanadharmikatrust.org",
             role: "PRIMARY_ADMIN",
             createdAt: "2026-01-15",
             lastLogin: "2026-02-09",
@@ -25,7 +25,7 @@ export default function UsersPage() {
         {
             id: "2",
             name: "Events Coordinator",
-            email: "events@aradhanatrust.org",
+            email: "events@aradhanadharmikatrust.org",
             role: "SECONDARY_ADMIN",
             createdAt: "2026-01-20",
             lastLogin: "2026-02-08",
@@ -104,8 +104,8 @@ export default function UsersPage() {
                                                 <Shield className="w-4 h-4 text-secondary" />
                                                 <span
                                                     className={`text-xs px-3 py-1 rounded-full font-semibold ${user.role === "PRIMARY_ADMIN"
-                                                            ? "bg-secondary text-surface-white"
-                                                            : "bg-accent-saffron/20 text-accent-saffron"
+                                                        ? "bg-secondary text-surface-white"
+                                                        : "bg-accent-saffron/20 text-accent-saffron"
                                                         }`}
                                                 >
                                                     {user.role.replace("_", " ")}
