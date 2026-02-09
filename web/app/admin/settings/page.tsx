@@ -6,16 +6,18 @@ import { useSession } from "next-auth/react";
 import { User, Mail, Phone, Lock, Camera, Save } from "lucide-react";
 
 export default function SettingsPage() {
-    const { data: session } = useSession();
+    const { data: session, update } = useSession();
     const [isEditing, setIsEditing] = useState(false);
     const [showPasswordSection, setShowPasswordSection] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState("");
+    const [success, setSuccess] = useState("");
 
-    // Mock user data - will be replaced with API
     const [userData, setUserData] = useState({
-        name: session?.user?.name || "Administrator",
+        name: session?.user?.name || "",
         email: session?.user?.email || "",
-        phone: "+91 98765 43210",
-        photo: "/assets/Logo_Round.png",
+        phone: (session?.user as any)?.phone || "", // Need to expose phone in session or fetch from API
+        photo: session?.user?.image || "",
         role: session?.user?.role || "PRIMARY_ADMIN",
     });
 
@@ -24,6 +26,92 @@ export default function SettingsPage() {
         newPassword: "",
         confirmPassword: "",
     });
+
+    const handleProfileUpdate = async () => {
+        setError("");
+        setSuccess("");
+        setIsLoading(true);
+
+        try {
+            const res = await fetch("/api/admin/profile", {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    name: userData.name,
+                    email: userData.email,
+                    phone: userData.phone,
+                    photo: userData.photo,
+                }),
+            });
+
+            if (!res.ok) {
+                const msg = await res.text();
+                throw new Error(msg);
+            }
+
+            // Update session client-side
+            await update({
+                ...session,
+                user: {
+                    ...session?.user,
+                    name: userData.name,
+                    email: userData.email,
+                },
+            });
+
+            setSuccess("Profile updated successfully");
+            setIsEditing(false);
+        } catch (err: any) {
+            setError(err.message || "Failed to update profile");
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    const handlePasswordUpdate = async () => {
+        setError("");
+        setSuccess("");
+
+        if (passwordData.newPassword !== passwordData.confirmPassword) {
+            setError("New passwords do not match");
+            return;
+        }
+
+        if (passwordData.newPassword.length < 8) {
+            setError("Password must be at least 8 characters");
+            return;
+        }
+
+        setIsLoading(true);
+
+        try {
+            const res = await fetch("/api/admin/profile", {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    currentPassword: passwordData.currentPassword,
+                    newPassword: passwordData.newPassword,
+                }),
+            });
+
+            if (!res.ok) {
+                const msg = await res.text();
+                throw new Error(msg);
+            }
+
+            setSuccess("Password updated successfully");
+            setShowPasswordSection(false);
+            setPasswordData({
+                currentPassword: "",
+                newPassword: "",
+                confirmPassword: "",
+            });
+        } catch (err: any) {
+            setError(err.message || "Failed to update password");
+        } finally {
+            setIsLoading(false);
+        }
+    };
 
     return (
         <DashboardLayout>
@@ -38,18 +126,32 @@ export default function SettingsPage() {
                     </p>
                 </div>
 
+                {/* Status Messages */}
+                {error && (
+                    <div className="p-4 bg-accent-saffron/10 border border-accent-saffron/30 rounded-lg text-accent-saffron text-sm font-medium">
+                        {error}
+                    </div>
+                )}
+                {success && (
+                    <div className="p-4 bg-green-500/10 border border-green-500/30 rounded-lg text-green-700 text-sm font-medium">
+                        {success}
+                    </div>
+                )}
+
                 {/* Profile Information Section */}
                 <div className="bg-surface-white border-2 border-secondary/20 rounded-xl p-8">
                     <div className="flex items-center justify-between mb-6">
                         <h3 className="text-lg font-cinzel-decorative font-bold text-primary-dark">
                             Profile Information
                         </h3>
-                        <button
-                            onClick={() => setIsEditing(!isEditing)}
-                            className="px-4 py-2 border-2 border-secondary/30 text-secondary-dark rounded-lg hover:bg-secondary/5 transition-colors font-semibold"
-                        >
-                            {isEditing ? "Cancel" : "Edit Profile"}
-                        </button>
+                        {!isEditing && (
+                            <button
+                                onClick={() => setIsEditing(true)}
+                                className="px-4 py-2 border-2 border-secondary/30 text-secondary-dark rounded-lg hover:bg-secondary/5 transition-colors font-semibold"
+                            >
+                                Edit Profile
+                            </button>
+                        )}
                     </div>
 
                     <div className="space-y-6">
@@ -58,27 +160,28 @@ export default function SettingsPage() {
                             <div className="relative">
                                 <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-secondary/30">
                                     <img
-                                        src={userData.photo}
+                                        src={userData.photo || "/assets/Logo_Round.png"}
                                         alt="Profile"
                                         className="w-full h-full object-cover"
+                                        onError={(e) => {
+                                            (e.target as HTMLImageElement).src = "/assets/Logo_Round.png";
+                                        }}
                                     />
                                 </div>
-                                {isEditing && (
-                                    <button className="absolute bottom-0 right-0 p-2 bg-secondary text-surface-white rounded-full hover:bg-secondary-dark transition-colors">
-                                        <Camera className="w-4 h-4" />
-                                    </button>
-                                )}
                             </div>
-                            <div>
-                                <p className="font-semibold text-primary-dark">Profile Photo</p>
-                                <p className="text-sm text-primary/60 mt-1">
-                                    PNG, JPG up to 5MB
+                            <div className="flex-1">
+                                <p className="font-semibold text-primary-dark">Profile Photo URL</p>
+                                <input
+                                    type="text"
+                                    value={userData.photo}
+                                    onChange={(e) => setUserData({ ...userData, photo: e.target.value })}
+                                    disabled={!isEditing || isLoading}
+                                    className="w-full mt-2 px-4 py-2 border-2 border-secondary/20 rounded-lg focus:border-secondary focus:outline-none disabled:bg-background-cream/50 disabled:cursor-not-allowed"
+                                    placeholder="https://example.com/photo.jpg"
+                                />
+                                <p className="text-xs text-primary/60 mt-1">
+                                    Enter a direct URL to your profile image. Use a square image for best results.
                                 </p>
-                                {isEditing && (
-                                    <button className="text-sm text-secondary-dark hover:text-secondary mt-2 font-medium">
-                                        Upload new photo
-                                    </button>
-                                )}
                             </div>
                         </div>
 
@@ -96,7 +199,7 @@ export default function SettingsPage() {
                                         onChange={(e) =>
                                             setUserData({ ...userData, name: e.target.value })
                                         }
-                                        disabled={!isEditing}
+                                        disabled={!isEditing || isLoading}
                                         className="w-full pl-11 pr-4 py-3 border-2 border-secondary/20 rounded-lg focus:border-secondary focus:outline-none disabled:bg-background-cream/50 disabled:cursor-not-allowed transition-all"
                                     />
                                 </div>
@@ -115,7 +218,7 @@ export default function SettingsPage() {
                                         onChange={(e) =>
                                             setUserData({ ...userData, email: e.target.value })
                                         }
-                                        disabled={!isEditing}
+                                        disabled={!isEditing || isLoading}
                                         className="w-full pl-11 pr-4 py-3 border-2 border-secondary/20 rounded-lg focus:border-secondary focus:outline-none disabled:bg-background-cream/50 disabled:cursor-not-allowed transition-all"
                                     />
                                 </div>
@@ -135,7 +238,7 @@ export default function SettingsPage() {
                                     onChange={(e) =>
                                         setUserData({ ...userData, phone: e.target.value })
                                     }
-                                    disabled={!isEditing}
+                                    disabled={!isEditing || isLoading}
                                     className="w-full pl-11 pr-4 py-3 border-2 border-secondary/20 rounded-lg focus:border-secondary focus:outline-none disabled:bg-background-cream/50 disabled:cursor-not-allowed transition-all"
                                     placeholder="+91 98765 43210"
                                 />
@@ -156,15 +259,24 @@ export default function SettingsPage() {
                         {isEditing && (
                             <div className="flex gap-3 pt-4 border-t border-secondary/20">
                                 <button
-                                    onClick={() => setIsEditing(false)}
-                                    className="px-6 py-3 bg-secondary text-surface-white rounded-lg hover:bg-secondary-dark transition-colors font-semibold flex items-center gap-2"
+                                    onClick={handleProfileUpdate}
+                                    disabled={isLoading}
+                                    className="px-6 py-3 bg-secondary text-surface-white rounded-lg hover:bg-secondary-dark transition-colors font-semibold flex items-center gap-2 disabled:opacity-50"
                                 >
                                     <Save className="w-5 h-5" />
-                                    Save Changes
+                                    {isLoading ? "Saving..." : "Save Changes"}
                                 </button>
                                 <button
-                                    onClick={() => setIsEditing(false)}
-                                    className="px-6 py-3 border-2 border-secondary/30 text-primary-dark rounded-lg hover:bg-secondary/5 transition-colors font-semibold"
+                                    onClick={() => {
+                                        setIsEditing(false);
+                                        setUserData({
+                                            ...userData,
+                                            name: session?.user?.name || "",
+                                            email: session?.user?.email || "",
+                                        });
+                                    }}
+                                    disabled={isLoading}
+                                    className="px-6 py-3 border-2 border-secondary/30 text-primary-dark rounded-lg hover:bg-secondary/5 transition-colors font-semibold disabled:opacity-50"
                                 >
                                     Discard
                                 </button>
@@ -184,12 +296,14 @@ export default function SettingsPage() {
                                 Update your password to keep your account secure
                             </p>
                         </div>
-                        <button
-                            onClick={() => setShowPasswordSection(!showPasswordSection)}
-                            className="px-4 py-2 border-2 border-secondary/30 text-secondary-dark rounded-lg hover:bg-secondary/5 transition-colors font-semibold"
-                        >
-                            {showPasswordSection ? "Cancel" : "Change Password"}
-                        </button>
+                        {!showPasswordSection && (
+                            <button
+                                onClick={() => setShowPasswordSection(true)}
+                                className="px-4 py-2 border-2 border-secondary/30 text-secondary-dark rounded-lg hover:bg-secondary/5 transition-colors font-semibold"
+                            >
+                                Change Password
+                            </button>
+                        )}
                     </div>
 
                     {showPasswordSection && (
@@ -261,8 +375,12 @@ export default function SettingsPage() {
                             </div>
 
                             <div className="flex gap-3 pt-4">
-                                <button className="px-6 py-3 bg-secondary text-surface-white rounded-lg hover:bg-secondary-dark transition-colors font-semibold">
-                                    Update Password
+                                <button
+                                    onClick={handlePasswordUpdate}
+                                    disabled={isLoading}
+                                    className="px-6 py-3 bg-secondary text-surface-white rounded-lg hover:bg-secondary-dark transition-colors font-semibold disabled:opacity-50"
+                                >
+                                    {isLoading ? "Updating..." : "Update Password"}
                                 </button>
                                 <button
                                     onClick={() => {
@@ -273,7 +391,8 @@ export default function SettingsPage() {
                                             confirmPassword: "",
                                         });
                                     }}
-                                    className="px-6 py-3 border-2 border-secondary/30 text-primary-dark rounded-lg hover:bg-secondary/5 transition-colors font-semibold"
+                                    disabled={isLoading}
+                                    className="px-6 py-3 border-2 border-secondary/30 text-primary-dark rounded-lg hover:bg-secondary/5 transition-colors font-semibold disabled:opacity-50"
                                 >
                                     Cancel
                                 </button>

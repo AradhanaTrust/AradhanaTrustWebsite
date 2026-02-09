@@ -1,5 +1,7 @@
 "use client";
 
+import { useState, useEffect } from "react";
+
 import { useSession } from "next-auth/react";
 import DashboardLayout from "@/components/admin/DashboardLayout";
 import {
@@ -15,21 +17,56 @@ export default function AdminDashboard() {
     const { data: session } = useSession();
     const isPrimaryAdmin = session?.user?.role === "PRIMARY_ADMIN";
 
-    // Mock data - will be replaced with real API calls
-    const stats = {
-        totalDonations: "₹2,45,000",
-        donationsThisMonth: "₹45,000",
-        newDevotees: 127,
-        upcomingEvents: 5,
-        registrations: 234,
-        recentDonations: [
-            { id: 1, donor: "Ramesh Kumar", amount: "₹5,000", category: "Annadanam", date: "2026-02-08" },
-            { id: 2, donor: "Priya Sharma", amount: "₹10,000", category: "Temple", date: "2026-02-08" },
-            { id: 3, donor: "Anonymous", amount: "₹2,500", category: "Education", date: "2026-02-07" },
-            { id: 4, donor: "Venkat Rao", amount: "₹15,000", category: "Gauseva", date: "2026-02-07" },
-            { id: 5, donor: "Lakshmi Devi", amount: "₹3,000", category: "Cultural", date: "2026-02-06" },
-        ]
-    };
+    // State for real data
+    const [stats, setStats] = useState({
+        totalDonations: "₹0",
+        donationsThisMonth: "₹0",
+        newDevotees: 0,
+        upcomingEvents: 0,
+        registrations: 0,
+        recentDonations: [] as any[]
+    });
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchStats = async () => {
+            try {
+                const res = await fetch("/api/admin/dashboard/stats");
+                if (res.ok) {
+                    const data = await res.json();
+
+                    // Format currency
+                    const formatCurrency = (amount: number) => {
+                        return new Intl.NumberFormat('en-IN', {
+                            style: 'currency',
+                            currency: 'INR',
+                            maximumFractionDigits: 0
+                        }).format(amount);
+                    };
+
+                    setStats({
+                        totalDonations: formatCurrency(data.totalDonations),
+                        donationsThisMonth: formatCurrency(data.donationsThisMonth),
+                        newDevotees: data.newDevotees,
+                        upcomingEvents: data.upcomingEvents,
+                        registrations: data.registrations,
+                        recentDonations: data.recentDonations.map((d: any) => ({
+                            ...d,
+                            amount: formatCurrency(d.amount),
+                            date: new Date(d.date).toLocaleDateString('en-IN')
+                        }))
+                    });
+                }
+            } catch (error) {
+                console.error("Failed to fetch dashboard stats", error);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        fetchStats();
+    }, []);
+
 
     return (
         <DashboardLayout>

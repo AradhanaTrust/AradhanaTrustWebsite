@@ -54,10 +54,13 @@ export const authOptions: NextAuthOptions = {
         signIn: "/", // Custom sign-in page (login modal on homepage)
     },
     callbacks: {
-        async jwt({ token, user }) {
+        async jwt({ token, user, trigger, session }) {
             if (user) {
                 token.role = user.role;
                 token.id = user.id;
+            }
+            if (trigger === "update" && session) {
+                return { ...token, ...session.user };
             }
             return token;
         },
@@ -65,6 +68,8 @@ export const authOptions: NextAuthOptions = {
             if (session.user) {
                 session.user.role = token.role as string;
                 session.user.id = token.id as string;
+                session.user.name = token.name;
+                session.user.email = token.email;
             }
             return session;
         },

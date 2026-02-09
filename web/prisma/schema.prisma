@@ -45,6 +45,7 @@ model User {
   password      String    // bcrypt hashed
   emailVerified DateTime?
   image         String?
+  phone         String?
   role          Role      @default(SECONDARY_ADMIN)
   accounts      Account[]
   sessions      Session[]
@@ -77,6 +78,7 @@ model Event {
   imageUrl    String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  donationRecords DonationRecord[]
 }
 
 model Donation {
@@ -106,8 +108,12 @@ model DonationRecord {
   organisation String?
   panNumber    String?  // For 80G certificate
   frequency    String   @default("one-time") // one-time, monthly
+  eventId      String?
+  event        Event?   @relation(fields: [eventId], references: [id])
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
+
+  @@index([eventId])
 }
 
 model EventRegistration {

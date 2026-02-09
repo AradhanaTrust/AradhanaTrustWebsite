@@ -94,9 +94,13 @@ datasource db {
 ```
 
 **Before**:
-```env
-DATABASE_URL="postgresql://neondb_owner:npg_ZE2xWBQJrvV7@ep-noisy-mud-a1xdmx72-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require"
+```bash
+# Update .env file with your Neon PostgreSQL connection string
+# ⚠️ Get the actual DATABASE_URL from: deployment_secrets_DO_NOT_COMMIT.txt
+DATABASE_URL="postgresql://[user]:[password]@[host]/[database]?sslmode=require"
 ```
+
+> **🔒 Security Note**: The actual connection string is stored in `deployment_secrets_DO_NOT_COMMIT.txt` which is in `.gitignore` and never committed to Git.
 
 **After**:
 ```env
@@ -210,8 +214,10 @@ datasource db {
 
 **3. Update .env**
 
-```env
-DATABASE_URL="postgresql://user:pass@ep-xxx.neon.tech/neondb?sslmode=require"
+```bash
+# In web/.env
+# ⚠️ Get the full connection string from: ../deployment_secrets_DO_NOT_COMMIT.txt
+DATABASE_URL="postgresql://[user]:[password]@[host]/[database]?sslmode=require"
 ```
 
 **4. Deploy**
@@ -230,9 +236,10 @@ npm run dev
 ### 🏆 Best: Hostinger VPS + Neon PostgreSQL
 
 **Setup**:
-```env
-# On Hostinger VPS .env file
-DATABASE_URL="postgresql://neondb_owner:...@ep-noisy-mud-a1xdmx72-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require"
+```bash
+# In web/.env
+# ⚠️ Get the full connection string from: ../deployment_secrets_DO_NOT_COMMIT.txt
+DATABASE_URL="postgresql://[user]:[password]@[host]/[database]?sslmode=require"
 ```
 
 **Why This is Better**:
