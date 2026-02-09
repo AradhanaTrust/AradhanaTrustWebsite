@@ -1,10 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
-
 import { useSession } from "next-auth/react";
 import DashboardLayout from "@/components/admin/DashboardLayout";
+import AddDonationModal from "@/components/admin/AddDonationModal";
 import {
     TrendingUp,
     Users as UsersIcon,
@@ -29,6 +29,7 @@ export default function AdminDashboard() {
         recentDonations: [] as any[]
     });
     const [isLoading, setIsLoading] = useState(true);
+    const [isAddDonationModalOpen, setIsAddDonationModalOpen] = useState(false);
 
     useEffect(() => {
         const fetchStats = async () => {
@@ -191,9 +192,12 @@ export default function AdminDashboard() {
 
                     {/* Quick Actions */}
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                        <Link href="/admin/donations" className="block p-4 bg-secondary text-surface-white rounded-lg hover:bg-secondary-dark transition-all font-semibold text-center">
+                        <button
+                            onClick={() => setIsAddDonationModalOpen(true)}
+                            className="block p-4 bg-secondary text-surface-white rounded-lg hover:bg-secondary-dark transition-all font-semibold text-center w-full"
+                        >
                             + Add Donation
-                        </Link>
+                        </button>
                         <Link href="/admin/events" className="block p-4 bg-secondary/10 text-secondary-dark border-2 border-secondary/30 rounded-lg hover:bg-secondary/20 transition-all font-semibold text-center">
                             + Create Event
                         </Link>
@@ -204,6 +208,11 @@ export default function AdminDashboard() {
                             👥 Manage Users
                         </Link>
                     </div>
+                    <AddDonationModal
+                        isOpen={isAddDonationModalOpen}
+                        onClose={() => setIsAddDonationModalOpen(false)}
+                        onSuccess={() => window.location.reload()}
+                    />
                 </div>
             ) : (
                 /* SECONDARY ADMIN DASHBOARD */

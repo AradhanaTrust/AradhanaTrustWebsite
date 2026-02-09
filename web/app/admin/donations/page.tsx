@@ -17,6 +17,7 @@ export default function DonationsPage() {
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
     const [eventId, setEventId] = useState("all");
+    const [referredBy, setReferredBy] = useState("");
 
     const categories = ["Annadanam", "Temple", "Education", "Cultural", "Gauseva", "General Fund"];
     const methods = ["UPI", "Credit/Debit Card", "Net Banking", "Cash", "Cheque"];
@@ -31,7 +32,7 @@ export default function DonationsPage() {
             fetchDonations();
         }, 500);
         return () => clearTimeout(timer);
-    }, [search, category, method, startDate, endDate, eventId]);
+    }, [search, category, method, startDate, endDate, eventId, referredBy]);
 
     const fetchEvents = async () => {
         try {
@@ -55,6 +56,7 @@ export default function DonationsPage() {
             if (eventId !== "all") params.append("eventId", eventId);
             if (startDate) params.append("startDate", startDate);
             if (endDate) params.append("endDate", endDate);
+            if (referredBy) params.append("referredBy", referredBy);
 
             const res = await fetch(`/api/admin/donations?${params.toString()}`);
             if (res.ok) {
@@ -74,6 +76,7 @@ export default function DonationsPage() {
             "Receipt No": d.receiptNo,
             "Date": new Date(d.date).toLocaleDateString("en-IN"),
             "Donor Name": d.donorName,
+            "Referred By": d.referredBy || "None",
             "Email": d.email,
             "Phone": d.phone,
             "Amount (₹)": d.amount,
@@ -98,6 +101,7 @@ export default function DonationsPage() {
             { wch: 15 }, // Receipt
             { wch: 12 }, // Date
             { wch: 25 }, // Donor
+            { wch: 20 }, // Referred By
             { wch: 25 }, // Email
             { wch: 15 }, // Phone
             { wch: 12 }, // Amount
@@ -143,27 +147,39 @@ export default function DonationsPage() {
                 </div>
 
                 {/* Filters & Search */}
-                <div className="bg-surface-white p-3 rounded-xl border-2 border-secondary/20 shadow-sm space-y-3 md:space-y-0 md:flex md:items-center md:gap-2 flex-wrap text-sm">
+                <div className="bg-surface-white p-3 rounded-xl border-2 border-secondary/20 shadow-sm space-y-3 md:space-y-0 md:flex md:items-center md:gap-1.5 flex-wrap text-sm">
 
                     {/* Search */}
-                    <div className="relative w-full md:w-56">
+                    <div className="relative w-full md:w-48">
                         <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3 h-3 text-secondary/60" />
                         <input
                             type="text"
                             placeholder="Name, Receipt No..."
                             value={search}
                             onChange={(e) => setSearch(e.target.value)}
-                            className="w-full pl-8 pr-3 py-1.5 border-2 border-secondary/20 rounded-lg focus:border-secondary focus:outline-none text-sm"
+                            className="w-full pl-8 pr-3 py-1.5 border-2 border-secondary/20 rounded-lg focus:border-secondary focus:outline-none text-xs"
+                        />
+                    </div>
+
+                    {/* Referred By Filter */}
+                    <div className="relative w-full md:w-36">
+                        <Filter className="absolute left-3 top-1/2 -translate-y-1/2 w-3 h-3 text-secondary/60" />
+                        <input
+                            type="text"
+                            placeholder="Referred By..."
+                            value={referredBy}
+                            onChange={(e) => setReferredBy(e.target.value)}
+                            className="w-full pl-8 pr-3 py-1.5 border-2 border-secondary/20 rounded-lg focus:border-secondary focus:outline-none text-xs"
                         />
                     </div>
 
                     {/* Event Filter */}
-                    <div className="relative min-w-[140px]">
+                    <div className="relative min-w-[120px]">
                         <Filter className="absolute left-3 top-1/2 -translate-y-1/2 w-3 h-3 text-secondary/60" />
                         <select
                             value={eventId}
                             onChange={(e) => setEventId(e.target.value)}
-                            className="w-full pl-8 pr-6 py-1.5 border-2 border-secondary/20 rounded-lg focus:border-secondary focus:outline-none appearance-none bg-white text-sm"
+                            className="w-full pl-8 pr-6 py-1.5 border-2 border-secondary/20 rounded-lg focus:border-secondary focus:outline-none appearance-none bg-white text-xs"
                         >
                             <option value="all">All Events</option>
                             {events.map(e => <option key={e.id} value={e.id}>{e.title}</option>)}
@@ -171,43 +187,43 @@ export default function DonationsPage() {
                     </div>
 
                     {/* Category Filter */}
-                    <div className="relative min-w-[140px]">
+                    <div className="relative min-w-[120px]">
                         <select
                             value={category}
                             onChange={(e) => setCategory(e.target.value)}
-                            className="w-full px-3 py-1.5 border-2 border-secondary/20 rounded-lg focus:border-secondary focus:outline-none bg-white text-sm"
+                            className="w-full px-3 py-1.5 border-2 border-secondary/20 rounded-lg focus:border-secondary focus:outline-none bg-white text-xs"
                         >
-                            <option value="all">All Categories</option>
+                            <option value="all">Categories</option>
                             {categories.map(c => <option key={c} value={c}>{c}</option>)}
                         </select>
                     </div>
 
                     {/* Method Filter */}
-                    <div className="relative min-w-[120px]">
+                    <div className="relative min-w-[100px]">
                         <select
                             value={method}
                             onChange={(e) => setMethod(e.target.value)}
-                            className="w-full px-3 py-1.5 border-2 border-secondary/20 rounded-lg focus:border-secondary focus:outline-none bg-white text-sm"
+                            className="w-full px-3 py-1.5 border-2 border-secondary/20 rounded-lg focus:border-secondary focus:outline-none bg-white text-xs"
                         >
-                            <option value="all">All Methods</option>
+                            <option value="all">Methods</option>
                             {methods.map(m => <option key={m} value={m}>{m}</option>)}
                         </select>
                     </div>
 
                     {/* Date Range */}
-                    <div className="flex items-center gap-1.5">
+                    <div className="flex items-center gap-1">
                         <input
                             type="date"
                             value={startDate}
                             onChange={(e) => setStartDate(e.target.value)}
-                            className="w-40 px-3 py-1.5 border-2 border-secondary/20 rounded-lg focus:border-secondary focus:outline-none text-sm"
+                            className="w-32 px-2 py-1.5 border-2 border-secondary/20 rounded-lg focus:border-secondary focus:outline-none text-xs"
                         />
-                        <span className="text-primary/60 text-sm">to</span>
+                        <span className="text-primary/60 text-xs">to</span>
                         <input
                             type="date"
                             value={endDate}
                             onChange={(e) => setEndDate(e.target.value)}
-                            className="w-40 px-3 py-1.5 border-2 border-secondary/20 rounded-lg focus:border-secondary focus:outline-none text-sm"
+                            className="w-32 px-2 py-1.5 border-2 border-secondary/20 rounded-lg focus:border-secondary focus:outline-none text-xs"
                         />
                     </div>
                 </div>
@@ -232,6 +248,7 @@ export default function DonationsPage() {
                                         <th className="p-4 font-semibold text-primary-dark whitespace-nowrap">Receipt No</th>
                                         <th className="p-4 font-semibold text-primary-dark whitespace-nowrap">Date</th>
                                         <th className="p-4 font-semibold text-primary-dark whitespace-nowrap">Donor</th>
+                                        <th className="p-4 font-semibold text-primary-dark whitespace-nowrap">Referred By</th>
                                         <th className="p-4 font-semibold text-primary-dark whitespace-nowrap">Event</th>
                                         <th className="p-4 font-semibold text-primary-dark whitespace-nowrap">Amount</th>
                                         <th className="p-4 font-semibold text-primary-dark whitespace-nowrap">Category</th>
@@ -251,6 +268,9 @@ export default function DonationsPage() {
                                             <td className="p-4">
                                                 <div className="font-semibold text-primary-dark">{donation.donorName}</div>
                                                 <div className="text-xs text-primary/50">{donation.email}</div>
+                                            </td>
+                                            <td className="p-4 text-sm text-primary/80">
+                                                {donation.referredBy || <span className="text-primary/40">None</span>}
                                             </td>
                                             <td className="p-4 text-sm text-primary/80">
                                                 {donation.event ? (

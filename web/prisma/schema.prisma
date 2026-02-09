@@ -108,6 +108,7 @@ model DonationRecord {
   organisation String?
   panNumber    String?  // For 80G certificate
   frequency    String   @default("one-time") // one-time, monthly
+  referredBy   String?  @default("None")
   eventId      String?
   event        Event?   @relation(fields: [eventId], references: [id])
   createdAt    DateTime @default(now())
