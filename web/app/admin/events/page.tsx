@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { events } from "@/lib/events-data";
+import { getEventTranslation, getCategoryName } from "@/lib/event-utils";
 
 export default function EventsPage() {
     const { data: session } = useSession();
@@ -110,8 +111,8 @@ export default function EventsPage() {
                     <button
                         onClick={() => setActiveTab("upcoming")}
                         className={`px-6 py-3 font-semibold transition-all ${activeTab === "upcoming"
-                                ? "text-secondary-dark border-b-4 border-secondary"
-                                : "text-primary/60 hover:text-primary"
+                            ? "text-secondary-dark border-b-4 border-secondary"
+                            : "text-primary/60 hover:text-primary"
                             }`}
                     >
                         Upcoming Events ({upcomingEvents.length})
@@ -119,8 +120,8 @@ export default function EventsPage() {
                     <button
                         onClick={() => setActiveTab("past")}
                         className={`px-6 py-3 font-semibold transition-all ${activeTab === "past"
-                                ? "text-secondary-dark border-b-4 border-secondary"
-                                : "text-primary/60 hover:text-primary"
+                            ? "text-secondary-dark border-b-4 border-secondary"
+                            : "text-primary/60 hover:text-primary"
                             }`}
                     >
                         Past Events ({pastEvents.length})
@@ -144,7 +145,7 @@ export default function EventsPage() {
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                                 <div className="absolute top-3 left-3">
                                     <span className={`text-xs px-3 py-1 rounded-full font-semibold ${getCategoryColor(event.category)}`}>
-                                        {event.category.toUpperCase()}
+                                        {getCategoryName(event.category, 'en').toUpperCase()}
                                     </span>
                                 </div>
                             </div>
@@ -152,7 +153,7 @@ export default function EventsPage() {
                             {/* Event Details */}
                             <div className="p-5">
                                 <h3 className="font-cinzel-decorative text-lg font-bold text-primary-dark mb-3">
-                                    {event.titleKey.split('.')[0].replace(/([A-Z])/g, ' $1').trim()}
+                                    {getEventTranslation(event, 'en').title}
                                 </h3>
 
                                 <div className="space-y-2 mb-4">
@@ -166,7 +167,7 @@ export default function EventsPage() {
                                     </div>
                                     <div className="flex items-center gap-2 text-sm text-primary/70">
                                         <MapPin className="w-4 h-4 text-secondary" />
-                                        <span>{event.locationKey}</span>
+                                        <span>{getEventTranslation(event, 'en').location}</span>
                                     </div>
                                     {event.capacity && (
                                         <div className="flex items-center gap-2 text-sm text-primary/70">
@@ -265,17 +266,18 @@ export default function EventsPage() {
                                             type="text"
                                             className="w-full px-4 py-2 border-2 border-secondary/20 rounded-lg focus:border-secondary focus:outline-none"
                                             placeholder="Ugadi Festival 2026"
-                                            defaultValue={selectedEvent?.titleKey}
+                                            defaultValue={selectedEvent ? getEventTranslation(selectedEvent, 'en').title : ""}
                                         />
                                     </div>
                                     <div>
                                         <label className="block text-sm font-semibold text-primary-dark mb-2">
-                                            Event Title (Telugu - తెలుగు)
+                                            Event Title (Kannada - ಕನ್ನಡ)
                                         </label>
                                         <input
                                             type="text"
                                             className="w-full px-4 py-2 border-2 border-secondary/20 rounded-lg focus:border-secondary focus:outline-none"
-                                            placeholder="ఉగాది పండుగ 2026"
+                                            placeholder="ಯುಗಾದಿ ಹಬ್ಬ 2026"
+                                            defaultValue={selectedEvent ? getEventTranslation(selectedEvent, 'kn').title : ""}
                                         />
                                     </div>
                                 </div>
@@ -320,16 +322,29 @@ export default function EventsPage() {
                                     </div>
                                 </div>
 
-                                <div>
-                                    <label className="block text-sm font-semibold text-primary-dark mb-2">
-                                        Location
-                                    </label>
-                                    <input
-                                        type="text"
-                                        className="w-full px-4 py-2 border-2 border-secondary/20 rounded-lg focus:border-secondary focus:outline-none"
-                                        placeholder="Main Temple Hall"
-                                        defaultValue={selectedEvent?.locationKey}
-                                    />
+                                <div className="grid md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label className="block text-sm font-semibold text-primary-dark mb-2">
+                                            Location (English)
+                                        </label>
+                                        <input
+                                            type="text"
+                                            className="w-full px-4 py-2 border-2 border-secondary/20 rounded-lg focus:border-secondary focus:outline-none"
+                                            placeholder="Main Temple Hall"
+                                            defaultValue={selectedEvent ? getEventTranslation(selectedEvent, 'en').location : ""}
+                                        />
+                                    </div>
+                                    <div>
+                                        <label className="block text-sm font-semibold text-primary-dark mb-2">
+                                            Location (Kannada)
+                                        </label>
+                                        <input
+                                            type="text"
+                                            className="w-full px-4 py-2 border-2 border-secondary/20 rounded-lg focus:border-secondary focus:outline-none"
+                                            placeholder="ಮುಖ್ಯ ದೇವಾಲಯ ಸಭಾಂಗಣ"
+                                            defaultValue={selectedEvent ? getEventTranslation(selectedEvent, 'kn').location : ""}
+                                        />
+                                    </div>
                                 </div>
 
                                 <div>
@@ -340,7 +355,18 @@ export default function EventsPage() {
                                         rows={3}
                                         className="w-full px-4 py-2 border-2 border-secondary/20 rounded-lg focus:border-secondary focus:outline-none"
                                         placeholder="Enter event description..."
-                                        defaultValue={selectedEvent?.descriptionKey}
+                                        defaultValue={selectedEvent ? getEventTranslation(selectedEvent, 'en').description : ""}
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-semibold text-primary-dark mb-2">
+                                        Description (Kannada)
+                                    </label>
+                                    <textarea
+                                        rows={3}
+                                        className="w-full px-4 py-2 border-2 border-secondary/20 rounded-lg focus:border-secondary focus:outline-none"
+                                        placeholder="ಕಾರ್ಯಕ್ರಮದ ವಿವರಗಳನ್ನು ನಮೂದಿಸಿ..."
+                                        defaultValue={selectedEvent ? getEventTranslation(selectedEvent, 'kn').description : ""}
                                     />
                                 </div>
 
