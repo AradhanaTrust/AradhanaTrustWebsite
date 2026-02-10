@@ -15,7 +15,7 @@ export default function Footer() {
             {/* Decorative Top Border Gradient */}
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-secondary/40 to-transparent" />
 
-            <div className="container mx-auto px-6 lg:px-12">
+            <div className="w-full max-w-[1920px] mx-auto px-6 lg:px-12 2xl:px-20">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[2fr_0.7fr_0.7fr_2.6fr] gap-8 lg:gap-10 mb-8">
                     {/* Brand Section */}
                     <div className="space-y-6">

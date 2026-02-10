@@ -43,7 +43,7 @@ export default function Header() {
                 : "bg-background-cream/80 backdrop-blur-md py-3 h-20 lg:h-28"
                 }`}
         >
-            <div className="container mx-auto px-4 lg:px-8 h-full flex items-center justify-between gap-4">
+            <div className="w-full max-w-[1920px] mx-auto px-4 lg:px-8 2xl:px-16 h-full flex items-center justify-between gap-4">
                 {/* Logo Section */}
                 <Link
                     href="/"
