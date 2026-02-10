@@ -11,35 +11,35 @@ export default function Footer() {
     const t = translations[language].footer;
 
     return (
-        <footer className="bg-background-cream text-primary border-t border-secondary/20 pt-12 pb-8 relative overflow-hidden">
+        <footer className="bg-background-cream text-primary border-t border-secondary/20 pt-8 pb-6 relative overflow-hidden">
             {/* Decorative Top Border Gradient */}
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-secondary/40 to-transparent" />
 
             <div className="container mx-auto px-6 lg:px-12">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[2fr_0.7fr_0.7fr_2.6fr] gap-10 lg:gap-12 mb-12">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[2fr_0.7fr_0.7fr_2.6fr] gap-8 lg:gap-10 mb-8">
                     {/* Brand Section */}
                     <div className="space-y-6">
                         <div className="flex items-center gap-4">
                             <img
                                 src="/assets/Logo_Round.png"
                                 alt="Logo"
-                                className="w-20 h-20 lg:w-24 lg:h-24 object-contain shadow-md rounded-full border-2 border-secondary/10"
+                                className="w-16 h-16 lg:w-20 lg:h-20 object-contain shadow-md rounded-full border-2 border-secondary/10"
                             />
                             <div className="flex flex-col">
-                                <h2 className="font-cinzel-decorative font-bold text-2xl lg:text-3xl tracking-wide text-[#4A3225] leading-none mb-1">
+                                <h2 className="font-cinzel-decorative font-bold text-xl lg:text-2xl tracking-wide text-[#4A3225] leading-none mb-1">
                                     {translations[language].nav.trustNameLine1}
                                 </h2>
-                                <h2 className="font-cinzel-decorative font-bold text-lg lg:text-xl tracking-wider text-[#4A3225]/80 leading-none">
+                                <h2 className="font-cinzel-decorative font-bold text-base lg:text-lg tracking-wider text-[#4A3225]/80 leading-none">
                                     {translations[language].nav.trustNameLine2}
                                 </h2>
                             </div>
                         </div>
-                        <p className="text-primary/80 text-sm leading-relaxed max-w-sm font-medium font-serif">
+                        <p className="text-primary/80 text-xs leading-relaxed max-w-sm font-medium font-serif">
                             {t.desc}
                         </p>
 
                         <div className="pt-2">
-                            <div className="bg-white/50 backdrop-blur-sm p-4 rounded-xl border border-secondary/20 shadow-sm inline-block w-full md:w-auto">
+                            <div className="bg-white/50 backdrop-blur-sm p-3 rounded-xl border border-secondary/20 shadow-sm inline-block w-full md:w-auto">
                                 <p className="text-[#5D4037] text-xs font-bold font-mono tracking-wider uppercase text-center md:text-left">
                                     {t.registration.number}
                                 </p>
@@ -58,7 +58,7 @@ export default function Footer() {
                                 <a
                                     key={index}
                                     href={item.href}
-                                    className="w-10 h-10 rounded-full bg-secondary/10 hover:bg-secondary hover:text-white text-secondary-dark flex items-center justify-center transition-all duration-300 hover:scale-110 shadow-sm border border-secondary/5"
+                                    className="w-8 h-8 rounded-full bg-secondary/10 hover:bg-secondary hover:text-white text-secondary-dark flex items-center justify-center transition-all duration-300 hover:scale-110 shadow-sm border border-secondary/5"
                                 >
                                     {item.icon}
                                 </a>
@@ -67,11 +67,11 @@ export default function Footer() {
                     </div>
 
                     {/* Quick Links - Unchanged */}
-                    <div className="space-y-6 lg:justify-self-center pt-2">
-                        <h4 className="font-cinzel text-secondary-dark font-bold text-xs xl:text-sm tracking-wide border-b-2 border-secondary/20 pb-2 inline-block uppercase">
+                    <div className="space-y-6 lg:justify-self-center pt-1">
+                        <h4 className="font-cinzel text-secondary-dark font-bold text-xs xl:text-sm tracking-wide border-b border-secondary/20 pb-2 inline-block uppercase">
                             {t.quickLinks}
                         </h4>
-                        <ul className="space-y-3.5 text-sm font-serif text-primary/80">
+                        <ul className="space-y-3.5 text-xs xl:text-sm font-serif text-primary/80">
                             {[
                                 { link: "/about", label: t.about },
                                 { link: "/events", label: t.events },
@@ -89,11 +89,11 @@ export default function Footer() {
                     </div>
 
                     {/* Contact Info - Unchanged */}
-                    <div className="space-y-6 lg:justify-self-center pt-2">
-                        <h4 className="font-cinzel text-secondary-dark font-bold text-xs xl:text-sm tracking-wide border-b-2 border-secondary/20 pb-2 inline-block uppercase">
+                    <div className="space-y-6 lg:justify-self-center pt-1">
+                        <h4 className="font-cinzel text-secondary-dark font-bold text-xs xl:text-sm tracking-wide border-b border-secondary/20 pb-2 inline-block uppercase">
                             {t.contact}
                         </h4>
-                        <ul className="space-y-5 text-sm font-serif text-primary/80">
+                        <ul className="space-y-5 text-xs xl:text-sm font-serif text-primary/80">
                             <li className="flex items-start gap-4 group">
                                 <div className="p-2.5 bg-white rounded-lg shadow-sm border border-secondary/10 group-hover:border-secondary/30 transition-colors text-secondary-dark mt-0.5">
                                     <MapPin size={18} />
@@ -116,8 +116,8 @@ export default function Footer() {
                     </div>
 
                     {/* Map - Unchanged */}
-                    <div className="space-y-6 pt-2">
-                        <h4 className="font-cinzel text-secondary-dark font-bold text-xs xl:text-sm tracking-wide border-b-2 border-secondary/20 pb-2 inline-block uppercase">
+                    <div className="space-y-6 pt-1">
+                        <h4 className="font-cinzel text-secondary-dark font-bold text-xs xl:text-sm tracking-wide border-b border-secondary/20 pb-2 inline-block uppercase">
                             {translations[language].aboutPage.locationTitle}
                         </h4>
                         <div className="w-full h-48 bg-background-ivory rounded-xl overflow-hidden border-2 border-secondary/10 relative group shadow-lg hover:shadow-xl transition-shadow duration-300">
@@ -135,7 +135,7 @@ export default function Footer() {
                     </div>
                 </div>
 
-                <div className="border-t border-secondary/10 pt-8 flex flex-col items-center justify-center gap-4 text-xs sm:text-sm font-medium tracking-wide text-primary/60 text-center">
+                <div className="border-t border-secondary/10 pt-4 flex flex-col items-center justify-center gap-2 text-[10px] sm:text-xs font-medium tracking-wide text-primary/60 text-center">
                     <div className="flex flex-col md:flex-row items-center gap-2 md:gap-4">
                         <p className="font-serif">
                             {/* Use translation directly to avoid duplication as per user request */}
