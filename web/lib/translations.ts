@@ -285,7 +285,7 @@ export const translations = {
                     address1: "Kodihalli Village, Malur Taluk,",
                     address2: "Kolar District – 563160, Karnataka, India",
                     email: "Email:",
-                    emailValue: "contact@aradhanatrust.org",
+                    emailValue: "support@aradhanadharmikatrust.org",
                     phone: "Phone:",
                     phoneValue: "+91 98765 43210"
                 }
@@ -333,7 +333,7 @@ export const translations = {
                     address1: "Kodihalli Village, Malur Taluk,",
                     address2: "Kolar District – 563160, Karnataka, India",
                     email: "Email:",
-                    emailValue: "contact@aradhanatrust.org",
+                    emailValue: "support@aradhanadharmikatrust.org",
                     phone: "Phone:",
                     phoneValue: "+91 98765 43210"
                 }
@@ -355,7 +355,7 @@ export const translations = {
             contactInfo: {
                 address: "Kodihalli Village, Malur Taluk, Kolar District – 563160, Karnataka, India",
                 phone: "+91 98765 43210",
-                email: "contact@aradhanatrust.org",
+                email: "support@aradhanadharmikatrust.org",
                 whatsapp: "+91 98765 43210",
                 mapLabel: "Locate us on Google Maps"
             },
@@ -851,7 +851,7 @@ export const translations = {
                     address1: "ಕೋಡಿಹಳ್ಳಿ ಗ್ರಾಮ, ಮಲೂರು ತಾಲೂಕು,",
                     address2: "ಕೋಲಾರ ಜಿಲ್ಲೆ – 563160, ಕರ್ನಾಟಕ, ಭಾರತ",
                     email: "ಇಮೇಲ್:",
-                    emailValue: "contact@aradhanatrust.org",
+                    emailValue: "support@aradhanadharmikatrust.org",
                     phone: "ದೂರವಾಣಿ:",
                     phoneValue: "+91 98765 43210"
                 }
@@ -899,7 +899,7 @@ export const translations = {
                     address1: "ಕೋಡಿಹಳ್ಳಿ ಗ್ರಾಮ, ಮಲೂರು ತಾಲೂಕು,",
                     address2: "ಕೋಲಾರ ಜಿಲ್ಲೆ – 563160, ಕರ್ನಾಟಕ, ಭಾರತ",
                     email: "ಇಮೇಲ್:",
-                    emailValue: "contact@aradhanatrust.org",
+                    emailValue: "support@aradhanadharmikatrust.org",
                     phone: "ದೂರವಾಣಿ:",
                     phoneValue: "+91 98765 43210"
                 }
@@ -921,7 +921,7 @@ export const translations = {
             contactInfo: {
                 address: "ಕೋಡಿಹಳ್ಳಿ ಗ್ರಾಮ, ಮಾಲೂರು ತಾಲೂಕು, ಕೋಲಾರ ಜಿಲ್ಲೆ – 563160, ಕರ್ನಾಟಕ, ಭಾರತ",
                 phone: "+91 98765 43210",
-                email: "contact@aradhanatrust.org",
+                email: "support@aradhanadharmikatrust.org",
                 whatsapp: "+91 98765 43210",
                 mapLabel: "ಗೂಗಲ್ ಮ್ಯಾಪ್‌ನಲ್ಲಿ ನೋಡಿ"
             },

@@ -170,7 +170,7 @@ export default function ContactPage() {
                                 </div>
                                 <div>
                                     <p className="font-semibold text-sm text-[#5D4037]">{t.info.phoneEmail.email}</p>
-                                    <a href="mailto:contact@aradhanatrust.org" className="text-[#D4AF37] hover:text-[#B8860B] break-all">contact@aradhanatrust.org</a>
+                                    <a href="mailto:support@aradhanadharmikatrust.org" className="text-[#D4AF37] hover:text-[#B8860B] break-all">support@aradhanadharmikatrust.org</a>
                                 </div>
                                 <div>
                                     <p className="font-semibold text-sm text-[#5D4037]">{t.info.phoneEmail.whatsapp}</p>

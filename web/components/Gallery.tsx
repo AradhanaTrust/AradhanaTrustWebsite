@@ -17,11 +17,17 @@ const galleryImages = [
     "/assets/gallery-5.png",
 ];
 
-export default function Gallery() {
+interface GalleryProps {
+    dbImages?: string[];
+}
+
+export default function Gallery({ dbImages = [] }: GalleryProps) {
     const { language } = useLanguage();
     const t = translations[language].gallery;
     const [currentIndex, setCurrentIndex] = useState(0);
     const [visibleCards, setVisibleCards] = useState(3);
+
+    const allImages = [...dbImages, ...galleryImages];
 
     // Responsive Carousel Logic
     useEffect(() => {
@@ -35,7 +41,7 @@ export default function Gallery() {
         return () => window.removeEventListener("resize", handleResize);
     }, []);
 
-    const maxIndex = Math.max(0, galleryImages.length - visibleCards);
+    const maxIndex = Math.max(0, allImages.length - visibleCards);
 
     const nextSlide = () => {
         setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
@@ -102,7 +108,7 @@ export default function Gallery() {
                                 }
                             }}
                         >
-                            {galleryImages.map((img, idx) => (
+                            {allImages.map((img, idx) => (
                                 <motion.div
                                     key={idx}
                                     style={{ minWidth: `calc((100% - ${(visibleCards - 1) * 24}px) / ${visibleCards})` }}
