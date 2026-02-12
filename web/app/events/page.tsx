@@ -14,20 +14,77 @@ import EventDetailModal from "@/components/EventDetailModal";
 import { useLanguage } from "@/context/LanguageContext";
 import { translations } from "@/lib/translations";
 
+"use client";
+
+import { useState, useEffect } from "react";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import { motion, AnimatePresence } from "framer-motion";
+import { Calendar, MapPin, Users, ArrowRight, Clock, X, Loader2 } from "lucide-react";
+import { events as staticEvents } from "@/lib/events-data";
+import type { Event } from "@/lib/events-data";
+import { getEventTranslation, getCategoryName, getCategoryColor } from "@/lib/event-utils";
+import Link from "next/link";
+import GoldCurveSeparator from "@/components/GoldCurveSeparator";
+import EventDetailModal from "@/components/EventDetailModal";
+import { useLanguage } from "@/context/LanguageContext";
+import { translations } from "@/lib/translations";
+
 export default function EventsPage() {
     const { language } = useLanguage();
     const t = translations[language].eventsPage;
     const [showUpcoming, setShowUpcoming] = useState(true);
     const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
+    const [allEvents, setAllEvents] = useState<Event[]>(staticEvents);
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchEvents = async () => {
+            try {
+                const res = await fetch("/api/events");
+                if (res.ok) {
+                    const dbEvents = await res.json();
+
+                    // Normalize DB events to match Event interface
+                    const normalizedEvents: Event[] = dbEvents.map((e: any) => {
+                        const eventDate = new Date(e.date);
+                        const now = new Date();
+                        // Reset time part for accurate date comparison if needed, 
+                        // but usually simple comparison is enough.
+                        const isUpcoming = eventDate >= now;
+
+                        return {
+                            ...e,
+                            date: eventDate,
+                            image: e.imageUrl, // Map imageUrl to image
+                            isUpcoming: isUpcoming,
+                            // Ensure other required fields are present if missing from DB (shouldn't be based on schema)
+                        };
+                    });
+
+                    // Combine static and dynamic events
+                    // Use a Map to avoid duplicates if IDs clash (though unlikely as static uses 'ugadi-2026' and DB uses CUID)
+                    const combined = [...staticEvents, ...normalizedEvents];
+                    setAllEvents(combined);
+                }
+            } catch (error) {
+                console.error("Failed to fetch events", error);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        fetchEvents();
+    }, []);
 
     // Sort upcoming events by date (nearest first), past events by date (most recent first)
-    const upcomingEvents = events
+    const upcomingEvents = allEvents
         .filter(e => e.isUpcoming)
-        .sort((a, b) => a.date.getTime() - b.date.getTime());
+        .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
 
-    const pastEvents = events
+    const pastEvents = allEvents
         .filter(e => !e.isUpcoming)
-        .sort((a, b) => b.date.getTime() - a.date.getTime());
+        .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
     return (
         <>
@@ -141,76 +198,89 @@ export default function EventsPage() {
             {/* Events Grid */}
             <section className="py-24 bg-background-ivory">
                 <div className="container mx-auto px-4 lg:px-12">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {(showUpcoming ? upcomingEvents : pastEvents).map((event, idx) => {
-                            const translatedEvent = getEventTranslation(event, language);
-                            return (
-                                <motion.div
-                                    key={event.id}
-                                    initial={{ opacity: 0, y: 20 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ delay: idx * 0.1 }}
-                                    className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl hover:-translate-y-2 transition-all duration-300 cursor-pointer"
-                                    onClick={() => setSelectedEvent(event)}
-                                >
-                                    {/* Event Image */}
-                                    <div className="relative h-48 overflow-hidden">
-                                        <img src={event.image} alt={translatedEvent.title} className="w-full h-full object-cover" />
-                                        <div className="absolute top-4 left-4">
-                                            <div
-                                                className="px-4 py-1.5 rounded-full text-white text-xs font-bold tracking-wider uppercase backdrop-blur-sm"
-                                                style={{ backgroundColor: getCategoryColor(event.category) }}
-                                            >
-                                                {getCategoryName(event.category, language)}
+                    {isLoading ? (
+                        <div className="flex justify-center py-12">
+                            <Loader2 className="w-12 h-12 animate-spin text-[#D4AF37]" />
+                        </div>
+                    ) : (
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            {(showUpcoming ? upcomingEvents : pastEvents).map((event, idx) => {
+                                const translatedEvent = getEventTranslation(event, language);
+                                return (
+                                    <motion.div
+                                        key={event.id}
+                                        initial={{ opacity: 0, y: 20 }}
+                                        whileInView={{ opacity: 1, y: 0 }}
+                                        viewport={{ once: true }}
+                                        transition={{ delay: idx * 0.1 }}
+                                        className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl hover:-translate-y-2 transition-all duration-300 cursor-pointer"
+                                        onClick={() => setSelectedEvent(event)}
+                                    >
+                                        {/* Event Image */}
+                                        <div className="relative h-48 overflow-hidden">
+                                            <img src={event.image} alt={translatedEvent.title} className="w-full h-full object-cover" />
+                                            <div className="absolute top-4 left-4">
+                                                <div
+                                                    className="px-4 py-1.5 rounded-full text-white text-xs font-bold tracking-wider uppercase backdrop-blur-sm"
+                                                    style={{ backgroundColor: getCategoryColor(event.category) }}
+                                                >
+                                                    {getCategoryName(event.category, language)}
+                                                </div>
+                                            </div>
+                                            <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-xl px-4 py-2 text-center">
+                                                <div className="text-2xl font-bold text-[#D4AF37]">{(event.date as Date).getDate()}</div>
+                                                <div className="text-xs font-semibold text-[#5D4037]">
+                                                    {(event.date as Date).toLocaleDateString('en-US', { month: 'short' })}
+                                                </div>
                                             </div>
                                         </div>
-                                        <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-xl px-4 py-2 text-center">
-                                            <div className="text-2xl font-bold text-[#D4AF37]">{event.date.getDate()}</div>
-                                            <div className="text-xs font-semibold text-[#5D4037]">
-                                                {event.date.toLocaleDateString('en-US', { month: 'short' })}
-                                            </div>
-                                        </div>
-                                    </div>
 
-                                    {/* Event Content */}
-                                    <div className="p-6">
-                                        <h3 className="font-serif font-bold text-xl text-[#5D4037] mb-3">
-                                            {translatedEvent.title}
-                                        </h3>
+                                        {/* Event Content */}
+                                        <div className="p-6">
+                                            <h3 className="font-serif font-bold text-xl text-[#5D4037] mb-3">
+                                                {translatedEvent.title}
+                                            </h3>
 
-                                        <div className="space-y-2 text-sm text-[#5D4037]/70 mb-4">
-                                            <div className="flex items-center gap-2">
-                                                <Clock size={16} className="text-[#D4AF37]" />
-                                                <span>{event.time}</span>
-                                            </div>
-                                            <div className="flex items-center gap-2">
-                                                <MapPin size={16} className="text-[#D4AF37]" />
-                                                <span>{translatedEvent.location}</span>
+                                            <div className="space-y-2 text-sm text-[#5D4037]/70 mb-4">
+                                                <div className="flex items-center gap-2">
+                                                    <Clock size={16} className="text-[#D4AF37]" />
+                                                    <span>{event.time}</span>
+                                                </div>
+                                                <div className="flex items-center gap-2">
+                                                    <MapPin size={16} className="text-[#D4AF37]" />
+                                                    <span>{translatedEvent.location}</span>
+                                                </div>
+
                                             </div>
 
-                                        </div>
+                                            <p className="text-[#5D4037]/60 text-sm mb-4 line-clamp-2">
+                                                {translatedEvent.description}
+                                            </p>
 
-                                        <p className="text-[#5D4037]/60 text-sm mb-4 line-clamp-2">
-                                            {translatedEvent.description}
-                                        </p>
-
-                                        <div className="flex justify-center">
-                                            {event.isUpcoming && event.registrationOpen ? (
-                                                <button className="px-6 py-2.5 bg-gradient-to-b from-[#F2C96D] to-[#9E731C] text-white font-medium text-sm rounded-xl border border-[#CFA14E] shadow-[inset_0_0_0_2px_#DFA848,inset_0_0_0_3px_#FFF5D1,0_4px_8px_rgba(0,0,0,0.3)] hover:shadow-[inset_0_0_0_2px_#DFA848,inset_0_0_0_3px_#FFF5D1,0_6px_12px_rgba(0,0,0,0.4)] hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2 drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)]">
-                                                    {t.buttons.registerNow} <ArrowRight size={16} />
-                                                </button>
-                                            ) : (
-                                                <button className="px-6 py-2.5 bg-gradient-to-b from-[#FFFEF9] to-[#F3E5C5] text-[#4A3225] font-medium text-sm rounded-xl border border-[#CFA14E] shadow-[inset_0_0_0_2px_#FFFDF8,inset_0_0_0_3px_#CFA14E,0_2px_4px_rgba(0,0,0,0.05)] hover:shadow-[inset_0_0_0_2px_#FFFDF8,inset_0_0_0_3px_#CFA14E,0_4px_8px_rgba(0,0,0,0.1)] hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2">
-                                                    {t.buttons.viewDetails} <ArrowRight size={16} />
-                                                </button>
-                                            )}
+                                            <div className="flex justify-center">
+                                                {event.isUpcoming && event.registrationOpen ? (
+                                                    <button className="px-6 py-2.5 bg-gradient-to-b from-[#F2C96D] to-[#9E731C] text-white font-medium text-sm rounded-xl border border-[#CFA14E] shadow-[inset_0_0_0_2px_#DFA848,inset_0_0_0_3px_#FFF5D1,0_4px_8px_rgba(0,0,0,0.3)] hover:shadow-[inset_0_0_0_2px_#DFA848,inset_0_0_0_3px_#FFF5D1,0_6px_12px_rgba(0,0,0,0.4)] hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2 drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)]">
+                                                        {t.buttons.registerNow} <ArrowRight size={16} />
+                                                    </button>
+                                                ) : (
+                                                    <button className="px-6 py-2.5 bg-gradient-to-b from-[#FFFEF9] to-[#F3E5C5] text-[#4A3225] font-medium text-sm rounded-xl border border-[#CFA14E] shadow-[inset_0_0_0_2px_#FFFDF8,inset_0_0_0_3px_#CFA14E,0_2px_4px_rgba(0,0,0,0.05)] hover:shadow-[inset_0_0_0_2px_#FFFDF8,inset_0_0_0_3px_#CFA14E,0_4px_8px_rgba(0,0,0,0.1)] hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2">
+                                                        {t.buttons.viewDetails} <ArrowRight size={16} />
+                                                    </button>
+                                                )}
+                                            </div>
                                         </div>
-                                    </div>
-                                </motion.div>
-                            );
-                        })}
-                    </div>
+                                    </motion.div>
+                                );
+                            })}
+                        </div>
+                    )}
+
+                    {/* No events message */}
+                    {!isLoading && (showUpcoming ? upcomingEvents : pastEvents).length === 0 && (
+                        <div className="text-center py-12">
+                            <p className="text-[#5D4037]/60 text-lg">No {showUpcoming ? 'upcoming' : 'past'} events found.</p>
+                        </div>
+                    )}
                 </div>
             </section>
 

@@ -72,13 +72,21 @@ model VerificationToken {
 model Event {
   id          String   @id @default(cuid())
   title       String
+  titleKn     String?
+  category    String   @default("community")
   date        DateTime
+  time        String
   location    String
+  locationKn  String?
   description String
+  descriptionKn String?
   imageUrl    String
+  capacity    Int?
+  registrationOpen Boolean @default(true)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   donationRecords DonationRecord[]
+  registrations  EventRegistration[]
 }
 
 model Donation {
@@ -119,7 +127,8 @@ model DonationRecord {
 
 model EventRegistration {
   id          String   @id @default(cuid())
-  eventId     String   // References events-data.ts event ID
+  eventId     String
+  event       Event    @relation(fields: [eventId], references: [id])
   eventTitle  String   // Cached for quick display
   name        String
   email       String
