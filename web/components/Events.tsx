@@ -20,11 +20,38 @@ export default function Events() {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [visibleCards, setVisibleCards] = useState(3);
     const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
+    const [allEvents, setAllEvents] = useState<Event[]>(events);
+
+    useEffect(() => {
+        const fetchEvents = async () => {
+            try {
+                const res = await fetch("/api/events");
+                if (res.ok) {
+                    const dbEvents = await res.json();
+                    const normalizedEvents: Event[] = dbEvents.map((e: any) => {
+                        const eventDate = new Date(e.date);
+                        const now = new Date();
+                        const isUpcoming = eventDate >= now;
+                        return {
+                            ...e,
+                            date: eventDate,
+                            image: e.imageUrl,
+                            isUpcoming: isUpcoming,
+                        };
+                    });
+                    setAllEvents([...events, ...normalizedEvents]);
+                }
+            } catch (error) {
+                console.error("Failed to fetch events", error);
+            }
+        };
+        fetchEvents();
+    }, []);
 
     // Get only upcoming events and sort by date (nearest first)
-    const upcomingEvents = events
+    const upcomingEvents = allEvents
         .filter(e => e.isUpcoming)
-        .sort((a, b) => a.date.getTime() - b.date.getTime());
+        .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
 
     // Simple responsive handler
     useEffect(() => {
