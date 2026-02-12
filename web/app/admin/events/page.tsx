@@ -1,19 +1,6 @@
-const fileInputRef = useState<HTMLInputElement | null>(null); // logic fix: use useRef
-// actually, we need to import useRef first. 
-// waiting for next step to correct the hook usage if I can't do it here. 
-// I will rewrite the component part that needs changing.
+"use client";
 
-// Correcting the plan: I need to add useRef to imports and then use it.
-// Since I'm replacing a large chunk, I'll do it in one go.
-
-/* 
-   Wait, I can't easily add useRef to imports without replacing the top of the file.
-   I will use two replace calls or one large one. 
-   Let's do one large replacement for the component body or use separate edits.
-   I'll start by adding useRef to imports.
-*/
-
-/* Submitting "Refactor event form file input..." in next steps. */
+import { useState, useEffect, useRef } from "react";
 import DashboardLayout from "@/components/admin/DashboardLayout";
 import { useSession } from "next-auth/react";
 import {
