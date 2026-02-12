@@ -1,6 +1,19 @@
-"use client";
+const fileInputRef = useState<HTMLInputElement | null>(null); // logic fix: use useRef
+// actually, we need to import useRef first. 
+// waiting for next step to correct the hook usage if I can't do it here. 
+// I will rewrite the component part that needs changing.
 
-import { useState, useEffect } from "react";
+// Correcting the plan: I need to add useRef to imports and then use it.
+// Since I'm replacing a large chunk, I'll do it in one go.
+
+/* 
+   Wait, I can't easily add useRef to imports without replacing the top of the file.
+   I will use two replace calls or one large one. 
+   Let's do one large replacement for the component body or use separate edits.
+   I'll start by adding useRef to imports.
+*/
+
+/* Submitting "Refactor event form file input..." in next steps. */
 import DashboardLayout from "@/components/admin/DashboardLayout";
 import { useSession } from "next-auth/react";
 import {
@@ -60,6 +73,7 @@ export default function EventsPage() {
     const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
     const [activeTab, setActiveTab] = useState<"upcoming" | "past">("upcoming");
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const fileInputRef = useRef<HTMLInputElement>(null);
 
     // Form State
     const [formData, setFormData] = useState({
@@ -136,6 +150,13 @@ export default function EventsPage() {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+
+        // Manual validation for file input (since it's hidden)
+        if (!selectedEvent && !formData.file) {
+            alert("Please select an event image.");
+            return;
+        }
+
         setIsSubmitting(true);
 
         const submitData = new FormData();
@@ -575,63 +596,83 @@ export default function EventsPage() {
                                     </div>
                                 </div>
 
-                                <div>
-                                    <label className="block text-sm font-semibold text-primary-dark mb-2">
-                                        Event Image {!selectedEvent && "*"}
-                                    </label>
-                                    <div className="border-2 border-dashed border-secondary/30 rounded-lg p-6 text-center hover:bg-secondary/5 transition-colors cursor-pointer bg-background-cream/30">
-                                        <input
-                                            type="file"
-                                            accept="image/*"
-                                            required={!selectedEvent}
-                                            onChange={(e) => {
-                                                if (e.target.files?.[0]) {
-                                                    setFormData({ ...formData, file: e.target.files[0] });
-                                                }
-                                            }}
-                                            className="block w-full text-sm text-slate-500
-                                                file:mr-4 file:py-2 file:px-4
-                                                file:rounded-full file:border-0
-                                                file:text-sm file:font-semibold
-                                                file:bg-secondary/10 file:text-secondary-dark
-                                                hover:file:bg-secondary/20"
-                                        />
-                                    </div>
-                                    {formData.file && (
-                                        <p className="mt-2 text-sm text-secondary-dark font-medium">
-                                            Selected: {formData.file.name}
-                                        </p>
+                                <label className="block text-sm font-semibold text-primary-dark mb-2">
+                                    Event Image {!selectedEvent && "*"}
+                                </label>
+                                <div
+                                    onClick={() => fileInputRef.current?.click()}
+                                    className="border-2 border-dashed border-secondary/30 rounded-lg p-6 text-center hover:bg-secondary/5 transition-colors cursor-pointer bg-background-cream/30 flex flex-col items-center justify-center gap-2"
+                                >
+                                    <input
+                                        ref={fileInputRef}
+                                        type="file"
+                                        accept="image/*"
+                                        // Make required logic manual validation in handleSubmit or rely on state if file is present
+                                        onChange={(e) => {
+                                            if (e.target.files?.[0]) {
+                                                setFormData({ ...formData, file: e.target.files[0] });
+                                            }
+                                        }}
+                                        className="hidden"
+                                    />
+
+                                    {formData.file ? (
+                                        <div className="text-sm text-secondary-dark font-medium flex flex-col items-center">
+                                            <div className="w-10 h-10 bg-secondary/10 rounded-full flex items-center justify-center mb-2">
+                                                <ImageIcon className="w-5 h-5" />
+                                            </div>
+                                            {formData.file.name}
+                                            <button
+                                                type="button"
+                                                onClick={(e) => {
+                                                    e.stopPropagation();
+                                                    setFormData({ ...formData, file: null });
+                                                    if (fileInputRef.current) fileInputRef.current.value = "";
+                                                }}
+                                                className="text-xs text-red-500 hover:text-red-700 mt-1 font-semibold"
+                                            >
+                                                Remove
+                                            </button>
+                                        </div>
+                                    ) : (
+                                        <>
+                                            <Upload className="w-8 h-8 text-secondary/40" />
+                                            <span className="text-sm font-medium text-primary/60">Click to upload image</span>
+                                            <span className="text-xs text-primary/40">JPG, PNG (max 5MB)</span>
+                                            {selectedEvent && <span className="text-xs text-green-600 mt-1 font-medium">Keep existing to not change</span>}
+                                        </>
                                     )}
                                 </div>
+                            </div>
 
-                                {/* Action Buttons */}
-                                <div className="flex gap-3 mt-6 pt-6 border-t border-secondary/20">
-                                    <button
-                                        type="button"
-                                        onClick={() => setShowAddModal(false)}
-                                        className="flex-1 px-6 py-3 border-2 border-secondary/30 text-primary-dark rounded-lg hover:bg-secondary/5 transition-colors font-semibold"
-                                        disabled={isSubmitting}
-                                    >
-                                        Cancel
-                                    </button>
-                                    <button
-                                        type="submit"
-                                        disabled={isSubmitting}
-                                        className="flex-1 px-6 py-3 bg-secondary text-surface-white rounded-lg hover:bg-secondary-dark transition-colors font-semibold flex items-center justify-center gap-2 disabled:opacity-50"
-                                    >
-                                        {isSubmitting ? (
-                                            <>
-                                                <Loader2 className="w-5 h-5 animate-spin" />
-                                                Saving...
-                                            </>
-                                        ) : selectedEvent ? "Update Event" : "Create Event"}
-                                    </button>
-                                </div>
-                            </form>
-                        </motion.div>
+                            {/* Action Buttons */}
+                            <div className="flex gap-3 mt-6 pt-6 border-t border-secondary/20">
+                                <button
+                                    type="button"
+                                    onClick={() => setShowAddModal(false)}
+                                    className="flex-1 px-6 py-3 border-2 border-secondary/30 text-primary-dark rounded-lg hover:bg-secondary/5 transition-colors font-semibold"
+                                    disabled={isSubmitting}
+                                >
+                                    Cancel
+                                </button>
+                                <button
+                                    type="submit"
+                                    disabled={isSubmitting}
+                                    className="flex-1 px-6 py-3 bg-secondary text-surface-white rounded-lg hover:bg-secondary-dark transition-colors font-semibold flex items-center justify-center gap-2 disabled:opacity-50"
+                                >
+                                    {isSubmitting ? (
+                                        <>
+                                            <Loader2 className="w-5 h-5 animate-spin" />
+                                            Saving...
+                                        </>
+                                    ) : selectedEvent ? "Update Event" : "Create Event"}
+                                </button>
+                            </div>
+                        </form>
+                    </motion.div>
                     </div>
                 )}
-            </AnimatePresence>
-        </DashboardLayout>
+        </AnimatePresence>
+        </DashboardLayout >
     );
 }
