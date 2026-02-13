@@ -34,9 +34,10 @@ export default function EventsPage() {
                     const normalizedEvents: Event[] = dbEvents.map((e: any) => {
                         const eventDate = new Date(e.date);
                         const now = new Date();
-                        // Reset time part for accurate date comparison if needed, 
-                        // but usually simple comparison is enough.
-                        const isUpcoming = eventDate >= now;
+                        now.setHours(0, 0, 0, 0); // Normalize 'now' to start of today
+
+                        // Compare normalized dates (ignoring time) or check if event is today or future
+                        const isUpcoming = new Date(eventDate).setHours(0, 0, 0, 0) >= now.getTime();
 
                         return {
                             ...e,

@@ -207,20 +207,26 @@ export default function EventsPage() {
 
 
     const now = new Date();
-    const upcomingEvents = events.filter(e => new Date(e.date) >= now);
-    const pastEvents = events.filter(e => new Date(e.date) < now);
+    now.setHours(0, 0, 0, 0); // Normalize to start of today
+
+    // Compare normalized dates (ignoring time)
+    const upcomingEvents = events.filter(e => new Date(e.date).setHours(0, 0, 0, 0) >= now.getTime());
+    const pastEvents = events.filter(e => new Date(e.date).setHours(0, 0, 0, 0) < now.getTime());
 
     const displayEvents = activeTab === "upcoming" ? upcomingEvents : pastEvents;
 
-    const getCategoryColor = (category: string) => {
-        const colors = {
-            festival: "bg-accent-saffron/20 text-accent-saffron",
-            discourse: "bg-secondary/20 text-secondary-dark",
-            community: "bg-primary/20 text-primary-dark",
-            cultural: "bg-secondary-light/20 text-secondary-light",
-            educational: "bg-primary/10 text-primary",
+    const getCategoryBadgeStyle = (category: string) => {
+        const base = "backdrop-blur-md shadow-[0_2px_4px_rgba(0,0,0,0.05)] border px-3 py-1 rounded-full text-xs font-bold tracking-wide uppercase";
+
+        const styles = {
+            festival: "bg-[#FFF9F0]/90 border-[#FFB347]/30 text-[#D97706]", // Warm Orange/Gold for Festival
+            discourse: "bg-[#F0FDFA]/90 border-[#5EEAD4]/30 text-[#0F766E]", // Teal for Discourse
+            community: "bg-[#F0F9FF]/90 border-[#7DD3FC]/30 text-[#0369A1]", // Light Blue for Community
+            cultural: "bg-[#FFF1F2]/90 border-[#FDA4AF]/30 text-[#BE123C]", // Rose/Pink for Cultural
+            educational: "bg-[#FAF5FF]/90 border-[#D8B4FE]/30 text-[#7E22CE]", // Purple for Educational
         };
-        return colors[category as keyof typeof colors] || colors.community;
+
+        return `${base} ${styles[category as keyof typeof styles] || "bg-gray-50/90 border-gray-200 text-gray-700"}`;
     };
 
     return (
@@ -324,8 +330,8 @@ export default function EventsPage() {
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent pointer-events-none" />
                                     <div className="absolute top-3 left-3">
-                                        <span className={`text-xs px-3 py-1 rounded-full font-semibold ${getCategoryColor(event.category)}`}>
-                                            {event.category.toUpperCase()}
+                                        <span className={getCategoryBadgeStyle(event.category)}>
+                                            {event.category}
                                         </span>
                                     </div>
                                 </div>

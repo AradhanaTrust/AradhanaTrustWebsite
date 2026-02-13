@@ -13,6 +13,8 @@ export default function UsersPage() {
     const [selectedUser, setSelectedUser] = useState<any>(null);
     const [showPasswordModal, setShowPasswordModal] = useState(false);
     const [showEditModal, setShowEditModal] = useState(false);
+    const [newPassword, setNewPassword] = useState("");
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     useEffect(() => {
         fetchUsers();
@@ -40,6 +42,39 @@ export default function UsersPage() {
     const handleEditUser = (user: any) => {
         setSelectedUser(user);
         setShowEditModal(true);
+    };
+
+    const handleResetPasswordSubmit = async () => {
+        if (!newPassword) {
+            alert("Please enter a new password");
+            return;
+        }
+
+        setIsSubmitting(true);
+        try {
+            const res = await fetch("/api/admin/users", {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    id: selectedUser.id,
+                    password: newPassword
+                }),
+            });
+
+            if (res.ok) {
+                alert("Password reset successfully");
+                setShowPasswordModal(false);
+                setNewPassword("");
+            } else {
+                const msg = await res.text();
+                alert("Failed to reset password: " + msg);
+            }
+        } catch (error) {
+            console.error("Failed to reset password", error);
+            alert("Failed to reset password");
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     return (
@@ -180,15 +215,42 @@ export default function UsersPage() {
                             <p className="text-primary/70 mb-6">
                                 Reset password for <strong>{selectedUser.name}</strong>
                             </p>
+
+                            <div className="mb-4">
+                                <label className="block text-sm font-semibold text-primary-dark mb-2">
+                                    New Password
+                                </label>
+                                <input
+                                    type="password"
+                                    value={newPassword}
+                                    onChange={(e) => setNewPassword(e.target.value)}
+                                    className="w-full px-4 py-2 border-2 border-secondary/20 rounded-lg focus:border-secondary focus:outline-none"
+                                    placeholder="Enter new password"
+                                />
+                            </div>
+
                             <div className="flex gap-3 mt-6">
                                 <button
-                                    onClick={() => setShowPasswordModal(false)}
+                                    onClick={() => {
+                                        setShowPasswordModal(false);
+                                        setNewPassword("");
+                                    }}
                                     className="flex-1 px-4 py-2 border-2 border-secondary/30 text-primary-dark rounded-lg hover:bg-secondary/5 transition-colors"
+                                    disabled={isSubmitting}
                                 >
                                     Cancel
                                 </button>
-                                <button className="flex-1 px-4 py-2 bg-secondary text-surface-white rounded-lg hover:bg-secondary-dark transition-colors">
-                                    Reset Password
+                                <button
+                                    onClick={handleResetPasswordSubmit}
+                                    disabled={isSubmitting || !newPassword}
+                                    className="flex-1 px-4 py-2 bg-secondary text-surface-white rounded-lg hover:bg-secondary-dark transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
+                                >
+                                    {isSubmitting ? (
+                                        <>
+                                            <Loader2 className="w-4 h-4 animate-spin" />
+                                            Resetting...
+                                        </>
+                                    ) : "Reset Password"}
                                 </button>
                             </div>
                         </motion.div>
