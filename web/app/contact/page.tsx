@@ -71,9 +71,9 @@ export default function ContactPage() {
                 {/* Gradient Overlay for Text Readability */}
                 <div className="absolute inset-0 bg-gradient-to-b from-[#FDFBF7]/0 via-[#FDFBF7]/30 to-[#FDFBF7]/90 pointer-events-none" />
 
-                <div className="container mx-auto px-4 lg:px-12 relative z-10 w-full">
+                <div className="container-gold relative z-10 w-full">
                     {/* Adjusted Grid: Reduced gap further (gap-0 to gap-4) and added symmetric padding (pl-12 pr-12) */}
-                    <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-12 lg:gap-0 items-center lg:pr-12 lg:pl-12">
+                    <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-12 lg:gap-0 items-center">
 
                         {/* LEFT CONTENT - Centered Text */}
                         <motion.div
