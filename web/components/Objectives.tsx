@@ -50,12 +50,12 @@ export default function Objectives() {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 transition={{ delay: idx * 0.1 }}
                                 viewport={{ once: true }}
-                                className="group bg-gradient-to-b from-[#FFFEF9] to-[#F3E5C5] rounded-2xl p-4 md:p-6 border border-[#CFA14E] shadow-[inset_0_0_0_2px_#FFFDF8,inset_0_0_0_3px_#CFA14E,0_2px_4px_rgba(0,0,0,0.05)] hover:shadow-[inset_0_0_0_2px_#FFFDF8,inset_0_0_0_3px_#CFA14E,0_8px_16px_rgba(0,0,0,0.1)] hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center cursor-pointer h-full relative overflow-hidden"
+                                className="group bg-gradient-to-b from-[#FFFEF9] to-[#F3E5C5] rounded-2xl px-4 py-5 md:px-5 md:py-6 xl:p-6 border border-[#CFA14E] shadow-[inset_0_0_0_2px_#FFFDF8,inset_0_0_0_3px_#CFA14E,0_2px_4px_rgba(0,0,0,0.05)] hover:shadow-[inset_0_0_0_2px_#FFFDF8,inset_0_0_0_3px_#CFA14E,0_8px_16px_rgba(0,0,0,0.1)] hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center cursor-pointer h-full relative overflow-hidden"
                             >
                                 <div className="absolute inset-0 texture-parchment opacity-40 pointer-events-none" />
 
-                                {/* Image Container */}
-                                <div className="relative z-10 w-full h-24 md:h-32 flex items-center justify-center mb-4">
+                                {/* Image Container: Compact on Zoom (md/lg), Original on Normal (xl) */}
+                                <div className="relative z-10 w-full h-20 md:h-24 xl:h-32 flex items-center justify-center mb-3 xl:mb-4">
                                     <img
                                         src={images[idx]}
                                         alt={obj.title}
@@ -63,8 +63,8 @@ export default function Objectives() {
                                     />
                                 </div>
 
-                                {/* Title */}
-                                <h3 className="font-cinzel-decorative font-bold text-[#5D4037] text-base md:text-lg relative z-10 group-hover:text-[#8B5E3C] transition-colors leading-relaxed tracking-wider uppercase" style={{ fontFeatureSettings: '"liga" 0, "clig" 0', fontVariantLigatures: 'none' }}>
+                                {/* Title: Smaller on Zoom, Original on Normal */}
+                                <h3 className="font-cinzel-decorative font-bold text-[#5D4037] text-sm md:text-base xl:text-lg relative z-10 group-hover:text-[#8B5E3C] transition-colors leading-relaxed tracking-wider uppercase" style={{ fontFeatureSettings: '"liga" 0, "clig" 0', fontVariantLigatures: 'none' }}>
                                     {obj.title === "Vedic Pooja" ? <>Vedic<br />Pooja</> : obj.title}
                                 </h3>
                             </motion.div>

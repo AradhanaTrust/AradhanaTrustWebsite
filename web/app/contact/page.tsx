@@ -405,54 +405,54 @@ export default function ContactPage() {
                         <h2 className="font-cinzel-decorative font-bold text-3xl md:text-4xl text-[#D4AF37]">{t.quickContact.title}</h2>
                     </div>
 
-                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
                         {/* Puja Services */}
-                        <Link href="/events">
+                        <Link href="/events" className="h-full block">
                             <motion.div
                                 initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
-                                className="bg-white rounded-2xl p-6 shadow-lg border border-[#CFA14E]/20 hover:shadow-xl hover:-translate-y-2 transition-all cursor-pointer group"
+                                className="bg-white rounded-2xl p-6 shadow-lg border border-[#CFA14E]/20 hover:shadow-xl hover:-translate-y-2 transition-all cursor-pointer group h-full flex flex-col"
                             >
-                                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-[#F2C96D] to-[#9E731C] flex items-center justify-center group-hover:scale-110 transition-transform">
+                                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-[#F2C96D] to-[#9E731C] flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0">
                                     <MessageSquare size={32} className="text-white" />
                                 </div>
                                 <h3 className="font-cinzel-decorative font-bold text-xl text-[#5D4037] text-center mb-2">{t.quickContact.puja.title}</h3>
-                                <p className="text-[#5D4037]/70 text-sm text-center">{t.quickContact.puja.desc}</p>
+                                <p className="text-[#5D4037]/70 text-sm text-center flex-grow">{t.quickContact.puja.desc}</p>
                             </motion.div>
                         </Link>
 
                         {/* Donations */}
-                        <Link href="/donate">
+                        <Link href="/donate" className="h-full block">
                             <motion.div
                                 initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: 0.1 }}
-                                className="bg-white rounded-2xl p-6 shadow-lg border border-[#CFA14E]/20 hover:shadow-xl hover:-translate-y-2 transition-all cursor-pointer group"
+                                className="bg-white rounded-2xl p-6 shadow-lg border border-[#CFA14E]/20 hover:shadow-xl hover:-translate-y-2 transition-all cursor-pointer group h-full flex flex-col"
                             >
-                                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-[#F2C96D] to-[#9E731C] flex items-center justify-center group-hover:scale-110 transition-transform">
+                                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-[#F2C96D] to-[#9E731C] flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0">
                                     <Heart size={32} className="text-white" />
                                 </div>
                                 <h3 className="font-cinzel-decorative font-bold text-xl text-[#5D4037] text-center mb-2">{t.quickContact.donate.title}</h3>
-                                <p className="text-[#5D4037]/70 text-sm text-center">{t.quickContact.donate.desc}</p>
+                                <p className="text-[#5D4037]/70 text-sm text-center flex-grow">{t.quickContact.donate.desc}</p>
                             </motion.div>
                         </Link>
 
                         {/* Events */}
-                        <Link href="/events">
+                        <Link href="/events" className="h-full block">
                             <motion.div
                                 initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: 0.2 }}
-                                className="bg-white rounded-2xl p-6 shadow-lg border border-[#CFA14E]/20 hover:shadow-xl hover:-translate-y-2 transition-all cursor-pointer group"
+                                className="bg-white rounded-2xl p-6 shadow-lg border border-[#CFA14E]/20 hover:shadow-xl hover:-translate-y-2 transition-all cursor-pointer group h-full flex flex-col"
                             >
-                                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-[#F2C96D] to-[#9E731C] flex items-center justify-center group-hover:scale-110 transition-transform">
+                                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-[#F2C96D] to-[#9E731C] flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0">
                                     <Calendar size={32} className="text-white" />
                                 </div>
                                 <h3 className="font-cinzel-decorative font-bold text-xl text-[#5D4037] text-center mb-2">{t.quickContact.events.title}</h3>
-                                <p className="text-[#5D4037]/70 text-sm text-center">{t.quickContact.events.desc}</p>
+                                <p className="text-[#5D4037]/70 text-sm text-center flex-grow">{t.quickContact.events.desc}</p>
                             </motion.div>
                         </Link>
 
@@ -462,13 +462,13 @@ export default function ContactPage() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: 0.3 }}
-                            className="bg-white rounded-2xl p-6 shadow-lg border border-[#CFA14E]/20 hover:shadow-xl hover:-translate-y-2 transition-all cursor-pointer group"
+                            className="bg-white rounded-2xl p-6 shadow-lg border border-[#CFA14E]/20 hover:shadow-xl hover:-translate-y-2 transition-all cursor-pointer group h-full flex flex-col"
                         >
-                            <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-[#F2C96D] to-[#9E731C] flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-[#F2C96D] to-[#9E731C] flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0">
                                 <Users size={32} className="text-white" />
                             </div>
                             <h3 className="font-cinzel-decorative font-bold text-xl text-[#5D4037] text-center mb-2">{t.quickContact.volunteer.title}</h3>
-                            <p className="text-[#5D4037]/70 text-sm text-center">{t.quickContact.volunteer.desc}</p>
+                            <p className="text-[#5D4037]/70 text-sm text-center flex-grow">{t.quickContact.volunteer.desc}</p>
                         </motion.div>
                     </div>
                 </div>
