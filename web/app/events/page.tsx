@@ -1,21 +1,5 @@
 "use client";
 
-import { useState } from "react";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import { motion, AnimatePresence } from "framer-motion";
-import { Calendar, MapPin, Users, ArrowRight, Clock, X } from "lucide-react";
-import { events } from "@/lib/events-data";
-import type { Event } from "@/lib/events-data";
-import { getEventTranslation, getCategoryName, getCategoryColor } from "@/lib/event-utils";
-import Link from "next/link";
-import GoldCurveSeparator from "@/components/GoldCurveSeparator";
-import EventDetailModal from "@/components/EventDetailModal";
-import { useLanguage } from "@/context/LanguageContext";
-import { translations } from "@/lib/translations";
-
-"use client";
-
 import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -29,6 +13,7 @@ import GoldCurveSeparator from "@/components/GoldCurveSeparator";
 import EventDetailModal from "@/components/EventDetailModal";
 import { useLanguage } from "@/context/LanguageContext";
 import { translations } from "@/lib/translations";
+
 
 export default function EventsPage() {
     const { language } = useLanguage();
@@ -62,10 +47,16 @@ export default function EventsPage() {
                         };
                     });
 
-                    // Combine static and dynamic events
-                    // Use a Map to avoid duplicates if IDs clash (though unlikely as static uses 'ugadi-2026' and DB uses CUID)
-                    const combined = [...staticEvents, ...normalizedEvents];
-                    setAllEvents(combined);
+                    // Merge and Deduplicate: specific DB events override static events with same ID
+                    const eventMap = new Map<string, Event>();
+
+                    // 1. Add static events
+                    staticEvents.forEach(event => eventMap.set(event.id, event));
+
+                    // 2. Add/Overwrite with DB events
+                    normalizedEvents.forEach(event => eventMap.set(event.id, event));
+
+                    setAllEvents(Array.from(eventMap.values()));
                 }
             } catch (error) {
                 console.error("Failed to fetch events", error);

@@ -39,7 +39,17 @@ export default function Events() {
                             isUpcoming: isUpcoming,
                         };
                     });
-                    setAllEvents([...events, ...normalizedEvents]);
+
+                    // Merge and Deduplicate: specific DB events override static events with same ID
+                    const eventMap = new Map<string, Event>();
+
+                    // 1. Add static events
+                    events.forEach(event => eventMap.set(event.id, event));
+
+                    // 2. Add/Overwrite with DB events
+                    normalizedEvents.forEach(event => eventMap.set(event.id, event));
+
+                    setAllEvents(Array.from(eventMap.values()));
                 }
             } catch (error) {
                 console.error("Failed to fetch events", error);
@@ -175,8 +185,8 @@ export default function Events() {
                                             <div className="p-5 space-y-3 relative z-20 flex-1 flex flex-col items-center text-center">
                                                 {/* Date Badge */}
                                                 <div className="absolute -top-6 left-1/2 -translate-x-1/2 bg-[#FFFEF9] border border-[#CFA14E] px-3 py-1 rounded-lg shadow-md flex flex-col items-center min-w-[70px]">
-                                                    <span className="text-[10px] font-bold text-secondary-dark uppercase">{event.date.toLocaleDateString('en-US', { month: 'short' })}</span>
-                                                    <span className="text-xl font-serif font-bold text-primary-dark">{event.date.getDate()}</span>
+                                                    <span className="text-[10px] font-bold text-secondary-dark uppercase">{new Date(event.date).toLocaleDateString('en-US', { month: 'short' })}</span>
+                                                    <span className="text-xl font-serif font-bold text-primary-dark">{new Date(event.date).getDate()}</span>
                                                 </div>
 
                                                 <div className="pt-4 space-y-2 flex-1 w-full flex flex-col justify-center">

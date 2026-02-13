@@ -630,36 +630,34 @@ export default function EventsPage() {
                                         </>
                                     )}
                                 </div>
-                            </div>
-
-                            {/* Action Buttons */}
-                            <div className="flex gap-3 mt-6 pt-6 border-t border-secondary/20">
-                                <button
-                                    type="button"
-                                    onClick={() => setShowAddModal(false)}
-                                    className="flex-1 px-6 py-3 border-2 border-secondary/30 text-primary-dark rounded-lg hover:bg-secondary/5 transition-colors font-semibold"
-                                    disabled={isSubmitting}
-                                >
-                                    Cancel
-                                </button>
-                                <button
-                                    type="submit"
-                                    disabled={isSubmitting}
-                                    className="flex-1 px-6 py-3 bg-secondary text-surface-white rounded-lg hover:bg-secondary-dark transition-colors font-semibold flex items-center justify-center gap-2 disabled:opacity-50"
-                                >
-                                    {isSubmitting ? (
-                                        <>
-                                            <Loader2 className="w-5 h-5 animate-spin" />
-                                            Saving...
-                                        </>
-                                    ) : selectedEvent ? "Update Event" : "Create Event"}
-                                </button>
-                            </div>
-                        </form>
-                    </motion.div>
+                                {/* Action Buttons */}
+                                <div className="flex gap-3 mt-6 pt-6 border-t border-secondary/20">
+                                    <button
+                                        type="button"
+                                        onClick={() => setShowAddModal(false)}
+                                        className="flex-1 px-6 py-3 border-2 border-secondary/30 text-primary-dark rounded-lg hover:bg-secondary/5 transition-colors font-semibold"
+                                        disabled={isSubmitting}
+                                    >
+                                        Cancel
+                                    </button>
+                                    <button
+                                        type="submit"
+                                        disabled={isSubmitting}
+                                        className="flex-1 px-6 py-3 bg-secondary text-surface-white rounded-lg hover:bg-secondary-dark transition-colors font-semibold flex items-center justify-center gap-2 disabled:opacity-50"
+                                    >
+                                        {isSubmitting ? (
+                                            <>
+                                                <Loader2 className="w-5 h-5 animate-spin" />
+                                                Saving...
+                                            </>
+                                        ) : selectedEvent ? "Update Event" : "Create Event"}
+                                    </button>
+                                </div>
+                            </form>
+                        </motion.div>
                     </div>
                 )}
-        </AnimatePresence>
+            </AnimatePresence>
         </DashboardLayout >
     );
 }
