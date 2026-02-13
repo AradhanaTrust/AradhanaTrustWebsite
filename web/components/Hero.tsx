@@ -52,7 +52,7 @@ export default function Hero() {
             </div>
 
             {/* Content Container */}
-            <div className="w-full px-4 lg:px-12 relative z-10 flex flex-col items-center text-center space-y-8">
+            <div className="container-gold relative z-10 flex flex-col items-center text-center space-y-8">
 
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}

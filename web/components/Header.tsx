@@ -43,7 +43,7 @@ export default function Header() {
                 : "bg-background-cream/80 backdrop-blur-md py-3 h-20 lg:h-28"
                 }`}
         >
-            <div className="w-full max-w-[1920px] mx-auto px-4 lg:px-8 2xl:px-16 h-full flex items-center justify-between gap-4">
+            <div className="container-gold h-full flex items-center justify-between gap-4">
                 {/* Logo Section */}
                 <Link
                     href="/"
@@ -53,29 +53,30 @@ export default function Header() {
                         <img
                             src="/assets/Logo_Main.png"
                             alt="Aradhana Dharmika Trust"
-                            className={`w-auto object-contain transition-all duration-500 group-hover:scale-105 filter drop-shadow-md ${scrolled ? "h-9 lg:h-12" : "h-10 lg:h-16"
+                            className={`w-auto object-contain transition-all duration-500 group-hover:scale-105 filter drop-shadow-md ${scrolled ? "h-9 lg:h-10 xl:h-12" : "h-10 lg:h-12 xl:h-16"
                                 }`}
                         />
                     </div>
                     <div className="flex flex-col justify-center transition-all duration-500">
-                        <span className={`font-cinzel-decorative font-black tracking-wide text-[#5D4037] leading-none drop-shadow-sm transition-all duration-500 whitespace-nowrap ${scrolled ? "text-lg lg:text-2xl" : "text-xl lg:text-3xl"
+                        <span className={`font-cinzel-decorative font-black tracking-wide text-[#5D4037] leading-none drop-shadow-sm transition-all duration-500 whitespace-nowrap ${scrolled ? "text-lg lg:text-xl xl:text-2xl" : "text-xl lg:text-2xl xl:text-3xl"
                             }`}>
                             {t.trustNameLine1}
                         </span>
-                        <span className={`font-cinzel-decorative font-black tracking-[0.2em] text-[#795548] leading-tight transition-all duration-500 whitespace-nowrap ${scrolled ? "text-[10px] lg:text-xs" : "text-xs lg:text-base"
+                        {/* Tagline: Always visible, scales down on Compact Desktop */}
+                        <span className={`font-cinzel-decorative font-black tracking-[0.2em] text-[#795548] leading-tight transition-all duration-500 whitespace-nowrap ${scrolled ? "text-[10px] xl:text-xs" : "text-xs xl:text-base"
                             }`}>
                             {t.trustNameLine2}
                         </span>
                     </div>
                 </Link>
 
-                {/* Desktop Navigation - Centered & Premium */}
-                <nav className="hidden lg:flex items-center gap-6 xl:gap-10 ml-auto">
+                {/* Desktop Navigation - Compact (gap-4) -> Spacious (gap-10) */}
+                <nav className="hidden lg:flex items-center gap-4 xl:gap-10 ml-auto">
                     {navLinks.map((link) => (
                         <Link
                             key={link.name}
                             href={link.href}
-                            className="relative text-xs xl:text-sm font-serif font-bold uppercase tracking-[0.15em] text-primary-dark/80 hover:text-secondary-dark transition-colors group py-2 whitespace-nowrap"
+                            className="relative text-xs lg:text-[13px] xl:text-sm font-serif font-bold uppercase tracking-[0.15em] text-primary-dark/80 hover:text-secondary-dark transition-colors group py-2 whitespace-nowrap"
                         >
                             {link.name}
                             <span className="absolute left-0 bottom-0 w-0 h-[1.5px] bg-gradient-to-r from-secondary-light via-secondary to-secondary-dark transition-all duration-300 group-hover:w-full" />
@@ -84,7 +85,7 @@ export default function Header() {
                 </nav>
 
                 {/* Right Section: User Icon + Language Toggle */}
-                <div className="hidden lg:flex items-center gap-6">
+                <div className="hidden lg:flex items-center gap-3 xl:gap-6">
                     {/* User Authentication */}
                     <div className="relative">
                         <button
@@ -98,7 +99,7 @@ export default function Header() {
                                 <UserCircle className="w-6 h-6 text-secondary-dark" />
                             </div>
                             {session && (
-                                <span className="text-sm font-bold font-serif tracking-wider text-primary-dark">
+                                <span className="text-sm font-bold font-serif tracking-wider text-primary-dark hidden xl:inline-block">
                                     {session.user?.name?.split(' ')[0]}
                                 </span>
                             )}
@@ -149,7 +150,7 @@ export default function Header() {
                     {/* Language Toggle */}
                     <button
                         onClick={toggleLanguage}
-                        className={`text-[11px] font-black tracking-widest border-2 border-secondary px-6 py-2.5 rounded-full transition-all uppercase shadow-sm hover:shadow-md active:scale-95 ${scrolled ? "bg-white text-secondary-dark" : "bg-secondary text-white"
+                        className={`text-[10px] xl:text-[11px] font-black tracking-widest border-2 border-secondary px-4 xl:px-6 py-2 xl:py-2.5 rounded-full transition-all uppercase shadow-sm hover:shadow-md active:scale-95 ${scrolled ? "bg-white text-secondary-dark" : "bg-secondary text-white"
                             }`}
                     >
                         {t.toggleBtn}

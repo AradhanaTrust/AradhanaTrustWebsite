@@ -87,7 +87,7 @@ export default function Events() {
 
     return (
         <section id="events" className="py-20 lg:py-24 bg-background-cream relative overflow-hidden">
-            <div className="container mx-auto px-4 lg:px-8 relative z-10">
+            <div className="container-gold relative z-10">
 
                 {/* Header Section - Compact Spacing */}
                 <div className="text-center mb-6 space-y-2">

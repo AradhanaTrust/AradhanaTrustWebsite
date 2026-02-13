@@ -24,7 +24,7 @@ export default function Donation() {
         <section id="donations" className="py-24 relative bg-background-cream overflow-hidden">
 
 
-            <div className="container mx-auto px-4 lg:px-12 relative z-10 text-primary-dark">
+            <div className="container-gold relative z-10 text-primary-dark">
                 <div className="grid lg:grid-cols-2 gap-16 items-center max-w-7xl mx-auto">
 
                     <div className="space-y-8 text-center max-w-md mx-auto">

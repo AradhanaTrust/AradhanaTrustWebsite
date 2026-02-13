@@ -56,7 +56,7 @@ export default function Gallery({ dbImages = [] }: GalleryProps) {
             {/* Background Pattern */}
             <div className="absolute inset-0 bg-mandala-premium opacity-[0.03] animate-spin-slow pointer-events-none" />
 
-            <div className="container mx-auto px-4 lg:px-8 relative z-10">
+            <div className="container-gold relative z-10">
 
                 {/* Header Section - Standardized Lined Style */}
                 <div className="text-center mb-12 space-y-4">

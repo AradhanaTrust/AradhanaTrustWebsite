@@ -19,7 +19,7 @@ export default function Welcome() {
             <div className="absolute top-1/2 -left-20 -translate-y-1/2 w-64 h-64 bg-[url('/assets/mandala-bg.svg')] bg-contain bg-no-repeat opacity-5 animate-spin-slow pointer-events-none" />
             <div className="absolute top-1/2 -right-20 -translate-y-1/2 w-64 h-64 bg-[url('/assets/mandala-bg.svg')] bg-contain bg-no-repeat opacity-5 animate-spin-slow pointer-events-none" />
 
-            <div className="container mx-auto px-4 lg:px-12 relative z-10">
+            <div className="container-gold relative z-10">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}

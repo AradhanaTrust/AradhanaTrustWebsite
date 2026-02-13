@@ -13,7 +13,7 @@ export default function Objectives() {
 
     return (
         <section className="py-20 bg-background border-t border-secondary/10 relative">
-            <div className="w-full max-w-[1800px] mx-auto px-4 lg:px-12 pb-8">
+            <div className="container-gold pb-8">
                 <div className="text-center mb-16 space-y-6">
                     <div className="flex items-center justify-center gap-4 text-secondary">
                         <span className="h-[1.5px] w-24 bg-gradient-to-r from-transparent to-secondary" />
