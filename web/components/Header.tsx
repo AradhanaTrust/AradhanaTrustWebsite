@@ -71,12 +71,12 @@ export default function Header() {
                 </Link>
 
                 {/* Desktop Navigation - Compact (gap-4) -> Spacious (gap-10) */}
-                <nav className="hidden lg:flex items-center gap-4 xl:gap-10 ml-auto">
+                <nav className="hidden lg:flex items-center gap-2 xl:gap-10 ml-auto">
                     {navLinks.map((link) => (
                         <Link
                             key={link.name}
                             href={link.href}
-                            className="relative text-xs lg:text-[13px] xl:text-sm font-serif font-bold uppercase tracking-[0.15em] text-primary-dark/80 hover:text-secondary-dark transition-colors group py-2 whitespace-nowrap"
+                            className="relative text-[10px] lg:text-[13px] xl:text-sm font-serif font-bold uppercase tracking-[0.15em] text-primary-dark/80 hover:text-secondary-dark transition-colors group py-2 whitespace-nowrap"
                         >
                             {link.name}
                             <span className="absolute left-0 bottom-0 w-0 h-[1.5px] bg-gradient-to-r from-secondary-light via-secondary to-secondary-dark transition-all duration-300 group-hover:w-full" />
@@ -90,16 +90,16 @@ export default function Header() {
                     <div className="relative">
                         <button
                             onClick={() => session ? setShowUserMenu(!showUserMenu) : setIsLoginModalOpen(true)}
-                            className={`flex items-center gap-3 p-1.5 rounded-full transition-all duration-300 group border-2 ${session ? "pr-4" : ""
+                            className={`flex items-center gap-2 lg:gap-3 p-1.5 rounded-full transition-all duration-300 group border-2 ${session ? "pr-3 lg:pr-4" : ""
                                 } ${scrolled ? "border-secondary/20 bg-secondary/5" : "border-secondary/40 bg-white/10"
                                 } hover:border-secondary hover:bg-secondary/10`}
                             aria-label={session ? "User menu" : "Login"}
                         >
-                            <div className="bg-secondary/20 rounded-full p-1">
+                            <div className="bg-secondary/20 rounded-full p-1 flex-shrink-0">
                                 <UserCircle className="w-6 h-6 text-secondary-dark" />
                             </div>
                             {session && (
-                                <span className="text-sm font-bold font-serif tracking-wider text-primary-dark hidden xl:inline-block">
+                                <span className="text-xs lg:text-sm font-bold font-serif tracking-wider text-primary-dark hidden lg:inline-block">
                                     {session.user?.name?.split(' ')[0]}
                                 </span>
                             )}
