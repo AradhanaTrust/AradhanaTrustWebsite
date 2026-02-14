@@ -154,6 +154,11 @@ DATABASE_URL="postgresql://user:pass@ep-xxx.ap-southeast-1.aws.neon.tech/neondb?
 # NextAuth
 NEXTAUTH_URL="https://aradhanadharmikatrust.org"
 NEXTAUTH_SECRET="your-32-char-random-string-here"
+
+# Vercel Blob (Image Storage)
+# Recommended: Keep using Vercel Blob even on VPS for stateless image handling.
+# This works seamlessly without code changes.
+BLOB_READ_WRITE_TOKEN="vercel_blob_rw_..."
 ```
 
 Save and exit (`Ctrl+X`, `Y`, `Enter`)
@@ -198,7 +203,30 @@ pm2 status
 
 ---
 
-## Part 4: Configure Nginx Reverse Proxy
+## Part 4: Storage Strategy Options
+
+### Option A: Keep Vercel Blob (Recommended)
+**No code changes required.**
+- **Pros:** Fast global CDN for images, simpler server setup (stateless), no need to manage local file backups.
+- **Cons:** Usage limits apply (though free tier is generous).
+- **Action:** Just ensure `BLOB_READ_WRITE_TOKEN` is in your `.env`.
+
+### Option B: Switch to Local Filesystem Storage
+If you want to stop using Vercel Blob entirely and store images on the Hostinger VPS disk:
+
+1.  **Code Changes Required**:
+    - Revert `app/api/admin/gallery/route.ts` to use `fs.writeFile` instead of `@vercel/blob`.
+    - Remove `@vercel/blob` import.
+    - Change `imageUrl` logic to save relative paths (e.g., `/uploads/gallery/...`).
+2.  **Configuration**:
+    - Ensure the `public/uploads` directory exists and is writable on the server.
+    - Remove `images.remotePatterns` for Vercel Blob from `next.config.ts`.
+3.  **Infrastructure**:
+    - **Backups:** You must manually back up the `public/uploads` folder, as it is now stateful data on your disk.
+
+---
+
+## Part 5: Configure Nginx Reverse Proxy
 
 ### Step 1: Create Nginx Configuration
 
