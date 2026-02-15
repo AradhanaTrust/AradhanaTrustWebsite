@@ -47,7 +47,7 @@ export async function sendContactEmail(formData: FormData) {
 
         const mailOptions = {
             from: process.env.SMTP_USER,
-            to: process.env.CONTACT_EMAIL || "support@aradhanadharmikatrust.org",
+            to: process.env.CONTACT_EMAIL || "[EMAIL_ADDRESS]",
             subject: `New Contact Form Submission: ${readableSubject}`,
             html: `
                 <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">

@@ -25,6 +25,7 @@ export interface Event {
     gallery?: string[];
     registrationOpen: boolean;
     capacity?: number;
+    price?: number;
     attendees?: number;
     isUpcoming: boolean;
 }
@@ -45,6 +46,7 @@ export const events: Event[] = [
         agendaKey: 'ugadi2026.agenda',
         registrationOpen: true,
         capacity: 300,
+        price: 500,
         attendees: 142,
         isUpcoming: true
     },

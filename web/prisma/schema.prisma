@@ -82,6 +82,7 @@ model Event {
   descriptionKn String?
   imageUrl    String
   capacity    Int?
+  price       Float    @default(0)
   registrationOpen Boolean @default(true)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
@@ -90,13 +91,20 @@ model Event {
 }
 
 model Donation {
-  id        String   @id @default(cuid())
-  amount    Float
-  paymentId String // Razorpay ID
-  status    String // "SUCCESS", "PENDING"
-  userId    String?
-  user      User?     @relation(fields: [userId], references: [id])
-  createdAt DateTime @default(now())
+  id              String   @id @default(cuid())
+  amount          Float
+  currency        String   @default("INR")
+  status          String   @default("created") // "created", "paid", "failed"
+  razorpayOrderId String   @unique
+  razorpayPaymentId String?
+  razorpaySignature String?
+  donorName       String?
+  donorEmail      String?
+  donorPhone      String?
+  userId          String?
+  user            User?     @relation(fields: [userId], references: [id])
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 }
 
 // ==================== Admin Dashboard Models ====================
@@ -133,10 +141,17 @@ model EventRegistration {
   name        String
   email       String
   phone       String?
-  attendees   Int      @default(1)
-  status      String   @default("registered") // registered, confirmed, attended, cancelled
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  attendees       Int      @default(1)
+  totalAmount     Float    @default(0)
+  status          String   @default("registered") // registered, confirmed, attended, cancelled
+  razorpayOrderId String?
+  razorpayPaymentId String?
+  razorpaySignature String?
+  address         String?
+  organisation    String?
+  referredBy      String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 
   @@index([eventId])
   @@index([email])
