@@ -3,9 +3,7 @@ import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { writeFile, unlink, mkdir } from "fs/promises";
-import path from "path";
-import { existsSync } from "fs";
+import { put, del } from "@vercel/blob";
 
 export async function GET() {
     try {
@@ -34,28 +32,17 @@ export async function POST(req: Request) {
             return new NextResponse("Missing file or category", { status: 400 });
         }
 
-        const bytes = await file.arrayBuffer();
-        const buffer = Buffer.from(bytes);
+        // Upload to Vercel Blob
+        const blob = await put(file.name, file, {
+            access: 'public',
+        });
 
-        // Save file locally
-        const fileName = `${crypto.randomUUID()}${path.extname(file.name)}`;
-        const relativePath = `/uploads/gallery/${fileName}`;
-        const absolutePath = path.join(process.cwd(), "public", "uploads", "gallery", fileName);
-
-        // Ensure folder exists
-        const dir = path.dirname(absolutePath);
-        if (!existsSync(dir)) {
-            await mkdir(dir, { recursive: true });
-        }
-
-        await writeFile(absolutePath, buffer);
-
-        // Create DB record
+        // Create DB record with Blob URL
         const image = await prisma.galleryImage.create({
             data: {
                 title: title || "",
                 category,
-                imageUrl: relativePath
+                imageUrl: blob.url
             }
         });
 
@@ -88,14 +75,11 @@ export async function DELETE(req: Request) {
             return new NextResponse("Image not found", { status: 404 });
         }
 
-        // Delete from FS
-        const absolutePath = path.join(process.cwd(), "public", image.imageUrl);
+        // Delete from Vercel Blob
         try {
-            if (existsSync(absolutePath)) {
-                await unlink(absolutePath);
-            }
+            await del(image.imageUrl);
         } catch (e) {
-            console.error("Failed to delete file:", e);
+            console.error("Failed to delete blob:", e);
         }
 
         // Delete from DB

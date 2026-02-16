@@ -1,17 +1,28 @@
 export interface Event {
     id: string;
-    titleKey: string; // Translation key for title
+    // Static Data Keys
+    titleKey?: string;
+    locationKey?: string;
+    descriptionKey?: string;
+    longDescriptionKey?: string;
+    speakerKey?: string;
+    agendaKey?: string;
+
+    // Dynamic Data Fields
+    title?: string;
+    titleKn?: string;
+    location?: string;
+    locationKn?: string;
+    description?: string;
+    descriptionKn?: string;
+    imageUrl?: string; // DB uses imageUrl, static uses image. We can normalise this.
+
     category: 'festival' | 'discourse' | 'community' | 'cultural' | 'educational';
-    date: Date;
-    endDate?: Date;
-    time: string; // Keep time language-neutral (e.g., "6:00 AM")
-    locationKey: string; // Translation key for location
-    descriptionKey: string; // Translation key for short description
-    longDescriptionKey?: string; // Translation key for long description
-    image: string;
+    date: Date | string; // DB returns ISO string
+    endDate?: Date | string;
+    time: string;
+    image: string; // We will ensure this is populated
     gallery?: string[];
-    speakerKey?: string; // Translation key for speaker name
-    agendaKey?: string; // Translation key for agenda array
     registrationOpen: boolean;
     capacity?: number;
     attendees?: number;

@@ -9,6 +9,7 @@ import { useLanguage } from "@/context/LanguageContext";
 import { translations } from "@/lib/translations";
 import { Phone, Mail, MapPin, Clock, Send, Calendar, MessageSquare, Users, Heart, Sparkles, Flower, ChevronDown } from "lucide-react";
 import Link from "next/link";
+import { sendContactEmail } from "@/app/actions/send-contact-email";
 
 export default function ContactPage() {
     const { language } = useLanguage();
@@ -20,16 +21,29 @@ export default function ContactPage() {
         subject: "",
         message: ""
     });
-    const [formStatus, setFormStatus] = useState<"idle" | "success" | "error">("idle");
+    const [formStatus, setFormStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        // For now, just show success message. Backend integration can be added later.
-        setFormStatus("success");
-        setTimeout(() => {
-            setFormStatus("idle");
+        setFormStatus("loading");
+
+        const formDataToSend = new FormData();
+        formDataToSend.append("name", formData.name);
+        formDataToSend.append("email", formData.email);
+        formDataToSend.append("phone", formData.phone);
+        formDataToSend.append("subject", formData.subject);
+        formDataToSend.append("message", formData.message);
+
+        const result = await sendContactEmail(formDataToSend);
+
+        if (result.success) {
+            setFormStatus("success");
             setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
-        }, 5000);
+            setTimeout(() => setFormStatus("idle"), 5000);
+        } else {
+            setFormStatus("error");
+            setTimeout(() => setFormStatus("idle"), 5000);
+        }
     };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -71,9 +85,9 @@ export default function ContactPage() {
                 {/* Gradient Overlay for Text Readability */}
                 <div className="absolute inset-0 bg-gradient-to-b from-[#FDFBF7]/0 via-[#FDFBF7]/30 to-[#FDFBF7]/90 pointer-events-none" />
 
-                <div className="container mx-auto px-4 lg:px-12 relative z-10 w-full">
+                <div className="container-gold relative z-10 w-full">
                     {/* Adjusted Grid: Reduced gap further (gap-0 to gap-4) and added symmetric padding (pl-12 pr-12) */}
-                    <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-12 lg:gap-0 items-center lg:pr-12 lg:pl-12">
+                    <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-12 lg:gap-0 items-center">
 
                         {/* LEFT CONTENT - Centered Text */}
                         <motion.div
@@ -387,10 +401,11 @@ export default function ContactPage() {
                             {/* Submit Button */}
                             <button
                                 type="submit"
-                                className="w-full px-8 py-4 bg-gradient-to-b from-[#F2C96D] to-[#9E731C] text-white font-semibold text-lg rounded-xl border border-[#CFA14E] shadow-[inset_0_0_0_2px_#DFA848,inset_0_0_0_3px_#FFF5D1,0_4px_8px_rgba(0,0,0,0.3)] hover:shadow-[inset_0_0_0_2px_#DFA848,inset_0_0_0_3px_#FFF5D1,0_6px_12px_rgba(0,0,0,0.4)] hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2 drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)]"
+                                className={`w-full px-8 py-4 bg-gradient-to-b from-[#F2C96D] to-[#9E731C] text-white font-semibold text-lg rounded-xl border border-[#CFA14E] shadow-[inset_0_0_0_2px_#DFA848,inset_0_0_0_3px_#FFF5D1,0_4px_8px_rgba(0,0,0,0.3)] hover:shadow-[inset_0_0_0_2px_#DFA848,inset_0_0_0_3px_#FFF5D1,0_6px_12px_rgba(0,0,0,0.4)] hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2 drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)] ${formStatus === "loading" ? "opacity-70 cursor-not-allowed" : ""}`}
+                                disabled={formStatus === "loading"}
                             >
                                 <Send size={20} />
-                                {t.form.submit}
+                                {formStatus === "loading" ? "Sending..." : t.form.submit}
                             </button>
                         </form>
                     </motion.div>
@@ -405,54 +420,54 @@ export default function ContactPage() {
                         <h2 className="font-cinzel-decorative font-bold text-3xl md:text-4xl text-[#D4AF37]">{t.quickContact.title}</h2>
                     </div>
 
-                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
                         {/* Puja Services */}
-                        <Link href="/events">
+                        <Link href="/events" className="h-full block">
                             <motion.div
                                 initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
-                                className="bg-white rounded-2xl p-6 shadow-lg border border-[#CFA14E]/20 hover:shadow-xl hover:-translate-y-2 transition-all cursor-pointer group"
+                                className="bg-white rounded-2xl p-6 shadow-lg border border-[#CFA14E]/20 hover:shadow-xl hover:-translate-y-2 transition-all cursor-pointer group h-full flex flex-col"
                             >
-                                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-[#F2C96D] to-[#9E731C] flex items-center justify-center group-hover:scale-110 transition-transform">
+                                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-[#F2C96D] to-[#9E731C] flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0">
                                     <MessageSquare size={32} className="text-white" />
                                 </div>
                                 <h3 className="font-cinzel-decorative font-bold text-xl text-[#5D4037] text-center mb-2">{t.quickContact.puja.title}</h3>
-                                <p className="text-[#5D4037]/70 text-sm text-center">{t.quickContact.puja.desc}</p>
+                                <p className="text-[#5D4037]/70 text-sm text-center flex-grow">{t.quickContact.puja.desc}</p>
                             </motion.div>
                         </Link>
 
                         {/* Donations */}
-                        <Link href="/donate">
+                        <Link href="/donate" className="h-full block">
                             <motion.div
                                 initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: 0.1 }}
-                                className="bg-white rounded-2xl p-6 shadow-lg border border-[#CFA14E]/20 hover:shadow-xl hover:-translate-y-2 transition-all cursor-pointer group"
+                                className="bg-white rounded-2xl p-6 shadow-lg border border-[#CFA14E]/20 hover:shadow-xl hover:-translate-y-2 transition-all cursor-pointer group h-full flex flex-col"
                             >
-                                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-[#F2C96D] to-[#9E731C] flex items-center justify-center group-hover:scale-110 transition-transform">
+                                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-[#F2C96D] to-[#9E731C] flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0">
                                     <Heart size={32} className="text-white" />
                                 </div>
                                 <h3 className="font-cinzel-decorative font-bold text-xl text-[#5D4037] text-center mb-2">{t.quickContact.donate.title}</h3>
-                                <p className="text-[#5D4037]/70 text-sm text-center">{t.quickContact.donate.desc}</p>
+                                <p className="text-[#5D4037]/70 text-sm text-center flex-grow">{t.quickContact.donate.desc}</p>
                             </motion.div>
                         </Link>
 
                         {/* Events */}
-                        <Link href="/events">
+                        <Link href="/events" className="h-full block">
                             <motion.div
                                 initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: 0.2 }}
-                                className="bg-white rounded-2xl p-6 shadow-lg border border-[#CFA14E]/20 hover:shadow-xl hover:-translate-y-2 transition-all cursor-pointer group"
+                                className="bg-white rounded-2xl p-6 shadow-lg border border-[#CFA14E]/20 hover:shadow-xl hover:-translate-y-2 transition-all cursor-pointer group h-full flex flex-col"
                             >
-                                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-[#F2C96D] to-[#9E731C] flex items-center justify-center group-hover:scale-110 transition-transform">
+                                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-[#F2C96D] to-[#9E731C] flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0">
                                     <Calendar size={32} className="text-white" />
                                 </div>
                                 <h3 className="font-cinzel-decorative font-bold text-xl text-[#5D4037] text-center mb-2">{t.quickContact.events.title}</h3>
-                                <p className="text-[#5D4037]/70 text-sm text-center">{t.quickContact.events.desc}</p>
+                                <p className="text-[#5D4037]/70 text-sm text-center flex-grow">{t.quickContact.events.desc}</p>
                             </motion.div>
                         </Link>
 
@@ -462,13 +477,13 @@ export default function ContactPage() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: 0.3 }}
-                            className="bg-white rounded-2xl p-6 shadow-lg border border-[#CFA14E]/20 hover:shadow-xl hover:-translate-y-2 transition-all cursor-pointer group"
+                            className="bg-white rounded-2xl p-6 shadow-lg border border-[#CFA14E]/20 hover:shadow-xl hover:-translate-y-2 transition-all cursor-pointer group h-full flex flex-col"
                         >
-                            <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-[#F2C96D] to-[#9E731C] flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-[#F2C96D] to-[#9E731C] flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0">
                                 <Users size={32} className="text-white" />
                             </div>
                             <h3 className="font-cinzel-decorative font-bold text-xl text-[#5D4037] text-center mb-2">{t.quickContact.volunteer.title}</h3>
-                            <p className="text-[#5D4037]/70 text-sm text-center">{t.quickContact.volunteer.desc}</p>
+                            <p className="text-[#5D4037]/70 text-sm text-center flex-grow">{t.quickContact.volunteer.desc}</p>
                         </motion.div>
                     </div>
                 </div>

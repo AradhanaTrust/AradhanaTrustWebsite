@@ -13,3 +13,8 @@
 
 ## General
 - [ ] Verify Global CSS Variables for `secondary-dark` to ensure it's not overriding to black in specific contexts.
+
+## Data Migration
+- [ ] **Migrate Static Gallery Images to Database**
+  - Problem: Static images in `galleryData.ts` and `Gallery.tsx` are hardcoded and not manageable via Admin Dashboard.
+  - Goal: Upload original static images to the database via Admin Dashboard and remove hardcoded references from `Gallery.tsx` and `galleryData.ts` so all images are dynamic.

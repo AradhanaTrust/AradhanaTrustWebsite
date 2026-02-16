@@ -1,36 +1,45 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Aradhana Trust Website
+
+A Next.js 13+ application for Aradhana Dharmika Trust, featuring an admin dashboard, donation management, and event galleries.
+
+## Tech Stack
+- **Framework**: Next.js 16 (App Router)
+- **Database**: PostgreSQL (Prisma ORM)
+- **Auth**: NextAuth.js
+- **Storage**: Vercel Blob (Cloud) or Local Filesystem (Self-hosted)
+- **Styling**: Tailwind CSS
 
 ## Getting Started
 
-First, run the development server:
+1.  **Clone the repository**:
+    ```bash
+    git clone https://github.com/AradhanaTrust/AradhanaTrustWebsite.git
+    cd AradhanaTrustWebsite/web
+    ```
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+2.  **Install dependencies**:
+    ```bash
+    npm install
+    ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3.  **Set up Environment Variables**:
+    Copy `.env.example` (or create `.env`) and add:
+    ```env
+    DATABASE_URL="postgresql://..."
+    NEXTAUTH_SECRET="your-secret"
+    NEXTAUTH_URL="http://localhost:3000"
+    BLOB_READ_WRITE_TOKEN="vercel_blob_rw_..." # Optional for local dev if not using Vercel Blob
+    ```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+4.  **Run the development server**:
+    ```bash
+    npm run dev
+    ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Deployment
 
-## Learn More
+This project handles storage flexibly. You can deploy it on:
+- **Vercel**: Zero-config deployment.
+- **Hostinger / VPS**: Requires Node.js environment.
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+👉 **[Read the Deployment Guide](../docs/deployment_hostinger.md)** for detailed VPS instruction.

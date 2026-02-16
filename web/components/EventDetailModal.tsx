@@ -79,7 +79,7 @@ export default function EventDetailModal({ event, onClose }: EventDetailModalPro
                     <div className="flex flex-wrap gap-4 mb-6 text-[#5D4037]/80">
                         <div className="flex items-center gap-2">
                             <Calendar size={20} className="text-[#D4AF37]" />
-                            <span className="font-medium">{event.date.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</span>
+                            <span className="font-medium">{new Date(event.date).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</span>
                         </div>
                         <div className="flex items-center gap-2">
                             <Clock size={20} className="text-[#D4AF37]" />

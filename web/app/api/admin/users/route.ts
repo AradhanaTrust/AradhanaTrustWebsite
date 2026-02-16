@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/lib/auth";
 import { PrismaClient } from "@prisma/client";
+import bcrypt from "bcryptjs";
 
 const prisma = new PrismaClient();
 
@@ -48,7 +49,7 @@ export async function PUT(req: Request) {
         }
 
         const body = await req.json();
-        const { id, name, email, role } = body;
+        const { id, name, email, role, password } = body;
 
         if (!id) {
             return new NextResponse("User ID required", { status: 400 });
@@ -70,13 +71,19 @@ export async function PUT(req: Request) {
             }
         }
 
+        const updateData: any = {
+            name: name || undefined,
+            email: email || undefined,
+            role: role || undefined,
+        };
+
+        if (password) {
+            updateData.password = await bcrypt.hash(password, 10);
+        }
+
         const updatedUser = await prisma.user.update({
             where: { id },
-            data: {
-                name: name || undefined,
-                email: email || undefined,
-                role: role || undefined,
-            }
+            data: updateData
         });
 
         return NextResponse.json(updatedUser);

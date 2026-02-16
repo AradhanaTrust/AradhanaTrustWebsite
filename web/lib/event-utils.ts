@@ -4,27 +4,31 @@ import { translations } from './translations';
 type Language = 'en' | 'kn';
 
 /**
- * Get translated content for an event based on current language
- */
-export function getEventTranslation(event: Event, language: Language) {
-    const t = translations[language].eventContent;
-
-    return {
-        title: getNestedValue(t, event.titleKey) || event.titleKey,
-        location: getNestedValue(t, event.locationKey) || event.locationKey,
-        description: getNestedValue(t, event.descriptionKey) || event.descriptionKey,
-        longDescription: event.longDescriptionKey ? getNestedValue(t, event.longDescriptionKey) : undefined,
-        speaker: event.speakerKey ? getNestedValue(t, event.speakerKey) : undefined,
-        agenda: event.agendaKey ? getNestedValue(t, event.agendaKey) : undefined
-    };
-}
-
-/**
  * Helper to access nested object properties via dot notation
  * e.g., getNestedValue(obj, 'ugadi2026.title')
  */
 function getNestedValue(obj: any, path: string): any {
     return path.split('.').reduce((current, part) => current?.[part], obj);
+}
+
+/**
+ * Get translated content for an event based on current language
+ */
+export function getEventTranslation(event: Event, language: Language) {
+    const t = translations[language].eventContent;
+
+    const title = event.titleKey ? (getNestedValue(t, event.titleKey) || event.titleKey) : (language === 'kn' ? event.titleKn || event.title : event.title);
+    const location = event.locationKey ? (getNestedValue(t, event.locationKey) || event.locationKey) : (language === 'kn' ? event.locationKn || event.location : event.location);
+    const description = event.descriptionKey ? (getNestedValue(t, event.descriptionKey) || event.descriptionKey) : (language === 'kn' ? event.descriptionKn || event.description : event.description);
+
+    return {
+        title,
+        location,
+        description,
+        longDescription: event.longDescriptionKey ? getNestedValue(t, event.longDescriptionKey) : undefined,
+        speaker: event.speakerKey ? getNestedValue(t, event.speakerKey) : undefined,
+        agenda: event.agendaKey ? getNestedValue(t, event.agendaKey) : undefined
+    };
 }
 
 /**
@@ -48,7 +52,7 @@ export function getCategoryName(category: string, language: Language): string {
         }
     };
 
-    return categoryTranslations[language][category as keyof typeof categoryTranslations['en']] || category;
+    return categoryTranslations[language]?.[category as keyof typeof categoryTranslations['en']] || category;
 }
 
 /**

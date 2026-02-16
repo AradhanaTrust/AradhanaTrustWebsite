@@ -114,3 +114,13 @@ h6 {
 .font-cinzel-decorative {
   font-family: var(--font-cinzel-decorative), "Times New Roman", serif;
 }
+
+/* Gold Standard Layout Container */
+@layer components {
+  .container-gold {
+    @apply w-full mx-auto px-6 sm:px-8 lg:px-12 2xl:px-20;
+    max-width: 1440px;
+    padding-left: max(1.5rem, env(safe-area-inset-left));
+    padding-right: max(1.5rem, env(safe-area-inset-right));
+  }
+}

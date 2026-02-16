@@ -135,15 +135,15 @@ export default function GalleryClient({ initialImages }: GalleryClientProps) {
                 </div>
             </section>
 
-            {/* Category Filter */}
-            <section className="py-8 bg-background-ivory sticky top-20 z-40 border-b-2 border-secondary/20 backdrop-blur-sm">
-                <div className="container mx-auto px-4 lg:px-12">
-                    <div className="flex flex-wrap justify-center gap-3 md:gap-4">
+            {/* Category Filter - Responsive Sticky & Compact on Zoom */}
+            <section className="py-3 xl:py-8 bg-background-ivory/95 sticky top-16 lg:top-20 z-40 border-b-2 border-secondary/20 backdrop-blur-md transition-all duration-300">
+                <div className="container-gold">
+                    <div className="flex flex-wrap justify-center gap-2 md:gap-3 xl:gap-4">
                         {galleryCategories.map((category) => (
                             <button
                                 key={category}
                                 onClick={() => setSelectedCategory(category)}
-                                className={`px-6 py-2.5 font-serif font-medium text-sm md:text-base rounded-full border-2 transition-all duration-300 ${selectedCategory === category
+                                className={`px-4 py-1.5 xl:px-6 xl:py-2.5 font-serif font-medium text-xs md:text-sm xl:text-base rounded-full border-2 transition-all duration-300 ${selectedCategory === category
                                     ? "bg-secondary text-white border-secondary shadow-lg scale-105"
                                     : "bg-background-cream text-primary-dark border-secondary/30 hover:border-secondary hover:shadow-md hover:scale-105"
                                     }`}

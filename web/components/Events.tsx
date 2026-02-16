@@ -20,11 +20,48 @@ export default function Events() {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [visibleCards, setVisibleCards] = useState(3);
     const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
+    const [allEvents, setAllEvents] = useState<Event[]>(events);
+
+    useEffect(() => {
+        const fetchEvents = async () => {
+            try {
+                const res = await fetch("/api/events");
+                if (res.ok) {
+                    const dbEvents = await res.json();
+                    const normalizedEvents: Event[] = dbEvents.map((e: any) => {
+                        const eventDate = new Date(e.date);
+                        const now = new Date();
+                        const isUpcoming = eventDate >= now;
+                        return {
+                            ...e,
+                            date: eventDate,
+                            image: e.imageUrl,
+                            isUpcoming: isUpcoming,
+                        };
+                    });
+
+                    // Merge and Deduplicate: specific DB events override static events with same ID
+                    const eventMap = new Map<string, Event>();
+
+                    // 1. Add static events
+                    events.forEach(event => eventMap.set(event.id, event));
+
+                    // 2. Add/Overwrite with DB events
+                    normalizedEvents.forEach(event => eventMap.set(event.id, event));
+
+                    setAllEvents(Array.from(eventMap.values()));
+                }
+            } catch (error) {
+                console.error("Failed to fetch events", error);
+            }
+        };
+        fetchEvents();
+    }, []);
 
     // Get only upcoming events and sort by date (nearest first)
-    const upcomingEvents = events
+    const upcomingEvents = allEvents
         .filter(e => e.isUpcoming)
-        .sort((a, b) => a.date.getTime() - b.date.getTime());
+        .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
 
     // Simple responsive handler
     useEffect(() => {
@@ -50,7 +87,7 @@ export default function Events() {
 
     return (
         <section id="events" className="py-20 lg:py-24 bg-background-cream relative overflow-hidden">
-            <div className="container mx-auto px-4 lg:px-8 relative z-10">
+            <div className="container-gold relative z-10">
 
                 {/* Header Section - Compact Spacing */}
                 <div className="text-center mb-6 space-y-2">
@@ -148,8 +185,8 @@ export default function Events() {
                                             <div className="p-5 space-y-3 relative z-20 flex-1 flex flex-col items-center text-center">
                                                 {/* Date Badge */}
                                                 <div className="absolute -top-6 left-1/2 -translate-x-1/2 bg-[#FFFEF9] border border-[#CFA14E] px-3 py-1 rounded-lg shadow-md flex flex-col items-center min-w-[70px]">
-                                                    <span className="text-[10px] font-bold text-secondary-dark uppercase">{event.date.toLocaleDateString('en-US', { month: 'short' })}</span>
-                                                    <span className="text-xl font-serif font-bold text-primary-dark">{event.date.getDate()}</span>
+                                                    <span className="text-[10px] font-bold text-secondary-dark uppercase">{new Date(event.date).toLocaleDateString('en-US', { month: 'short' })}</span>
+                                                    <span className="text-xl font-serif font-bold text-primary-dark">{new Date(event.date).getDate()}</span>
                                                 </div>
 
                                                 <div className="pt-4 space-y-2 flex-1 w-full flex flex-col justify-center">
