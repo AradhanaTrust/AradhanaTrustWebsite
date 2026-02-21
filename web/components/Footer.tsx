@@ -98,7 +98,9 @@ export default function Footer() {
                                 <div className="p-2.5 bg-white rounded-lg shadow-sm border border-secondary/10 group-hover:border-secondary/30 transition-colors text-secondary-dark mt-0.5">
                                     <MapPin size={18} />
                                 </div>
-                                <span className="leading-relaxed">{t.contactInfo.address}</span>
+                                <a href="https://maps.app.goo.gl/Kx9rd5npQzJcuikt5?g_st=iw" target="_blank" rel="noopener noreferrer" className="hover:text-secondary-dark transition-colors leading-relaxed block">
+                                    {t.contactInfo.address}
+                                </a>
                             </li>
                             <li className="flex items-center gap-4 group">
                                 <div className="p-2.5 bg-white rounded-lg shadow-sm border border-secondary/10 group-hover:border-secondary/30 transition-colors text-secondary-dark">

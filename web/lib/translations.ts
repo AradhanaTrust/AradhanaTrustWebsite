@@ -122,7 +122,7 @@ export const translations = {
                 email: "Email Address",
                 emailPlaceholder: "your@email.com",
                 phone: "Phone Number",
-                phonePlaceholder: "+91 98765 43210",
+                phonePlaceholder: "+91 85500 93111",
                 referredBy: "Referred By",
                 referredByPlaceholder: "Name of person who referred you",
                 address: "Address",
@@ -287,7 +287,7 @@ export const translations = {
                     email: "Email:",
                     emailValue: "support@aradhanadharmikatrust.org",
                     phone: "Phone:",
-                    phoneValue: "+91 98765 43210"
+                    phoneValue: "+91 85500 93111"
                 }
             }
         },
@@ -335,7 +335,7 @@ export const translations = {
                     email: "Email:",
                     emailValue: "support@aradhanadharmikatrust.org",
                     phone: "Phone:",
-                    phoneValue: "+91 98765 43210"
+                    phoneValue: "+91 85500 93111"
                 }
             }
         },
@@ -354,9 +354,9 @@ export const translations = {
             designed: "Designed with Devotion.",
             contactInfo: {
                 address: "Kodihalli Village, Malur Taluk, Kolar District – 563160, Karnataka, India",
-                phone: "+91 98765 43210",
+                phone: "+91 85500 93111",
                 email: "support@aradhanadharmikatrust.org",
-                whatsapp: "+91 98765 43210",
+                whatsapp: "+91 85500 93111",
                 mapLabel: "Locate us on Google Maps"
             },
             registration: {
@@ -688,7 +688,7 @@ export const translations = {
                 email: "ಇಮೇಲ್ ವಿಳಾಸ",
                 emailPlaceholder: "your@email.com",
                 phone: "ಫೋನ್ ಸಂಖ್ಯೆ",
-                phonePlaceholder: "+91 98765 43210",
+                phonePlaceholder: "+91 85500 93111",
                 referredBy: "ಶಿಫಾರಸು ಮಾಡಿದವರು",
                 referredByPlaceholder: "ನಿಮ್ಮನ್ನು ಶಿಫಾರಸು ಮಾಡಿದವರ ಹೆಸರು",
                 address: "ವಿಳಾಸ",
@@ -853,7 +853,7 @@ export const translations = {
                     email: "ಇಮೇಲ್:",
                     emailValue: "support@aradhanadharmikatrust.org",
                     phone: "ದೂರವಾಣಿ:",
-                    phoneValue: "+91 98765 43210"
+                    phoneValue: "+91 85500 93111"
                 }
             }
         },
@@ -901,7 +901,7 @@ export const translations = {
                     email: "ಇಮೇಲ್:",
                     emailValue: "support@aradhanadharmikatrust.org",
                     phone: "ದೂರವಾಣಿ:",
-                    phoneValue: "+91 98765 43210"
+                    phoneValue: "+91 85500 93111"
                 }
             }
         },
@@ -920,9 +920,9 @@ export const translations = {
             designed: "ಭಕ್ತಿಯಿಂದ ವಿನ್ಯಾಸಗೊಳಿಸಲಾಗಿದೆ.",
             contactInfo: {
                 address: "ಕೋಡಿಹಳ್ಳಿ ಗ್ರಾಮ, ಮಾಲೂರು ತಾಲೂಕು, ಕೋಲಾರ ಜಿಲ್ಲೆ – 563160, ಕರ್ನಾಟಕ, ಭಾರತ",
-                phone: "+91 98765 43210",
+                phone: "+91 85500 93111",
                 email: "support@aradhanadharmikatrust.org",
-                whatsapp: "+91 98765 43210",
+                whatsapp: "+91 85500 93111",
                 mapLabel: "ಗೂಗಲ್ ಮ್ಯಾಪ್‌ನಲ್ಲಿ ನೋಡಿ"
             },
             registration: {

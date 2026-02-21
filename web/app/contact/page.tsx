@@ -176,11 +176,11 @@ export default function ContactPage() {
                             <div className="space-y-4 text-[#5D4037]/80">
                                 <div>
                                     <p className="font-semibold text-sm text-[#5D4037]">{t.info.phoneEmail.office}</p>
-                                    <a href="tel:+919876543210" className="text-[#D4AF37] hover:text-[#B8860B]">+91 98765 43210</a>
+                                    <a href="tel:+918550093111" className="text-[#D4AF37] hover:text-[#B8860B]">+91 85500 93111</a>
                                 </div>
                                 <div>
                                     <p className="font-semibold text-sm text-[#5D4037]">{t.info.phoneEmail.pujaBooking}</p>
-                                    <a href="tel:+919876543210" className="text-[#D4AF37] hover:text-[#B8860B]">+91 98765 43210</a>
+                                    <a href="tel:+918550093111" className="text-[#D4AF37] hover:text-[#B8860B]">+91 85500 93111</a>
                                 </div>
                                 <div>
                                     <p className="font-semibold text-sm text-[#5D4037]">{t.info.phoneEmail.email}</p>
@@ -188,7 +188,7 @@ export default function ContactPage() {
                                 </div>
                                 <div>
                                     <p className="font-semibold text-sm text-[#5D4037]">{t.info.phoneEmail.whatsapp}</p>
-                                    <a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer" className="text-[#D4AF37] hover:text-[#B8860B]">+91 98765 43210</a>
+                                    <a href="https://wa.me/918550093111" target="_blank" rel="noopener noreferrer" className="text-[#D4AF37] hover:text-[#B8860B]">+91 85500 93111</a>
                                 </div>
                             </div>
                         </motion.div>
@@ -218,7 +218,7 @@ export default function ContactPage() {
                                 </div>
                             </div>
                             <a
-                                href="https://maps.google.com/?q=Kodihalli+Village,+Malur+Taluk,+Kolar+District+563160,+Karnataka,+India"
+                                href="https://maps.app.goo.gl/Kx9rd5npQzJcuikt5?g_st=iw"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="inline-flex items-center gap-2 px-6 py-2.5 bg-gradient-to-b from-[#F2C96D] to-[#9E731C] text-white font-medium text-sm rounded-xl border border-[#CFA14E] shadow-[inset_0_0_0_2px_#DFA848,inset_0_0_0_3px_#FFF5D1,0_4px_8px_rgba(0,0,0,0.3)] hover:shadow-[inset_0_0_0_2px_#DFA848,inset_0_0_0_3px_#FFF5D1,0_6px_12px_rgba(0,0,0,0.4)] hover:-translate-y-1 transition-all duration-300 drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)]"
