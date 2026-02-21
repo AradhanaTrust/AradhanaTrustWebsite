@@ -51,6 +51,7 @@ export async function POST(request: Request) {
         const description = formData.get("description") as string;
         const descriptionKn = formData.get("descriptionKn") as string || null;
         const capacity = formData.get("capacity") ? parseInt(formData.get("capacity") as string) : null;
+        const price = formData.get("price") ? parseFloat(formData.get("price") as string) : 0;
         const registrationOpen = formData.get("registrationOpen") === "true";
         const existingImageUrl = formData.get("imageUrl") as string | null;
 
@@ -91,6 +92,7 @@ export async function POST(request: Request) {
                 descriptionKn,
                 imageUrl,
                 capacity,
+                price,
                 registrationOpen
             }
         });
@@ -133,6 +135,7 @@ export async function PUT(request: Request) {
         const description = formData.get("description") as string;
         const descriptionKn = formData.get("descriptionKn") as string || null;
         const capacity = formData.get("capacity") ? parseInt(formData.get("capacity") as string) : null;
+        const price = formData.get("price") ? parseFloat(formData.get("price") as string) : 0;
         const registrationOpen = formData.get("registrationOpen") === "true";
 
         let imageUrl = event.imageUrl;
@@ -167,6 +170,7 @@ export async function PUT(request: Request) {
                 descriptionKn,
                 imageUrl,
                 capacity,
+                price,
                 registrationOpen
             }
         });

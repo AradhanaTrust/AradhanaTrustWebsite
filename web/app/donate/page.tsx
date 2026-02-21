@@ -10,6 +10,7 @@ import { Heart, Users, BookOpen, Sparkles, Leaf, HandHeart, Check, ChevronDown, 
 import GoldCurveSeparator from "@/components/GoldCurveSeparator";
 import { donationConfig } from "@/lib/donation-config";
 import Image from "next/image";
+import RazorpayButton from "@/components/RazorpayButton";
 
 export default function DonatePage() {
     const { language } = useLanguage();
@@ -20,6 +21,20 @@ export default function DonatePage() {
     const [donationType, setDonationType] = useState<"one-time" | "monthly">("one-time");
     const [expandedFAQ, setExpandedFAQ] = useState<number | null>(null);
     const [copied, setCopied] = useState(false);
+
+    // Donor Details State
+    const [donorDetails, setDonorDetails] = useState({
+        name: "",
+        email: "",
+        phone: "",
+        organisation: "",
+        referredBy: "",
+        address: ""
+    });
+
+    const handleDonorChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setDonorDetails(prev => ({ ...prev, [e.target.name]: e.target.value }));
+    };
 
     const handleCopy = () => {
         navigator.clipboard.writeText(donationConfig.upiId);
@@ -288,24 +303,67 @@ export default function DonatePage() {
                                 </h3>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div className="space-y-4">
-                                        <input type="text" placeholder={t.donationForm.namePlaceholder} className="w-full p-4 bg-white/60 border border-white/40 rounded-xl focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/20 outline-none transition-all placeholder:text-primary/40 text-[#5D4037]" />
-                                        <input type="email" placeholder={t.donationForm.emailPlaceholder} className="w-full p-4 bg-white/60 border border-white/40 rounded-xl focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/20 outline-none transition-all placeholder:text-primary/40 text-[#5D4037]" />
-                                        <input type="tel" placeholder={t.donationForm.phonePlaceholder} className="w-full p-4 bg-white/60 border border-white/40 rounded-xl focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/20 outline-none transition-all placeholder:text-primary/40 text-[#5D4037]" />
+                                        <input
+                                            name="name"
+                                            value={donorDetails.name}
+                                            onChange={handleDonorChange}
+                                            type="text"
+                                            placeholder={t.donationForm.namePlaceholder}
+                                            className="w-full p-4 bg-white/60 border border-white/40 rounded-xl focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/20 outline-none transition-all placeholder:text-primary/40 text-[#5D4037]"
+                                        />
+                                        <input
+                                            name="email"
+                                            value={donorDetails.email}
+                                            onChange={handleDonorChange}
+                                            type="email"
+                                            placeholder={t.donationForm.emailPlaceholder}
+                                            className="w-full p-4 bg-white/60 border border-white/40 rounded-xl focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/20 outline-none transition-all placeholder:text-primary/40 text-[#5D4037]"
+                                        />
+                                        <input
+                                            name="phone"
+                                            value={donorDetails.phone}
+                                            onChange={handleDonorChange}
+                                            type="tel"
+                                            placeholder={t.donationForm.phonePlaceholder}
+                                            className="w-full p-4 bg-white/60 border border-white/40 rounded-xl focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/20 outline-none transition-all placeholder:text-primary/40 text-[#5D4037]"
+                                        />
                                     </div>
                                     <div className="space-y-4">
-                                        <input type="text" placeholder={t.donationForm.organisationPlaceholder} className="w-full p-4 bg-white/60 border border-white/40 rounded-xl focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/20 outline-none transition-all placeholder:text-primary/40 text-[#5D4037]" />
-                                        <input type="text" placeholder={t.donationForm.referredByPlaceholder} className="w-full p-4 bg-white/60 border border-white/40 rounded-xl focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/20 outline-none transition-all placeholder:text-primary/40 text-[#5D4037]" />
-                                        <textarea placeholder={t.donationForm.addressPlaceholder} rows={1} className="w-full p-4 bg-white/60 border border-white/40 rounded-xl focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/20 outline-none transition-all placeholder:text-primary/40 text-[#5D4037] resize-none h-[58px]" />
+                                        <input
+                                            name="organisation"
+                                            value={donorDetails.organisation}
+                                            onChange={handleDonorChange}
+                                            type="text"
+                                            placeholder={t.donationForm.organisationPlaceholder}
+                                            className="w-full p-4 bg-white/60 border border-white/40 rounded-xl focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/20 outline-none transition-all placeholder:text-primary/40 text-[#5D4037]"
+                                        />
+                                        <input
+                                            name="referredBy"
+                                            value={donorDetails.referredBy}
+                                            onChange={handleDonorChange}
+                                            type="text"
+                                            placeholder={t.donationForm.referredByPlaceholder}
+                                            className="w-full p-4 bg-white/60 border border-white/40 rounded-xl focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/20 outline-none transition-all placeholder:text-primary/40 text-[#5D4037]"
+                                        />
+                                        <textarea
+                                            name="address"
+                                            value={donorDetails.address}
+                                            onChange={handleDonorChange}
+                                            placeholder={t.donationForm.addressPlaceholder}
+                                            rows={1}
+                                            className="w-full p-4 bg-white/60 border border-white/40 rounded-xl focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/20 outline-none transition-all placeholder:text-primary/40 text-[#5D4037] resize-none h-[58px]"
+                                        />
                                     </div>
                                 </div>
                             </div>
 
                             {/* Submit Button */}
                             <div className="text-center mt-8">
-                                <button className="relative z-10 w-full md:w-auto px-16 py-4 bg-gradient-to-r from-[#D4AF37] to-[#B8860B] text-white font-semibold text-base rounded-full shadow-lg hover:shadow-[#D4AF37]/50 hover:-translate-y-1 transition-all duration-300 border border-white/20 flex items-center justify-center gap-3 mx-auto group">
-                                    Proceed
-                                    <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-                                </button>
+                                <RazorpayButton
+                                    amount={selectedAmount}
+                                    donorDetails={donorDetails}
+                                    disabled={selectedAmount <= 0}
+                                />
                                 <p className="text-[#5D4037]/60 text-xs mt-4 flex items-center justify-center gap-1">
                                     <Sparkles size={12} />
                                     Secure Payment Gateway
