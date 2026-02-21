@@ -110,6 +110,7 @@ export default function EventsPage() {
             description: event.description,
             descriptionKn: event.descriptionKn || "",
             capacity: event.capacity?.toString() || "",
+            price: (event as any).price?.toString() || "0",
             registrationOpen: event.registrationOpen ? "true" : "false",
             file: null
         });
@@ -129,6 +130,7 @@ export default function EventsPage() {
             description: "",
             descriptionKn: "",
             capacity: "",
+            price: "0",
             registrationOpen: "true",
             file: null
         });
@@ -157,6 +159,7 @@ export default function EventsPage() {
         submitData.append("description", formData.description);
         if (formData.descriptionKn) submitData.append("descriptionKn", formData.descriptionKn);
         if (formData.capacity) submitData.append("capacity", formData.capacity);
+        if (formData.price) submitData.append("price", formData.price);
         submitData.append("registrationOpen", formData.registrationOpen);
 
         if (formData.file) {
@@ -561,7 +564,7 @@ export default function EventsPage() {
                                     />
                                 </div>
 
-                                <div className="grid md:grid-cols-2 gap-4">
+                                <div className="grid md:grid-cols-3 gap-4">
                                     <div>
                                         <label className="block text-sm font-semibold text-primary-dark mb-2">
                                             Capacity
@@ -572,6 +575,18 @@ export default function EventsPage() {
                                             onChange={(e) => setFormData({ ...formData, capacity: e.target.value })}
                                             className="w-full px-4 py-2 border-2 border-secondary/20 rounded-lg focus:border-secondary focus:outline-none"
                                             placeholder="300"
+                                        />
+                                    </div>
+                                    <div>
+                                        <label className="block text-sm font-semibold text-primary-dark mb-2">
+                                            Registration Fee (₹)
+                                        </label>
+                                        <input
+                                            type="number"
+                                            value={formData.price}
+                                            onChange={(e) => setFormData({ ...formData, price: e.target.value })}
+                                            className="w-full px-4 py-2 border-2 border-secondary/20 rounded-lg focus:border-secondary focus:outline-none"
+                                            placeholder="0 for Free"
                                         />
                                     </div>
                                     <div>
