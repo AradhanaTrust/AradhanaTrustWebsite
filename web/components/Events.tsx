@@ -40,16 +40,7 @@ export default function Events() {
                         };
                     });
 
-                    // Merge and Deduplicate: specific DB events override static events with same ID
-                    const eventMap = new Map<string, Event>();
-
-                    // 1. Add static events
-                    events.forEach(event => eventMap.set(event.id, event));
-
-                    // 2. Add/Overwrite with DB events
-                    normalizedEvents.forEach(event => eventMap.set(event.id, event));
-
-                    setAllEvents(Array.from(eventMap.values()));
+                    setAllEvents(normalizedEvents);
                 }
             } catch (error) {
                 console.error("Failed to fetch events", error);
