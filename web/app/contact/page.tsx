@@ -9,6 +9,7 @@ import { useLanguage } from "@/context/LanguageContext";
 import { translations } from "@/lib/translations";
 import { Phone, Mail, MapPin, Clock, Send, Calendar, MessageSquare, Users, Heart, Sparkles, Flower, ChevronDown } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { sendContactEmail } from "@/app/actions/send-contact-email";
 
 export default function ContactPage() {
@@ -176,11 +177,11 @@ export default function ContactPage() {
                             <div className="space-y-4 text-[#5D4037]/80">
                                 <div>
                                     <p className="font-semibold text-sm text-[#5D4037]">{t.info.phoneEmail.office}</p>
-                                    <a href="tel:+919876543210" className="text-[#D4AF37] hover:text-[#B8860B]">+91 98765 43210</a>
+                                    <a href="tel:+918550093111" className="text-[#D4AF37] hover:text-[#B8860B]">+91 85500 93111</a>
                                 </div>
                                 <div>
                                     <p className="font-semibold text-sm text-[#5D4037]">{t.info.phoneEmail.pujaBooking}</p>
-                                    <a href="tel:+919876543210" className="text-[#D4AF37] hover:text-[#B8860B]">+91 98765 43210</a>
+                                    <a href="tel:+918550093111" className="text-[#D4AF37] hover:text-[#B8860B]">+91 85500 93111</a>
                                 </div>
                                 <div>
                                     <p className="font-semibold text-sm text-[#5D4037]">{t.info.phoneEmail.email}</p>
@@ -188,7 +189,7 @@ export default function ContactPage() {
                                 </div>
                                 <div>
                                     <p className="font-semibold text-sm text-[#5D4037]">{t.info.phoneEmail.whatsapp}</p>
-                                    <a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer" className="text-[#D4AF37] hover:text-[#B8860B]">+91 98765 43210</a>
+                                    <a href="https://wa.me/918550093111" target="_blank" rel="noopener noreferrer" className="text-[#D4AF37] hover:text-[#B8860B]">+91 85500 93111</a>
                                 </div>
                             </div>
                         </motion.div>
@@ -207,18 +208,33 @@ export default function ContactPage() {
                                 </div>
                                 <h3 className="font-cinzel-decorative font-bold text-xl text-[#5D4037]">{t.info.visit.title}</h3>
                             </div>
-                            <div className="space-y-3 text-[#5D4037]/80 mb-6">
-                                <p className="font-semibold text-sm text-[#5D4037]">{t.info.visit.address}</p>
-                                <div className="leading-relaxed">
-                                    <p>{t.info.visit.addressLine1}</p>
-                                    <p>{t.info.visit.addressLine2}</p>
-                                    <p>{t.info.visit.addressLine3}</p>
-                                    <p>{t.info.visit.addressLine4}</p>
-                                    <p className="text-sm italic mt-2 text-[#8D6E63]">{t.info.visit.landmark}</p>
+                            <div className="flex flex-col xl:flex-row items-start justify-between gap-6 mb-6">
+                                <div className="space-y-3 text-[#5D4037]/80 w-full xl:flex-1 text-left">
+                                    <p className="font-semibold text-sm text-[#5D4037]">{t.info.visit.address}</p>
+                                    <div className="leading-relaxed">
+                                        <p>{t.info.visit.addressLine1}</p>
+                                        <p>{t.info.visit.addressLine2}</p>
+                                        <p>{t.info.visit.addressLine3}</p>
+                                        <p>{t.info.visit.addressLine4}</p>
+                                        <p className="text-sm italic mt-2 text-[#8D6E63]">{t.info.visit.landmark}</p>
+                                    </div>
+                                </div>
+                                <div className="shrink-0 flex flex-col items-start mt-2 xl:mt-0">
+                                    <div className="relative w-32 h-32 sm:w-40 sm:h-40 xl:w-44 xl:h-44 rounded-2xl overflow-hidden border-2 border-[#CFA14E]/40 shadow-[0_4px_12px_rgba(207,161,78,0.2)] bg-white p-1.5 md:p-2 group">
+                                        <div className="relative w-full h-full rounded-xl overflow-hidden bg-[#FFFDF9]">
+                                            <Image
+                                                src="/location-qr.jpeg"
+                                                alt="Location QR Code"
+                                                fill
+                                                className="object-cover group-hover:scale-105 transition-transform duration-500"
+                                            />
+                                        </div>
+                                    </div>
+                                    <p className="text-[10px] sm:text-xs text-left text-[#8D6E63] mt-3 font-semibold uppercase tracking-widest font-cinzel w-32 sm:w-40 xl:w-44">Scan to<br className="hidden xl:block" /> Navigate</p>
                                 </div>
                             </div>
                             <a
-                                href="https://maps.google.com/?q=Kodihalli+Village,+Malur+Taluk,+Kolar+District+563160,+Karnataka,+India"
+                                href="https://maps.app.goo.gl/Kx9rd5npQzJcuikt5?g_st=iw"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="inline-flex items-center gap-2 px-6 py-2.5 bg-gradient-to-b from-[#F2C96D] to-[#9E731C] text-white font-medium text-sm rounded-xl border border-[#CFA14E] shadow-[inset_0_0_0_2px_#DFA848,inset_0_0_0_3px_#FFF5D1,0_4px_8px_rgba(0,0,0,0.3)] hover:shadow-[inset_0_0_0_2px_#DFA848,inset_0_0_0_3px_#FFF5D1,0_6px_12px_rgba(0,0,0,0.4)] hover:-translate-y-1 transition-all duration-300 drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)]"
@@ -273,7 +289,7 @@ export default function ContactPage() {
                         className="mt-12 rounded-2xl overflow-hidden shadow-xl border-4 border-[#D4AF37]/30"
                     >
                         <iframe
-                            src="https://maps.google.com/maps?q=Kodihalli%20Village,%20Malur%20Taluk,%20Kolar%20District%20563160,%20Karnataka,%20India&t=&z=14&ie=UTF8&iwloc=&output=embed"
+                            src="https://maps.google.com/maps?q=12.9345044,77.898610&t=&z=14&ie=UTF8&iwloc=&output=embed"
                             width="100%"
                             height="400"
                             style={{ border: 0 }}

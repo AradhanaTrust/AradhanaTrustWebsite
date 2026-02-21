@@ -107,35 +107,10 @@ export default function EventDetailModal({ event, onClose }: EventDetailModalPro
                     {/* Description */}
                     <div className="mb-6">
                         <h3 className="font-serif font-bold text-xl text-[#5D4037] mb-3">About This Event</h3>
-                        <p className="text-[#5D4037]/80 leading-relaxed">
-                            {translatedEvent.longDescription || translatedEvent.description}
+                        <p className="text-[#5D4037]/80 leading-relaxed whitespace-pre-wrap">
+                            {translatedEvent.description}
                         </p>
                     </div>
-
-                    {/* Speaker */}
-                    {translatedEvent.speaker && (
-                        <div className="mb-6">
-                            <h3 className="font-serif font-bold text-xl text-[#5D4037] mb-2">Speaker</h3>
-                            <p className="text-[#5D4037]/80">{translatedEvent.speaker}</p>
-                        </div>
-                    )}
-
-                    {/* Agenda */}
-                    {translatedEvent.agenda && translatedEvent.agenda.length > 0 && (
-                        <div className="mb-6">
-                            <h3 className="font-serif font-bold text-xl text-[#5D4037] mb-3">Event Schedule</h3>
-                            <div className="space-y-3">
-                                {translatedEvent.agenda.map((item: { time: string; activity: string }, idx: number) => (
-                                    <div key={idx} className="flex gap-4 items-start">
-                                        <div className="bg-[#D4AF37] text-white px-3 py-1 rounded-lg text-sm font-semibold min-w-[80px] text-center">
-                                            {item.time}
-                                        </div>
-                                        <div className="text-[#5D4037]/80">{item.activity}</div>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                    )}
 
                     {/* Gallery */}
                     {event.gallery && event.gallery.length > 0 && (

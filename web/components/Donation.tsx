@@ -25,32 +25,32 @@ export default function Donation() {
 
 
             <div className="container-gold relative z-10 text-primary-dark">
-                <div className="grid lg:grid-cols-2 gap-16 items-center max-w-7xl mx-auto">
+                <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center max-w-7xl mx-auto">
 
                     <div className="space-y-8 text-center max-w-md mx-auto">
                         <div className="inline-block px-4 py-1.5 bg-secondary/10 border border-secondary/30 rounded-full text-secondary-dark text-[10px] font-bold tracking-[0.2em] uppercase mb-2">
                             {t.badge}
                         </div>
-                        <h2 className="text-4xl md:text-5xl font-serif font-medium leading-tight whitespace-pre-line">
+                        <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-medium leading-tight whitespace-pre-line">
                             {t.title}
                         </h2>
 
 
-                        <p className="text-primary/70 text-lg leading-relaxed font-light">
+                        <p className="text-primary/70 text-base sm:text-lg leading-relaxed font-light">
                             {t.text}
                         </p>
 
-                        <div className="pt-4 flex flex-col gap-4">
+                        <div className="pt-4 flex flex-col gap-4 w-full">
                             <div
                                 onClick={handleCopy}
-                                className="bg-white p-5 rounded-xl border border-secondary/20 flex items-center justify-between group cursor-pointer hover:shadow-lg transition-all shadow-sm active:scale-95"
+                                className="bg-white p-4 sm:p-5 rounded-xl border border-secondary/20 flex items-center justify-between group cursor-pointer hover:shadow-lg transition-all shadow-sm active:scale-95 w-full overflow-hidden gap-2"
                             >
-                                <div className="text-left">
-                                    <p className="text-xs text-secondary-dark uppercase tracking-widest font-bold">UPI ID</p>
-                                    <p className="text-lg font-mono font-bold text-primary">{donationConfig.upiId}</p>
+                                <div className="text-left flex-1 min-w-0">
+                                    <p className="text-[10px] sm:text-xs text-secondary-dark uppercase tracking-widest font-bold mb-1">UPI ID</p>
+                                    <p className="text-xs sm:text-sm md:text-base font-mono font-bold text-primary break-all">{donationConfig.upiId}</p>
                                 </div>
-                                <div className={`p-2 rounded-lg transition-colors ${copied ? "bg-green-100 text-green-600" : "bg-secondary/10 text-secondary-dark group-hover:bg-secondary group-hover:text-white"}`}>
-                                    {copied ? <Check size={20} /> : <Copy size={20} />}
+                                <div className={`p-2 rounded-lg transition-colors flex-shrink-0 ${copied ? "bg-green-100 text-green-600" : "bg-secondary/10 text-secondary-dark group-hover:bg-secondary group-hover:text-white"}`}>
+                                    {copied ? <Check size={16} className="sm:w-5 sm:h-5" /> : <Copy size={16} className="sm:w-5 sm:h-5" />}
                                 </div>
                             </div>
                         </div>
@@ -60,7 +60,7 @@ export default function Donation() {
                         initial={{ opacity: 0, scale: 0.95 }}
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
-                        className="bg-white p-8 rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.05)] border border-secondary/10 max-w-md mx-auto text-center space-y-6 relative overflow-hidden"
+                        className="bg-white p-6 sm:p-8 rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.05)] border border-secondary/10 max-w-md mx-auto text-center space-y-6 relative overflow-hidden w-full"
                     >
                         <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-secondary-light to-secondary" />
 

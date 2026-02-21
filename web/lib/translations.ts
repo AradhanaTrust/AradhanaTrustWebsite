@@ -122,7 +122,7 @@ export const translations = {
                 email: "Email Address",
                 emailPlaceholder: "your@email.com",
                 phone: "Phone Number",
-                phonePlaceholder: "+91 98765 43210",
+                phonePlaceholder: "+91 85500 93111",
                 referredBy: "Referred By",
                 referredByPlaceholder: "Name of person who referred you",
                 address: "Address",
@@ -287,7 +287,7 @@ export const translations = {
                     email: "Email:",
                     emailValue: "support@aradhanadharmikatrust.org",
                     phone: "Phone:",
-                    phoneValue: "+91 98765 43210"
+                    phoneValue: "+91 8550093111"
                 }
             }
         },
@@ -335,7 +335,7 @@ export const translations = {
                     email: "Email:",
                     emailValue: "support@aradhanadharmikatrust.org",
                     phone: "Phone:",
-                    phoneValue: "+91 98765 43210"
+                    phoneValue: "+91 85500 93111"
                 }
             }
         },
@@ -354,9 +354,9 @@ export const translations = {
             designed: "Designed with Devotion.",
             contactInfo: {
                 address: "Kodihalli Village, Malur Taluk, Kolar District – 563160, Karnataka, India",
-                phone: "+91 98765 43210",
+                phone: "+91 85500 93111",
                 email: "support@aradhanadharmikatrust.org",
-                whatsapp: "+91 98765 43210",
+                whatsapp: "+91 85500 93111",
                 mapLabel: "Locate us on Google Maps"
             },
             registration: {
@@ -457,119 +457,12 @@ export const translations = {
                 }
             }
         },
-        eventContent: {
-            // Common Locations
-            locations: {
-                mainTemple: "Aradhana Dharmika Trust Temple",
-                mainHall: "Main Temple Hall",
-                communityHall: "Community Hall",
-                templePremises: "Temple Premises",
-                templeComplex: "Entire Temple Complex",
-                hanumanTemple: "Hanuman Temple, Temple Premises",
-                shivaMandap: "Shiva Mandap"
-            },
-            // Common Speakers
-            speakers: {
-                panditVenkatesh: "Pandit Venkatesh Bhat",
-                anjaneya: "HG Anjaneya Das",
-                ganapatiSharma: "Pandit Ganapati Sharma",
-                multiple: "Multiple Guest Speakers",
-                lakshmiPrasad: "Pandit Lakshmi Prasad",
-                raghavendra: "Swami Raghavendra",
-                shivacharya: "Acharya Shiva Prasad"
-            },
-            // Event: Ugadi 2026
-            ugadi2026: {
-                title: "Ugadi - Kannada New Year",
-                description: "Celebrate the auspicious Kannada New Year with traditional pachadi, special pooja, and cultural programs.",
-                longDescription: "Ugadi marks the beginning of a new year for the people of Karnataka, Andhra Pradesh, and Telangana. Join us for a grand celebration featuring the preparation of Ugadi Pachadi (a symbolic mixture of six tastes), special temple decorations with mango leaves and flowers, and traditional music and dance performances. The day begins with an oil bath, followed by the reading of Panchanga (yearly predictions) and special prayers for prosperity.",
-                agenda: [
-                    { time: "6:00 AM", activity: "Abhigamana & Oil Bath Tradition" },
-                    { time: "8:00 AM", activity: "Ugadi Pachadi Preparation" },
-                    { time: "9:30 AM", activity: "Panchanga Reading" },
-                    { time: "11:00 AM", activity: "Prasadam Distribution" }
-                ]
-            },
-            // Event: Hanuman Jayanti 2026
-            hanuman2026: {
-                title: "Hanuman Jayanti",
-                description: "Celebrate Lord Hanuman's birthday with Hanuman Chalisa recitation, abhishek, and special bhajans.",
-                longDescription: "Hanuman Jayanti celebrates the birth of Lord Hanuman, the devoted disciple of Lord Rama. The day-long celebration includes continuous recitation of Hanuman Chalisa, abhishek with panchamrita, special decorations, and bhajan sandhya in the evening. Devotees seek blessings for strength, courage, and devotion.",
-                agenda: [
-                    { time: "5:00 AM", activity: "Morning Abhishek & Suprabhatham" },
-                    { time: "7:00 AM", activity: "Hanuman Chalisa Parayanam" },
-                    { time: "12:00 PM", activity: "Maha Prasadam" },
-                    { time: "6:00 PM", activity: "Bhajan Sandhya & Arti" }
-                ]
-            },
-            // Event: Ganesh Chaturthi 2026
-            ganesh2026: {
-                title: "Ganesh Chaturthi",
-                description: "Ten-day celebration of Lord Ganesha with daily rituals, cultural programs, and grand visarjan.",
-                longDescription: "Ganesh Chaturthi is Karnataka's most vibrant festival, celebrating Lord Ganesha's birth. Our ten-day celebration features daily special poojas, cultural programs, devotional music, and ends with a grand immersion ceremony. Each day brings unique offerings and special abhisheks to Vighneshwara.",
-                agenda: [
-                    { time: "7:00 AM", activity: "Ganapati Sthapana & Prana Prathistha" },
-                    { time: "10:00 AM", activity: "Special Abhishek" },
-                    { time: "6:00 PM", activity: "Cultural Program" },
-                    { time: "8:00 PM", activity: "Maha Arti" }
-                ]
-            },
-            // Event: Dasara 2026
-            dasara2026: {
-                title: "Navaratri & Dasara Celebrations",
-                description: "Nine nights of Devi worship culminating in Vijayadashami with special South Indian traditions.",
-                longDescription: "Experience the grandeur of Dasara, Karnataka's state festival, with nine nights dedicated to Goddess Durga. Following Mysore Dasara traditions, we celebrate with daily abhisheks, classical music concerts, traditional Bharatanatyam performances, and Ayudha Pooja on the ninth day. The tenth day features Vijayadashami celebrations.",
-                agenda: [
-                    { time: "6:00 AM", activity: "Morning Devi Pooja" },
-                    { time: "11:00 AM", activity: "Kumkumarchane" },
-                    { time: "7:00 PM", activity: "Cultural Program" },
-                    { time: "8:30 PM", activity: "Maha Arti" }
-                ]
-            },
-            // Event: Deepavali 2026
-            deepavali2026: {
-                title: "Deepavali - Festival of Lights",
-                description: "Grand Deepavali celebration with Lakshmi Pooja, thousands of diyas, and fireworks.",
-                longDescription: "Deepavali, the festival of lights, symbolizes the victory of light over darkness. Join us for special Lakshmi Pooja, lighting of traditional oil lamps across the temple, distribution of sweets, and a magnificent display of lights. The evening includes traditional rangoli competition, bhajans, and safe community fireworks.",
-                agenda: [
-                    { time: "4:00 AM", activity: "Abhyang Snan (Oil Bath)" },
-                    { time: "6:00 PM", activity: "Lakshmi Pooja" },
-                    { time: "7:30 PM", activity: "Diya Lighting Ceremony" },
-                    { time: "9:00 PM", activity: "Community Festivities" }
-                ]
-            },
-            // Event: Rama Navami 2025
-            ramaNavami2025: {
-                title: "Rama Navami",
-                description: "Celebrate Lord Rama's birthday with Ramayana parayanam, special abhishek, and cultural programs.",
-                longDescription: "Rama Navami celebrates the birth of Lord Rama, the seventh avatar of Lord Vishnu. Join us for a day filled with devotion, including continuous Ramayana recitation, elaborate decorations, special abhishek, and traditional music performances. The celebration includes prasadam distribution and storytelling for children.",
-                agenda: [
-                    { time: "6:00 AM", activity: "Suprabhatham & Morning Pooja" },
-                    { time: "10:00 AM", activity: "Ramayana Parayanam" },
-                    { time: "12:00 PM", activity: "Special Abhishek" },
-                    { time: "6:00 PM", activity: "Bhajan & Arti" }
-                ]
-            },
-            // Event: Maha Shivaratri 2025
-            shivaratri2025: {
-                title: "Maha Shivaratri",
-                description: "All-night vigil with continuous abhishek, Rudra homam, and devotional programs.",
-                longDescription: "Maha Shivaratri is the most auspicious night dedicated to Lord Shiva. Devotees observe fasting and participate in night-long worship with continuous abhishek every three hours, chanting of Om Namah Shivaya, Rudra homam, and bhajan sandhya. The celebration culminates with early morning pooja and prasadam distribution.",
-                agenda: [
-                    { time: "6:00 PM", activity: "First Prahar Abhishek" },
-                    { time: "9:00 PM", activity: "Second Prahar Abhishek" },
-                    { time: "12:00 AM", activity: "Third Prahar Abhishek" },
-                    { time: "3:00 AM", activity: "Fourth Prahar Abhishek" },
-                    { time: "6:00 AM", activity: "Morning Arti & Prasadam" }
-                ]
-            }
-        }
-    },
+},
     kn: {
         nav: {
-            home: "ಮನೆ",
+            home: "ಮುಖಪುಟ",
             about: "ನಮ್ಮ ಬಗ್ಗೆ",
-            gallery: "ಗ್ಯಾಲರಿ",
+            gallery: "ಚಿತ್ರ ಸಂಗ್ರಹ",
             donations: "ದೇಣಿಗೆ",
             events: "ಕಾರ್ಯಕ್ರಮಗಳು",
             contact: "ಸಂಪರ್ಕ",
@@ -579,9 +472,9 @@ export const translations = {
         },
         hero: {
             est: "ಸ್ಥಾಪನೆ 2024",
-            title_line1: "ಧರ್ಮ ಸೇವೆ",
+            title_line1: "ಧರ್ಮಸೇವೆ",
             title_line2: "ಭಕ್ತಿ ಪ್ರಸಾರ",
-            quote: "ಧರ್ಮ ಸೇವೆ | ಭಕ್ತಿ ಪ್ರಸಾರ | ಲೋಕ ಕಲ್ಯಾಣ",
+            quote: "ಧರ್ಮಸೇವೆ | ದೇವಾಲಯ ನಿರ್ಮಾಣ | ಆಧ್ಯಾತ್ಮಿಕ ಉನ್ನತಿ",
             donateBtn: "ದೇಣಿಗೆ ನೀಡಿ",
             eventsBtn: "ಮುಂಬರುವ ಕಾರ್ಯಕ್ರಮಗಳು",
         },
@@ -589,13 +482,13 @@ export const translations = {
             sectionTitle: "ನಮ್ಮ ಬಗ್ಗೆ",
             heading: "ಆರಾಧನಾ ಧಾರ್ಮಿಕ ಟ್ರಸ್ಟ್: ಭಕ್ತಿ ಮತ್ತು ಸೇವೆಯ ಸಂಗಮ",
             subheading: "\"ಧರ್ಮ, ಆಧ್ಯಾತ್ಮಿಕ ಅರಿವು ಮತ್ತು ಸಾಮಾಜಿಕ ಕಲ್ಯಾಣವನ್ನು ಉತ್ತೇಜಿಸುವುದು\"",
-            description: "ಸನಾತನ ಧರ್ಮದ ಪಾವಿತ್ರ್ಯವನ್ನು ಕಾಪಾಡುವುದು ಮತ್ತು ಸಾಮಾಜಿಕ ಕಲ್ಯಾಣದಲ್ಲಿ ಸಕ್ರಿಯವಾಗಿ ತೊಡಗುವುದು ನಮ್ಮ ಉದ್ದೇಶ. ವೇದ ಪೂಜೆಗಳಿಂದ ಹಿಡಿದು ಅನ್ನದಾನ ಮತ್ತು ಶೈಕ್ಷಣಿಕ ಸಹಾಯದವರೆಗೆ, ನಾವು ಭಕ್ತಿ ಮತ್ತು ಮಾನವೀಯತೆಯ ತಳಹದಿಯ ಮೇಲೆ ಸಮುದಾಯವನ್ನು ಕಟ್ಟಲು ಶ್ರಮಿಸುತ್ತಿದ್ದೇವೆ.",
+            description: "ಸನಾತನ ಧರ್ಮದ ಪವಿತ್ರ ಸಾಂಸ್ಕೃತಿಕ ಪರಂಪರೆಯನ್ನು ಉಳಿಸಿ, ಸಮಾಜ ಸೇವೆಯಲ್ಲಿ ನಿಷ್ಠೆಯಿಂದ ತೊಡಗುವುದು ನಮ್ಮ ಸಂಕಲ್ಪ. ವೇದ ಆರಾಧನೆ, ಅನ್ನದಾನ ಹಾಗೂ ಶಿಕ್ಷಣ ಸಹಾಯದ ಮೂಲಕ ಭಕ್ತಿ, ಕರುಣೆ ಮತ್ತು ಮಾನವೀಯ ಮೌಲ್ಯಗಳ ಮೇಲೆ ಆಧಾರಿತ ಸಮುದಾಯವನ್ನು ಬೆಳೆಸುವ ದಿಸೆಯಲ್ಲಿ ನಾವು ಮುಂದುವರೆಯುತ್ತಿದ್ದೇವೆ.",
             learnMore: "ಹೆಚ್ಚಿನ ಮಾಹಿತಿ",
         },
         objectives: {
             title: "ನಮ್ಮ ಉದ್ದೇಶಗಳು",
-            subtitle: "ನಮ್ಮ ಪವಿತ್ರ ಕಾರ್ಯಗಳು",
-            description: "ಧರ್ಮ ರಕ್ಷಣೆ • ಸಂಸ್ಕೃತಿ ಆಚರಣೆ • ಮಾನವೀಯ ಸೇವೆ",
+            subtitle: "ನಮ್ಮ ಧರ್ಮಸೇವಾ ಕಾರ್ಯಗಳು",
+            description: "“ಧರ್ಮ ರಕ್ಷಣೆ • • ಸಂಸ್ಕೃತಿ ಸಂರಕ್ಷಣೆ• ಮಾನವ ಸೇವೆ",
             cards: [
                 { title: "ದೇವಾಲಯ ಕಾರ್ಯಕ್ರಮಗಳು", desc: "" },
                 { title: "ಅನ್ನದಾನ", desc: "" },
@@ -623,7 +516,7 @@ export const translations = {
         },
         donation: {
             badge: "ನಮ್ಮ ಕಾರ್ಯಕ್ಕೆ ಬೆಂಬಲ ನೀಡಿ",
-            title: "ನಮ್ಮ ಪವಿತ್ರ\nಸಂಪ್ರದಾಯಗಳ ರಕ್ಷಣೆ",
+            title: "ನಮ್ಮ ಪವಿತ್ರ ಸಂಪ್ರದಾಯಗಳ ರಕ್ಷಣೆ",
             text: "ನಿಮ್ಮ ದೇಣಿಗೆಯು ನಿತ್ಯ ಪೂಜೆಗಳು, ಭಕ್ತಾದಿಗಳಿಗೆ ಅನ್ನದಾನ ಮತ್ತು ನಮ್ಮ ಪ್ರಾಚೀನ ಸಂಸ್ಕೃತಿಯನ್ನು ಉಳಿಸುವ ಶೈಕ್ಷಣಿಕ ಕಾರ್ಯಕ್ರಮಗಳಿಗೆ ಅತ್ಯಮೂಲ್ಯವಾಗಿದೆ.",
             scanTitle: "ದೈವಿಕ ಕಾಣಿಕೆ ನೀಡಿ",
             razorpayBtn: "ಈಗಲೇ ದೇಣಿಗೆ ನೀಡಿ",
@@ -646,7 +539,7 @@ export const translations = {
                 subtitle: "ನಿಮ್ಮ ದಾನ ಪ್ರಭಾವ ಬೀರುವ ಸ್ಥಳ",
                 annadanam: {
                     name: "ಅನ್ನದಾನ ಸೇವೆ",
-                    desc: "ಭಕ್ತಾದಿಗಳು ಮತ್ತು ಅಗತ್ಯವಿರುವವರಿಗೆ ಪೌಷ್ಟಿಕ ಪ್ರಸಾದವನ್ನು ನೀಡಿ. ಹಸಿದವರಿಗೆ ಆಹಾರ ನೀಡಿ ಮತ್ತು ದೈವಿಕ ಪುಣ್ಯ ಗಳಿಸಿ.",
+                    desc: "ಭಕ್ತಾದಿಗಳು ಮತ್ತು ಅಗತ್ಯವಿರುವವರಿಗೆ ಪೌಷ್ಟಿಕ ಪ್ರಸಾದವನ್ನು ನೀಡಿ. ಹಸಿದವರಿಗೆ ಆಹಾರ ನೀಡಿ ಮತ್ತು ದೈವಿಕ ಪುಣ್ಯ ಗಳಿಸಿ",
                     impact: "₹500 50 ಜನರಿಗೆ ಊಟ"
                 },
                 temple: {
@@ -665,7 +558,7 @@ export const translations = {
                     impact: "ನಮ್ಮ ಸಂಸ್ಕೃತಿ ಆಚರಿಸಿ"
                 },
                 gauseva: {
-                    name: "ಗೌ ಸೇವೆ",
+                    name: "ಗೋ ಸೇವೆ",
                     desc: "ಆಶ್ರಯ, ಆಹಾರ ಮತ್ತು ವೈದ್ಯಕೀಯ ಗಮನದೊಂದಿಗೆ ಪವಿತ್ರ ಹಸುಗಳನ್ನು ನೋಡಿಕೊಳ್ಳಿ. ಗೋಮಾತೆಗೆ ಗೌರವ ನೀಡಿ.",
                     impact: "ರಕ್ಷಿಸಿ ಮತ್ತು ಸೇವೆ ಮಾಡಿ"
                 },
@@ -688,14 +581,14 @@ export const translations = {
                 email: "ಇಮೇಲ್ ವಿಳಾಸ",
                 emailPlaceholder: "your@email.com",
                 phone: "ಫೋನ್ ಸಂಖ್ಯೆ",
-                phonePlaceholder: "+91 98765 43210",
+                phonePlaceholder: "+91 85500 93111",
                 referredBy: "ಶಿಫಾರಸು ಮಾಡಿದವರು",
                 referredByPlaceholder: "ನಿಮ್ಮನ್ನು ಶಿಫಾರಸು ಮಾಡಿದವರ ಹೆಸರು",
                 address: "ವಿಳಾಸ",
                 addressPlaceholder: "ನಿಮ್ಮ ಪೂರ್ಣ ವಿಳಾಸ",
                 organisation: "ಸಂಸ್ಥೆ",
                 organisationPlaceholder: "ಕಂಪನಿ ಅಥವಾ ಸಂಸ್ಥೆಯ ಹೆಸರು",
-                frequency: "ದಾನ ಆವರ್ತನ",
+                frequency: "ದಾನದ ಅವಧಿ",
                 oneTime: "ಒಂದು-ಬಾರಿ",
                 monthly: "ಮಾಸಿಕ",
                 submitBtn: "ಪಾವತಿಗೆ ಮುಂದುವರಿಯಿರಿ",
@@ -703,7 +596,7 @@ export const translations = {
             },
             taxExemption: {
                 title: "ತೆರಿಗೆ ಪ್ರಯೋಜನಗಳು",
-                subtitle: "80G ವಿನಾಯತಿ ಲಭ್ಯ",
+                subtitle: "80G ವಿನಾಯಿತಿ ಲಭ್ಯ",
                 desc: "ಆರಾಧನಾ ಧಾರ್ಮಿಕ ಟ್ರಸ್ಟ್‌ಗೆ ಎಲ್ಲಾ ದಾನಗಳು ಆದಾಯ ತೆರಿಗೆ ಕಾಯ್ದೆಯ ವಿಭಾಗ 80G ಅಡಿಯಲ್ಲಿ ತೆರಿಗೆ ಕಡಿತಕ್ಕೆ ಅರ್ಹವಾಗಿವೆ. ನಿಮ್ಮ ದಾನದ ನಂತರ ತಕ್ಷಣ ಡಿಜಿಟಲ್ ಪ್ರಮಾಣಪತ್ರವನ್ನು ಸ್ವೀಕರಿಸುತ್ತೀರಿ.",
                 features: [
                     "ತ್ವರಿತ 80G ಪ್ರಮಾಣಪತ್ರ",
@@ -719,7 +612,7 @@ export const translations = {
                     { value: "50,000+", label: "ಊಟಗಳು ನೀಡಲಾಗಿದೆ" },
                     { value: "100+", label: "ವಿದ್ಯಾರ್ಥಿಗಳಿಗೆ ಬೆಂಬಲ" },
                     { value: "15+", label: "ಹಬ್ಬಗಳು ಆಚರಿಸಲಾಗಿದೆ" },
-                    { value: "25+", label: "ಗೋಗಳು ರಕ್ಷಿಸಲಾಗಿದೆ" }
+                    { value: "25+", label: "ಗೋವುಗಳನ್ನು ರಕ್ಷಿಸಲಾಗಿದೆ" }
                 ]
             },
             faqs: {
@@ -730,7 +623,7 @@ export const translations = {
                         a: "ನಿಮ್ಮ ದಾನವು ನೀವು ಆಯ್ಕೆಮಾಡಿದ ವರ್ಗವನ್ನು ನೇರವಾಗಿ ಬೆಂಬಲಿಸುತ್ತದೆ. ಎಲ್ಲಾ ನಿಧಿಗಳನ್ನು ಪಾರದರ್ಶಕವಾಗಿ ನಿಯೋಜಿಸಲಾಗುತ್ತದೆ ಮತ್ತು ನಿಯಮಿತವಾಗಿ ಆಡಿಟ್ ಮಾಡಲಾಗುತ್ತದೆ."
                     },
                     {
-                        q: "ನನಗೆ ತೆರಿಗೆ ವಿನಾಯತಿ ಪ್ರಮಾಣಪತ್ರ ಸಿಗುತ್ತದೆಯೇ?",
+                        q: "ನನಗೆ ತೆರಿಗೆ ವಿನಾಯಿತಿ ಪ್ರಮಾಣಪತ್ರ ಸಿಗುತ್ತದೆಯೇ?",
                         a: "ಹೌದು! ಎಲ್ಲಾ ದಾನಗಳು 80G ತೆರಿಗೆ ಪ್ರಯೋಜನಗಳಿಗೆ ಅರ್ಹವಾಗಿವೆ. ನೀವು ಇಮೇಲ್ ಮೂಲಕ ತ್ವರಿತ ಡಿಜಿಟಲ್ ಪ್ರಮಾಣಪತ್ರವನ್ನು ಸ್ವೀಕರಿಸುತ್ತೀರಿ."
                     },
                     {
@@ -761,9 +654,9 @@ export const translations = {
             heroTitle2: "ಧಾರ್ಮಿಕ ಟ್ರಸ್ಟ್",
             heroDescription: "<span>ಸನಾತನ ಧರ್ಮದ</span> ರಕ್ಷಣೆಗೆ ಸಮರ್ಪಿತವಾಗಿದೆ, <span>ಸೇವೆ</span>ಯ ಮೂಲಕ ಮಾನವೀಯತೆಗೆ ಸೇವೆ ಸಲ್ಲಿಸುವುದು ಮತ್ತು <span>ಸಂಸ್ಕಾರ</span>ವನ್ನು ಬೆಳೆಸುವುದು.",
             originsTitle: "ನಮ್ಮ ಮೂಲ",
-            originsSubtitle: "ಕೋಡಿಹಳ್ಳಿ ಗ್ರಾಮ, ಮಲೂರು ತಾಲೂಕು",
+            originsSubtitle: "ಕೋಡಿಹಳ್ಳಿ ಗ್ರಾಮ, ಮಾಲೂರು ತಾಲ್ಲೂಕು",
             originsPara1: "ಆರಾಧನಾ ಧಾರ್ಮಿಕ ಟ್ರಸ್ಟ್ ಅನ್ನು ಪವಿತ್ರ ಸಂಕಲ್ಪದೊಂದಿಗೆ ಸ್ಥಾಪಿಸಲಾಗಿದೆ: ಪ್ರಾಚೀನ ವೈದಿಕ ಸಂಪ್ರದಾಯಗಳು ಮತ್ತು ಆಧುನಿಕ ಸಾಮಾಜಿಕ ಜವಾಬ್ದಾರಿಯ ನಡುವಿನ ಅಂತರವನ್ನು ಕಡಿಮೆ ಮಾಡುವುದು. ಕೋಲಾರ ಜಿಲ್ಲೆಯ <strong>ಕೋಡಿಹಳ್ಳಿ ಗ್ರಾಮದ</strong> ಶಾಂತ, ಆಧ್ಯಾತ್ಮಿಕ ಮಣ್ಣಿನಲ್ಲಿ ಬೇರೂರಿರುವ ನಾವು ಭರವಸೆ, ಆಧ್ಯಾತ್ಮ ಮತ್ತು ಜೀವನಾಧಾರದ ದೀಪಸ್ತಂಭವಾಗಲು ಪ್ರಯತ್ನಿಸುತ್ತೇವೆ.",
-            originsPara2: "ನಮ್ಮ ಪ್ರಯಾಣವು ಸರಳ ಆದರೆ ಆಳವಾದ ಅರಿವಿನೊಂದಿಗೆ ಪ್ರಾರಂಭವಾಯಿತು - ನಿಜವಾದ ಭಕ್ತಿಯು ಕೇವಲ ಆಚಾರ ಪೂಜೆಯನ್ನು ಮಾತ್ರ ಒಳಗೊಂಡಿರುವುದಿಲ್ಲ, ಬದಲಿಗೆ ಜೀವಿಗಳ ಸೇವೆಯನ್ನು ಸಹ ಒಳಗೊಂಡಿರುತ್ತದೆ. ಈ ತತ್ವದಿಂದ ಮಾರ್ಗದರ್ಶಿತವಾಗಿ, ನಾವು ದೇವಾಲಯಗಳನ್ನು ನಿರ್ವಹಿಸುತ್ತೇವೆ, ಸಾರ್ವತ್ರಿಕ ಕಲ್ಯಾಣಕ್ಕಾಗಿ ವೈದಿಕ ಆಚರಣೆಗಳನ್ನು ನಡೆಸುತ್ತೇವೆ ಮತ್ತು ನಮ್ಮ ಸುತ್ತಮುತ್ತಲಿನ ಯಾರೂ ಹಸಿವಿನಿಂದ ಇರಬಾರದು ಎಂದು ಖಚಿತಪಡಿಸುತ್ತೇವೆ.",
+            originsPara2: "ನಮ್ಮ ಪ್ರಯಾಣವು ಸರಳ ಆದರೆ ಆಳವಾದ ಅರಿವಿನೊಂದಿಗೆ ಪ್ರಾರಂಭವಾಗಿದೆ  - ನಿಜವಾದ ಭಕ್ತಿಯು ಕೇವಲ ಆಚಾರ ಪೂಜೆಯನ್ನು ಮಾತ್ರ ಒಳಗೊಂಡಿರುವುದಿಲ್ಲ, ಬದಲಿಗೆ ಜೀವಿಗಳ ಸೇವೆಯನ್ನು ಸಹ ಒಳಗೊಂಡಿರುತ್ತದೆ. ಈ ತತ್ವದಿಂದ ಮಾರ್ಗದರ್ಶಿತವಾಗಿ, ನಾವು ದೇವಾಲಯಗಳನ್ನು ನಿರ್ವಹಿಸುತ್ತೇವೆ, ಸಾರ್ವತ್ರಿಕ ಕಲ್ಯಾಣಕ್ಕಾಗಿ ವೈದಿಕ ಆಚರಣೆಗಳನ್ನು ನಡೆಸುತ್ತೇವೆ ಮತ್ತು ನಮ್ಮ ಸುತ್ತಮುತ್ತಲಿನ ಯಾರೂ ಹಸಿವಿನಿಂದ ಇರಬಾರದು ಎಂದು ಖಚಿತಪಡಿಸುತ್ತೇವೆ.",
             guidingLightTitle: "ನಮ್ಮ ಮಾರ್ಗದರ್ಶಿ ಬೆಳಕು",
             missionTitle: "ನಮ್ಮ ಧ್ಯೇಯ",
             missionContent: "ಸತ್ಸಂಗಗಳು, ಪ್ರವಚನಗಳು ಮತ್ತು ಆಧ್ಯಾತ್ಮಿಕ ಅಧ್ಯಯನ ವಲಯಗಳ ಮೂಲಕ <strong>ಸನಾತನ ಧರ್ಮ</strong>ದ ಮೌಲ್ಯಗಳನ್ನು ಉತ್ತೇಜಿಸುವುದು. ಆಧ್ಯಾತ್ಮಿಕವಾಗಿ ಜಾಗೃತ ಮತ್ತು ಸಾಮಾಜಿಕವಾಗಿ ಜವಾಬ್ದಾರರಾದ ಸಮುದಾಯವನ್ನು ಬೆಳೆಸುವುದು ನಮ್ಮ ಗುರಿಯಾಗಿದೆ.",
@@ -773,12 +666,12 @@ export const translations = {
             impacts: {
                 annadanam: { title: "ಅನ್ನದಾನ", desc: "ಅಗತ್ಯವಿರುವವರಿಗೆ ಪೋಷಕಾಂಶ ಊಟಗಳನ್ನು ಒದಗಿಸುವುದು." },
                 education: { title: "ಶಿಕ್ಷಣ", desc: "ವಿದ್ಯಾರ್ಥಿಗಳಿಗೆ ವಿದ್ಯಾರ್ಥಿವೇತನ ಮತ್ತು ಸಾಮಗ್ರಿಗಳೊಂದಿಗೆ ಬೆಂಬಲ." },
-                culture: { title: "ಸಂಸ್ಕೃತಿ", desc: "ಸಾಂಪ್ರದಾಯಿಕ ಕಲೆಗಳು ಮತ್ತು ಸಂಗೀತವನ್ನು ಕಾಪಾಡುವುದು." },
+                culture: { title: "ಸಂಸ್ಕೃತಿ", desc: "ಸಾಂಪ್ರದಾಯಿಕ ಕಲೆಗಳು ಮತ್ತು ಸಂಗೀತ ಸಂರಕ್ಷಣೆ." },
                 welfare: { title: "ಕಲ್ಯಾಣ", desc: "ಸ್ಥಾಪನಾ ಆರೋಗ್ಯ ಮತ್ತು ಸಾಮಾಜಿಕ ಬೆಂಬಲ." }
             },
             ctaTitle: "ನಮ್ಮ ಪ್ರಯಾಣದ ಭಾಗವಾಗಿರಿ",
             ctaDescription: "ನಿಮ್ಮ ನಿಧಿ ನಮ್ಮ ಈ ಉದಾತ್ತ ಉಪಕ್ರಮಗಳನ್ನು ಉಳಿಸಿಕೊಳ್ಳಲು ಸಹಾಯ ಮಾಡುತ್ತದೆ. ಧರ್ಮ ಮತ್ತು ಮಾನವೀಯತೆಗೆ ಸೇವೆ ಸಲ್ಲಿಸಲು ನಮ್ಮೊಂದಿಗೆ ಕೈ ಜೋಡಿಸಿ.",
-            ctaButton: "ಈಗೇ ಕೊಡುಗೆ ನೀಡಿ",
+            ctaButton: "ಈಗಲೇ ಕೊಡುಗೆ ನೀಡಿ",
             locationTitle: "ಸ್ಥಳ"
         },
         galleryPage: {
@@ -814,7 +707,7 @@ export const translations = {
             intro: "ಆರಾಧನಾ ಧಾರ್ಮಿಕ ಟ್ರಸ್ಟ್‌ಗೆ (\"ನಾವು,\" \"ನಮ್ಮ,\" ಅಥವಾ \"ನಮಗೆ\") ಸುಸ್ವಾಗತ. ನಿಮ್ಮ ಗೌಪ್ಯತೆಯನ್ನು ರಕ್ಷಿಸಲು ಮತ್ತು ನಿಮ್ಮ ವೈಯಕ್ತಿಕ ಮಾಹಿತಿಯ ಸುರಕ್ಷತೆಯನ್ನು ಖಾತ್ರಿಪಡಿಸಲು ನಾವು ಬದ್ಧರಾಗಿದ್ದೇವೆ. ನಿಮ್ಮ ನಮ್ಮ ವೆಬ್‌ಸೈಟ್‌ಗೆ ಭೇಟಿ ನೀಡಿದಾಗ, ದೇಣಿಗೆ ನೀಡಿದಾಗ ಅಥವಾ ನಮ್ಮ ಕಾರ್ಯಕ್ರಮಗಳಿಗೆ ನೋಂದಾಯಿಸಿಕೊಂಡಾಗ ನಾವು ನಿಮ್ಮ ಡೇಟಾವನ್ನು ಹೇಗೆ ಸಂಗ್ರಹಿಸುತ್ತೇವೆ, ಬಳಸುತ್ತೇವೆ ಮತ್ತು ರಕ್ಷಿಸುತ್ತೇವೆ ಎಂಬುದನ್ನು ಈ ಗೌಪ್ಯತಾ ನೀತಿ ವಿವರಿಸುತ್ತದೆ.",
             section1: {
                 title: "1. ನಾವು ಸಂಗ್ರಹಿಸುವ ಮಾಹಿತಿ",
-                content: "ನಮ್ಮ ಸೇವೆಗಳನ್ನು ಒದಗಿಸಲು, ದೇಣಿಗೆಗಳನ್ನು ಪ್ರಕ್ರಿಯೆಗೊಳಿಸಲು ಮತ್ತು ನಮ್ಮ ಧಾರ್ಮಿಕ ಚಟುವಟಿಕೆಗಳ ಬಗ್ಗೆ ನಿಮ್ಮನ್ನು ತಿಳಿಸಲು ಅಗತ್ಯವಾದ ಮಾಹಿತಿಯನ್ನು ನಾವು ಸಂಗ್ರಹಿಸುತ್ತೇವೆ. ಇದು ಒಳಗೊಂಡಿರಬಹುದು:",
+                content: "ನಮ್ಮ ಸೇವೆಗಳನ್ನು ಒದಗಿಸಲು, ದೇಣಿಗೆಗಳನ್ನು ಸಂಸ್ಕರಿಸಲು ಮತ್ತು ನಮ್ಮ ಧಾರ್ಮಿಕ ಚಟುವಟಿಕೆಗಳ ಕುರಿತು ನಿಮಗೆ ತಿಳಿಸಲು ಅಗತ್ಯವಾದ ಮಾಹಿತಿಯನ್ನು ನಾವು ಸಂಗ್ರಹಿಸುತ್ತೇವೆ. ಇದರಲ್ಲಿ ಕೆಳಗಿನವುಗಳು ಒಳಗೊಂಡಿರಬಹುದು:",
                 items: {
                     personal: "ವೈಯಕ್ತಿಕ ಮಾಹಿತಿ: ಹೆಸರು, ಇಮೇಲ್ ವಿಳಾಸ, ದೂರವಾಣಿ ಸಂಖ್ಯೆ, ಅಂಚೆ ವಿಳಾಸ ಮತ್ತು ಪ್ಯಾನ್ ಕಾರ್ಡ್ ವಿವರಗಳು (ಭಾರತೀಯ ಕಾನೂನಿನ ಪ್ರಕಾರ ತೆರಿಗೆ ವಿನಾಯಿತಿ ಉದ್ದೇಶಗಳಿಗಾಗಿ).",
                     transaction: "ವಹಿವಾಟು ಮಾಹಿತಿ: ದೇಣಿಗೆ ಮೊತ್ತ, ವಹಿವಾಟಿನ ದಿನಾಂಕ ಮತ್ತು ವಹಿವಾಟು ಉಲ್ಲೇಖ ಸಂಖ್ಯೆಗಳು. ಗಮನಿಸಿ: ನಾವು ನಿಮ್ಮ ಕ್ರೆಡಿಟ್/ಡೆಬಿಟ್ ಕಾರ್ಡ್ ಸಂಖ್ಯೆಗಳು ಅಥವಾ UPI ಪಿನ್‌ಗಳನ್ನು ಸಂಗ್ರಹಿಸುವುದಿಲ್ಲ. ಎಲ್ಲಾ ಪಾವತಿಗಳನ್ನು ಸುರಕ್ಷಿತ ಮೂರನೇ ವ್ಯಕ್ತಿಯ ಪಾವತಿ ಗೇಟ್‌ವೇಗಳ ಮೂಲಕ ಪ್ರಕ್ರಿಯೆಗೊಳಿಸಲಾಗುತ್ತದೆ.",
@@ -825,10 +718,10 @@ export const translations = {
                 title: "2. ನಾವು ನಿಮ್ಮ ಮಾಹಿತಿಯನ್ನು ಹೇಗೆ ಬಳಸುತ್ತೇವೆ",
                 content: "ನಾವು ಸಂಗ್ರಹಿಸುವ ಮಾಹಿತಿಯನ್ನು ಈ ಕೆಳಗಿನ ಉದ್ದೇಶಗಳಿಗಾಗಿ ಮಾತ್ರ ಬಳಸಲಾಗುತ್ತದೆ:",
                 items: {
-                    trust: "ಟ್ರಸ್ಟ್ ಚಟುವಟಿಕೆಗಳು: ಸಂಬಂಧಿತ ದೇವಾಲಯಗಳಲ್ಲಿ ಸೇವೆಗಳ ಸುಧಾರಣೆಗಾಗಿ ಮತ್ತು ಟ್ರಸ್ಟ್‌ನ ಉದ್ದೇಶಗಳ ಪ್ರಕಾರ ವಿವಿಧ ಧಾರ್ಮಿಕ ಚಟುವಟಿಕೆಗಳನ್ನು ನಡೆಸಲು ದೇಣಿಗೆಗಳನ್ನು ಬಳಸಲು.",
-                    communication: "ಸಂವಹನ: ನಿಮಗೆ ರಸೀದಿಗಳು, ದೇಣಿಗೆ ಒಪ್ಪಿಗೆಗಳು ಮತ್ತು ನಿಮ್ಮ ವಹಿವಾಟುಗಳಿಗೆ ಸಂಬಂಧಿಸಿದ ನವೀಕರಣಗಳನ್ನು ಕಳುಹಿಸಲು.",
-                    promotional: "ಪ್ರಚಾರ ಚಟುವಟಿಕೆಗಳು: ರನ್ನು ಮುಂಬರುವ ದೇವಾಲಯ ಕಾರ್ಯಕ್ರಮಗಳು, ಹಬ್ಬಗಳು, ಸಮಾಜ ಕಲ್ಯಾಣ ಉಪಕ್ರಮಗಳು ಮತ್ತು ಟ್ರಸ್ಟ್‌ನಿಂದ ನಡೆಸುವ ಇತರ ಪ್ರಚಾರ ಚಟುವಟಿಕೆಗಳ ಬಗ್ಗೆ ತಿಳಿಸಲು. ನಿಮ್ಮ ಸಂಪರ್ಕ ವಿವರಗಳನ್ನು ಒದಗಿಸುವ ಮೂಲಕ, ಅಂತಹ ಸಂವಹನಗಳನ್ನು ಸ್ವೀಕರಿಸಲು ನೀವು ಸಮ್ಮತಿಸುತ್ತೀರಿ.",
-                    legal: "ಕಾನೂನು ಅನುಸರಣೆ: ಆದಾಯ ತೆರಿಗೆ ಇಲಾಖೆಗೆ ದಾಖಲೆಗಳನ್ನು ನಿರ್ವಹಿಸುವುದು ಸೇರಿದಂತೆ ಭಾರತದೊಳಗೆ ಅನ್ವಯವಾಗುವ ಕಾನೂನುಗಳನ್ನು ಅನುಸರಿಸಲು."
+                    trust: "ಟ್ರಸ್ಟ್ ಚಟುವಟಿಕೆಗಳು: ಸಂಬಂಧಿತ ದೇವಾಲಯಗಳಲ್ಲಿ ಸೇವೆಗಳ ಸುಧಾರಣೆಗಾಗಿ ಮತ್ತು ಟ್ರಸ್ಟ್‌ನ ಉದ್ದೇಶಗಳ ಪ್ರಕಾರ ವಿವಿಧ ಧಾರ್ಮಿಕ ಚಟುವಟಿಕೆಗಳನ್ನು ನಡೆಸಲು ದೇಣಿಗೆಗಳನ್ನು ಬಳಸಲಾಗುತ್ತದೆ.",
+                    communication: "ಸಂವಹನ: ನಿಮಗೆ ರಸೀದಿಗಳು, ದೇಣಿಗೆ ಒಪ್ಪಿಗೆಗಳು ಮತ್ತು ನಿಮ್ಮ ವಹಿವಾಟುಗಳಿಗೆ ಸಂಬಂಧಿಸಿದ ನವೀಕರಣಗಳನ್ನು ಕಳುಹಿಸಲಾಗುತ್ತದೆ.",
+                    promotional: "ಪ್ರಚಾರ ಚಟುವಟಿಕೆಗಳು: ಮುಂಬರುವ ದೇವಾಲಯ ಕಾರ್ಯಕ್ರಮಗಳು, ಹಬ್ಬಗಳು, ಸಮಾಜ ಕಲ್ಯಾಣ ಉಪಕ್ರಮಗಳು ಮತ್ತು ಟ್ರಸ್ಟ್‌ನಿಂದ ನಡೆಸುವ ಇತರ ಪ್ರಚಾರ ಚಟುವಟಿಕೆಗಳ ಬಗ್ಗೆ ತಿಳಿಸಲು. ನಿಮ್ಮ ಸಂಪರ್ಕ ವಿವರಗಳನ್ನು ಒದಗಿಸುವ ಮೂಲಕ, ಅಂತಹ ಸಂವಹನಗಳನ್ನು ಸ್ವೀಕರಿಸಲು ನೀವು ಸಮ್ಮತಿಸುತ್ತೀರಿ.",
+                    legal: "ಕಾನೂನು ಅನುಸರಣೆ: ಆದಾಯ ತೆರಿಗೆ ಇಲಾಖೆಗೆ ದಾಖಲೆಗಳನ್ನು ನಿರ್ವಹಿಸುವುದು ಸೇರಿದಂತೆ ಭಾರತದೊಳಗೆ ಅನ್ವಯವಾಗುವ ಕಾನೂನುಗಳನ್ನು ಅನುಸರಿಸುವುದು."
                 }
             },
             section3: {
@@ -848,12 +741,12 @@ export const translations = {
                 content: "ಈ ಗೌಪ್ಯತಾ ನೀತಿ, ಈ ಸೈಟ್‌ನ ಅಭ್ಯಾಸಗಳು ಅಥವಾ ಈ ಸೈಟ್‌ನೊಂದಿಗಿನ ನಿಮ್ಮ ವ್ಯವಹಾರಗಳ ಬಗ್ಗೆ ನಿಮಗೆ ಯಾವುದೇ ಪ್ರಶ್ನೆಗಳಿದ್ದರೆ, ದಯವಿಟ್ಟು ನಮ್ಮನ್ನು ಇಲ್ಲಿ ಸಂಪರ್ಕಿಸಿ:",
                 contact: {
                     name: "ಆರಾಧನಾ ಧಾರ್ಮಿಕ ಟ್ರಸ್ಟ್",
-                    address1: "ಕೋಡಿಹಳ್ಳಿ ಗ್ರಾಮ, ಮಲೂರು ತಾಲೂಕು,",
+                    address1: "ಕೋಡಿಹಳ್ಳಿ ಗ್ರಾಮ, ಮಾಲೂರು ತಾಲ್ಲೂಕು ,",
                     address2: "ಕೋಲಾರ ಜಿಲ್ಲೆ – 563160, ಕರ್ನಾಟಕ, ಭಾರತ",
                     email: "ಇಮೇಲ್:",
                     emailValue: "support@aradhanadharmikatrust.org",
                     phone: "ದೂರವಾಣಿ:",
-                    phoneValue: "+91 98765 43210"
+                    phoneValue: "+91 85500 93111"
                 }
             }
         },
@@ -867,7 +760,7 @@ export const translations = {
             },
             section2: {
                 title: "2. ಸೇವೆಗಳ ಬಳಕೆ",
-                content: "ನಮ್ಮ ವೆಬ್‌ಸೈಟ್ ಅನ್ನು ಕಾನೂನುಬದ್ಧ ಉದ್ದೇಶಗಳಿಗಾಗಿ ಮಾತ್ರ ಮತ್ತು ಇತರರ ಹಕ್ಕುಗಳನ್ನು ಉಲ್ಲಂಘಿಸದ, ನಿರ್ಬಂಧಿಸದ ಅಥವಾ ವೆಬ್‌ಸೈಟ್‌ನ ಬಳಕೆ ಮತ್ತು ಸಂತೋಷವನ್ನು ಪ್ರತಿಬಂಧಿಸದ ರೀತಿಯಲ್ಲಿ ಬಳಸಲು ನೀವು ಒಪ್ಪುತ್ತೀರಿ. ನಿಷೇಧಿತ ನಡವಳಿಕೆಯು ಯಾವುದೇ ವ್ಯಕ್ತಿಗೆ ಕಿರುಕುಳ ನೀಡುವುದು ಅಥವಾ ತೊಂದರೆ ಉಂಟುಮಾಡುವುದು, ಅಶ್ಲೀಲ ಅಥವಾ ಆಕ್ಷೇಪಾರ್ಹ ವಿಷಯವನ್ನು ರವಾನಿಸುವುದು ಅಥವಾ ನಮ್ಮ ವೆಬ್‌ಸೈಟ್‌ನಲ್ಲಿನ ಸಂವಾದದ ಸಾಮಾನ್ಯ ಹರಿವನ್ನು ಅಡ್ಡಿಪಡಿಸುವುದನ್ನು ಒಳಗೊಂಡಿರುತ್ತದೆ."
+                content: "ನಮ್ಮ ವೆಬ್‌ಸೈಟ್ ಅನ್ನು ಕಾನೂನುಬದ್ಧ ಉದ್ದೇಶಗಳಿಗಾಗಿ ಮಾತ್ರ ಮತ್ತು ಇತರರ ಹಕ್ಕುಗಳನ್ನು ಉಲ್ಲಂಘಿಸದ, ನಿರ್ಬಂಧಿಸದ ಅಥವಾ ವೆಬ್‌ಸೈಟ್‌ನ ಬಳಕೆ ಮತ್ತು ಸಂತೋಷವನ್ನು ಪ್ರತಿಬಂಧಿಸದ ರೀತಿಯಲ್ಲಿ ಬಳಸಲು ನೀವು ಒಪ್ಪುತ್ತೀರಿ. ನಿಷೇಧಿತ ನಡವಳಿಕೆಯು ಯಾವುದೇ ವ್ಯಕ್ತಿಗೆ ಕಿರುಕುಳ ನೀಡುವುದು ಅಥವಾ ತೊಂದರೆ ಉಂಟುಮಾಡುವುದು, ಅಶ್ಲೀಲ ಅಥವಾ ಆಕ್ಷೇಪಾರ್ಹ ವಿಷಯವನ್ನು ರವಾನಿಸುವುದು ಅಥವಾ ನಮ್ಮ ವೆಬ್‌ಸೈಟ್‌ನಲ್ಲಿನ ಸಂವಾದದ ಸಾಮಾನ್ಯ ಹರಿವನ್ನು ಅಡ್ಡಿಪಡಿಸುವುದು ಸೇರಿದಂತೆ ಕ್ರಮಗಳನ್ನು ಒಳಗೊಂಡಿರುತ್ತದೆ."
             },
             section3: {
                 title: "3. ದೇಣಿಗೆಗಳು ಮತ್ತು ಪಾವತಿಗಳು",
@@ -880,7 +773,7 @@ export const translations = {
             },
             section4: {
                 title: "4. ಬೌದ್ಧಿಕ ಆಸ್ತಿ",
-                content: "ಈ ವೆಬ್‌ಸೈಟ್‌ನಲ್ಲಿನ ವಿಷಯ, ವಿನ್ಯಾಸ, ವಿನ್ಯಾಸ, ಡೇಟಾ, ಡೇಟಾಬೇಸ್‌ಗಳು ಮತ್ತು ಗ್ರಾಫಿಕ್ಸ್ ಭಾರತೀಯ ಮತ್ತು ಇತರ ಅಂತರರಾಷ್ಟ್ರೀಯ ಬೌದ್ಧಿಕ ಆಸ್ತಿ ಕಾನೂನುಗಳಿಂದ ರಕ್ಷಿಸಲ್ಪಡುತ್ತವೆ ಮತ್ತು ಆರಾಧನಾ ಧಾರ್ಮಿಕ ಟ್ರಸ್ಟ್‌ನ ಒಡೆತನದಲ್ಲಿದೆ. ನಿಮ್ಮ ಸ್ವಂತ ವೈಯಕ್ತಿಕ, ವಾಣಿಜ್ಯೇತರ ಬಳಕೆಯನ್ನು ಹೊರತುಪಡಿಸಿ ನೀವು ನಮ್ಮ ವಿಷಯವನ್ನು ನಕಲಿಸಬಾರದು, ಪುನರುತ್ಪಾದಿಸಬಾರದು, ಪುನಃ ಪ್ರಕಟಿಸಬಾರದು, ಡೌನ್‌ಲೋಡ್ ಮಾಡಬಾರದು, ಪೋಸ್ಟ್ ಮಾಡಬಾರದು, ಪ್ರಸಾರ ಮಾಡಬಾರದು, ರವಾನಿಸಬಾರದು, ಸಾರ್ವಜನಿಕರಿಗೆ ಲಭ್ಯವಾಗುವಂತೆ ಮಾಡಬಾರದು ಅಥವಾ ಬೇರೆ ರೀತಿಯಲ್ಲಿ ಬಳಸಬಾರದು."
+                content: "ಈ ವೆಬ್‌ಸೈಟ್‌ನಲ್ಲಿನ ವಿಷಯ, ವಿನ್ಯಾಸ, ಡೇಟಾ, ಡೇಟಾಬೇಸ್‌ಗಳು ಮತ್ತು ಗ್ರಾಫಿಕ್ಸ್ ಭಾರತೀಯ ಮತ್ತು ಇತರ ಅಂತರರಾಷ್ಟ್ರೀಯ ಬೌದ್ಧಿಕ ಆಸ್ತಿ ಕಾನೂನುಗಳಿಂದ ರಕ್ಷಿಸಲ್ಪಡುತ್ತವೆ ಮತ್ತು ಆರಾಧನಾ ಧಾರ್ಮಿಕ ಟ್ರಸ್ಟ್‌ನ ಒಡೆತನದಲ್ಲಿದೆ. ನಿಮ್ಮ ಸ್ವಂತ ವೈಯಕ್ತಿಕ, ವಾಣಿಜ್ಯೇತರ ಬಳಕೆಯನ್ನು ಹೊರತುಪಡಿಸಿ ನೀವು ನಮ್ಮ ವಿಷಯವನ್ನು ನಕಲಿಸಬಾರದು, ಪುನರುತ್ಪಾದಿಸಬಾರದು, ಪುನಃ ಪ್ರಕಟಿಸಬಾರದು, ಡೌನ್‌ಲೋಡ್ ಮಾಡಬಾರದು, ಪೋಸ್ಟ್ ಮಾಡಬಾರದು, ಪ್ರಸಾರ ಮಾಡಬಾರದು, ರವಾನಿಸಬಾರದು, ಸಾರ್ವಜನಿಕರಿಗೆ ಲಭ್ಯವಾಗುವಂತೆ ಮಾಡಬಾರದು ಅಥವಾ ಬೇರೆ ರೀತಿಯಲ್ಲಿ ಬಳಸಬಾರದು."
             },
             section5: {
                 title: "5. ಹೊಣೆಗಾರಿಕೆಯ ಮಿತಿ",
@@ -896,17 +789,17 @@ export const translations = {
                 content: "ಈ ನಿಯಮಗಳು ಮತ್ತು ಷರತ್ತುಗಳ ಬಗ್ಗೆ ಯಾವುದೇ ಪ್ರಶ್ನೆಗಳಿದ್ದರೆ, ದಯವಿಟ್ಟು ನಮ್ಮನ್ನು ಇಲ್ಲಿ ಸಂಪರ್ಕಿಸಿ:",
                 contact: {
                     name: "ಆರಾಧನಾ ಧಾರ್ಮಿಕ ಟ್ರಸ್ಟ್",
-                    address1: "ಕೋಡಿಹಳ್ಳಿ ಗ್ರಾಮ, ಮಲೂರು ತಾಲೂಕು,",
+                    address1: "ಕೋಡಿಹಳ್ಳಿ ಗ್ರಾಮ, ಮಾಲೂರು ತಾಲ್ಲೂಕು ,",
                     address2: "ಕೋಲಾರ ಜಿಲ್ಲೆ – 563160, ಕರ್ನಾಟಕ, ಭಾರತ",
                     email: "ಇಮೇಲ್:",
                     emailValue: "support@aradhanadharmikatrust.org",
                     phone: "ದೂರವಾಣಿ:",
-                    phoneValue: "+91 98765 43210"
+                    phoneValue: "+91 8550093111"
                 }
             }
         },
         footer: {
-            desc: "ನಮ್ಮ ಪರಂಪರೆಯನ್ನು ಕಾಪಾಡುವುದು, ಆಧ್ಯಾತ್ಮಿಕ ಮೌಲ್ಯಗಳನ್ನು ಉತ್ತೇಜಿಸುವುದು ಮತ್ತು ಧರ್ಮದ ಮೂಲಕ ಮಾನವೀಯತೆಯನ್ನು ಸೇವಿಸುವುದು.",
+            desc: "ನಮ್ಮ ಪರಂಪರೆಯನ್ನು ಕಾಪಾಡುವುದು, ಆಧ್ಯಾತ್ಮಿಕ ಮೌಲ್ಯಗಳನ್ನು ಉತ್ತೇಜಿಸುವುದು ಮತ್ತು ಧರ್ಮದ ಮೂಲಕ ಮಾನವೀಯತೆಯನ್ನು ಬೆಳೆಸುವುದು ನಮ್ಮ ಉದ್ದೇಶವಾಗಿದೆ. .",
             quickLinks: "ತ್ವರಿತ ಲಿಂಕ್‌ಗಳು",
             about: "ನಮ್ಮ ಬಗ್ಗೆ",
             events: "ದೇವಾಲಯ ಕಾರ್ಯಕ್ರಮಗಳು",
@@ -920,9 +813,9 @@ export const translations = {
             designed: "ಭಕ್ತಿಯಿಂದ ವಿನ್ಯಾಸಗೊಳಿಸಲಾಗಿದೆ.",
             contactInfo: {
                 address: "ಕೋಡಿಹಳ್ಳಿ ಗ್ರಾಮ, ಮಾಲೂರು ತಾಲೂಕು, ಕೋಲಾರ ಜಿಲ್ಲೆ – 563160, ಕರ್ನಾಟಕ, ಭಾರತ",
-                phone: "+91 98765 43210",
+                phone: "+91 8550093111",
                 email: "support@aradhanadharmikatrust.org",
-                whatsapp: "+91 98765 43210",
+                whatsapp: "+91 8550093111",
                 mapLabel: "ಗೂಗಲ್ ಮ್ಯಾಪ್‌ನಲ್ಲಿ ನೋಡಿ"
             },
             registration: {
@@ -935,7 +828,7 @@ export const translations = {
                 tagline: "ನಂಬಿಕೆಯ ಆಚರಣೆಗಳು",
                 title1: "ಪವಿತ್ರ ಕಾರ್ಯಕ್ರಮಗಳು",
                 title2: "ಮತ್ತು ಹಬ್ಬಗಳು",
-                description: "ರೋಮಾಂಚಕಾರಿ ಹಬ್ಬಗಳು ಮತ್ತು ಪವಿತ್ರ ಸಮಾವೇಶಗಳ ಮೂಲಕ ನಮ್ಮ ಆಧ್ಯಾತ್ಮಿಕ ಸಂಪ್ರದಾಯಗಳನ್ನು ಗೌರವಿಸುವಾಗ ಭಕ್ತಿ ಮತ್ತು ಆಚರಣೆಯಲ್ಲಿ ನಮ್ಮೊಂದಿಗೆ ಸೇರಿ."
+                description: "ರೋಮಾಂಚನಕಾರಿ ಹಬ್ಬಗಳು ಮತ್ತು ಪವಿತ್ರ ಸಮಾವೇಶಗಳ ಮೂಲಕ ನಮ್ಮ ಆಧ್ಯಾತ್ಮಿಕ ಸಂಪ್ರದಾಯಗಳನ್ನು ಗೌರವಿಸುವಾಗ ಭಕ್ತಿ ಮತ್ತು ಆಚರಣೆಯಲ್ಲಿ ನಮ್ಮೊಂದಿಗೆ ಸೇರಿ."
             },
             buttons: {
                 upcomingEvents: "ಮುಂಬರುವ ಕಾರ್ಯಕ್ರಮಗಳು",
@@ -962,11 +855,11 @@ export const translations = {
                     title: "ನಮ್ಮನ್ನು ಭೇಟಿ ಮಾಡಿ",
                     address: "ವಿಳಾಸ",
                     addressLine1: "ಆರಾಧನಾ ಧಾರ್ಮಿಕ ಟ್ರಸ್ಟ್",
-                    addressLine2: "ಕೋಡಿಹಳ್ಳಿ ಗ್ರಾಮ, ಮಾಳೂರು ತಾಲ್ಲೂಕು",
+                    addressLine2: "ಕೋಡಿಹಳ್ಳಿ ಗ್ರಾಮ, ಮಾಲೂರು ತಾಲ್ಲೂಕು",
                     addressLine3: "ಕೋಲಾರ ಜಿಲ್ಲೆ – 563160",
                     addressLine4: "ಕರ್ನಾಟಕ, ಭಾರತ",
                     getDirections: "ನಿರ್ದೇಶನಗಳನ್ನು ಪಡೆಯಿರಿ",
-                    landmark: "ಮಾಳೂರು ಹತ್ತಿರ, ಕೋಲಾರ ಜಿಲ್ಲೆ"
+                    landmark: "ಮಾಲೂರು ಹತ್ತಿರ, ಕೋಲಾರ ಜಿಲ್ಲೆ"
                 },
                 timings: {
                     title: "ದೇವಾಲಯ ಸಮಯ",
@@ -1023,112 +916,5 @@ export const translations = {
                 }
             }
         },
-        eventContent: {
-            // Common Locations
-            locations: {
-                mainTemple: "ಆರಾಧನಾ ಧಾರ್ಮಿಕ ಟ್ರಸ್ಟ್ ದೇವಾಲಯ",
-                mainHall: "ಮುಖ್ಯ ದೇವಾಲಯ ಸಭಾಂಗಣ",
-                communityHall: "ಸಮುದಾಯ ಸಭಾಂಗಣ",
-                templePremises: "ದೇವಾಲಯ ಆವರಣ",
-                templeComplex: "ಸಂಪೂರ್ಣ ದೇವಾಲಯ ಸಂಕೀರ್ಣ",
-                hanumanTemple: "ಹನುಮಾನ್ ದೇವಾಲಯ, ದೇವಾಲಯ ಆವರಣ",
-                shivaMandap: "ಶಿವ ಮಂಡಪ"
-            },
-            // Common Speakers
-            speakers: {
-                panditVenkatesh: "ಪಂಡಿತ್ ವೆಂಕಟೇಶ್ ಭಟ್",
-                anjaneya: "ಎಚ್ಜಿ ಆಂಜನೇಯ ದಾಸ್",
-                ganapatiSharma: "ಪಂಡಿತ್ ಗಣಪತಿ ಶರ್ಮಾ",
-                multiple: "ಅನೇಕ ಅತಿಥಿ ವಕ್ತಾರರು",
-                lakshmiPrasad: "ಪಂಡಿತ್ ಲಕ್ಷ್ಮೀ ಪ್ರಸಾದ್",
-                raghavendra: "ಸ್ವಾಮಿ ರಾಘವೇಂದ್ರ",
-                shivacharya: "ಆಚಾರ್ಯ ಶಿವ ಪ್ರಸಾದ್"
-            },
-            // Event: Ugadi 2026
-            ugadi2026: {
-                title: "ಯುಗಾದಿ - ಕನ್ನಡ ಹೊಸ ವರ್ಷ",
-                description: "ಸಾಂಪ್ರದಾಯಿಕ ಪಚ್ಚಡಿ, ವಿಶೇಷ ಪೂಜೆ ಮತ್ತು ಸಾಂಸ್ಕೃತಿಕ ಕಾರ್ಯಕ್ರಮಗಳೊಂದಿಗೆ ಶುಭ ಕನ್ನಡ ಹೊಸ ವರ್ಷವನ್ನು ಆಚರಿಸಿ.",
-                longDescription: "ಯುಗಾದಿ ಕರ್ನಾಟಕ, ಆಂಧ್ರಪ್ರದೇಶ ಮತ್ತು ತೆಲಂಗಾಣದ ಜನರಿಗೆ ಹೊಸ ವರ್ಷದ ಆರಂಭವನ್ನು ಸೂಚಿಸುತ್ತದೆ. ಯುಗಾದಿ ಪಚ್ಚಡಿ (ಆರು ರುಚಿಗಳ ಸಾಂಕೇತಿಕ ಮಿಶ್ರಣ) ತಯಾರಿಕೆ, ಮಾವಿನ ಎಲೆಗಳು ಮತ್ತು ಹೂವುಗಳೊಂದಿಗೆ ವಿಶೇಷ ದೇವಾಲಯ ಅಲಂಕಾರಗಳು, ಮತ್ತು ಸಾಂಪ್ರದಾಯಿಕ ಸಂಗೀತ ಮತ್ತು ನೃತ್ಯ ಪ್ರದರ್ಶನಗಳನ್ನು ಒಳಗೊಂಡ ಭವ್ಯ ಆಚರಣೆಗೆ ನಮ್ಮೊಂದಿಗೆ ಸೇರಿ. ದಿನವು ತೈಲ ಸ್ನಾನದೊಂದಿಗೆ ಪ್ರಾರಂಭವಾಗುತ್ತದೆ, ನಂತರ ಪಂಚಾಂಗ ಪಠಣ (ವಾರ್ಷಿಕ ಭವಿಷ್ಯ) ಮತ್ತು ಸಮೃದ್ಧಿಗಾಗಿ ವಿಶೇಷ ಪ್ರಾರ್ಥನೆಗಳು.",
-                agenda: [
-                    { time: "6:00 AM", activity: "ಅಭಿಗಮನ ಮತ್ತು ತೈಲ ಸ್ನಾನ ಸಂಪ್ರದಾಯ" },
-                    { time: "8:00 AM", activity: "ಯುಗಾದಿ ಪಚ್ಚಡಿ ತಯಾರಿಕೆ" },
-                    { time: "9:30 AM", activity: "ಪಂಚಾಂಗ ಪಠಣ" },
-                    { time: "11:00 AM", activity: "ಪ್ರಸಾದ ವಿತರಣೆ" }
-                ]
-            },
-            // Event: Hanuman Jayanti 2026
-            hanuman2026: {
-                title: "ಹನುಮಾನ್ ಜಯಂತಿ",
-                description: "ಹನುಮಾನ್ ಚಾಲೀಸಾ ಪಠಣ, ಅಭಿಷೇಕ ಮತ್ತು ವಿಶೇಷ ಭಜನೆಗಳೊಂದಿಗೆ ಭಗವಾನ್ ಹನುಮಾನ್ ಹುಟ್ಟುಹಬ್ಬವನ್ನು ಆಚರಿಸಿ.",
-                longDescription: "ಹನುಮಾನ್ ಜಯಂತಿ ಭಗವಾನ್ ರಾಮನ ನಿಷ್ಠಾವಂತ ಶಿಷ್ಯ ಭಗವಾನ್ ಹನುಮಾನ್‌ರ ಜನ್ಮವನ್ನು ಆಚರಿಸುತ್ತದೆ. ಇಡೀ ದಿನದ ಆಚರಣೆಯು ಹನುಮಾನ್ ಚಾಲೀಸಾದ ನಿರಂತರ ಪಠಣ, ಪಂಚಾಮೃತದೊಂದಿಗೆ ಅಭಿಷೇಕ, ವಿಶೇಷ ಅಲಂಕಾರಗಳು ಮತ್ತು ಸಂಜೆ ಭಜನ ಸಂಧ್ಯೆಯನ್ನು ಒಳಗೊಂಡಿದೆ. ಭಕ್ತರು ಶಕ್ತಿ, ಧೈರ್ಯ ಮತ್ತು ಭಕ್ತಿಗಾಗಿ ಆಶೀರ್ವಾದವನ್ನು ಪಡೆಯುತ್ತಾರೆ.",
-                agenda: [
-                    { time: "5:00 AM", activity: "ಬೆಳಗಿನ ಅಭಿಷೇಕ ಮತ್ತು ಸುಪ್ರಭಾತಂ" },
-                    { time: "7:00 AM", activity: "ಹನುಮಾನ್ ಚಾಲೀಸಾ ಪಾರಾಯಣಂ" },
-                    { time: "12:00 PM", activity: "ಮಹಾ ಪ್ರಸಾದಂ" },
-                    { time: "6:00 PM", activity: "ಭಜನ ಸಂಧ್ಯೆ ಮತ್ತು ಆರತಿ" }
-                ]
-            },
-            // Event: Ganesh Chaturthi 2026
-            ganesh2026: {
-                title: "ಗಣೇಶ ಚತುರ್ಥಿ",
-                description: "ದೈನಂದಿನ ಆಚರಣೆಗಳು, ಸಾಂಸ್ಕೃತಿಕ ಕಾರ್ಯಕ್ರಮಗಳು ಮತ್ತು ಭವ್ಯ ವಿಸರ್ಜನೆಯೊಂದಿಗೆ ಭಗವಾನ್ ಗಣೇಶನ ಹತ್ತು ದಿನಗಳ ಆಚರಣೆ.",
-                longDescription: "ಗಣೇಶ ಚತುರ್ಥಿ ಕರ್ನಾಟಕದ ಅತ್ಯಂತ ರೋಮಾಂಚಕಾರಿ ಹಬ್ಬವಾಗಿದ್ದು, ಭಗವಾನ್ ಗಣೇಶನ ಜನ್ಮವನ್ನು ಆಚರಿಸುತ್ತದೆ. ನಮ್ಮ ಹತ್ತು ದಿನಗಳ ಆಚರಣೆಯು ದೈನಂದಿನ ವಿಶೇಷ ಪೂಜೆಗಳು, ಸಾಂಸ್ಕೃತಿಕ ಕಾರ್ಯಕ್ರಮಗಳು, ಭಕ್ತಿಗೀತೆಗಳನ್ನು ಒಳಗೊಂಡಿದೆ ಮತ್ತು ಭವ್ಯ ವಿಸರ್ಜನೆ ಸಮಾರಂಭದೊಂದಿಗೆ ಕೊನೆಗೊಳ್ಳುತ್ತದೆ. ಪ್ರತಿ ದಿನವೂ ವಿಘ್ನೇಶ್ವರನಿಗೆ ವಿಶಿಷ್ಟ ಕಾಣಿಕೆಗಳು ಮತ್ತು ವಿಶೇಷ ಅಭಿಷೇಕಗಳನ್ನು ತರುತ್ತದೆ.",
-                agenda: [
-                    { time: "7:00 AM", activity: "ಗಣಪತಿ ಸ್ಥಾಪನಾ ಮತ್ತು ಪ್ರಾಣ ಪ್ರತಿಷ್ಠೆ" },
-                    { time: "10:00 AM", activity: "ವಿಶೇಷ ಅಭಿಷೇಕ" },
-                    { time: "6:00 PM", activity: "ಸಾಂಸ್ಕೃತಿಕ ಕಾರ್ಯಕ್ರಮ" },
-                    { time: "8:00 PM", activity: "ಮಹಾ ಆರತಿ" }
-                ]
-            },
-            // Event: Dasara 2026
-            dasara2026: {
-                title: "ನವರಾತ್ರಿ ಮತ್ತು ದಸರಾ ಆಚರಣೆಗಳು",
-                description: "ದಕ್ಷಿಣ ಭಾರತೀಯ ಸಂಪ್ರದಾಯಗಳೊಂದಿಗೆ ವಿಜಯದಶಮಿಯಲ್ಲಿ ಪರಾಕಾಷ್ಠೆಯನ್ನು ತಲುಪುವ ದೇವಿ ಆರಾಧನೆಯ ಒಂಬತ್ತು ರಾತ್ರಿಗಳು.",
-                longDescription: "ದೇವಿ ದುರ್ಗೆಗೆ ಸಮರ್ಪಿತವಾದ ಒಂಬತ್ತು ರಾತ್ರಿಗಳೊಂದಿಗೆ ಕರ್ನಾಟಕದ ರಾಜ್ಯ ಹಬ್ಬವಾದ ದಸರಾದ ವೈಭವವನ್ನು ಅನುಭವಿಸಿ. ಮೈಸೂರು ದಸರಾ ಸಂಪ್ರದಾಯಗಳನ್ನು ಅನುಸರಿಸಿ, ನಾವು ದೈನಂದಿನ ಅಭಿಷೇಕಗಳು, ಶಾಸ್ತ್ರೀಯ ಸಂಗೀತ ಸಂಗೀತ ಕಚೇರಿಗಳು, ಸಾಂಪ್ರದಾಯಿಕ ಭರತನಾಟ್ಯಂ ಪ್ರದರ್ಶನಗಳು ಮತ್ತು ಒಂಬತ್ತನೇ ದಿನದಂದು ಆಯುಧ ಪೂಜೆಯೊಂದಿಗೆ ಆಚರಿಸುತ್ತೇವೆ. ಹತ್ತನೇ ದಿನ ವಿಜಯದಶಮಿ ಆಚರಣೆಗಳನ್ನು ಒಳಗೊಂಡಿದೆ.",
-                agenda: [
-                    { time: "6:00 AM", activity: "ಬೆಳಗಿನ ದೇವಿ ಪೂಜೆ" },
-                    { time: "11:00 AM", activity: "ಕುಂಕುಮಾರ್ಚನೆ" },
-                    { time: "7:00 PM", activity: "ಸಾಂಸ್ಕೃತಿಕ ಕಾರ್ಯಕ್ರಮ" },
-                    { time: "8:30 PM", activity: "ಮಹಾ ಆರತಿ" }
-                ]
-            },
-            // Event: Deepavali 2026
-            deepavali2026: {
-                title: "ದೀಪಾವಳಿ - ಬೆಳಕಿನ ಹಬ್ಬ",
-                description: "ಲಕ್ಷ್ಮೀ ಪೂಜೆ, ಸಾವಿರಾರು ದೀಪಗಳು ಮತ್ತು ಪಟಾಕಿಗಳೊಂದಿಗೆ ಭವ್ಯ ದೀಪಾವಳಿ ಆಚರಣೆ.",
-                longDescription: "ಬೆಳಕಿನ ಹಬ್ಬವಾದ ದೀಪಾವಳಿಯು ಕತ್ತಲೆಯ ಮೇಲೆ ಬೆಳಕಿನ ವಿಜಯವನ್ನು ಸಂಕೇತಿಸುತ್ತದೆ. ವಿಶೇಷ ಲಕ್ಷ್ಮೀ ಪೂಜೆ, ದೇವಾಲಯದಾದ್ಯಂತ ಸಾಂಪ್ರದಾಯಿಕ ಎಣ್ಣೆ ದೀಪಗಳನ್ನು ಬೆಳಗುವುದು, ಸಿಹಿತಿಂಡಿಗಳ ವಿತರಣೆ ಮತ್ತು ಬೆಳಕಿನ ಭವ್ಯ ಪ್ರದರ್ಶನಕ್ಕಾಗಿ ನಮ್ಮೊಂದಿಗೆ ಸೇರಿ. ಸಂಜೆಯು ಸಾಂಪ್ರದಾಯಿಕ ರಂಗೋಲಿ ಸ್ಪರ್ಧೆ, ಭಜನೆಗಳು ಮತ್ತು ಸುರಕ್ಷಿತ ಸಮುದಾಯ ಪಟಾಕಿಗಳನ್ನು ಒಳಗೊಂಡಿದೆ.",
-                agenda: [
-                    { time: "4:00 AM", activity: "ಅಭ್ಯಂಗ ಸ್ನಾನ (ತೈಲ ಸ್ನಾನ)" },
-                    { time: "6:00 PM", activity: "ಲಕ್ಷ್ಮೀ ಪೂಜೆ" },
-                    { time: "7:30 PM", activity: "ದೀಪಗಳನ್ನು ಬೆಳಗುವ ಸಮಾರಂಭ" },
-                    { time: "9:00 PM", activity: "ಸಮುದಾಯ ಹಬ್ಬಗಳು" }
-                ]
-            },
-            // Event: Rama Navami 2025
-            ramaNavami2025: {
-                title: "ರಾಮ ನವಮಿ",
-                description: "ರಾಮಾಯಣ ಪಾರಾಯಣ, ವಿಶೇಷ ಅಭಿಷೇಕ ಮತ್ತು ಸಾಂಸ್ಕೃತಿಕ ಕಾರ್ಯಕ್ರಮಗಳೊಂದಿಗೆ ಭಗವಾನ್ ರಾಮನ ಹುಟ್ಟುಹಬ್ಬವನ್ನು ಆಚರಿಸಿ.",
-                longDescription: "ಭಗವಾನ್ ವಿಷ್ಣುವಿನ ಏಳನೇ ಅವತಾರವಾದ ಭಗವಾನ್ ರಾಮನ ಜನ್ಮವನ್ನು ರಾಮ ನವಮಿ ಆಚರಿಸುತ್ತದೆ. ನಿರಂತರ ರಾಮಾಯಣ ಪಠಣ, ವಿಸ್ತಾರವಾದ ಅಲಂಕಾರಗಳು, ವಿಶೇಷ ಅಭಿಷೇಕ ಮತ್ತು ಸಾಂಪ್ರದಾಯಿಕ ಸಂಗೀತ ಪ್ರದರ್ಶನಗಳನ್ನು ಒಳಗೊಂಡ ಭಕ್ತಿಯಿಂದ ತುಂಬಿದ ದಿನಕ್ಕಾಗಿ ನಮ್ಮೊಂದಿಗೆ ಸೇರಿ. ಆಚರಣೆಯು ಪ್ರಸಾದ ವಿತರಣೆ ಮತ್ತು ಮಕ್ಕಳಿಗೆ ಕಥೆ ಹೇಳುವಿಕೆಯನ್ನು ಒಳಗೊಂಡಿದೆ.",
-                agenda: [
-                    { time: "6:00 AM", activity: "ಸುಪ್ರಭಾತಂ ಮತ್ತು ಬೆಳಗಿನ ಪೂಜೆ" },
-                    { time: "10:00 AM", activity: "ರಾಮಾಯಣ ಪಾರಾಯಣಂ" },
-                    { time: "12:00 PM", activity: "ವಿಶೇಷ ಅಭಿಷೇಕ" },
-                    { time: "6:00 PM", activity: "ಭಜನ ಮತ್ತು ಆರತಿ" }
-                ]
-            },
-            // Event: Maha Shivaratri 2025
-            shivaratri2025: {
-                title: "ಮಹಾ ಶಿವರಾತ್ರಿ",
-                description: "ನಿರಂತರ ಅಭಿಷೇಕ, ರುದ್ರ ಹೋಮ ಮತ್ತು ಭಕ್ತಿ ಕಾರ್ಯಕ್ರಮಗಳೊಂದಿಗೆ ರಾತ್ರಿಯಿಡೀ ಜಾಗರಣೆ.",
-                longDescription: "ಮಹಾಶಿವರಾತ್ರಿಯು ಭಗವಾನ್ ಶಿವನಿಗೆ ಸಮರ್ಪಿತವಾದ ಅತ್ಯಂತ ಶುಭಕರವಾದ ರಾತ್ರಿಯಾಗಿದೆ. ಭಕ್ತರು ಉಪವಾಸವನ್ನು ಆಚರಿಸುತ್ತಾರೆ ಮತ್ತು ಪ್ರತಿ ಮೂರು ಗಂಟೆಗಳಿಗೊಮ್ಮೆ ನಿರಂತರ ಅಭಿಷೇಕ, ಓಂ ನಮಃ ಶಿವಾಯ ಪಠಣ, ರುದ್ರ ಹೋಮ ಮತ್ತು ಭಜನ ಸಂಧ್ಯೆಯೊಂದಿಗೆ ರಾತ್ರಿಯಿಡೀ ಪೂಜೆಯಲ್ಲಿ ಭಾಗವಹಿಸುತ್ತಾರೆ. ಆಚರಣೆಯು ಮುಂಜಾನೆ ಪೂಜೆ ಮತ್ತು ಪ್ರಸಾದ ವಿತರಣೆಯೊಂದಿಗೆ ಕೊನೆಗೊಳ್ಳುತ್ತದೆ.",
-                agenda: [
-                    { time: "6:00 PM", activity: "ಮೊದಲ ಪ್ರಹರ ಅಭಿಷೇಕ" },
-                    { time: "9:00 PM", activity: "ಎರಡನೇ ಪ್ರಹರ ಅಭಿಷೇಕ" },
-                    { time: "12:00 AM", activity: "ಮೂರನೇ ಪ್ರಹರ ಅಭಿಷೇಕ" },
-                    { time: "3:00 AM", activity: "ನಾಲ್ಕನೇ ಪ್ರಹರ ಅಭಿಷೇಕ" },
-                    { time: "6:00 AM", activity: "ಬೆಳಗಿನ ಆರತಿ ಮತ್ತು ಪ್ರಸಾದ" }
-                ]
-            }
-        }
-    }
+}
 };

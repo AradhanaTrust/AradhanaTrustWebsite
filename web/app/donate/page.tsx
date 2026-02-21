@@ -106,14 +106,14 @@ export default function DonatePage() {
                             {/* UPI ID Display with Copy */}
                             <div
                                 onClick={handleCopy}
-                                className="bg-white/80 backdrop-blur-sm p-4 rounded-xl border-2 border-[#D4AF37]/30 flex items-center justify-between group cursor-pointer hover:shadow-lg transition-all shadow-sm active:scale-95 max-w-sm mx-auto w-full"
+                                className="bg-white/80 backdrop-blur-sm p-4 rounded-xl border-2 border-[#D4AF37]/30 flex items-center justify-between group cursor-pointer hover:shadow-lg transition-all shadow-sm active:scale-95 max-w-sm mx-auto w-full overflow-hidden gap-2"
                             >
-                                <div className="text-left">
-                                    <p className="text-xs text-[#8D6E63] uppercase tracking-widest font-bold">UPI ID</p>
-                                    <p className="text-lg font-mono font-bold text-[#4A3225]">{donationConfig.upiId}</p>
+                                <div className="text-left flex-1 min-w-0">
+                                    <p className="text-[10px] sm:text-xs text-[#8D6E63] uppercase tracking-widest font-bold mb-1">UPI ID</p>
+                                    <p className="text-xs sm:text-sm md:text-base font-mono font-bold text-[#4A3225] break-all">{donationConfig.upiId}</p>
                                 </div>
-                                <div className={`p-2 rounded-lg transition-colors ${copied ? "bg-green-100 text-green-600" : "bg-[#D4AF37]/10 text-[#B8860B] group-hover:bg-[#D4AF37] group-hover:text-white"}`}>
-                                    {copied ? <Check size={20} /> : <Copy size={20} />}
+                                <div className={`p-2 rounded-lg transition-colors flex-shrink-0 ${copied ? "bg-green-100 text-green-600" : "bg-[#D4AF37]/10 text-[#B8860B] group-hover:bg-[#D4AF37] group-hover:text-white"}`}>
+                                    {copied ? <Check size={16} className="sm:w-5 sm:h-5" /> : <Copy size={16} className="sm:w-5 sm:h-5" />}
                                 </div>
                             </div>
 
@@ -133,7 +133,7 @@ export default function DonatePage() {
                             className="relative w-full order-2 lg:order-2 flex justify-center lg:justify-end items-center"
                         >
                             {/* QR Code Container - Square Frame matching Home Page */}
-                            <div className="relative w-full max-w-sm">
+                            <div className="relative w-11/12 sm:w-full max-w-sm mx-auto lg:mx-0 lg:mr-4">
                                 {/* Outer Glow */}
                                 <div className="absolute inset-4 rounded-xl bg-[#D4AF37]/20 blur-xl" />
 

@@ -98,7 +98,9 @@ export default function Footer() {
                                 <div className="p-2.5 bg-white rounded-lg shadow-sm border border-secondary/10 group-hover:border-secondary/30 transition-colors text-secondary-dark mt-0.5">
                                     <MapPin size={18} />
                                 </div>
-                                <span className="leading-relaxed">{t.contactInfo.address}</span>
+                                <a href="https://maps.app.goo.gl/Kx9rd5npQzJcuikt5?g_st=iw" target="_blank" rel="noopener noreferrer" className="hover:text-secondary-dark transition-colors leading-relaxed block">
+                                    {t.contactInfo.address}
+                                </a>
                             </li>
                             <li className="flex items-center gap-4 group">
                                 <div className="p-2.5 bg-white rounded-lg shadow-sm border border-secondary/10 group-hover:border-secondary/30 transition-colors text-secondary-dark">
@@ -122,7 +124,7 @@ export default function Footer() {
                         </h4>
                         <div className="w-full h-48 bg-background-ivory rounded-xl overflow-hidden border-2 border-secondary/10 relative group shadow-lg hover:shadow-xl transition-shadow duration-300">
                             <iframe
-                                src="https://maps.google.com/maps?q=Kodihalli%20Village,%20Malur%20Taluk,%20Kolar%20District%20563160,%20Karnataka,%20India&t=&z=14&ie=UTF8&iwloc=&output=embed"
+                                src="https://maps.google.com/maps?q=12.9345044,77.898610&t=&z=14&ie=UTF8&iwloc=&output=embed"
                                 width="100%"
                                 height="100%"
                                 style={{ border: 0, filter: 'contrast(1.05) saturate(1.05) sepia(0.1)' }}
