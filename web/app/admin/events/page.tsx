@@ -62,7 +62,6 @@ export default function EventsPage() {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const fileInputRef = useRef<HTMLInputElement>(null);
 
-    // Form State
     const [formData, setFormData] = useState({
         title: "",
         titleKn: "",
@@ -74,6 +73,7 @@ export default function EventsPage() {
         description: "",
         descriptionKn: "",
         capacity: "",
+        price: "0",
         registrationOpen: "true",
         file: null as File | null
     });
