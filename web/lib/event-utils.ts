@@ -17,17 +17,24 @@ function getNestedValue(obj: any, path: string): any {
 export function getEventTranslation(event: Event, language: Language) {
     const t = translations[language].eventContent;
 
-    const title = event.titleKey ? (getNestedValue(t, event.titleKey) || event.titleKey) : (language === 'kn' ? event.titleKn || event.title : event.title);
-    const location = event.locationKey ? (getNestedValue(t, event.locationKey) || event.locationKey) : (language === 'kn' ? event.locationKn || event.location : event.location);
-    const description = event.descriptionKey ? (getNestedValue(t, event.descriptionKey) || event.descriptionKey) : (language === 'kn' ? event.descriptionKn || event.description : event.description);
+    const title = language === 'kn' ? (event.titleKn || event.title || "") : (event.title || "");
+    const location = language === 'kn' ? (event.locationKn || event.location || "") : (event.location || "");
+    const description = language === 'kn' ? (event.descriptionKn || event.description || "") : (event.description || "");
+
+    // For static seeded events, we still want to grab their localized strings if the DB doesn't have them
+    // However, we just merged these to the DB via migration, so the DB fields SHOULD be populated.
+    // As a strict fallback, we can still resolve keys just in case.
+    const resolvedTitle = title || (event.titleKey ? getNestedValue(t, event.titleKey) : "");
+    const resolvedLocation = location || (event.locationKey ? getNestedValue(t, event.locationKey) : "");
+    const resolvedDesc = description || (event.descriptionKey ? getNestedValue(t, event.descriptionKey) : "");
 
     return {
-        title,
-        location,
-        description,
-        longDescription: event.longDescriptionKey ? getNestedValue(t, event.longDescriptionKey) : undefined,
-        speaker: event.speakerKey ? getNestedValue(t, event.speakerKey) : undefined,
-        agenda: event.agendaKey ? getNestedValue(t, event.agendaKey) : undefined
+        title: resolvedTitle,
+        location: resolvedLocation,
+        description: resolvedDesc,
+        longDescription: undefined,
+        speaker: undefined,
+        agenda: undefined
     };
 }
 
