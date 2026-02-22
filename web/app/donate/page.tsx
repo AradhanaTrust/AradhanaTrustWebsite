@@ -11,6 +11,7 @@ import GoldCurveSeparator from "@/components/GoldCurveSeparator";
 import { donationConfig } from "@/lib/donation-config";
 import Image from "next/image";
 import RazorpayButton from "@/components/RazorpayButton";
+import DonationActivities from "@/components/DonationActivities";
 
 export default function DonatePage() {
     const { language } = useLanguage();
@@ -159,6 +160,9 @@ export default function DonatePage() {
                 </div>
                 <GoldCurveSeparator />
             </div>
+
+            {/* Dynamic Donation Activities */}
+            <DonationActivities />
 
             {/* Donation Categories Section */}
             <section className="py-24 bg-background-ivory relative z-10">
