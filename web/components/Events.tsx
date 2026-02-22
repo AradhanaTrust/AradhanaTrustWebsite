@@ -13,9 +13,11 @@ import { getEventTranslation } from "@/lib/event-utils";
 import GoldCurveSeparator from "./GoldCurveSeparator";
 import EventDetailModal from "./EventDetailModal";
 import type { Event } from "@/lib/events-data";
+import { useRouter } from "next/navigation";
 
 export default function Events() {
     const { language } = useLanguage();
+    const router = useRouter();
     const t = translations[language].events;
     const [currentIndex, setCurrentIndex] = useState(0);
     const [visibleCards, setVisibleCards] = useState(3);
@@ -167,8 +169,15 @@ export default function Events() {
                                                     sizes="(max-width: 768px) 100vw, 25vw"
                                                     className="object-cover group-hover:scale-110 transition-transform duration-700"
                                                 />
-                                                <div className="absolute top-2 right-2 bg-secondary text-primary-dark px-2 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-widest shadow-md z-20">
-                                                    Upcoming
+                                                <div className="absolute top-2 right-2 flex flex-col items-end gap-1 z-20">
+                                                    <div className="bg-secondary text-primary-dark px-2 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-widest shadow-md">
+                                                        Upcoming
+                                                    </div>
+                                                    {event.isFeatured && (
+                                                        <div className="bg-gradient-to-r from-[#D4AF37] to-[#B8860B] text-white px-2 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-widest shadow-md flex items-center gap-1 border border-[#FFFDF8]/30">
+                                                            <span>⭐</span> {language === 'kn' ? 'ವಿಶೇಷ' : 'Featured'}
+                                                        </div>
+                                                    )}
                                                 </div>
                                             </div>
 
@@ -192,7 +201,13 @@ export default function Events() {
 
                                                 {/* Button: Enlarged width & text */}
                                                 <button
-                                                    onClick={() => setSelectedEvent(event)}
+                                                    onClick={() => {
+                                                        if (event.isFeatured) {
+                                                            router.push('/events/featured');
+                                                        } else {
+                                                            setSelectedEvent(event);
+                                                        }
+                                                    }}
                                                     className="mt-2 w-auto px-8 py-2.5 bg-gradient-to-b from-[#FFFEF9] to-[#F3E5C5] text-[#4A3225] font-bold text-xs rounded-lg border border-[#CFA14E] shadow-[inset_0_0_0_2px_#FFFDF8,inset_0_0_0_3px_#CFA14E,0_2px_4px_rgba(0,0,0,0.05)] hover:shadow-[inset_0_0_0_2px_#FFFDF8,inset_0_0_0_3px_#CFA14E,0_4px_8px_rgba(0,0,0,0.1)] hover:-translate-y-0.5 active:scale-95 transition-all duration-300 transform uppercase tracking-widest"
                                                 >
                                                     {t.register}

@@ -137,6 +137,8 @@ export async function PUT(request: Request) {
         const capacity = formData.get("capacity") ? parseInt(formData.get("capacity") as string) : null;
         const price = formData.get("price") ? parseFloat(formData.get("price") as string) : 0;
         const registrationOpen = formData.get("registrationOpen") === "true";
+        const isFeatured = formData.get("isFeatured") === "true";
+        const videoUrl = formData.get("videoUrl") as string || null;
 
         let imageUrl = event.imageUrl;
 
@@ -156,6 +158,15 @@ export async function PUT(request: Request) {
             imageUrl = blob.url;
         }
 
+        // Feature Toggle Logic
+        // If this event is being marked as featured, un-feature all others first
+        if (isFeatured) {
+            await prisma.event.updateMany({
+                where: { isFeatured: true },
+                data: { isFeatured: false }
+            });
+        }
+
         const updatedEvent = await prisma.event.update({
             where: { id },
             data: {
@@ -169,9 +180,11 @@ export async function PUT(request: Request) {
                 description,
                 descriptionKn,
                 imageUrl,
+                videoUrl,
                 capacity,
                 price,
-                registrationOpen
+                registrationOpen,
+                isFeatured
             }
         });
 

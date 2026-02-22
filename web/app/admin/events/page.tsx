@@ -34,8 +34,11 @@ interface Event {
     description: string;
     descriptionKn?: string;
     imageUrl: string;
+    videoUrl?: string; // NEW
     capacity?: number;
+    price?: number;
     registrationOpen: boolean;
+    isFeatured: boolean; // NEW
     createdAt: string;
     updatedAt: string;
     attendees?: number; // Derived or related
@@ -75,6 +78,8 @@ export default function EventsPage() {
         capacity: "",
         price: "0",
         registrationOpen: "true",
+        isFeatured: "false", // NEW
+        videoUrl: "", // NEW
         file: null as File | null
     });
 
@@ -112,6 +117,8 @@ export default function EventsPage() {
             capacity: event.capacity?.toString() || "",
             price: (event as any).price?.toString() || "0",
             registrationOpen: event.registrationOpen ? "true" : "false",
+            isFeatured: event.isFeatured ? "true" : "false", // NEW
+            videoUrl: event.videoUrl || "", // NEW
             file: null
         });
         setShowAddModal(true);
@@ -132,6 +139,8 @@ export default function EventsPage() {
             capacity: "",
             price: "0",
             registrationOpen: "true",
+            isFeatured: "false", // NEW
+            videoUrl: "", // NEW
             file: null
         });
         setShowAddModal(true);
@@ -161,6 +170,8 @@ export default function EventsPage() {
         if (formData.capacity) submitData.append("capacity", formData.capacity);
         if (formData.price) submitData.append("price", formData.price);
         submitData.append("registrationOpen", formData.registrationOpen);
+        submitData.append("isFeatured", formData.isFeatured); // NEW
+        if (formData.videoUrl) submitData.append("videoUrl", formData.videoUrl); // NEW
 
         if (formData.file) {
             submitData.append("file", formData.file);
@@ -332,10 +343,15 @@ export default function EventsPage() {
                                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent pointer-events-none" />
-                                    <div className="absolute top-3 left-3">
+                                    <div className="absolute top-3 left-3 flex gap-2">
                                         <span className={getCategoryBadgeStyle(event.category)}>
                                             {event.category}
                                         </span>
+                                        {event.isFeatured && (
+                                            <span className="backdrop-blur-md shadow-[0_2px_4px_rgba(0,0,0,0.05)] border px-3 py-1 rounded-full text-xs font-bold tracking-wide uppercase bg-secondary text-white border-secondary-light">
+                                                Featured
+                                            </span>
+                                        )}
                                     </div>
                                 </div>
 
@@ -600,6 +616,34 @@ export default function EventsPage() {
                                         >
                                             <option value="true">Yes</option>
                                             <option value="false">No</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div className="grid md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label className="block text-sm font-semibold text-primary-dark mb-2">
+                                            Video URL (Optional)
+                                        </label>
+                                        <input
+                                            type="url"
+                                            value={formData.videoUrl}
+                                            onChange={(e) => setFormData({ ...formData, videoUrl: e.target.value })}
+                                            className="w-full px-4 py-2 border-2 border-secondary/20 rounded-lg focus:border-secondary focus:outline-none"
+                                            placeholder="https://youtube.com/..."
+                                        />
+                                    </div>
+                                    <div>
+                                        <label className="block text-sm font-semibold text-primary-dark mb-2">
+                                            Set as Featured Event? (Only 1 active)
+                                        </label>
+                                        <select
+                                            value={formData.isFeatured}
+                                            onChange={(e) => setFormData({ ...formData, isFeatured: e.target.value })}
+                                            className="w-full px-4 py-2 border-2 border-secondary/20 rounded-lg focus:border-secondary focus:outline-none bg-secondary/5 font-semibold text-secondary-dark"
+                                        >
+                                            <option value="false">No</option>
+                                            <option value="true">Yes, set as Featured</option>
                                         </select>
                                     </div>
                                 </div>

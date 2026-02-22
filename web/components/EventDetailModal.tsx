@@ -2,12 +2,12 @@
 
 import { motion } from "framer-motion";
 import { X, Calendar, Clock, MapPin, ArrowRight } from "lucide-react";
-import { registerForFreeEvent } from "@/app/actions/event-registration";
 import { Event } from "@/lib/events-data";
 import { getEventTranslation, getCategoryColor, getCategoryName } from "@/lib/event-utils";
 import { useLanguage } from "@/context/LanguageContext";
 import { createPortal } from "react-dom";
 import { useEffect, useState } from "react";
+import EventRegistrationForm from "./EventRegistrationForm";
 import RazorpayButton from "./RazorpayButton";
 
 interface EventDetailModalProps {
@@ -20,16 +20,6 @@ export default function EventDetailModal({ event, onClose }: EventDetailModalPro
     const translatedEvent = getEventTranslation(event, language);
     const [mounted, setMounted] = useState(false);
     const [showRegistration, setShowRegistration] = useState(false);
-    const [formData, setFormData] = useState({
-        name: "",
-        email: "",
-        phone: "",
-        address: "",
-        organisation: "",
-        referredBy: ""
-    });
-    const [donationAmount, setDonationAmount] = useState(0);
-    const [customDonation, setCustomDonation] = useState("");
 
     useEffect(() => {
         setMounted(true);
@@ -143,208 +133,8 @@ export default function EventDetailModal({ event, onClose }: EventDetailModalPro
                                     </button>
                                 </div>
                             ) : (
-                                <div className="bg-[#FDFBF7] p-8 rounded-2xl border border-[#D4AF37]/30 shadow-inner">
-                                    <h3 className="font-cinzel-decorative font-bold text-2xl text-[#5D4037] mb-8 text-center border-b border-[#D4AF37]/10 pb-4">
-                                        Complete Registration
-                                    </h3>
-
-                                    <div className="space-y-6 mb-8">
-                                        <div className="relative group">
-                                            <input
-                                                type="text"
-                                                value={formData.name}
-                                                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                                                className="w-full p-4 bg-white border border-[#D4AF37]/30 rounded-xl focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/10 outline-none text-[#5D4037] placeholder-transparent peer transition-all"
-                                                id="name"
-                                                placeholder="Full Name"
-                                            />
-                                            <label
-                                                htmlFor="name"
-                                                className="absolute left-4 top-4 text-[#8D6E63]/70 text-base transition-all peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:-translate-y-7 peer-focus:scale-75 peer-focus:text-[#D4AF37] peer-focus:bg-[#FDFBF7] peer-focus:px-2 -translate-y-7 scale-75 bg-[#FDFBF7] px-2 pointer-events-none"
-                                            >
-                                                Full Name
-                                            </label>
-                                        </div>
-
-                                        <div className="relative group">
-                                            <input
-                                                type="email"
-                                                value={formData.email}
-                                                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                                className="w-full p-4 bg-white border border-[#D4AF37]/30 rounded-xl focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/10 outline-none text-[#5D4037] placeholder-transparent peer transition-all"
-                                                id="email"
-                                                placeholder="Email Address"
-                                            />
-                                            <label
-                                                htmlFor="email"
-                                                className="absolute left-4 top-4 text-[#8D6E63]/70 text-base transition-all peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:-translate-y-7 peer-focus:scale-75 peer-focus:text-[#D4AF37] peer-focus:bg-[#FDFBF7] peer-focus:px-2 -translate-y-7 scale-75 bg-[#FDFBF7] px-2 pointer-events-none"
-                                            >
-                                                Email Address
-                                            </label>
-                                        </div>
-
-                                        <div className="relative group">
-                                            <input
-                                                type="tel"
-                                                value={formData.phone}
-                                                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                                                className="w-full p-4 bg-white border border-[#D4AF37]/30 rounded-xl focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/10 outline-none text-[#5D4037] placeholder-transparent peer transition-all"
-                                                id="phone"
-                                                placeholder="Phone Number"
-                                            />
-                                            <label
-                                                htmlFor="phone"
-                                                className="absolute left-4 top-4 text-[#8D6E63]/70 text-base transition-all peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:-translate-y-7 peer-focus:scale-75 peer-focus:text-[#D4AF37] peer-focus:bg-[#FDFBF7] peer-focus:px-2 -translate-y-7 scale-75 bg-[#FDFBF7] px-2 pointer-events-none"
-                                            >
-                                                Phone Number
-                                            </label>
-                                        </div>
-
-                                        <div className="md:col-span-2 relative group">
-                                            <textarea
-                                                value={formData.address}
-                                                onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-                                                className="w-full p-4 bg-white border border-[#D4AF37]/30 rounded-xl focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/10 outline-none text-[#5D4037] placeholder-transparent peer transition-all resize-none h-[80px]"
-                                                id="address"
-                                                placeholder="Address (Optional)"
-                                            />
-                                            <label
-                                                htmlFor="address"
-                                                className="absolute left-4 top-4 text-[#8D6E63]/70 text-base transition-all peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:-translate-y-7 peer-focus:scale-75 peer-focus:text-[#D4AF37] peer-focus:bg-[#FDFBF7] peer-focus:px-2 -translate-y-7 scale-75 bg-[#FDFBF7] px-2 pointer-events-none"
-                                            >
-                                                Address (Optional)
-                                            </label>
-                                        </div>
-
-                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                            <div className="relative group">
-                                                <input
-                                                    type="text"
-                                                    value={formData.organisation}
-                                                    onChange={(e) => setFormData({ ...formData, organisation: e.target.value })}
-                                                    className="w-full p-4 bg-white border border-[#D4AF37]/30 rounded-xl focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/10 outline-none text-[#5D4037] placeholder-transparent peer transition-all"
-                                                    id="organisation"
-                                                    placeholder="Organisation (Optional)"
-                                                />
-                                                <label
-                                                    htmlFor="organisation"
-                                                    className="absolute left-4 top-4 text-[#8D6E63]/70 text-base transition-all peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:-translate-y-7 peer-focus:scale-75 peer-focus:text-[#D4AF37] peer-focus:bg-[#FDFBF7] peer-focus:px-2 -translate-y-7 scale-75 bg-[#FDFBF7] px-2 pointer-events-none"
-                                                >
-                                                    Organisation (Optional)
-                                                </label>
-                                            </div>
-
-                                            <div className="relative group">
-                                                <input
-                                                    type="text"
-                                                    value={formData.referredBy}
-                                                    onChange={(e) => setFormData({ ...formData, referredBy: e.target.value })}
-                                                    className="w-full p-4 bg-white border border-[#D4AF37]/30 rounded-xl focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/10 outline-none text-[#5D4037] placeholder-transparent peer transition-all"
-                                                    id="referredBy"
-                                                    placeholder="Referred By (Optional)"
-                                                />
-                                                <label
-                                                    htmlFor="referredBy"
-                                                    className="absolute left-4 top-4 text-[#8D6E63]/70 text-base transition-all peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:-translate-y-7 peer-focus:scale-75 peer-focus:text-[#D4AF37] peer-focus:bg-[#FDFBF7] peer-focus:px-2 -translate-y-7 scale-75 bg-[#FDFBF7] px-2 pointer-events-none"
-                                                >
-                                                    Referred By (Optional)
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    {/* Donation Section */}
-                                    <div className="mb-8 p-6 bg-[#D4AF37]/5 rounded-xl border border-[#D4AF37]/20">
-                                        <label className="block text-sm font-bold text-[#5D4037] mb-3 uppercase tracking-wider">
-                                            Add a Donation (Optional)
-                                        </label>
-                                        <div className="grid grid-cols-3 gap-3 mb-3">
-                                            {[101, 501, 1001].map((amt) => (
-                                                <button
-                                                    key={amt}
-                                                    onClick={() => {
-                                                        setDonationAmount(amt);
-                                                        setCustomDonation(amt.toString());
-                                                    }}
-                                                    className={`py-2 rounded-lg font-semibold text-sm transition-all ${donationAmount === amt
-                                                        ? 'bg-[#D4AF37] text-white shadow-md'
-                                                        : 'bg-white text-[#5D4037] border border-[#D4AF37]/30 hover:bg-[#D4AF37]/10'
-                                                        }`}
-                                                >
-                                                    ₹{amt}
-                                                </button>
-                                            ))}
-                                        </div>
-                                        <div className="relative">
-                                            <span className="absolute left-4 top-1/2 -translate-y-1/2 text-[#5D4037] font-bold">₹</span>
-                                            <input
-                                                type="number"
-                                                value={customDonation}
-                                                onChange={(e) => {
-                                                    const val = e.target.value;
-                                                    setCustomDonation(val);
-                                                    setDonationAmount(Number(val));
-                                                }}
-                                                placeholder="Custom Amount"
-                                                className="w-full p-3 pl-8 bg-white border border-[#D4AF37]/30 rounded-lg focus:ring-2 focus:ring-[#D4AF37]/20 outline-none text-[#5D4037]"
-                                            />
-                                        </div>
-                                    </div>
-
-                                    {/* Total Calculation */}
-                                    <div className="flex justify-between items-center mb-6 px-2 text-[#5D4037]">
-                                        <span className="text-sm">Registration Fee:</span>
-                                        <span className="font-semibold">{event.price ? `₹${event.price}` : 'Free'}</span>
-                                    </div>
-                                    {donationAmount > 0 && (
-                                        <div className="flex justify-between items-center mb-6 px-2 text-[#D4AF37]">
-                                            <span className="text-sm">Donation:</span>
-                                            <span className="font-semibold">+ ₹{donationAmount}</span>
-                                        </div>
-                                    )}
-                                    <div className="flex justify-between items-center mb-8 px-4 py-3 bg-[#5D4037] text-white rounded-xl shadow-lg">
-                                        <span className="font-bold tracking-wide">Total Payable</span>
-                                        <span className="font-bold text-xl">₹{(event.price || 0) + donationAmount}</span>
-                                    </div>
-
-                                    {(event.price || 0) + donationAmount > 0 ? (
-                                        <div className="pt-2">
-                                            <RazorpayButton
-                                                amount={(event.price || 0) + donationAmount}
-                                                donorDetails={formData}
-                                                metadata={{
-                                                    type: 'event',
-                                                    eventId: event.id,
-                                                    eventTitle: translatedEvent.title,
-                                                    registrationFee: event.price || 0,
-                                                    donationAmount: donationAmount
-                                                }}
-                                                disabled={!formData.name || !formData.email || !formData.phone}
-                                            />
-                                            <p className="text-xs text-center text-[#8D6E63] mt-3 flex items-center justify-center gap-1">
-                                                <Clock size={12} /> Secure Payment via Razorpay
-                                            </p>
-                                        </div>
-                                    ) : (
-                                        <button
-                                            onClick={async () => {
-                                                if (!formData.name || !formData.email || !formData.phone) {
-                                                    alert("Please fill in all details");
-                                                    return;
-                                                }
-                                                const res = await registerForFreeEvent(event.id, translatedEvent.title, formData);
-                                                if (res.success) {
-                                                    alert("Registration Successful!");
-                                                    onClose();
-                                                } else {
-                                                    alert(res.message);
-                                                }
-                                            }}
-                                            className="w-full py-4 bg-gradient-to-r from-[#5D4037] to-[#4A3225] text-white font-bold text-lg rounded-full shadow-lg hover:shadow-[#5D4037]/40 hover:-translate-y-1 transition-all"
-                                        >
-                                            Confirm Free Registration
-                                        </button>
-                                    )}
+                                <div className="mt-8">
+                                    <EventRegistrationForm event={event} onSuccess={onClose} />
                                 </div>
                             )}
                         </div>

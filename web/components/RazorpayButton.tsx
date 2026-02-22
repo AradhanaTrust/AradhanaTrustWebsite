@@ -119,7 +119,7 @@ export default function RazorpayButton({ amount, donorDetails, metadata, disable
             <button
                 onClick={handlePayment}
                 disabled={loading || disabled}
-                className="relative z-10 w-full md:w-auto px-16 py-4 bg-gradient-to-r from-[#D4AF37] to-[#B8860B] text-white font-semibold text-base rounded-full shadow-lg hover:shadow-[#D4AF37]/50 hover:-translate-y-1 transition-all duration-300 border border-white/20 flex items-center justify-center gap-3 mx-auto group disabled:opacity-70 disabled:cursor-not-allowed disabled:transform-none"
+                className="relative z-10 w-full md:w-auto px-10 py-4 bg-gradient-to-b from-[#F2C96D] to-[#9E731C] text-white font-medium text-lg rounded-xl border border-[#CFA14E] shadow-[inset_0_0_0_2px_#DFA848,inset_0_0_0_3px_#FFF5D1,0_4px_8px_rgba(0,0,0,0.3)] hover:shadow-[inset_0_0_0_2px_#DFA848,inset_0_0_0_3px_#FFF5D1,0_6px_12px_rgba(0,0,0,0.4)] hover:-translate-y-1 drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)] active:scale-95 transition-all duration-300 transform flex items-center justify-center gap-3 mx-auto disabled:opacity-70 disabled:cursor-not-allowed disabled:transform-none group"
             >
                 {loading ? "Processing..." : `Donate ₹${amount}`}
                 {!loading && (

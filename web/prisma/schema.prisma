@@ -81,9 +81,11 @@ model Event {
   description String
   descriptionKn String?
   imageUrl    String
+  videoUrl    String?
   capacity    Int?
   price       Float    @default(0)
   registrationOpen Boolean @default(true)
+  isFeatured  Boolean  @default(false)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   donationRecords DonationRecord[]
