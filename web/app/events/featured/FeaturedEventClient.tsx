@@ -1,10 +1,11 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import GoldCurveSeparator from "@/components/GoldCurveSeparator";
-import { Calendar as CalendarIcon, Clock, MapPin, Users, Heart, Share2 } from "lucide-react";
+import { Calendar as CalendarIcon, Clock, MapPin, Users, Heart, Share2, Check } from "lucide-react";
 import EventRegistrationForm from "@/components/EventRegistrationForm";
 import type { Event } from "@/lib/events-data";
 import { useLanguage } from "@/context/LanguageContext";
@@ -23,6 +24,33 @@ export default function FeaturedEventClient({ event }: FeaturedEventClientProps)
     const eventDate = new Date(event.date);
     const dateFormatted = eventDate.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
     const isUpcoming = eventDate >= new Date();
+
+    const [isCopied, setIsCopied] = useState(false);
+
+    const handleShare = async () => {
+        const shareData = {
+            title: translatedEvent.title,
+            text: translatedEvent.description.substring(0, 100) + '...',
+            url: window.location.href,
+        };
+
+        if (navigator.share) {
+            try {
+                await navigator.share(shareData);
+            } catch (err) {
+                console.error("Error sharing:", err);
+            }
+        } else {
+            // Fallback to clipboard
+            try {
+                await navigator.clipboard.writeText(window.location.href);
+                setIsCopied(true);
+                setTimeout(() => setIsCopied(false), 2000);
+            } catch (err) {
+                console.error("Failed to copy!", err);
+            }
+        }
+    };
 
     return (
         <div className="flex flex-col min-h-screen">
@@ -91,12 +119,21 @@ export default function FeaturedEventClient({ event }: FeaturedEventClientProps)
                                             {language === "kn" ? "ನೋಂದಣಿ ಮಾಡಿ" : "Register Now"}
                                         </a>
                                     )}
-                                    <button className="min-h-[44px] px-6 py-3 bg-gradient-to-b from-[#FFFEF9] to-[#F3E5C5] text-[#4A3225] font-medium text-base rounded-xl border border-[#CFA14E] shadow-[inset_0_0_0_2px_#FFFDF8,inset_0_0_0_3px_#CFA14E,0_2px_4px_rgba(0,0,0,0.05)] hover:shadow-[inset_0_0_0_2px_#FFFDF8,inset_0_0_0_3px_#CFA14E,0_4px_8px_rgba(0,0,0,0.1)] hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2" onClick={() => {
-                                        navigator.clipboard.writeText(window.location.href);
-                                        alert(language === "kn" ? "ಲಿಂಕ್ ಕಾಪಿ ಮಾಡಲಾಗಿದೆ!" : "Link copied to clipboard!");
-                                    }}>
-                                        <Share2 className="w-5 h-5 text-[#D4AF37]" />
-                                        {language === "kn" ? "ಹಂಚಿಕೊಳ್ಳಿ" : "Share Event"}
+                                    <button
+                                        className={`min-h-[44px] px-6 py-3 bg-gradient-to-b from-[#FFFEF9] to-[#F3E5C5] text-[#4A3225] font-medium text-base rounded-xl border border-[#CFA14E] shadow-[inset_0_0_0_2px_#FFFDF8,inset_0_0_0_3px_#CFA14E,0_2px_4px_rgba(0,0,0,0.05)] hover:shadow-[inset_0_0_0_2px_#FFFDF8,inset_0_0_0_3px_#CFA14E,0_4px_8px_rgba(0,0,0,0.1)] hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2 ${isCopied ? 'bg-gradient-to-b from-[#E8F5E9] to-[#C8E6C9] border-[#4CAF50] text-[#2E7D32]' : ''}`}
+                                        onClick={handleShare}
+                                    >
+                                        {isCopied ? (
+                                            <>
+                                                <Check className="w-5 h-5 text-[#4CAF50]" />
+                                                {language === "kn" ? "ಕಾಪಿಯಾಗಿದೆ!" : "Copied!"}
+                                            </>
+                                        ) : (
+                                            <>
+                                                <Share2 className="w-5 h-5 text-[#D4AF37]" />
+                                                {language === "kn" ? "ಹಂಚಿಕೊಳ್ಳಿ" : "Share Event"}
+                                            </>
+                                        )}
                                     </button>
                                 </div>
                             </motion.div>
