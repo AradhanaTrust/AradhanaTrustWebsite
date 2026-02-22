@@ -27,6 +27,17 @@ export default function FeaturedEventClient({ event }: FeaturedEventClientProps)
 
     const [isCopied, setIsCopied] = useState(false);
 
+    // Helper to reliably parse YouTube URLs to embed format
+    const getYouTubeEmbedUrl = (url: string) => {
+        if (!url) return "";
+        const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|shorts\/)([^#\&\?]*).*/;
+        const match = url.match(regExp);
+        if (match && match[2].length === 11) {
+            return `https://www.youtube.com/embed/${match[2]}?autoplay=1&mute=1&rel=0`;
+        }
+        return url;
+    };
+
     const handleShare = async () => {
         const shareData = {
             title: translatedEvent.title,
@@ -58,7 +69,7 @@ export default function FeaturedEventClient({ event }: FeaturedEventClientProps)
 
             <main className="flex-grow">
                 {/* Hero Section - Matching About Us/Events Layout exactly */}
-                <section className="relative pt-32 pb-24 lg:pt-40 lg:pb-32 overflow-hidden bg-[#FDFBF7] min-h-[85vh] flex items-center">
+                <section className="relative pt-24 pb-32 md:pt-32 md:pb-36 lg:pt-40 lg:pb-40 overflow-hidden bg-[#FDFBF7] min-h-[85vh] flex flex-col">
                     {/* Background - Mandala Overlay Only */}
                     <div className="absolute inset-0 z-0">
                         <div className="absolute inset-0 bg-[url('/assets/mandala-bg.svg')] bg-[length:600px_600px] bg-center opacity-5 animate-spin-slow pointer-events-none mix-blend-multiply" />
@@ -67,7 +78,7 @@ export default function FeaturedEventClient({ event }: FeaturedEventClientProps)
                     {/* Gradient Overlay for Text Readability */}
                     <div className="absolute inset-0 bg-gradient-to-b from-[#FDFBF7]/0 via-[#FDFBF7]/30 to-[#FDFBF7]/90 pointer-events-none" />
 
-                    <div className="container-gold relative z-10 w-full">
+                    <div className="container-gold relative z-10 w-full my-auto">
                         <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-12 lg:gap-8 items-center">
 
                             {/* LEFT CONTENT */}
@@ -138,68 +149,105 @@ export default function FeaturedEventClient({ event }: FeaturedEventClientProps)
                                 </div>
                             </motion.div>
 
-                            {/* RIGHT IMAGE - Hero Style */}
+                            {/* RIGHT IMAGE / VIDEO - Hero Style */}
                             <motion.div
                                 initial={{ opacity: 0, x: 30 }}
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ duration: 0.8, delay: 0.2 }}
-                                className="relative h-[300px] md:h-[400px] lg:h-[450px] w-full order-2 lg:order-2 flex justify-center lg:justify-end items-center"
+                                className="relative w-full aspect-video md:aspect-[4/3] lg:aspect-video order-2 flex justify-center lg:justify-end items-center mt-8 lg:mt-0"
                             >
-                                {/* Image Container with Temple Border */}
-                                <div className="relative w-full max-w-sm h-full mx-auto lg:ml-auto lg:mr-0">
+                                {/* Media Container with Elegant Rectangular Border */}
+                                <div className="relative w-full h-full mx-auto lg:ml-auto lg:mr-0 group">
                                     {/* Outer Glow/Shadow */}
-                                    <div className="absolute inset-4 rounded-t-full bg-[#D4AF37]/20 blur-xl transform translate-y-4" />
+                                    <div className="absolute inset-4 rounded-3xl bg-[#D4AF37]/20 blur-xl transform translate-y-4" />
 
-                                    {/* Main Image Container with Temple Border */}
-                                    <div className="relative h-full w-full rounded-t-full overflow-hidden border-[6px] border-double border-[#D4AF37]/40 shadow-2xl bg-[#FFFDF9]">
+                                    {/* Main Media Container with Border */}
+                                    <div className="relative h-full w-full rounded-3xl overflow-hidden border-[4px] md:border-[6px] border-double border-[#D4AF37]/40 shadow-2xl bg-[#FFFDF9]">
                                         {/* Inner Gold Border */}
-                                        <div className="absolute inset-2 rounded-t-full border-2 border-[#D4AF37] pointer-events-none z-20 opacity-60" />
+                                        <div className="absolute inset-2 rounded-[1rem] md:rounded-[1.25rem] border-2 border-[#D4AF37] pointer-events-none z-20 opacity-60" />
 
-                                        <Image
-                                            src={event.imageUrl || event.image}
-                                            alt={translatedEvent.title}
-                                            fill
-                                            className="w-full h-full object-cover object-center hover:scale-105 transition-transform duration-1000"
-                                            priority
-                                            sizes="(max-width: 768px) 100vw, 50vw"
-                                        />
+                                        {event.videoUrl ? (
+                                            <iframe
+                                                src={getYouTubeEmbedUrl(event.videoUrl)}
+                                                className="absolute inset-0 w-full h-full z-10"
+                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                                allowFullScreen
+                                            />
+                                        ) : (
+                                            <>
+                                                <Image
+                                                    src={event.imageUrl || event.image}
+                                                    alt={translatedEvent.title}
+                                                    fill
+                                                    className="w-full h-full object-cover object-center hover:scale-105 transition-transform duration-1000 z-10"
+                                                    priority
+                                                    sizes="(max-width: 768px) 100vw, 50vw"
+                                                />
+                                                {/* Vignette for Depth on Image */}
+                                                <div className="absolute inset-0 bg-gradient-to-t from-[#5D4037]/40 via-transparent to-transparent pointer-events-none z-10" />
+                                            </>
+                                        )}
+                                    </div>
 
-                                        {/* Vignette for Depth */}
-                                        <div className="absolute inset-0 bg-gradient-to-t from-[#5D4037]/40 via-transparent to-transparent pointer-events-none z-10" />
+                                    {/* Decorative Corners */}
+                                    <div className="absolute -top-2 -left-2 w-10 h-10 md:w-12 md:h-12 bg-[#FDFBF7] rounded-full z-30 flex items-center justify-center opacity-100 lg:opacity-0 group-hover:opacity-100 transition-opacity drop-shadow-md md:drop-shadow-lg">
+                                        <div className="w-6 h-6 md:w-8 md:h-8 rounded-full border-2 border-[#D4AF37]" />
+                                    </div>
+                                    <div className="absolute -bottom-2 -right-2 w-10 h-10 md:w-12 md:h-12 bg-[#FDFBF7] rounded-full z-30 flex items-center justify-center opacity-100 lg:opacity-0 group-hover:opacity-100 transition-opacity drop-shadow-md md:drop-shadow-lg">
+                                        <div className="w-6 h-6 md:w-8 md:h-8 rounded-full border-2 border-[#D4AF37]" />
                                     </div>
                                 </div>
                             </motion.div>
 
                         </div>
                     </div>
+
+                    <GoldCurveSeparator fillColor="fill-[#FDFBF7]" />
                 </section>
 
-                <GoldCurveSeparator />
-
                 {/* Event Details Content */}
-                <section className="bg-[#FDFBF7] relative min-h-[50vh] py-16">
+                <section className="bg-[#FDFBF7] relative min-h-[50vh] pt-12 md:pt-16 lg:pt-24 pb-16">
                     <div className="absolute inset-0 z-0">
                         <div className="absolute inset-0 bg-[url('/assets/mandala-bg.svg')] bg-[length:600px_600px] bg-center opacity-[0.03] animate-spin-slow pointer-events-none mix-blend-multiply" />
                     </div>
 
                     {/* Increased side margins to match EventsPage grid */}
-                    <div className="container mx-auto px-4 lg:px-12 relative z-10">
-                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                    <div className="container mx-auto px-4 lg:px-12 relative z-10 w-full overflow-hidden">
+                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start mt-8">
 
-                            {/* Left Column: Description, Video & Registration Form */}
                             <div className="lg:col-span-7 xl:col-span-8 space-y-16">
-                                {/* Description */}
-                                <div>
-                                    <div className="flex items-center justify-center gap-4 mb-8">
+                                {/* Description & Conditional Image */}
+                                <div className="clear-both">
+                                    <div className="flex items-center justify-center gap-4 mb-12">
                                         <div className="h-[2px] w-16 md:w-24 bg-gradient-to-l from-[#D4AF37] to-transparent" />
-                                        <h2 className="text-3xl md:text-4xl font-cinzel-decorative font-bold text-[#5D4037] text-center">
+                                        <h2 className="text-3xl md:text-4xl font-cinzel-decorative font-bold text-[#5D4037] text-center leading-tight py-2">
                                             {language === "kn" ? "ಕಾರ್ಯಕ್ರಮದ ಬಗ್ಗೆ" : "About the Event"}
                                         </h2>
                                         <div className="h-[2px] w-16 md:w-24 bg-gradient-to-r from-[#D4AF37] to-transparent" />
                                     </div>
-                                    <div className="prose prose-lg prose-brown max-w-none text-gray-700 leading-relaxed font-serif whitespace-pre-wrap text-left">
-                                        {translatedEvent.description}
-                                    </div>
+
+                                    {event.videoUrl ? (
+                                        <div className="flex flex-col-reverse lg:grid lg:grid-cols-2 gap-8 lg:gap-10 items-start">
+                                            <div className="prose prose-lg prose-brown max-w-none text-gray-700 leading-relaxed font-serif whitespace-pre-wrap text-left">
+                                                {translatedEvent.description}
+                                            </div>
+                                            {/* Rectangular Image Frame */}
+                                            <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-lg md:shadow-xl border-[3px] md:border-4 border-[#D4AF37]/30 group lg:sticky lg:top-32 mb-6 lg:mb-0">
+                                                <Image
+                                                    src={event.imageUrl || event.image}
+                                                    alt={translatedEvent.title}
+                                                    fill
+                                                    className="w-full h-full object-cover object-center hover:scale-105 transition-transform duration-700"
+                                                    sizes="(max-width: 768px) 100vw, 50vw"
+                                                />
+                                                <div className="absolute inset-0 bg-gradient-to-t from-[#5D4037]/20 via-transparent to-transparent pointer-events-none z-10" />
+                                            </div>
+                                        </div>
+                                    ) : (
+                                        <div className="prose prose-lg prose-brown max-w-none text-gray-700 leading-relaxed font-serif whitespace-pre-wrap text-left">
+                                            {translatedEvent.description}
+                                        </div>
+                                    )}
                                 </div>
 
                                 {/* Registration Form Moved Here */}
@@ -216,33 +264,7 @@ export default function FeaturedEventClient({ event }: FeaturedEventClientProps)
                                     </div>
                                 )}
 
-                                {/* Video Section */}
-                                {event.videoUrl && (
-                                    <div>
-                                        <div className="flex items-center justify-center gap-4 mb-8">
-                                            <div className="h-[2px] w-16 md:w-24 bg-gradient-to-l from-[#D4AF37] to-transparent" />
-                                            <h2 className="text-3xl md:text-4xl font-cinzel-decorative font-bold text-[#5D4037] text-center">
-                                                {language === "kn" ? "ಕಾರ್ಯಕ್ರಮದ ಪೂರ್ವವೀಕ್ಷಣೆ" : "Event Preview"}
-                                            </h2>
-                                            <div className="h-[2px] w-16 md:w-24 bg-gradient-to-r from-[#D4AF37] to-transparent" />
-                                        </div>
-                                        <div className="relative w-full aspect-video rounded-3xl overflow-hidden shadow-2xl border-4 border-[#D4AF37]/30 group">
-                                            <iframe
-                                                src={event.videoUrl.replace("watch?v=", "embed/")}
-                                                className="absolute inset-0 w-full h-full"
-                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                                allowFullScreen
-                                            />
-                                            {/* Decorative Corners */}
-                                            <div className="absolute -top-2 -left-2 w-12 h-12 bg-[#FDFBF7] rounded-full z-10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity drop-shadow-lg">
-                                                <div className="w-8 h-8 rounded-full border-2 border-[#D4AF37]" />
-                                            </div>
-                                            <div className="absolute -bottom-2 -right-2 w-12 h-12 bg-[#FDFBF7] rounded-full z-10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity drop-shadow-lg">
-                                                <div className="w-8 h-8 rounded-full border-2 border-[#D4AF37]" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                )}
+
                             </div>
 
                             {/* Right Column: Registration / Details Card */}
