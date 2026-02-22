@@ -8,6 +8,8 @@ export interface Event {
     description: string;
     descriptionKn?: string;
     imageUrl?: string;
+    videoUrl?: string;
+    isFeatured?: boolean;
 
     category: 'festival' | 'discourse' | 'community' | 'cultural' | 'educational';
     date: Date | string;

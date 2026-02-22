@@ -13,7 +13,8 @@ import {
     LogOut,
     Menu,
     X,
-    Image
+    Image,
+    Activity
 } from "lucide-react";
 import { signOut } from "next-auth/react";
 import { useState } from "react";
@@ -32,6 +33,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
     const menuItems = [
         { name: "Dashboard", href: "/admin/dashboard", icon: LayoutDashboard, adminOnly: false },
         { name: "Donations", href: "/admin/donations", icon: HandHeart, adminOnly: false },
+        { name: "Activities", href: "/admin/donations/activities", icon: Activity, adminOnly: false },
         { name: "Events", href: "/admin/events", icon: Calendar, adminOnly: false },
         { name: "Gallery", href: "/admin/gallery", icon: Image, adminOnly: false },
         { name: "Users", href: "/admin/users", icon: Users, adminOnly: true },

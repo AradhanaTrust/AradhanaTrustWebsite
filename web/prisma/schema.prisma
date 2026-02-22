@@ -81,9 +81,11 @@ model Event {
   description String
   descriptionKn String?
   imageUrl    String
+  videoUrl    String?
   capacity    Int?
   price       Float    @default(0)
   registrationOpen Boolean @default(true)
+  isFeatured  Boolean  @default(false)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   donationRecords DonationRecord[]
@@ -180,4 +182,19 @@ model GalleryImage {
   imageUrl    String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+}
+
+// ==================== Donation Activities ====================
+model DonationActivity {
+  id            String   @id @default(cuid())
+  title         String
+  titleKn       String?
+  description   String
+  descriptionKn String?
+  imageUrl      String?
+  videoUrl      String?
+  isActive      Boolean  @default(true)
+  order         Int      @default(0) // allows sorting multiple activities
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 }

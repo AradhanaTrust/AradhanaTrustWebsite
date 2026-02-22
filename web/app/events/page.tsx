@@ -12,11 +12,13 @@ import Link from "next/link";
 import GoldCurveSeparator from "@/components/GoldCurveSeparator";
 import EventDetailModal from "@/components/EventDetailModal";
 import { useLanguage } from "@/context/LanguageContext";
+import { useRouter } from "next/navigation";
 import { translations } from "@/lib/translations";
 
 
 export default function EventsPage() {
     const { language } = useLanguage();
+    const router = useRouter();
     const t = translations[language].eventsPage;
     const [showUpcoming, setShowUpcoming] = useState(true);
     const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
@@ -196,19 +198,33 @@ export default function EventsPage() {
                                         whileInView={{ opacity: 1, y: 0 }}
                                         viewport={{ once: true }}
                                         transition={{ delay: idx * 0.1 }}
-                                        className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl hover:-translate-y-2 transition-all duration-300 cursor-pointer"
-                                        onClick={() => setSelectedEvent(event)}
+                                        className={`bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl hover:-translate-y-2 transition-all duration-300 cursor-pointer ${event.isFeatured ? 'ring-2 ring-[#D4AF37] ring-offset-2' : ''}`}
+                                        onClick={() => {
+                                            if (event.isFeatured) {
+                                                router.push('/events/featured');
+                                            } else {
+                                                setSelectedEvent(event);
+                                            }
+                                        }}
                                     >
                                         {/* Event Image */}
                                         <div className="relative h-48 overflow-hidden">
                                             <img src={event.image} alt={translatedEvent.title} className="w-full h-full object-cover" />
-                                            <div className="absolute top-4 left-4">
+                                            {event.isFeatured && (
+                                                <div className="absolute inset-0 border-4 border-[#D4AF37]/50 pointer-events-none" />
+                                            )}
+                                            <div className="absolute top-4 left-4 flex flex-col gap-2">
                                                 <div
-                                                    className="px-4 py-1.5 rounded-full text-white text-xs font-bold tracking-wider uppercase backdrop-blur-sm"
+                                                    className="px-4 py-1.5 rounded-full text-white text-xs font-bold tracking-wider uppercase backdrop-blur-sm shadow-md"
                                                     style={{ backgroundColor: getCategoryColor(event.category) }}
                                                 >
                                                     {getCategoryName(event.category, language)}
                                                 </div>
+                                                {event.isFeatured && (
+                                                    <div className="px-3 py-1 rounded-full bg-gradient-to-r from-[#D4AF37] to-[#B8860B] text-white text-[10px] sm:text-xs font-bold tracking-wider uppercase shadow-lg border border-[#FFFDF8]/30 flex items-center gap-1 w-fit">
+                                                        <span>⭐</span> {language === 'kn' ? 'ವಿಶೇಷ' : 'Featured Event'}
+                                                    </div>
+                                                )}
                                             </div>
                                             <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-xl px-4 py-2 text-center">
                                                 <div className="text-2xl font-bold text-[#D4AF37]">{(event.date as Date).getDate()}</div>
