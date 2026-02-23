@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { motion, AnimatePresence } from "framer-motion";
-import { Calendar, MapPin, Users, ArrowRight, Clock, X, Loader2 } from "lucide-react";
+import { Calendar, MapPin, Users, ArrowRight, Clock, X, Loader2, BookOpen } from "lucide-react";
 import { events as staticEvents } from "@/lib/events-data";
 import type { Event } from "@/lib/events-data";
 import { getEventTranslation, getCategoryName, getCategoryColor } from "@/lib/event-utils";
@@ -117,26 +117,41 @@ export default function EventsPage() {
                                 {t.hero.description}
                             </p>
 
-                            {/* Toggle Buttons - Matching Hero Button Style */}
-                            <div className="flex gap-4 justify-center pt-4 pb-10 lg:pb-0">
-                                <button
-                                    onClick={() => setShowUpcoming(true)}
-                                    className={`min-h-[44px] px-6 py-3 font-medium text-base rounded-xl border transition-all duration-300 transform flex items-center justify-center gap-2 ${showUpcoming
-                                        ? 'bg-gradient-to-b from-[#F2C96D] to-[#9E731C] text-white border-[#CFA14E] shadow-[inset_0_0_0_2px_#DFA848,inset_0_0_0_3px_#FFF5D1,0_4px_8px_rgba(0,0,0,0.3)] hover:shadow-[inset_0_0_0_2px_#DFA848,inset_0_0_0_3px_#FFF5D1,0_6px_12px_rgba(0,0,0,0.4)] hover:-translate-y-1 drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)]'
-                                        : 'bg-gradient-to-b from-[#FFFEF9] to-[#F3E5C5] text-[#4A3225] border-[#CFA14E] shadow-[inset_0_0_0_2px_#FFFDF8,inset_0_0_0_3px_#CFA14E,0_2px_4px_rgba(0,0,0,0.05)] hover:shadow-[inset_0_0_0_2px_#FFFDF8,inset_0_0_0_3px_#CFA14E,0_4px_8px_rgba(0,0,0,0.1)] hover:-translate-y-1'
-                                        }`}
-                                >
-                                    {t.buttons.upcomingEvents}
-                                </button>
-                                <button
-                                    onClick={() => setShowUpcoming(false)}
-                                    className={`min-h-[44px] px-6 py-3 font-medium text-base rounded-xl border transition-all duration-300 transform flex items-center justify-center gap-2 ${!showUpcoming
-                                        ? 'bg-gradient-to-b from-[#F2C96D] to-[#9E731C] text-white border-[#CFA14E] shadow-[inset_0_0_0_2px_#DFA848,inset_0_0_0_3px_#FFF5D1,0_4px_8px_rgba(0,0,0,0.3)] hover:shadow-[inset_0_0_0_2px_#DFA848,inset_0_0_0_3px_#FFF5D1,0_6px_12px_rgba(0,0,0,0.4)] hover:-translate-y-1 drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)]'
-                                        : 'bg-gradient-to-b from-[#FFFEF9] to-[#F3E5C5] text-[#4A3225] border-[#CFA14E] shadow-[inset_0_0_0_2px_#FFFDF8,inset_0_0_0_3px_#CFA14E,0_2px_4px_rgba(0,0,0,0.05)] hover:shadow-[inset_0_0_0_2px_#FFFDF8,inset_0_0_0_3px_#CFA14E,0_4px_8px_rgba(0,0,0,0.1)] hover:-translate-y-1'
-                                        }`}
-                                >
-                                    {t.buttons.pastEvents}
-                                </button>
+                            {/* Toggle Buttons & Priest CTA */}
+                            <div className="flex flex-col gap-4 pt-4 pb-10 lg:pb-0">
+                                <div className="flex gap-4 justify-center">
+                                    <button
+                                        onClick={() => setShowUpcoming(true)}
+                                        className={`min-h-[44px] px-6 py-3 font-medium text-base rounded-xl border transition-all duration-300 transform flex items-center justify-center gap-2 ${showUpcoming
+                                            ? 'bg-gradient-to-b from-[#F2C96D] to-[#9E731C] text-white border-[#CFA14E] shadow-[inset_0_0_0_2px_#DFA848,inset_0_0_0_3px_#FFF5D1,0_4px_8px_rgba(0,0,0,0.3)] hover:shadow-[inset_0_0_0_2px_#DFA848,inset_0_0_0_3px_#FFF5D1,0_6px_12px_rgba(0,0,0,0.4)] hover:-translate-y-1 drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)]'
+                                            : 'bg-gradient-to-b from-[#FFFEF9] to-[#F3E5C5] text-[#4A3225] border-[#CFA14E] shadow-[inset_0_0_0_2px_#FFFDF8,inset_0_0_0_3px_#CFA14E,0_2px_4px_rgba(0,0,0,0.05)] hover:shadow-[inset_0_0_0_2px_#FFFDF8,inset_0_0_0_3px_#CFA14E,0_4px_8px_rgba(0,0,0,0.1)] hover:-translate-y-1'
+                                            }`}
+                                    >
+                                        {t.buttons.upcomingEvents}
+                                    </button>
+                                    <button
+                                        onClick={() => setShowUpcoming(false)}
+                                        className={`min-h-[44px] px-6 py-3 font-medium text-base rounded-xl border transition-all duration-300 transform flex items-center justify-center gap-2 ${!showUpcoming
+                                            ? 'bg-gradient-to-b from-[#F2C96D] to-[#9E731C] text-white border-[#CFA14E] shadow-[inset_0_0_0_2px_#DFA848,inset_0_0_0_3px_#FFF5D1,0_4px_8px_rgba(0,0,0,0.3)] hover:shadow-[inset_0_0_0_2px_#DFA848,inset_0_0_0_3px_#FFF5D1,0_6px_12px_rgba(0,0,0,0.4)] hover:-translate-y-1 drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)]'
+                                            : 'bg-gradient-to-b from-[#FFFEF9] to-[#F3E5C5] text-[#4A3225] border-[#CFA14E] shadow-[inset_0_0_0_2px_#FFFDF8,inset_0_0_0_3px_#CFA14E,0_2px_4px_rgba(0,0,0,0.05)] hover:shadow-[inset_0_0_0_2px_#FFFDF8,inset_0_0_0_3px_#CFA14E,0_4px_8px_rgba(0,0,0,0.1)] hover:-translate-y-1'
+                                            }`}
+                                    >
+                                        {t.buttons.pastEvents}
+                                    </button>
+                                </div>
+
+                                {/* Priest Registration Scroll Link */}
+                                <div className="flex justify-center mt-2">
+                                    <button
+                                        onClick={() => {
+                                            document.getElementById('priest-registration-section')?.scrollIntoView({ behavior: 'smooth' });
+                                        }}
+                                        className="text-[#D4AF37] hover:text-[#B8860B] font-medium text-sm flex items-center gap-2 transition-colors border-b border-transparent hover:border-[#B8860B] pb-0.5"
+                                    >
+                                        <BookOpen className="w-4 h-4" />
+                                        Register as an Archaka / Priest
+                                    </button>
+                                </div>
                             </div>
                         </motion.div>
 
@@ -281,6 +296,32 @@ export default function EventsPage() {
                             <p className="text-[#5D4037]/60 text-lg">No {showUpcoming ? 'upcoming' : 'past'} events found.</p>
                         </div>
                     )}
+                </div>
+            </section>
+
+            {/* Archaka (Priest) Registration Section */}
+            <section id="priest-registration-section" className="py-24 bg-[#FFFDF9] relative border-t border-[#D4AF37]/10">
+                {/* Floral pattern background */}
+                <div className="absolute inset-0 opacity-[0.03] bg-[url('/assets/mandala-bg.svg')] bg-[length:300px_300px]" />
+
+                <div className="container mx-auto px-4 lg:px-12 relative z-10">
+                    <div className="max-w-4xl mx-auto space-y-12">
+                        <div className="text-center space-y-4">
+                            <div className="flex items-center justify-center gap-4 text-[#B8860B]/80 font-medium mb-2">
+                                <span className="h-[1px] w-12 bg-gradient-to-r from-transparent to-[#B8860B]" />
+                                <span className="font-serif italic tracking-wider text-sm md:text-base text-[#8D6E63] uppercase">Divine Service</span>
+                                <span className="h-[1px] w-12 bg-gradient-to-l from-transparent to-[#B8860B]" />
+                            </div>
+                            <h2 className="text-4xl md:text-5xl font-cinzel-decorative font-bold text-[#5D4037]">
+                                Archaka Registration
+                            </h2>
+                            <p className="text-gray-600 font-serif text-lg leading-relaxed max-w-2xl mx-auto">
+                                We invite respected Purohits and Archakas to register with the Aradhana Dharmika Trust to offer their divine services during upcoming events and rituals.
+                            </p>
+                        </div>
+
+                        <PriestRegistrationForm />
+                    </div>
                 </div>
             </section>
 
