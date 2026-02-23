@@ -149,7 +149,7 @@ export default function EventsPage() {
                                         className="text-[#D4AF37] hover:text-[#B8860B] font-medium text-sm flex items-center gap-2 transition-colors border-b border-transparent hover:border-[#B8860B] pb-0.5"
                                     >
                                         <BookOpen className="w-4 h-4" />
-                                        Register as an Archakaru / Purohitaru
+                                        Register as a Purohit or Pandit
                                     </button>
                                 </div>
                             </div>
@@ -299,7 +299,7 @@ export default function EventsPage() {
                 </div>
             </section>
 
-            {/* Archaka (Priest) Registration Section */}
+            {/* Purohit/Pandit Registration Section */}
             <section id="priest-registration-section" className="py-24 bg-[#FFFDF9] relative border-t border-[#D4AF37]/10">
                 {/* Floral pattern background */}
                 <div className="absolute inset-0 opacity-[0.03] bg-[url('/assets/mandala-bg.svg')] bg-[length:300px_300px]" />
@@ -313,10 +313,10 @@ export default function EventsPage() {
                                 <span className="h-[1px] w-12 bg-gradient-to-l from-transparent to-[#B8860B]" />
                             </div>
                             <h2 className="text-4xl md:text-5xl font-cinzel-decorative font-bold text-[#5D4037]">
-                                Archakaru / Purohitaru Registration
+                                Purohit or Pandit Registration
                             </h2>
                             <p className="text-gray-600 font-serif text-lg leading-relaxed max-w-2xl mx-auto">
-                                We invite respected Purohitaru and Archakaru to register with the Aradhana Dharmika Trust to offer their divine services during upcoming events and rituals.
+                                We invite respected Purohits and Pandits to register with the Aradhana Dharmika Trust to offer their divine services during upcoming events and rituals.
                             </p>
                         </div>
 

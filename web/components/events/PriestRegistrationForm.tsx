@@ -94,12 +94,14 @@ export default function PriestRegistrationForm({ onSuccess }: PriestRegistration
             {/* Elegant Header */}
             <div className="bg-gradient-to-b from-[#FFF9E6] to-[#FFFDF9] p-8 md:p-10 text-center relative border-b border-[#CFA14E]/20">
                 <div className="absolute inset-0 opacity-[0.03] bg-[url('/assets/mandala-bg.svg')] bg-[length:200px]" />
-                <h3 className="text-3xl font-cinzel-decorative font-bold text-[#D4AF37] relative z-10 mb-3 drop-shadow-sm">
-                    Archakaru / Purohitaru Registration
-                </h3>
-                <p className="text-[#5D4037]/80 font-serif text-lg relative z-10">
+                <h3 className="text-3xl md:text-3xl font-cinzel-decorative font-bold bg-gradient-to-r from-[#B8860B] via-[#D4AF37] to-[#B8860B] bg-clip-text text-transparent relative z-10 mb-2 drop-shadow-sm filter mt-2 px-4 leading-snug">
                     Register to offer your divine services
-                </p>
+                </h3>
+                <div className="flex items-center justify-center gap-4 text-[#B8860B]/60 mt-5 relative z-10">
+                    <span className="h-[1px] w-12 sm:w-16 bg-gradient-to-r from-transparent to-[#D4AF37]" />
+                    <Sparkles className="w-5 h-5 text-[#D4AF37]" />
+                    <span className="h-[1px] w-12 sm:w-16 bg-gradient-to-l from-transparent to-[#D4AF37]" />
+                </div>
             </div>
 
             <form onSubmit={handleSubmit} className="p-8 md:p-10 space-y-8">
@@ -122,7 +124,7 @@ export default function PriestRegistrationForm({ onSuccess }: PriestRegistration
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="space-y-2">
-                            <label className="text-sm font-semibold text-gray-700">Full Name (Purohitaru Name) *</label>
+                            <label className="text-sm font-semibold text-gray-700">Full Name (Purohit/Pandit Name) *</label>
                             <input
                                 type="text"
                                 required
