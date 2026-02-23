@@ -4,6 +4,7 @@ import { prisma } from "@/lib/prisma";
 import { put, del } from "@vercel/blob";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
+import { revalidatePath } from "next/cache";
 
 export async function GET(request: Request) {
     try {
@@ -97,6 +98,10 @@ export async function POST(request: Request) {
             }
         });
 
+        // Revalidate public pages
+        revalidatePath('/events');
+        revalidatePath('/events/featured');
+
         return NextResponse.json(event);
 
     } catch (error) {
@@ -188,6 +193,10 @@ export async function PUT(request: Request) {
             }
         });
 
+        // Revalidate public pages
+        revalidatePath('/events');
+        revalidatePath('/events/featured');
+
         return NextResponse.json(updatedEvent);
 
     } catch (error) {
@@ -228,6 +237,10 @@ export async function DELETE(request: Request) {
         await prisma.event.delete({
             where: { id }
         });
+
+        // Revalidate public pages
+        revalidatePath('/events');
+        revalidatePath('/events/featured');
 
         return NextResponse.json({ success: true });
 
