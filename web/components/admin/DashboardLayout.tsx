@@ -45,7 +45,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
             name: "Content Management",
             items: [
                 { name: "Events", href: "/admin/events", icon: Calendar, adminOnly: false },
-                { name: "Priest Registrations", href: "/admin/events/priests", icon: BookOpen, adminOnly: false }, // Added Priest Registrations
+                { name: "Archakaru / Purohitaru", href: "/admin/events/priests", icon: BookOpen, adminOnly: false }, // Added Priest Registrations
                 { name: "Gallery", href: "/admin/gallery", icon: ImageIcon, adminOnly: false }, // Using ImageIcon
             ]
         },

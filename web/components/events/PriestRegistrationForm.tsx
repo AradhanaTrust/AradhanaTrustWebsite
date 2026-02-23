@@ -90,14 +90,14 @@ export default function PriestRegistrationForm({ onSuccess }: PriestRegistration
     }
 
     return (
-        <div className="bg-surface-white rounded-3xl shadow-xl overflow-hidden border border-secondary/20 relative">
+        <div className="bg-white rounded-3xl shadow-2xl overflow-hidden border border-[#CFA14E]/20 relative">
             {/* Elegant Header */}
-            <div className="bg-gradient-to-r from-primary-dark via-primary to-primary-dark p-8 md:p-10 text-center relative overflow-hidden">
-                <div className="absolute inset-0 opacity-10 bg-[url('/assets/mandala-bg.svg')] bg-[length:200px]" />
-                <h3 className="text-3xl font-cinzel-decorative font-bold text-surface-white relative z-10 mb-3 drop-shadow-md">
-                    Archaka Registration
+            <div className="bg-gradient-to-b from-[#FFF9E6] to-[#FFFDF9] p-8 md:p-10 text-center relative border-b border-[#CFA14E]/20">
+                <div className="absolute inset-0 opacity-[0.03] bg-[url('/assets/mandala-bg.svg')] bg-[length:200px]" />
+                <h3 className="text-3xl font-cinzel-decorative font-bold text-[#D4AF37] relative z-10 mb-3 drop-shadow-sm">
+                    Archakaru / Purohitaru Registration
                 </h3>
-                <p className="text-secondary-light/90 font-serif text-lg relative z-10">
+                <p className="text-[#5D4037]/80 font-serif text-lg relative z-10">
                     Register to offer your divine services
                 </p>
             </div>
@@ -122,7 +122,7 @@ export default function PriestRegistrationForm({ onSuccess }: PriestRegistration
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="space-y-2">
-                            <label className="text-sm font-semibold text-gray-700">Full Name (Purohit Name) *</label>
+                            <label className="text-sm font-semibold text-gray-700">Full Name (Purohitaru Name) *</label>
                             <input
                                 type="text"
                                 required
@@ -264,7 +264,7 @@ export default function PriestRegistrationForm({ onSuccess }: PriestRegistration
                     <button
                         type="submit"
                         disabled={isSubmitting}
-                        className="w-full h-14 bg-gradient-to-r from-[#D4AF37] via-[#F2C96D] to-[#D4AF37] text-primary-dark font-cinzel font-bold text-lg rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-3 disabled:opacity-70 disabled:hover:translate-y-0"
+                        className="w-full md:w-auto mx-auto px-10 py-4 bg-gradient-to-b from-[#F2C96D] to-[#9E731C] text-white font-medium text-lg rounded-xl border border-[#CFA14E] shadow-[inset_0_0_0_2px_#DFA848,inset_0_0_0_3px_#FFF5D1,0_4px_8px_rgba(0,0,0,0.3)] hover:shadow-[inset_0_0_0_2px_#DFA848,inset_0_0_0_3px_#FFF5D1,0_6px_12px_rgba(0,0,0,0.4)] hover:-translate-y-1 drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)] active:scale-95 transition-all duration-300 transform flex items-center justify-center gap-2"
                     >
                         {isSubmitting ? (
                             <>
@@ -278,7 +278,7 @@ export default function PriestRegistrationForm({ onSuccess }: PriestRegistration
                             </>
                         )}
                     </button>
-                    <p className="text-center text-xs text-gray-500 font-serif mt-4">
+                    <p className="text-center text-xs text-gray-500 font-serif mt-5 mb-2">
                         Your details are submitted securely and will be reviewed by the temple authoritative committee.
                     </p>
                 </div>

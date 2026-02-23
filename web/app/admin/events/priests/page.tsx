@@ -172,7 +172,7 @@ export default function PriestRegistrationsAdminPage() {
                             {status === "CANDIDATE" && <Clock className="w-4 h-4" />}
                             {status === "SELECTED" && <CheckCircle className="w-4 h-4" />}
                             {status === "REJECTED" && <XCircle className="w-4 h-4" />}
-                            {status.charAt(0) + status.slice(1).toLowerCase()}s
+                            {status === "CANDIDATE" ? "Candidates" : status.charAt(0) + status.slice(1).toLowerCase()}
                             <span className={`px-2 py-0.5 rounded-full text-xs ${activeTab === status ? "bg-secondary/10 text-secondary-dark" : "bg-gray-100 text-gray-500"
                                 }`}>
                                 {getTabCount(status)}
@@ -189,7 +189,7 @@ export default function PriestRegistrationsAdminPage() {
                 ) : filteredRegistrations.length === 0 ? (
                     <div className="text-center py-20 bg-white rounded-xl border border-gray-100">
                         <BookOpen className="w-12 h-12 text-gray-300 mx-auto mb-3" />
-                        <h3 className="text-lg font-medium text-gray-900">No {activeTab.toLowerCase()}s found</h3>
+                        <h3 className="text-lg font-medium text-gray-900">No {activeTab === "CANDIDATE" ? "candidates" : activeTab.toLowerCase()} found</h3>
                         <p className="text-gray-500 text-sm mt-1">
                             {searchTerm ? "Try adjusting your search terms." : `There are no registrations currently marked as ${activeTab}.`}
                         </p>

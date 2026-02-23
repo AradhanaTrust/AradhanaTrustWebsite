@@ -149,7 +149,7 @@ export default function EventsPage() {
                                         className="text-[#D4AF37] hover:text-[#B8860B] font-medium text-sm flex items-center gap-2 transition-colors border-b border-transparent hover:border-[#B8860B] pb-0.5"
                                     >
                                         <BookOpen className="w-4 h-4" />
-                                        Register as an Archaka / Priest
+                                        Register as an Archakaru / Purohitaru
                                     </button>
                                 </div>
                             </div>
@@ -313,10 +313,10 @@ export default function EventsPage() {
                                 <span className="h-[1px] w-12 bg-gradient-to-l from-transparent to-[#B8860B]" />
                             </div>
                             <h2 className="text-4xl md:text-5xl font-cinzel-decorative font-bold text-[#5D4037]">
-                                Archaka Registration
+                                Archakaru / Purohitaru Registration
                             </h2>
                             <p className="text-gray-600 font-serif text-lg leading-relaxed max-w-2xl mx-auto">
-                                We invite respected Purohits and Archakas to register with the Aradhana Dharmika Trust to offer their divine services during upcoming events and rituals.
+                                We invite respected Purohitaru and Archakaru to register with the Aradhana Dharmika Trust to offer their divine services during upcoming events and rituals.
                             </p>
                         </div>
 
