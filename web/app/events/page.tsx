@@ -11,6 +11,7 @@ import { getEventTranslation, getCategoryName, getCategoryColor } from "@/lib/ev
 import Link from "next/link";
 import GoldCurveSeparator from "@/components/GoldCurveSeparator";
 import EventDetailModal from "@/components/EventDetailModal";
+import PriestRegistrationForm from "@/components/events/PriestRegistrationForm";
 import { useLanguage } from "@/context/LanguageContext";
 import { useRouter } from "next/navigation";
 import { translations } from "@/lib/translations";

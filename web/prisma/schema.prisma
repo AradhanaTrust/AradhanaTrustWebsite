@@ -90,6 +90,7 @@ model Event {
   updatedAt   DateTime @updatedAt
   donationRecords DonationRecord[]
   registrations  EventRegistration[]
+  priestRegistrations PriestRegistration[]
 }
 
 model Donation {
@@ -197,4 +198,33 @@ model DonationActivity {
   order         Int      @default(0) // allows sorting multiple activities
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
+}
+
+// ==================== Priest Registration ====================
+model PriestRegistration {
+  id              String   @id @default(cuid())
+  eventId         String?  // Optional: Link to a specific event if applicable
+  event           Event?   @relation(fields: [eventId], references: [id])
+  
+  fullName        String
+  email           String?  // Optional, as some traditional priests might only use phone
+  phoneNumber     String
+  whatsappNumber  String?
+  
+  gothram         String?  // Gothra details are important for priests
+  vedicTradition  String?  // e.g., Rig Veda, Yajur Veda, Smartha, Vaishnava
+  experienceYears Int?
+  currentTemple   String?  // Currently associated temple (if any)
+  
+  specialization  String?  // e.g., Alankaram, Homa, Veda Parayanam
+  address         String?
+  
+  status          String   @default("CANDIDATE") // CANDIDATE, SELECTED, REJECTED
+  adminNotes      String?  // Internal notes for the trust members
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([eventId])
+  @@index([status])
 }

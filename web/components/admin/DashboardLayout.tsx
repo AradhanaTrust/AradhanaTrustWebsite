@@ -6,15 +6,16 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
     LayoutDashboard,
-    HandHeart,
+    HandHeart, // Keep HandHeart for Donations, as Heart is used for Seva Management in the example
     Calendar,
     Users,
     Settings,
     LogOut,
     Menu,
     X,
-    Image,
-    Activity
+    Image as ImageIcon, // Renamed Image to ImageIcon to avoid conflict
+    Activity,
+    BookOpen // Added BookOpen for Priest Registrations
 } from "lucide-react";
 import { signOut } from "next-auth/react";
 import { useState } from "react";
@@ -30,17 +31,36 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
 
     const isPrimaryAdmin = session?.user?.role === "PRIMARY_ADMIN";
 
-    const menuItems = [
-        { name: "Dashboard", href: "/admin/dashboard", icon: LayoutDashboard, adminOnly: false },
-        { name: "Donations", href: "/admin/donations", icon: HandHeart, adminOnly: false },
-        { name: "Activities", href: "/admin/donations/activities", icon: Activity, adminOnly: false },
-        { name: "Events", href: "/admin/events", icon: Calendar, adminOnly: false },
-        { name: "Gallery", href: "/admin/gallery", icon: Image, adminOnly: false },
-        { name: "Users", href: "/admin/users", icon: Users, adminOnly: true },
-        { name: "Settings", href: "/admin/settings", icon: Settings, adminOnly: false },
+    // Updated menuItems to a grouped structure
+    const menuSections = [
+        {
+            name: "Main",
+            items: [
+                { name: "Dashboard", href: "/admin/dashboard", icon: LayoutDashboard, adminOnly: false },
+                { name: "Donations", href: "/admin/donations", icon: HandHeart, adminOnly: false },
+                { name: "Activities", href: "/admin/donations/activities", icon: Activity, adminOnly: false },
+            ]
+        },
+        {
+            name: "Content Management",
+            items: [
+                { name: "Events", href: "/admin/events", icon: Calendar, adminOnly: false },
+                { name: "Priest Registrations", href: "/admin/events/priests", icon: BookOpen, adminOnly: false }, // Added Priest Registrations
+                { name: "Gallery", href: "/admin/gallery", icon: ImageIcon, adminOnly: false }, // Using ImageIcon
+            ]
+        },
+        {
+            name: "Administration",
+            items: [
+                { name: "Users", href: "/admin/users", icon: Users, adminOnly: true },
+                { name: "Settings", href: "/admin/settings", icon: Settings, adminOnly: false },
+            ]
+        }
     ];
 
-    const filteredMenuItems = menuItems.filter(
+    // Flatten and filter menu items for easier processing in some places
+    const allMenuItems = menuSections.flatMap(section => section.items);
+    const filteredMenuItems = allMenuItems.filter(
         item => !item.adminOnly || isPrimaryAdmin
     );
 
@@ -93,27 +113,41 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                 </div>
 
                 {/* Navigation Menu */}
-                <nav className="flex-1 p-4 space-y-2 overflow-y-auto">
-                    {filteredMenuItems.map((item) => {
-                        const Icon = item.icon;
-                        const isActive = pathname === item.href;
+                <nav className="flex-1 p-4 space-y-4 overflow-y-auto"> {/* Changed space-y-2 to space-y-4 for section spacing */}
+                    {menuSections.map((section) => {
+                        const sectionItems = section.items.filter(item => !item.adminOnly || isPrimaryAdmin);
+                        if (sectionItems.length === 0) return null; // Don't render section if no items are visible
 
                         return (
-                            <Link
-                                key={item.name}
-                                href={item.href}
-                                onClick={() => setSidebarOpen(false)}
-                                className={`
-                  flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-all
-                  ${isActive
-                                        ? "bg-secondary text-surface-white shadow-md"
-                                        : "text-primary-dark hover:bg-secondary/10 hover:text-secondary-dark"
-                                    }
-                `}
-                            >
-                                <Icon className="w-5 h-5" />
-                                <span>{item.name}</span>
-                            </Link>
+                            <div key={section.name}>
+                                <h3 className="text-xs font-semibold uppercase text-primary/60 mb-2 px-4">
+                                    {section.name}
+                                </h3>
+                                <div className="space-y-2">
+                                    {sectionItems.map((item) => {
+                                        const Icon = item.icon;
+                                        const isActive = pathname === item.href;
+
+                                        return (
+                                            <Link
+                                                key={item.name}
+                                                href={item.href}
+                                                onClick={() => setSidebarOpen(false)}
+                                                className={`
+                                                    flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-all
+                                                    ${isActive
+                                                        ? "bg-secondary text-surface-white shadow-md"
+                                                        : "text-primary-dark hover:bg-secondary/10 hover:text-secondary-dark"
+                                                    }
+                                                `}
+                                            >
+                                                <Icon className="w-5 h-5" />
+                                                <span>{item.name}</span>
+                                            </Link>
+                                        );
+                                    })}
+                                </div>
+                            </div>
                         );
                     })}
                 </nav>
@@ -145,7 +179,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                     <div className="flex items-center justify-between">
                         <div>
                             <h1 className="text-2xl font-cinzel-decorative font-bold text-primary-dark">
-                                {menuItems.find(item => item.href === pathname)?.name || "Dashboard"}
+                                {allMenuItems.find(item => item.href === pathname)?.name || "Dashboard"}
                             </h1>
                             <p className="text-sm text-primary/60">
                                 Welcome back, {session?.user?.name?.split(' ')[0]}
