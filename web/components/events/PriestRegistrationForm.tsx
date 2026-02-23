@@ -5,11 +5,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Loader2, CheckCircle, GraduationCap, MapPin, Phone, BookOpen, Sparkles } from "lucide-react";
 
 interface PriestRegistrationFormProps {
-    eventId?: string; // Optional: If they are registering for a specific event
     onSuccess?: () => void;
 }
 
-export default function PriestRegistrationForm({ eventId, onSuccess }: PriestRegistrationFormProps) {
+export default function PriestRegistrationForm({ onSuccess }: PriestRegistrationFormProps) {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
     const [error, setError] = useState<string | null>(null);
@@ -36,10 +35,7 @@ export default function PriestRegistrationForm({ eventId, onSuccess }: PriestReg
             const res = await fetch("/api/priests/register", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    ...formData,
-                    eventId: eventId || null
-                })
+                body: JSON.stringify(formData)
             });
 
             const data = await res.json();

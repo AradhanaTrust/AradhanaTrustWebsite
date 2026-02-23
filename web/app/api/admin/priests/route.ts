@@ -11,20 +11,13 @@ export async function GET(request: Request) {
         }
 
         const { searchParams } = new URL(request.url);
-        const eventId = searchParams.get('eventId');
         const status = searchParams.get('status');
 
         const whereClause: any = {};
-        if (eventId) whereClause.eventId = eventId;
         if (status) whereClause.status = status;
 
         const priests = await prisma.priestRegistration.findMany({
             where: whereClause,
-            include: {
-                event: {
-                    select: { title: true } // Fetching the event title for display in the dashboard
-                }
-            },
             orderBy: {
                 createdAt: 'desc'
             }

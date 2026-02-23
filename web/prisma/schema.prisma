@@ -90,7 +90,6 @@ model Event {
   updatedAt   DateTime @updatedAt
   donationRecords DonationRecord[]
   registrations  EventRegistration[]
-  priestRegistrations PriestRegistration[]
 }
 
 model Donation {
@@ -203,8 +202,6 @@ model DonationActivity {
 // ==================== Priest Registration ====================
 model PriestRegistration {
   id              String   @id @default(cuid())
-  eventId         String?  // Optional: Link to a specific event if applicable
-  event           Event?   @relation(fields: [eventId], references: [id])
   
   fullName        String
   email           String?  // Optional, as some traditional priests might only use phone
@@ -225,6 +222,5 @@ model PriestRegistration {
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
 
-  @@index([eventId])
   @@index([status])
 }

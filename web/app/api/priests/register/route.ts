@@ -26,7 +26,6 @@ export async function POST(request: Request) {
                 currentTemple: data.currentTemple || null,
                 specialization: data.specialization || null,
                 address: data.address || null,
-                eventId: data.eventId || null,
                 status: "CANDIDATE", // Always default to candidate on public submission
             },
         });
