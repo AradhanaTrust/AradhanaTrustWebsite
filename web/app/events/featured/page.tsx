@@ -2,6 +2,8 @@ import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 import FeaturedEventClient from "./FeaturedEventClient";
 
+export const dynamic = 'force-dynamic';
+
 async function getFeaturedEvent() {
     const featured = await prisma.event.findFirst({
         where: { isFeatured: true }

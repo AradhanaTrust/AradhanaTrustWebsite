@@ -198,3 +198,29 @@ model DonationActivity {
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 }
+
+// ==================== Priest Registration ====================
+model PriestRegistration {
+  id              String   @id @default(cuid())
+  
+  fullName        String
+  email           String?  // Optional, as some traditional priests might only use phone
+  phoneNumber     String
+  whatsappNumber  String?
+  
+  gothram         String?  // Gothra details are important for priests
+  vedicTradition  String?  // e.g., Rig Veda, Yajur Veda, Smartha, Vaishnava
+  experienceYears Int?
+  currentTemple   String?  // Currently associated temple (if any)
+  
+  specialization  String?  // e.g., Alankaram, Homa, Veda Parayanam
+  address         String?
+  
+  status          String   @default("CANDIDATE") // CANDIDATE, SELECTED, REJECTED
+  adminNotes      String?  // Internal notes for the trust members
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([status])
+}
