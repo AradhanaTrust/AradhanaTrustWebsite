@@ -128,7 +128,8 @@ model DonationRecord {
   frequency    String   @default("one-time") // one-time, monthly
   referredBy   String?  @default("None")
   eventId      String?
-  event        Event?   @relation(fields: [eventId], references: [id])
+  registrationId String?
+  event        Event?   @relation(fields: [eventId], references: [id], onDelete: SetNull)
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
@@ -137,9 +138,11 @@ model DonationRecord {
 
 model EventRegistration {
   id          String   @id @default(cuid())
-  eventId     String
-  event       Event    @relation(fields: [eventId], references: [id])
+  eventId     String?
+  event       Event?    @relation(fields: [eventId], references: [id], onDelete: SetNull)
   eventTitle  String   // Cached for quick display
+  registrationFee Float    @default(0)
+  donationAmount  Float    @default(0)
   name        String
   email       String
   phone       String?

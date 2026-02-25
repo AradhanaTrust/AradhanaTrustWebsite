@@ -13,19 +13,45 @@ export async function GET() {
         const now = new Date();
         const firstDayOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
 
-        // 1. Total Donations & This Month
-        const allDonations = await prisma.donationRecord.aggregate({
+        // 1. Calculate General Donations (DonationRecord with registrationId: null)
+        const generalDonations = await prisma.donationRecord.aggregate({
+            where: { registrationId: null },
             _sum: { amount: true }
         });
 
-        const monthDonations = await prisma.donationRecord.aggregate({
+        // 2. Calculate Event-related Collections
+        // - Event Fees (sum of registrationFee from EventRegistration)
+        const eventFees = await prisma.eventRegistration.aggregate({
+            _sum: { registrationFee: true }
+        });
+        // - Event Donations (sum of donationAmount from EventRegistration, which also exist as DonationRecord with registrationId)
+        const eventDonations = await prisma.eventRegistration.aggregate({
+            _sum: { donationAmount: true }
+        });
+
+        const totalGeneralAmount = generalDonations?._sum?.amount || 0;
+        const totalEventFees = eventFees?._sum?.registrationFee || 0;
+        const totalEventDonations = eventDonations?._sum?.donationAmount || 0;
+        const totalCollection = totalGeneralAmount + totalEventFees + totalEventDonations;
+
+        // 3. Monthly Calculations
+        const monthGeneralDonations = await prisma.donationRecord.aggregate({
             where: {
+                registrationId: null,
                 date: { gte: firstDayOfMonth }
             },
             _sum: { amount: true }
         });
+        const monthEventRegistrations = await prisma.eventRegistration.aggregate({
+            where: { createdAt: { gte: firstDayOfMonth } },
+            _sum: {
+                registrationFee: true,
+                donationAmount: true
+            }
+        });
+        const monthTotal = (monthGeneralDonations?._sum?.amount || 0) + (monthEventRegistrations?._sum?.registrationFee || 0) + (monthEventRegistrations?._sum?.donationAmount || 0);
 
-        // 2. Total Donors (Unique Donor Names)
+        // 4. Total Donors (Unique Donor Names from DonationRecord)
         const uniqueDonors = await prisma.donationRecord.groupBy({
             by: ['donorName'],
         });
@@ -39,17 +65,17 @@ export async function GET() {
         });
         const newDonorsThisMonth = thisMonthDonations.length;
 
-        // 3. Upcoming Events
+        // 5. Upcoming Events
         const upcomingEventsCount = await prisma.event.count({
             where: {
                 date: { gte: now }
             }
         });
 
-        // 4. Registrations (Total)
+        // 6. Registrations (Total)
         const totalRegistrations = await prisma.eventRegistration.count();
 
-        // 5. Recent 5 Donations
+        // 7. Recent 5 Donations
         const recentDonations = await prisma.donationRecord.findMany({
             take: 5,
             orderBy: { date: 'desc' },
@@ -63,8 +89,14 @@ export async function GET() {
         });
 
         const stats = {
-            totalDonations: allDonations._sum.amount || 0,
-            donationsThisMonth: monthDonations._sum.amount || 0,
+            totalCollection: totalCollection,
+            collectionThisMonth: monthTotal,
+            segregation: {
+                general: totalGeneralAmount,
+                eventFees: totalEventFees,
+                eventDonations: totalEventDonations,
+                eventTotal: totalEventFees + totalEventDonations
+            },
             totalDonors: totalDonorsCount,
             newDonors: newDonorsThisMonth,
             upcomingEvents: upcomingEventsCount,
@@ -74,7 +106,7 @@ export async function GET() {
                 donor: d.donorName,
                 amount: d.amount,
                 category: d.category,
-                date: d.date // return date object or string, frontend handles it
+                date: d.date
             }))
         };
 

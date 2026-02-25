@@ -18,8 +18,11 @@ export async function POST(req: NextRequest) {
             // 1. Signature matches - Payment Successful
 
             if (metadata?.type === 'event') {
+                const regFee = parseFloat(metadata.registrationFee || 0);
+                const donAmount = parseFloat(metadata.donationAmount || 0);
+
                 // Create Event Registration
-                await prisma.eventRegistration.create({
+                const registration = await prisma.eventRegistration.create({
                     data: {
                         eventId: metadata.eventId,
                         eventTitle: metadata.eventTitle, // Ensure this is passed
@@ -31,13 +34,41 @@ export async function POST(req: NextRequest) {
                         referredBy: donorDetails.referredBy,
                         attendees: 1, // Default to 1 for now
                         totalAmount: parseFloat(amount),
+                        registrationFee: regFee,
+                        donationAmount: donAmount,
                         status: "registered",
                         razorpayOrderId: razorpay_order_id,
                         razorpayPaymentId: razorpay_payment_id,
                         razorpaySignature: razorpay_signature,
-                        event: { connect: { id: metadata.eventId } }
+                        // Relational connection
+                        event: metadata.eventId ? { connect: { id: metadata.eventId } } : undefined
                     }
                 });
+
+                // If there's a donation amount, also create a DonationRecord for the donations management section
+                if (donAmount > 0) {
+                    const date = new Date();
+                    const receiptNo = `RCT-${date.getFullYear()}${(date.getMonth() + 1).toString().padStart(2, '0')}${date.getDate().toString().padStart(2, '0')}-${Math.floor(Math.random() * 10000).toString().padStart(4, '0')}`;
+
+                    await prisma.donationRecord.create({
+                        data: {
+                            donorName: donorDetails.name,
+                            email: donorDetails.email,
+                            phone: donorDetails.phone,
+                            amount: donAmount,
+                            category: "Event Donation",
+                            method: "Razorpay",
+                            address: donorDetails.address,
+                            organisation: donorDetails.organisation,
+                            referredBy: donorDetails.referredBy || "None",
+                            receiptNo,
+                            status: "completed",
+                            date: new Date(),
+                            eventId: metadata.eventId,
+                            registrationId: registration.id
+                        }
+                    });
+                }
             } else {
                 // Default: Create Donation
                 await prisma.donation.create({

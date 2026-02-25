@@ -20,8 +20,14 @@ export default function AdminDashboard() {
 
     // State for real data
     const [stats, setStats] = useState({
-        totalDonations: "₹0",
-        donationsThisMonth: "₹0",
+        totalCollection: "₹0",
+        collectionThisMonth: "₹0",
+        segregation: {
+            general: 0,
+            eventFees: 0,
+            eventDonations: 0,
+            eventTotal: 0
+        },
         totalDonors: 0,
         newDonors: 0,
         upcomingEvents: 0,
@@ -48,8 +54,9 @@ export default function AdminDashboard() {
                     };
 
                     setStats({
-                        totalDonations: formatCurrency(data.totalDonations),
-                        donationsThisMonth: formatCurrency(data.donationsThisMonth),
+                        totalCollection: formatCurrency(data.totalCollection),
+                        collectionThisMonth: formatCurrency(data.collectionThisMonth),
+                        segregation: data.segregation,
                         totalDonors: data.totalDonors,
                         newDonors: data.newDonors,
                         upcomingEvents: data.upcomingEvents,
@@ -71,6 +78,14 @@ export default function AdminDashboard() {
         fetchStats();
     }, []);
 
+    const formatCurrencySmall = (amount: number) => {
+        return new Intl.NumberFormat('en-IN', {
+            style: 'currency',
+            currency: 'INR',
+            maximumFractionDigits: 0
+        }).format(amount);
+    };
+
 
     return (
         <DashboardLayout>
@@ -83,7 +98,7 @@ export default function AdminDashboard() {
                             Welcome, {session?.user?.name}
                         </h2>
                         <p className="text-primary/70 mt-1">
-                            Here's an overview of Aradhana Dharmika Trust's activities
+                            Here's a detailed overview of Aradhana Dharmika Trust's collections and registrations
                         </p>
                     </div>
 
@@ -91,20 +106,29 @@ export default function AdminDashboard() {
 
                     {/* KPI Cards */}
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                        {/* Total Donations */}
+                        {/* Total Collections */}
                         <div className="bg-surface-white border-2 border-secondary/20 rounded-xl p-6 hover:shadow-lg hover:border-secondary/40 transition-all">
                             <div className="flex items-center justify-between mb-4">
                                 <div className="p-3 bg-secondary/10 rounded-lg">
                                     <IndianRupee className="w-6 h-6 text-secondary-dark" />
                                 </div>
+                                <span className="text-[10px] font-bold text-primary/40 uppercase tracking-widest">Collections</span>
                             </div>
                             <h3 className="text-2xl font-bold text-primary-dark">
-                                {isLoading ? "..." : stats.donationsThisMonth}
+                                {isLoading ? "..." : stats.collectionThisMonth}
                             </h3>
                             <p className="text-sm text-primary/60 mt-1">This Month</p>
-                            <p className="text-xs text-primary/40 mt-2">
-                                Total: {isLoading ? "..." : stats.totalDonations}
-                            </p>
+
+                            <div className="mt-4 pt-4 border-t border-secondary/10 space-y-1">
+                                <p className="text-xs text-primary/40 flex justify-between">
+                                    <span>Total:</span>
+                                    <span className="font-bold text-primary-dark">{stats.totalCollection}</span>
+                                </p>
+                                <p className="text-[10px] text-secondary-dark flex justify-between">
+                                    <span>General:</span>
+                                    <span>{formatCurrencySmall(stats.segregation.general)}</span>
+                                </p>
+                            </div>
                         </div>
 
                         {/* Total Donors */}
@@ -113,6 +137,7 @@ export default function AdminDashboard() {
                                 <div className="p-3 bg-accent-saffron/10 rounded-lg">
                                     <UsersIcon className="w-6 h-6 text-accent-saffron" />
                                 </div>
+                                <span className="text-[10px] font-bold text-primary/40 uppercase tracking-widest">Donors</span>
                             </div>
                             <h3 className="text-2xl font-bold text-primary-dark">
                                 {isLoading ? "..." : stats.totalDonors}
@@ -129,6 +154,7 @@ export default function AdminDashboard() {
                                 <div className="p-3 bg-primary/10 rounded-lg">
                                     <Calendar className="w-6 h-6 text-primary-dark" />
                                 </div>
+                                <span className="text-[10px] font-bold text-primary/40 uppercase tracking-widest">Upcoming</span>
                             </div>
                             <h3 className="text-2xl font-bold text-primary-dark">
                                 {isLoading ? "..." : stats.upcomingEvents}
@@ -137,18 +163,33 @@ export default function AdminDashboard() {
                             <p className="text-xs text-primary/40 mt-2">Next 30 days</p>
                         </div>
 
-                        {/* Registrations */}
+                        {/* Registrations & Event Income */}
                         <div className="bg-surface-white border-2 border-secondary/20 rounded-xl p-6 hover:shadow-lg hover:border-secondary/40 transition-all">
                             <div className="flex items-center justify-between mb-4">
                                 <div className="p-3 bg-secondary-light/10 rounded-lg">
                                     <FileText className="w-6 h-6 text-secondary-light" />
                                 </div>
+                                <span className="text-[10px] font-bold text-primary/40 uppercase tracking-widest">Registrations</span>
                             </div>
                             <h3 className="text-2xl font-bold text-primary-dark">
                                 {isLoading ? "..." : stats.registrations}
                             </h3>
-                            <p className="text-sm text-primary/60 mt-1">Event Registrations</p>
-                            <p className="text-xs text-primary/40 mt-2">All time</p>
+                            <p className="text-sm text-primary/60 mt-1">Total Attendees</p>
+
+                            <div className="mt-4 pt-4 border-t border-secondary/10 space-y-1">
+                                <p className="text-[10px] text-primary/60 flex justify-between">
+                                    <span>Fees:</span>
+                                    <span>{formatCurrencySmall(stats.segregation.eventFees)}</span>
+                                </p>
+                                <p className="text-[10px] text-primary/60 flex justify-between">
+                                    <span>Donations:</span>
+                                    <span>{formatCurrencySmall(stats.segregation.eventDonations)}</span>
+                                </p>
+                                <div className="pt-1 flex justify-between text-[10px] font-bold text-secondary-dark">
+                                    <span>Event Income:</span>
+                                    <span>{formatCurrencySmall(stats.segregation.eventTotal)}</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -262,7 +303,7 @@ export default function AdminDashboard() {
                                     <Activity className="w-6 h-6 text-secondary-dark" />
                                 </div>
                             </div>
-                            <h3 className="text-2xl font-bold text-primary-dark">{stats.donationsThisMonth}</h3>
+                            <h3 className="text-2xl font-bold text-primary-dark">{stats.collectionThisMonth}</h3>
                             <p className="text-sm text-primary/60 mt-1">Recent Donations</p>
                             <p className="text-xs text-primary/40 mt-2">View only access</p>
                         </div>

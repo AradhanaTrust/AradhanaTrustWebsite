@@ -13,16 +13,38 @@ export async function GET(request: Request) {
 
         if (id) {
             const event = await prisma.event.findUnique({
-                where: { id }
+                where: { id },
+                include: {
+                    _count: {
+                        select: { registrations: true }
+                    }
+                }
             });
-            return NextResponse.json(event);
+            if (!event) return NextResponse.json({ error: "Event not found" }, { status: 404 });
+
+            return NextResponse.json({
+                ...event,
+                registrationCount: event._count.registrations,
+                _count: undefined
+            });
         }
 
         const events = await prisma.event.findMany({
-            orderBy: { date: 'asc' }
+            orderBy: { date: 'asc' },
+            include: {
+                _count: {
+                    select: { registrations: true }
+                }
+            }
         });
 
-        return NextResponse.json(events);
+        const formattedEvents = events.map(event => ({
+            ...event,
+            registrationCount: event._count.registrations,
+            _count: undefined
+        }));
+
+        return NextResponse.json(formattedEvents);
     } catch (error) {
         return NextResponse.json(
             { error: "Failed to fetch events" },

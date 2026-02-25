@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import Link from "next/link";
 import DashboardLayout from "@/components/admin/DashboardLayout";
 import { useSession } from "next-auth/react";
 import {
@@ -42,6 +43,7 @@ interface Event {
     createdAt: string;
     updatedAt: string;
     attendees?: number; // Derived or related
+    registrationCount?: number; // Count from backend
 }
 
 const CATEGORIES = [
@@ -256,13 +258,22 @@ export default function EventsPage() {
                             Manage upcoming and past events, registrations, and details
                         </p>
                     </div>
-                    <button
-                        onClick={handleAddNewClick}
-                        className="px-6 py-3 bg-secondary text-surface-white rounded-lg hover:bg-secondary-dark transition-colors font-semibold flex items-center gap-2"
-                    >
-                        <Plus className="w-5 h-5" />
-                        Add New Event
-                    </button>
+                    <div className="flex gap-2">
+                        <Link
+                            href="/admin/events/registrations"
+                            className="px-6 py-3 bg-primary/10 text-primary-dark border-2 border-primary/20 rounded-lg hover:bg-primary/20 transition-colors font-semibold flex items-center gap-2"
+                        >
+                            <Users className="w-5 h-5" />
+                            Global Registrations
+                        </Link>
+                        <button
+                            onClick={handleAddNewClick}
+                            className="px-6 py-3 bg-secondary text-surface-white rounded-lg hover:bg-secondary-dark transition-colors font-semibold flex items-center gap-2"
+                        >
+                            <Plus className="w-5 h-5" />
+                            Add New Event
+                        </button>
+                    </div>
                 </div>
 
                 {/* Stats Cards */}
@@ -374,24 +385,29 @@ export default function EventsPage() {
                                             <MapPin className="w-4 h-4 text-secondary" />
                                             <span>{event.location}</span>
                                         </div>
-                                        {event.capacity && (
-                                            <div className="flex items-center gap-2 text-sm text-primary/70">
-                                                <Users className="w-4 h-4 text-secondary" />
-                                                <span>
-                                                    Capacity: {event.capacity}
-                                                </span>
-                                            </div>
-                                        )}
+                                        <div className="flex items-center gap-2 text-sm font-semibold text-secondary-dark">
+                                            <Users className="w-4 h-4" />
+                                            <span>
+                                                Registrations: {event.registrationCount || 0}
+                                                {event.capacity ? ` / ${event.capacity}` : ""}
+                                            </span>
+                                        </div>
                                     </div>
 
                                     {/* Actions */}
                                     <div className="flex gap-2 pt-3 border-t border-secondary/20">
+                                        <Link
+                                            href={`/admin/events/registrations?eventId=${event.id}`}
+                                            className="flex-1 px-4 py-2 border-2 border-primary/30 text-primary-dark rounded-lg hover:bg-primary/5 transition-colors font-semibold flex items-center justify-center gap-2"
+                                        >
+                                            <Users className="w-4 h-4" />
+                                            View
+                                        </Link>
                                         <button
                                             onClick={() => handleEditClick(event)}
-                                            className="flex-1 px-4 py-2 border-2 border-secondary/30 text-secondary-dark rounded-lg hover:bg-secondary/5 transition-colors font-semibold flex items-center justify-center gap-2"
+                                            className="px-4 py-2 border-2 border-secondary/30 text-secondary-dark rounded-lg hover:bg-secondary/5 transition-colors"
                                         >
                                             <Edit className="w-4 h-4" />
-                                            Edit
                                         </button>
                                         <button
                                             onClick={() => handleDelete(event.id)}
