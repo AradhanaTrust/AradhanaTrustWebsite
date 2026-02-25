@@ -71,6 +71,8 @@ export async function POST(request: Request) {
 
             const blob = await put(file.name, file, {
                 access: 'public',
+                allowOverwrite: true,
+                addRandomSuffix: true
             });
             imageUrl = blob.url;
         }
@@ -159,6 +161,8 @@ export async function PUT(request: Request) {
 
             const blob = await put(file.name, file, {
                 access: 'public',
+                allowOverwrite: true,
+                addRandomSuffix: true
             });
             imageUrl = blob.url;
         }
