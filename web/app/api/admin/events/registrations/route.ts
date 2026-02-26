@@ -29,6 +29,7 @@ export async function GET(request: Request) {
         }
         if (search) {
             where.OR = [
+                { registrationNo: { contains: search, mode: 'insensitive' } },
                 { name: { contains: search, mode: 'insensitive' } },
                 { email: { contains: search, mode: 'insensitive' } },
                 { phone: { contains: search, mode: 'insensitive' } },

@@ -138,6 +138,7 @@ model DonationRecord {
 
 model EventRegistration {
   id          String   @id @default(cuid())
+  registrationNo String? @unique
   eventId     String?
   event       Event?    @relation(fields: [eventId], references: [id], onDelete: SetNull)
   eventTitle  String   // Cached for quick display

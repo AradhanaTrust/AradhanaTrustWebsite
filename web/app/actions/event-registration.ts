@@ -2,6 +2,7 @@
 
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
+import { generateStandardId } from "@/lib/id-generator";
 
 export async function registerForFreeEvent(eventId: string, eventTitle: string, userDetails: {
     name: string;
@@ -26,8 +27,10 @@ export async function registerForFreeEvent(eventId: string, eventTitle: string, 
             return { success: false, message: "This is a paid event. Payment is required." };
         }
 
-        await prisma.eventRegistration.create({
+        const regNo = generateStandardId('REG');
+        const registration = await prisma.eventRegistration.create({
             data: {
+                registrationNo: regNo,
                 eventId,
                 eventTitle,
                 name: userDetails.name,
@@ -45,7 +48,12 @@ export async function registerForFreeEvent(eventId: string, eventTitle: string, 
         });
 
         // revalidatePath(`/events`); // Optional: if we show attendee counts
-        return { success: true, message: "Registration successful!" };
+        return {
+            success: true,
+            message: "Registration successful!",
+            registrationId: registration.id,
+            registrationNo: registration.registrationNo
+        };
     } catch (error) {
         console.error("Free Registration Error:", error);
         return { success: false, message: "Failed to register. Please try again." };

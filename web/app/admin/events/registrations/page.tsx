@@ -24,6 +24,7 @@ import * as XLSX from 'xlsx';
 
 interface registration {
     id: string;
+    registrationNo: string | null;
     eventId: string | null;
     eventTitle: string;
     name: string;
@@ -118,6 +119,7 @@ export default function RegistrationsPage() {
 
     const exportToExcel = () => {
         const dataToExport = registrations.map(reg => ({
+            'Reg Number': reg.registrationNo || '-',
             'Registration Date': new Date(reg.createdAt).toLocaleDateString('en-IN'),
             'Event': reg.eventTitle + (reg.eventId ? "" : " (Deleted Event)"),
             'Attendee Name': reg.name,
@@ -250,6 +252,7 @@ export default function RegistrationsPage() {
                             <thead>
                                 <tr className="bg-background-cream/50 border-b-2 border-secondary/20">
                                     <th className="px-6 py-4 text-left text-xs font-bold text-primary-dark uppercase tracking-wider">Date</th>
+                                    <th className="px-6 py-4 text-left text-xs font-bold text-primary-dark uppercase tracking-wider">Reg No</th>
                                     <th className="px-6 py-4 text-left text-xs font-bold text-primary-dark uppercase tracking-wider">Attendee & Contact</th>
                                     <th className="px-6 py-4 text-left text-xs font-bold text-primary-dark uppercase tracking-wider">Event Details</th>
                                     <th className="px-6 py-4 text-left text-xs font-bold text-primary-dark uppercase tracking-wider">Payment Breakdown</th>
@@ -283,6 +286,11 @@ export default function RegistrationsPage() {
                                             <td className="px-6 py-4 whitespace-nowrap">
                                                 <div className="text-sm font-bold text-primary-dark">{new Date(reg.createdAt).toLocaleDateString('en-IN', { day: '2-digit', month: 'short' })}</div>
                                                 <div className="text-[10px] text-primary/40">{new Date(reg.createdAt).getFullYear()}</div>
+                                            </td>
+                                            <td className="px-6 py-4 whitespace-nowrap">
+                                                <span className="text-xs font-mono font-bold text-secondary-dark bg-secondary/10 px-2 py-1 rounded">
+                                                    {reg.registrationNo || "LEGACY"}
+                                                </span>
                                             </td>
                                             <td className="px-6 py-4">
                                                 <div className="text-sm font-bold text-primary-dark group-hover:text-secondary-dark transition-colors">{reg.name}</div>

@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import crypto from "crypto";
 import { prisma } from "@/lib/prisma";
+import { generateStandardId } from "@/lib/id-generator";
 
 export async function POST(req: NextRequest) {
     // Re-validating Prisma types
@@ -17,13 +18,16 @@ export async function POST(req: NextRequest) {
         if (expectedSignature === razorpay_signature) {
             // 1. Signature matches - Payment Successful
 
+            let registration;
             if (metadata?.type === 'event') {
                 const regFee = parseFloat(metadata.registrationFee || 0);
                 const donAmount = parseFloat(metadata.donationAmount || 0);
+                const regNo = generateStandardId('REG');
 
                 // Create Event Registration
-                const registration = await prisma.eventRegistration.create({
+                registration = await prisma.eventRegistration.create({
                     data: {
+                        registrationNo: regNo,
                         eventId: metadata.eventId,
                         eventTitle: metadata.eventTitle, // Ensure this is passed
                         name: donorDetails.name,
@@ -47,8 +51,7 @@ export async function POST(req: NextRequest) {
 
                 // If there's a donation amount, also create a DonationRecord for the donations management section
                 if (donAmount > 0) {
-                    const date = new Date();
-                    const receiptNo = `RCT-${date.getFullYear()}${(date.getMonth() + 1).toString().padStart(2, '0')}${date.getDate().toString().padStart(2, '0')}-${Math.floor(Math.random() * 10000).toString().padStart(4, '0')}`;
+                    const receiptNo = generateStandardId('RCT');
 
                     await prisma.donationRecord.create({
                         data: {
@@ -86,7 +89,10 @@ export async function POST(req: NextRequest) {
                 });
             }
 
-            return NextResponse.json({ success: true });
+            return NextResponse.json({
+                success: true,
+                registrationNo: registration?.registrationNo
+            });
         } else {
             return NextResponse.json({ error: "Invalid signature" }, { status: 400 });
         }
