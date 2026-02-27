@@ -38,23 +38,22 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
             items: [
                 { name: "Dashboard", href: "/admin/dashboard", icon: LayoutDashboard, adminOnly: false },
                 { name: "Donations", href: "/admin/donations", icon: HandHeart, adminOnly: false },
-                { name: "Activities", href: "/admin/donations/activities", icon: Activity, adminOnly: false },
+                { name: "Registrations", href: "/admin/events/registrations", icon: Users, adminOnly: false },
             ]
         },
         {
             name: "Content Management",
             items: [
                 { name: "Events", href: "/admin/events", icon: Calendar, adminOnly: false },
-                { name: "Registrations", href: "/admin/events/registrations", icon: Users, adminOnly: false },
-                { name: "Purohit Registrations", href: "/admin/events/priests", icon: BookOpen, adminOnly: false }, // Added Priest Registrations
-                { name: "Gallery", href: "/admin/gallery", icon: ImageIcon, adminOnly: false }, // Using ImageIcon
+                { name: "Activities", href: "/admin/donations/activities", icon: Activity, adminOnly: false },
+                { name: "Purohit Registrations", href: "/admin/events/priests", icon: BookOpen, adminOnly: false },
+                { name: "Gallery", href: "/admin/gallery", icon: ImageIcon, adminOnly: false },
             ]
         },
         {
-            name: "Administration",
+            name: "Settings",
             items: [
-                { name: "Users", href: "/admin/users", icon: Users, adminOnly: true },
-                { name: "Settings", href: "/admin/settings", icon: Settings, adminOnly: false },
+                { name: "General Settings", href: "/admin/settings", icon: Settings, adminOnly: false },
             ]
         }
     ];
@@ -176,14 +175,14 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
             {/* Main Content */}
             <main className="flex-1 overflow-y-auto">
                 {/* Top Bar */}
-                <div className="sticky top-0 z-20 bg-background-cream/95 backdrop-blur-md border-b-2 border-secondary/20 px-6 py-4 shadow-sm">
+                <div className="sticky top-0 z-20 bg-background-cream/95 backdrop-blur-md border-b-2 border-secondary/20 px-4 md:px-6 py-3 md:py-4 shadow-sm">
                     <div className="flex items-center justify-between">
                         <div>
-                            <h1 className="text-2xl font-cinzel-decorative font-bold text-primary-dark">
+                            <h1 className="text-xl md:text-2xl font-cinzel-decorative font-bold text-primary-dark">
                                 {allMenuItems.find(item => item.href === pathname)?.name || "Dashboard"}
                             </h1>
-                            <p className="text-sm text-primary/60">
-                                Welcome back, {session?.user?.name?.split(' ')[0]}
+                            <p className="text-xs md:text-sm text-primary/60">
+                                Welcome, {session?.user?.name?.split(' ')[0]}
                             </p>
                         </div>
                         <div className="flex items-center gap-4">
@@ -198,7 +197,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                 </div>
 
                 {/* Page Content */}
-                <div className="p-6">
+                <div className="p-4 md:p-6">
                     {children}
                 </div>
             </main>

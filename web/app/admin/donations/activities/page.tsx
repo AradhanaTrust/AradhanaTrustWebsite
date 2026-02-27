@@ -171,7 +171,7 @@ export default function DonationActivitiesPage() {
         <DashboardLayout>
             <div className="space-y-6">
                 {/* Header */}
-                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div>
                         <h2 className="text-2xl font-cinzel-decorative font-bold text-primary-dark">
                             Donation Activities
@@ -182,10 +182,10 @@ export default function DonationActivitiesPage() {
                     </div>
                     <button
                         onClick={handleAddNewClick}
-                        className="flex items-center gap-2 px-6 py-2.5 bg-secondary text-surface-white font-medium rounded-lg hover:bg-secondary-dark transition-all transform hover:-translate-y-0.5 shadow-md shadow-secondary/20"
+                        className="w-fit mx-auto sm:mx-0 flex items-center gap-2 px-6 py-2.5 bg-secondary text-surface-white font-bold rounded-lg hover:bg-secondary-dark transition-all transform hover:-translate-y-0.5 shadow-md shadow-secondary/20 text-sm"
                     >
                         <Plus className="w-5 h-5" />
-                        Add New Activity
+                        Activities
                     </button>
                 </div>
 

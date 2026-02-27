@@ -98,10 +98,10 @@ export default function GalleryManagementClient({ initialImages }: { initialImag
                 </div>
                 <button
                     onClick={() => setShowUploadModal(true)}
-                    className="flex items-center gap-2 bg-secondary text-surface-white px-6 py-3 rounded-lg hover:bg-secondary-dark transition-colors font-semibold"
+                    className="w-fit mx-auto sm:mx-0 flex items-center gap-2 bg-secondary text-surface-white px-6 py-2.5 rounded-lg hover:bg-secondary-dark transition-all transform hover:-translate-y-0.5 shadow-md shadow-secondary/20 font-bold text-sm"
                 >
                     <Plus className="w-5 h-5" />
-                    Add New Image
+                    Image
                 </button>
             </div>
 

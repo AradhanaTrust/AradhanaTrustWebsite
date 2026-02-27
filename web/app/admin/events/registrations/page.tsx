@@ -166,56 +166,56 @@ function RegistrationsPageContent() {
                 </div>
                 <button
                     onClick={exportToExcel}
-                    className="bg-secondary text-surface-white px-6 py-3 rounded-lg hover:bg-secondary-dark transition-all flex items-center justify-center gap-2 font-semibold shadow-md active:scale-95"
+                    className="w-fit mx-auto md:mx-0 px-4 py-2 md:px-6 md:py-3 bg-secondary text-surface-white rounded-lg hover:bg-secondary-dark transition-all flex items-center justify-center gap-2 font-semibold shadow-md active:scale-95 text-xs md:text-base"
                 >
-                    <Download size={20} /> Export to Excel
+                    <Download size={18} /> Export <span className="hidden sm:inline">to Excel</span>
                 </button>
             </div>
 
             {/* Filters Section */}
-            <div className="bg-surface-white border-2 border-secondary/20 rounded-xl p-6 shadow-sm">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="bg-surface-white border-2 border-secondary/20 rounded-xl p-4 md:p-6 shadow-sm">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
                     {/* Search */}
-                    <div className="space-y-2">
-                        <label className="text-xs font-bold text-primary/60 uppercase tracking-wider">Search</label>
+                    <div className="space-y-1.5">
+                        <label className="text-[10px] md:text-xs font-bold text-primary/60 uppercase tracking-wider">Search</label>
                         <div className="relative">
-                            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-primary/40" size={18} />
+                            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-primary/40" size={16} />
                             <input
                                 type="text"
-                                placeholder="Name, Email, Phone..."
+                                placeholder="Name, Email..."
                                 value={search}
                                 onChange={(e) => setSearch(e.target.value)}
-                                className="w-full pl-10 pr-4 py-2 bg-background-cream/50 border-2 border-secondary/20 rounded-lg focus:border-secondary transition-all outline-none text-sm font-medium"
+                                className="w-full pl-9 pr-4 py-2 bg-background-cream/50 border-2 border-secondary/20 rounded-lg focus:border-secondary transition-all outline-none text-xs md:text-sm font-medium"
                             />
                         </div>
                     </div>
 
                     {/* Event Filter */}
-                    <div className="space-y-2">
-                        <label className="text-xs font-bold text-primary/60 uppercase tracking-wider">Filter by Event</label>
+                    <div className="space-y-1.5">
+                        <label className="text-[10px] md:text-xs font-bold text-primary/60 uppercase tracking-wider">Event</label>
                         <div className="relative">
-                            <Filter className="absolute left-3 top-1/2 -translate-y-1/2 text-primary/40" size={18} />
+                            <Filter className="absolute left-3 top-1/2 -translate-y-1/2 text-primary/40" size={16} />
                             <select
                                 value={eventFilter}
                                 onChange={(e) => setEventFilter(e.target.value)}
-                                className="w-full pl-10 pr-4 py-2 bg-background-cream/50 border-2 border-secondary/20 rounded-lg focus:border-secondary transition-all outline-none text-sm font-medium appearance-none"
+                                className="w-full pl-9 pr-4 py-2 bg-background-cream/50 border-2 border-secondary/20 rounded-lg focus:border-secondary transition-all outline-none text-xs md:text-sm font-medium appearance-none"
                             >
                                 <option value="all">All Events</option>
                                 {events.map(e => <option key={e.id} value={e.id}>{e.title}</option>)}
                             </select>
-                            <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 text-primary/40 pointer-events-none" size={18} />
+                            <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 text-primary/40 pointer-events-none" size={16} />
                         </div>
                     </div>
 
                     {/* Status Filter */}
-                    <div className="space-y-2">
-                        <label className="text-xs font-bold text-primary/60 uppercase tracking-wider">Status</label>
+                    <div className="space-y-1.5">
+                        <label className="text-[10px] md:text-xs font-bold text-primary/60 uppercase tracking-wider">Status</label>
                         <div className="relative">
-                            <Clock className="absolute left-3 top-1/2 -translate-y-1/2 text-primary/40" size={18} />
+                            <Clock className="absolute left-3 top-1/2 -translate-y-1/2 text-primary/40" size={16} />
                             <select
                                 value={statusFilter}
                                 onChange={(e) => setStatusFilter(e.target.value)}
-                                className="w-full pl-10 pr-4 py-2 bg-background-cream/50 border-2 border-secondary/20 rounded-lg focus:border-secondary transition-all outline-none text-sm font-medium appearance-none"
+                                className="w-full pl-9 pr-4 py-2 bg-background-cream/50 border-2 border-secondary/20 rounded-lg focus:border-secondary transition-all outline-none text-xs md:text-sm font-medium appearance-none"
                             >
                                 <option value="all">Any Status</option>
                                 <option value="registered">Registered</option>
@@ -223,7 +223,7 @@ function RegistrationsPageContent() {
                                 <option value="attended">Attended</option>
                                 <option value="cancelled">Cancelled</option>
                             </select>
-                            <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 text-primary/40 pointer-events-none" size={18} />
+                            <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 text-primary/40 pointer-events-none" size={16} />
                         </div>
                     </div>
 
@@ -236,7 +236,7 @@ function RegistrationsPageContent() {
                                 setStatusFilter("all");
                                 setDateRange({ start: "", end: "" });
                             }}
-                            className="w-full py-2 border-2 border-secondary/20 text-secondary-dark font-semibold rounded-lg hover:bg-secondary/5 transition-all text-sm"
+                            className="w-full py-2 border-2 border-secondary/20 text-secondary-dark font-semibold rounded-lg hover:bg-secondary/5 transition-all text-xs md:text-sm"
                         >
                             Reset Filters
                         </button>
@@ -246,17 +246,17 @@ function RegistrationsPageContent() {
 
             {/* Table Section */}
             <div className="bg-surface-white border-2 border-secondary/20 rounded-xl overflow-hidden shadow-sm">
-                <div className="overflow-x-auto">
-                    <table className="w-full border-collapse">
+                <div className="overflow-x-auto -mx-4 px-4 md:mx-0 md:px-0">
+                    <table className="w-full border-collapse min-w-[800px]">
                         <thead>
                             <tr className="bg-background-cream/50 border-b-2 border-secondary/20">
-                                <th className="px-6 py-4 text-left text-xs font-bold text-primary-dark uppercase tracking-wider">Date</th>
-                                <th className="px-6 py-4 text-left text-xs font-bold text-primary-dark uppercase tracking-wider">Reg No</th>
-                                <th className="px-6 py-4 text-left text-xs font-bold text-primary-dark uppercase tracking-wider">Attendee & Contact</th>
-                                <th className="px-6 py-4 text-left text-xs font-bold text-primary-dark uppercase tracking-wider">Event Details</th>
-                                <th className="px-6 py-4 text-left text-xs font-bold text-primary-dark uppercase tracking-wider">Payment Breakdown</th>
-                                <th className="px-6 py-4 text-left text-xs font-bold text-primary-dark uppercase tracking-wider">Status</th>
-                                <th className="px-6 py-4 text-right text-xs font-bold text-primary-dark uppercase tracking-wider">Actions</th>
+                                <th className="px-4 md:px-6 py-4 text-left text-[10px] md:text-xs font-bold text-primary-dark uppercase tracking-wider">Date</th>
+                                <th className="px-4 md:px-6 py-4 text-left text-[10px] md:text-xs font-bold text-primary-dark uppercase tracking-wider">Reg No</th>
+                                <th className="px-4 md:px-6 py-4 text-left text-[10px] md:text-xs font-bold text-primary-dark uppercase tracking-wider">Attendee & Contact</th>
+                                <th className="px-4 md:px-6 py-4 text-left text-[10px] md:text-xs font-bold text-primary-dark uppercase tracking-wider">Event Details</th>
+                                <th className="px-4 md:px-6 py-4 text-left text-[10px] md:text-xs font-bold text-primary-dark uppercase tracking-wider">Payment</th>
+                                <th className="px-4 md:px-6 py-4 text-left text-[10px] md:text-xs font-bold text-primary-dark uppercase tracking-wider">Status</th>
+                                <th className="px-4 md:px-6 py-4 text-right text-[10px] md:text-xs font-bold text-primary-dark uppercase tracking-wider">Actions</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-secondary/10">
@@ -264,80 +264,75 @@ function RegistrationsPageContent() {
                                 <tr>
                                     <td colSpan={7} className="px-6 py-20 text-center">
                                         <div className="flex flex-col items-center gap-2">
-                                            <Loader2 className="animate-spin text-secondary" size={40} />
-                                            <p className="text-primary/60 font-medium">Fetching registrations...</p>
+                                            <Loader2 className="animate-spin text-secondary" size={32} />
+                                            <p className="text-sm text-primary/60 font-medium">Fetching registrations...</p>
                                         </div>
                                     </td>
                                 </tr>
                             ) : registrations.length === 0 ? (
                                 <tr>
-                                    <td colSpan={7} className="px-6 py-20 text-center">
+                                    <td colSpan={7} className="px-6 py-24 text-center">
                                         <div className="flex flex-col items-center gap-2">
-                                            <SearchX className="text-primary/20" size={60} />
-                                            <p className="text-primary/60 font-cinzel-decorative text-lg">No registrations found</p>
-                                            <p className="text-xs text-primary/40">Try adjusting your filters or search terms</p>
+                                            <SearchX className="text-primary/20" size={48} />
+                                            <p className="text-primary/60 font-cinzel-decorative text-base">No registrations found</p>
+                                            <p className="text-[10px] text-primary/40">Try adjusting your filters</p>
                                         </div>
                                     </td>
                                 </tr>
                             ) : (
                                 registrations.map((reg) => (
                                     <tr key={reg.id} className="hover:bg-secondary/2 transition-colors group">
-                                        <td className="px-6 py-4 whitespace-nowrap">
-                                            <div className="text-sm font-bold text-primary-dark">{new Date(reg.createdAt).toLocaleDateString('en-IN', { day: '2-digit', month: 'short' })}</div>
-                                            <div className="text-[10px] text-primary/40">{new Date(reg.createdAt).getFullYear()}</div>
+                                        <td className="px-4 md:px-6 py-4 whitespace-nowrap">
+                                            <div className="text-xs md:text-sm font-bold text-primary-dark">{new Date(reg.createdAt).toLocaleDateString('en-IN', { day: '2-digit', month: 'short' })}</div>
+                                            <div className="text-[9px] md:text-[10px] text-primary/40">{new Date(reg.createdAt).getFullYear()}</div>
                                         </td>
-                                        <td className="px-6 py-4 whitespace-nowrap">
-                                            <span className="text-xs font-mono font-bold text-secondary-dark bg-secondary/10 px-2 py-1 rounded">
+                                        <td className="px-4 md:px-6 py-4 whitespace-nowrap">
+                                            <span className="text-[10px] md:text-xs font-mono font-bold text-secondary-dark bg-secondary/10 px-2 py-1 rounded">
                                                 {reg.registrationNo || "LEGACY"}
                                             </span>
                                         </td>
-                                        <td className="px-6 py-4">
-                                            <div className="text-sm font-bold text-primary-dark group-hover:text-secondary-dark transition-colors">{reg.name}</div>
-                                            <div className="flex items-center gap-1 text-[11px] text-primary/60 mt-1">
-                                                <Briefcase size={12} className="text-secondary/60" /> {reg.organisation || "Individual"}
+                                        <td className="px-4 md:px-6 py-4">
+                                            <div className="text-xs md:text-sm font-bold text-primary-dark group-hover:text-secondary-dark transition-colors truncate max-w-[120px] md:max-w-none">{reg.name}</div>
+                                            <div className="flex items-center gap-1 text-[10px] md:text-[11px] text-primary/60 mt-1">
+                                                <Briefcase size={10} className="text-secondary/60" /> <span className="truncate max-w-[100px]">{reg.organisation || "Individual"}</span>
                                             </div>
-                                            <div className="flex items-center gap-3 text-[11px] text-primary/40 mt-1">
-                                                <span className="flex items-center gap-1"><Phone size={10} /> {reg.phone || "No Phone"}</span>
+                                            <div className="flex items-center gap-3 text-[10px] md:text-[11px] text-primary/40 mt-1">
+                                                <span className="flex items-center gap-1 whitespace-nowrap"><Phone size={10} /> {reg.phone || "N/A"}</span>
                                             </div>
                                         </td>
-                                        <td className="px-6 py-4">
-                                            <div className="text-sm font-semibold text-primary-dark truncate max-w-[180px]">
+                                        <td className="px-4 md:px-6 py-4">
+                                            <div className="text-xs md:text-sm font-semibold text-primary-dark truncate max-w-[140px] md:max-w-[200px]">
                                                 {reg.eventTitle}
                                             </div>
                                             {!reg.eventId && (
-                                                <span className="text-[10px] bg-red-50 text-red-600 px-1 border border-red-100 rounded">Deleted Event</span>
+                                                <span className="text-[9px] bg-red-50 text-red-600 px-1 border border-red-100 rounded">Deleted</span>
                                             )}
-                                            <div className="text-[11px] text-primary/50 mt-1">Ref: {reg.referredBy || "-"}</div>
                                         </td>
-                                        <td className="px-6 py-4">
-                                            <div className="space-y-1">
-                                                <div className="flex items-center justify-between text-[11px] text-primary/60">
+                                        <td className="px-4 md:px-6 py-4">
+                                            <div className="space-y-0.5 min-w-[80px]">
+                                                <div className="flex items-center justify-between text-[10px] text-primary/60 gap-4">
                                                     <span>Fee:</span>
-                                                    <span className="font-bold">₹{reg.registrationFee}</span>
+                                                    <span className="font-bold">₹{reg.totalAmount - reg.donationAmount}</span>
                                                 </div>
                                                 {reg.donationAmount > 0 && (
-                                                    <div className="flex items-center justify-between text-[11px] text-secondary-dark bg-secondary/5 px-1 rounded">
-                                                        <span>Donation:</span>
+                                                    <div className="flex items-center justify-between text-[10px] text-secondary-dark bg-secondary/5 px-1 rounded gap-4">
+                                                        <span>Don:</span>
                                                         <span className="font-bold">₹{reg.donationAmount}</span>
                                                     </div>
                                                 )}
-                                                <div className="flex items-center justify-between text-xs font-black text-primary-dark pt-1 border-t border-secondary/10">
-                                                    <span>Total:</span>
-                                                    <span>₹{reg.totalAmount}</span>
-                                                </div>
                                             </div>
                                         </td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-center">
-                                            <span className={`px-3 py-1 text-[10px] font-black uppercase tracking-widest rounded-full border shadow-sm ${getStatusStyle(reg.status)}`}>
+                                        <td className="px-4 md:px-6 py-4 whitespace-nowrap text-center">
+                                            <span className={`px-2 md:px-3 py-0.5 md:py-1 text-[9px] md:text-[10px] font-black uppercase tracking-widest rounded-full border shadow-sm ${getStatusStyle(reg.status)}`}>
                                                 {reg.status}
                                             </span>
                                         </td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-right">
-                                            <div className="flex justify-end gap-2">
+                                        <td className="px-4 md:px-6 py-4 whitespace-nowrap text-right">
+                                            <div className="flex justify-end gap-1 md:gap-2">
                                                 {reg.status !== 'confirmed' && (
                                                     <button
                                                         onClick={() => handleUpdateStatus(reg.id, 'confirmed')}
-                                                        className="p-2 text-green-600 hover:bg-green-50 rounded-lg transition-colors border border-transparent hover:border-green-100"
+                                                        className="p-1.5 md:p-2 text-green-600 hover:bg-green-50 rounded-lg transition-colors border border-transparent hover:border-green-100"
                                                         title="Confirm"
                                                     >
                                                         <CheckCircle2 size={18} />
@@ -346,7 +341,7 @@ function RegistrationsPageContent() {
                                                 {reg.status !== 'cancelled' && (
                                                     <button
                                                         onClick={() => handleUpdateStatus(reg.id, 'cancelled')}
-                                                        className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors border border-transparent hover:border-red-100"
+                                                        className="p-1.5 md:p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors border border-transparent hover:border-red-100"
                                                         title="Cancel"
                                                     >
                                                         <XCircle size={18} />
