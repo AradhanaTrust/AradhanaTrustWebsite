@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import { sendEmail, getPriestRegistrationSubmitTemplate } from '@/lib/mail';
 
 export async function POST(request: Request) {
     try {
@@ -29,6 +30,20 @@ export async function POST(request: Request) {
                 status: "CANDIDATE", // Always default to candidate on public submission
             },
         });
+        
+        // Send acknowledgment email if email is provided
+        if (priestRegistration.email) {
+            try {
+                await sendEmail({
+                    to: priestRegistration.email,
+                    subject: "Priest Registration Received - Aradhana Trust",
+                    html: getPriestRegistrationSubmitTemplate(priestRegistration.fullName)
+                });
+            } catch (emailError) {
+                console.error("Failed to send acknowledgment email:", emailError);
+                // We don't fail the registration if email fails
+            }
+        }
 
         return NextResponse.json(priestRegistration, { status: 201 });
     } catch (error) {

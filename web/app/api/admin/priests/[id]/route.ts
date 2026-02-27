@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/lib/auth";
 import { prisma } from '@/lib/prisma';
+import { sendEmail, getPriestRegistrationUpdateTemplate } from '@/lib/mail';
 
 export async function PUT(request: Request, { params }: { params: Promise<{ id: string }> }) {
     try {
@@ -20,6 +21,19 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
                 adminNotes: data.adminNotes
             }
         });
+
+        // Send status update email if status changed and email is available
+        if (data.status && updatedRegistration.email) {
+            try {
+                await sendEmail({
+                    to: updatedRegistration.email,
+                    subject: `Application Status Updated - Aradhana Trust`,
+                    html: getPriestRegistrationUpdateTemplate(updatedRegistration.fullName, data.status)
+                });
+            } catch (emailError) {
+                console.error("Failed to send status update email:", emailError);
+            }
+        }
 
         return NextResponse.json(updatedRegistration);
     } catch (error) {

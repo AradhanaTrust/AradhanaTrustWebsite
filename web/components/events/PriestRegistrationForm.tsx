@@ -80,8 +80,13 @@ export default function PriestRegistrationForm({ onSuccess }: PriestRegistration
                         <h3 className="text-3xl font-cinzel-decorative font-bold text-primary-dark">
                             Namaskaram
                         </h3>
-                        <p className="text-gray-600 font-serif leading-relaxed text-lg max-w-md mx-auto">
+                        <p className="text-gray-600 font-serif leading-relaxed text-lg max-w-xl mx-auto">
                             Thank you for submitting your details. Our temple trust committee will review your application and contact you soon.
+                            {formData.email && (
+                                <span className="block mt-2 font-medium text-secondary">
+                                    A confirmation email has been sent to {formData.email}.
+                                </span>
+                            )}
                         </p>
                     </div>
                 </div>
