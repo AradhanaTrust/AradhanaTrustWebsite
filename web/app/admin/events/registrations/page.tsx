@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import DashboardLayout from "@/components/admin/DashboardLayout";
 import {
@@ -47,7 +47,7 @@ interface registration {
     }
 }
 
-export default function RegistrationsPage() {
+function RegistrationsPageContent() {
     const searchParams = useSearchParams();
     const [registrations, setRegistrations] = useState<registration[]>([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -153,216 +153,229 @@ export default function RegistrationsPage() {
     };
 
     return (
-        <DashboardLayout>
-            <div className="space-y-6">
-                {/* Header */}
-                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                    <div>
-                        <h2 className="text-2xl font-cinzel-decorative font-bold text-primary-dark">
-                            Registration Management
-                        </h2>
-                        <p className="text-primary/60 mt-1">
-                            Track and manage attendees for all trust events
-                        </p>
-                    </div>
-                    <button
-                        onClick={exportToExcel}
-                        className="bg-secondary text-surface-white px-6 py-3 rounded-lg hover:bg-secondary-dark transition-all flex items-center justify-center gap-2 font-semibold shadow-md active:scale-95"
-                    >
-                        <Download size={20} /> Export to Excel
-                    </button>
+        <div className="space-y-6">
+            {/* Header */}
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                    <h2 className="text-2xl font-cinzel-decorative font-bold text-primary-dark">
+                        Registration Management
+                    </h2>
+                    <p className="text-primary/60 mt-1">
+                        Track and manage attendees for all trust events
+                    </p>
                 </div>
+                <button
+                    onClick={exportToExcel}
+                    className="bg-secondary text-surface-white px-6 py-3 rounded-lg hover:bg-secondary-dark transition-all flex items-center justify-center gap-2 font-semibold shadow-md active:scale-95"
+                >
+                    <Download size={20} /> Export to Excel
+                </button>
+            </div>
 
-                {/* Filters Section */}
-                <div className="bg-surface-white border-2 border-secondary/20 rounded-xl p-6 shadow-sm">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                        {/* Search */}
-                        <div className="space-y-2">
-                            <label className="text-xs font-bold text-primary/60 uppercase tracking-wider">Search</label>
-                            <div className="relative">
-                                <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-primary/40" size={18} />
-                                <input
-                                    type="text"
-                                    placeholder="Name, Email, Phone..."
-                                    value={search}
-                                    onChange={(e) => setSearch(e.target.value)}
-                                    className="w-full pl-10 pr-4 py-2 bg-background-cream/50 border-2 border-secondary/20 rounded-lg focus:border-secondary transition-all outline-none text-sm font-medium"
-                                />
-                            </div>
+            {/* Filters Section */}
+            <div className="bg-surface-white border-2 border-secondary/20 rounded-xl p-6 shadow-sm">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {/* Search */}
+                    <div className="space-y-2">
+                        <label className="text-xs font-bold text-primary/60 uppercase tracking-wider">Search</label>
+                        <div className="relative">
+                            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-primary/40" size={18} />
+                            <input
+                                type="text"
+                                placeholder="Name, Email, Phone..."
+                                value={search}
+                                onChange={(e) => setSearch(e.target.value)}
+                                className="w-full pl-10 pr-4 py-2 bg-background-cream/50 border-2 border-secondary/20 rounded-lg focus:border-secondary transition-all outline-none text-sm font-medium"
+                            />
                         </div>
+                    </div>
 
-                        {/* Event Filter */}
-                        <div className="space-y-2">
-                            <label className="text-xs font-bold text-primary/60 uppercase tracking-wider">Filter by Event</label>
-                            <div className="relative">
-                                <Filter className="absolute left-3 top-1/2 -translate-y-1/2 text-primary/40" size={18} />
-                                <select
-                                    value={eventFilter}
-                                    onChange={(e) => setEventFilter(e.target.value)}
-                                    className="w-full pl-10 pr-4 py-2 bg-background-cream/50 border-2 border-secondary/20 rounded-lg focus:border-secondary transition-all outline-none text-sm font-medium appearance-none"
-                                >
-                                    <option value="all">All Events</option>
-                                    {events.map(e => <option key={e.id} value={e.id}>{e.title}</option>)}
-                                </select>
-                                <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 text-primary/40 pointer-events-none" size={18} />
-                            </div>
-                        </div>
-
-                        {/* Status Filter */}
-                        <div className="space-y-2">
-                            <label className="text-xs font-bold text-primary/60 uppercase tracking-wider">Status</label>
-                            <div className="relative">
-                                <Clock className="absolute left-3 top-1/2 -translate-y-1/2 text-primary/40" size={18} />
-                                <select
-                                    value={statusFilter}
-                                    onChange={(e) => setStatusFilter(e.target.value)}
-                                    className="w-full pl-10 pr-4 py-2 bg-background-cream/50 border-2 border-secondary/20 rounded-lg focus:border-secondary transition-all outline-none text-sm font-medium appearance-none"
-                                >
-                                    <option value="all">Any Status</option>
-                                    <option value="registered">Registered</option>
-                                    <option value="confirmed">Confirmed</option>
-                                    <option value="attended">Attended</option>
-                                    <option value="cancelled">Cancelled</option>
-                                </select>
-                                <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 text-primary/40 pointer-events-none" size={18} />
-                            </div>
-                        </div>
-
-                        {/* Export/Reset */}
-                        <div className="flex items-end">
-                            <button
-                                onClick={() => {
-                                    setSearch("");
-                                    setEventFilter("all");
-                                    setStatusFilter("all");
-                                    setDateRange({ start: "", end: "" });
-                                }}
-                                className="w-full py-2 border-2 border-secondary/20 text-secondary-dark font-semibold rounded-lg hover:bg-secondary/5 transition-all text-sm"
+                    {/* Event Filter */}
+                    <div className="space-y-2">
+                        <label className="text-xs font-bold text-primary/60 uppercase tracking-wider">Filter by Event</label>
+                        <div className="relative">
+                            <Filter className="absolute left-3 top-1/2 -translate-y-1/2 text-primary/40" size={18} />
+                            <select
+                                value={eventFilter}
+                                onChange={(e) => setEventFilter(e.target.value)}
+                                className="w-full pl-10 pr-4 py-2 bg-background-cream/50 border-2 border-secondary/20 rounded-lg focus:border-secondary transition-all outline-none text-sm font-medium appearance-none"
                             >
-                                Reset Filters
-                            </button>
+                                <option value="all">All Events</option>
+                                {events.map(e => <option key={e.id} value={e.id}>{e.title}</option>)}
+                            </select>
+                            <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 text-primary/40 pointer-events-none" size={18} />
                         </div>
                     </div>
-                </div>
 
-                {/* Table Section */}
-                <div className="bg-surface-white border-2 border-secondary/20 rounded-xl overflow-hidden shadow-sm">
-                    <div className="overflow-x-auto">
-                        <table className="w-full border-collapse">
-                            <thead>
-                                <tr className="bg-background-cream/50 border-b-2 border-secondary/20">
-                                    <th className="px-6 py-4 text-left text-xs font-bold text-primary-dark uppercase tracking-wider">Date</th>
-                                    <th className="px-6 py-4 text-left text-xs font-bold text-primary-dark uppercase tracking-wider">Reg No</th>
-                                    <th className="px-6 py-4 text-left text-xs font-bold text-primary-dark uppercase tracking-wider">Attendee & Contact</th>
-                                    <th className="px-6 py-4 text-left text-xs font-bold text-primary-dark uppercase tracking-wider">Event Details</th>
-                                    <th className="px-6 py-4 text-left text-xs font-bold text-primary-dark uppercase tracking-wider">Payment Breakdown</th>
-                                    <th className="px-6 py-4 text-left text-xs font-bold text-primary-dark uppercase tracking-wider">Status</th>
-                                    <th className="px-6 py-4 text-right text-xs font-bold text-primary-dark uppercase tracking-wider">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody className="divide-y divide-secondary/10">
-                                {isLoading ? (
-                                    <tr>
-                                        <td colSpan={6} className="px-6 py-20 text-center">
-                                            <div className="flex flex-col items-center gap-2">
-                                                <Loader2 className="animate-spin text-secondary" size={40} />
-                                                <p className="text-primary/60 font-medium">Fetching registrations...</p>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                ) : registrations.length === 0 ? (
-                                    <tr>
-                                        <td colSpan={6} className="px-6 py-20 text-center">
-                                            <div className="flex flex-col items-center gap-2">
-                                                <SearchX className="text-primary/20" size={60} />
-                                                <p className="text-primary/60 font-cinzel-decorative text-lg">No registrations found</p>
-                                                <p className="text-xs text-primary/40">Try adjusting your filters or search terms</p>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                ) : (
-                                    registrations.map((reg) => (
-                                        <tr key={reg.id} className="hover:bg-secondary/2 transition-colors group">
-                                            <td className="px-6 py-4 whitespace-nowrap">
-                                                <div className="text-sm font-bold text-primary-dark">{new Date(reg.createdAt).toLocaleDateString('en-IN', { day: '2-digit', month: 'short' })}</div>
-                                                <div className="text-[10px] text-primary/40">{new Date(reg.createdAt).getFullYear()}</div>
-                                            </td>
-                                            <td className="px-6 py-4 whitespace-nowrap">
-                                                <span className="text-xs font-mono font-bold text-secondary-dark bg-secondary/10 px-2 py-1 rounded">
-                                                    {reg.registrationNo || "LEGACY"}
-                                                </span>
-                                            </td>
-                                            <td className="px-6 py-4">
-                                                <div className="text-sm font-bold text-primary-dark group-hover:text-secondary-dark transition-colors">{reg.name}</div>
-                                                <div className="flex items-center gap-1 text-[11px] text-primary/60 mt-1">
-                                                    <Briefcase size={12} className="text-secondary/60" /> {reg.organisation || "Individual"}
-                                                </div>
-                                                <div className="flex items-center gap-3 text-[11px] text-primary/40 mt-1">
-                                                    <span className="flex items-center gap-1"><Phone size={10} /> {reg.phone || "No Phone"}</span>
-                                                </div>
-                                            </td>
-                                            <td className="px-6 py-4">
-                                                <div className="text-sm font-semibold text-primary-dark truncate max-w-[180px]">
-                                                    {reg.eventTitle}
-                                                </div>
-                                                {!reg.eventId && (
-                                                    <span className="text-[10px] bg-red-50 text-red-600 px-1 border border-red-100 rounded">Deleted Event</span>
-                                                )}
-                                                <div className="text-[11px] text-primary/50 mt-1">Ref: {reg.referredBy || "-"}</div>
-                                            </td>
-                                            <td className="px-6 py-4">
-                                                <div className="space-y-1">
-                                                    <div className="flex items-center justify-between text-[11px] text-primary/60">
-                                                        <span>Fee:</span>
-                                                        <span className="font-bold">₹{reg.registrationFee}</span>
-                                                    </div>
-                                                    {reg.donationAmount > 0 && (
-                                                        <div className="flex items-center justify-between text-[11px] text-secondary-dark bg-secondary/5 px-1 rounded">
-                                                            <span>Donation:</span>
-                                                            <span className="font-bold">₹{reg.donationAmount}</span>
-                                                        </div>
-                                                    )}
-                                                    <div className="flex items-center justify-between text-xs font-black text-primary-dark pt-1 border-t border-secondary/10">
-                                                        <span>Total:</span>
-                                                        <span>₹{reg.totalAmount}</span>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td className="px-6 py-4 whitespace-nowrap text-center">
-                                                <span className={`px-3 py-1 text-[10px] font-black uppercase tracking-widest rounded-full border shadow-sm ${getStatusStyle(reg.status)}`}>
-                                                    {reg.status}
-                                                </span>
-                                            </td>
-                                            <td className="px-6 py-4 whitespace-nowrap text-right">
-                                                <div className="flex justify-end gap-2">
-                                                    {reg.status !== 'confirmed' && (
-                                                        <button
-                                                            onClick={() => handleUpdateStatus(reg.id, 'confirmed')}
-                                                            className="p-2 text-green-600 hover:bg-green-50 rounded-lg transition-colors border border-transparent hover:border-green-100"
-                                                            title="Confirm"
-                                                        >
-                                                            <CheckCircle2 size={18} />
-                                                        </button>
-                                                    )}
-                                                    {reg.status !== 'cancelled' && (
-                                                        <button
-                                                            onClick={() => handleUpdateStatus(reg.id, 'cancelled')}
-                                                            className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors border border-transparent hover:border-red-100"
-                                                            title="Cancel"
-                                                        >
-                                                            <XCircle size={18} />
-                                                        </button>
-                                                    )}
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    ))
-                                )}
-                            </tbody>
-                        </table>
+                    {/* Status Filter */}
+                    <div className="space-y-2">
+                        <label className="text-xs font-bold text-primary/60 uppercase tracking-wider">Status</label>
+                        <div className="relative">
+                            <Clock className="absolute left-3 top-1/2 -translate-y-1/2 text-primary/40" size={18} />
+                            <select
+                                value={statusFilter}
+                                onChange={(e) => setStatusFilter(e.target.value)}
+                                className="w-full pl-10 pr-4 py-2 bg-background-cream/50 border-2 border-secondary/20 rounded-lg focus:border-secondary transition-all outline-none text-sm font-medium appearance-none"
+                            >
+                                <option value="all">Any Status</option>
+                                <option value="registered">Registered</option>
+                                <option value="confirmed">Confirmed</option>
+                                <option value="attended">Attended</option>
+                                <option value="cancelled">Cancelled</option>
+                            </select>
+                            <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 text-primary/40 pointer-events-none" size={18} />
+                        </div>
+                    </div>
+
+                    {/* Export/Reset */}
+                    <div className="flex items-end">
+                        <button
+                            onClick={() => {
+                                setSearch("");
+                                setEventFilter("all");
+                                setStatusFilter("all");
+                                setDateRange({ start: "", end: "" });
+                            }}
+                            className="w-full py-2 border-2 border-secondary/20 text-secondary-dark font-semibold rounded-lg hover:bg-secondary/5 transition-all text-sm"
+                        >
+                            Reset Filters
+                        </button>
                     </div>
                 </div>
             </div>
+
+            {/* Table Section */}
+            <div className="bg-surface-white border-2 border-secondary/20 rounded-xl overflow-hidden shadow-sm">
+                <div className="overflow-x-auto">
+                    <table className="w-full border-collapse">
+                        <thead>
+                            <tr className="bg-background-cream/50 border-b-2 border-secondary/20">
+                                <th className="px-6 py-4 text-left text-xs font-bold text-primary-dark uppercase tracking-wider">Date</th>
+                                <th className="px-6 py-4 text-left text-xs font-bold text-primary-dark uppercase tracking-wider">Reg No</th>
+                                <th className="px-6 py-4 text-left text-xs font-bold text-primary-dark uppercase tracking-wider">Attendee & Contact</th>
+                                <th className="px-6 py-4 text-left text-xs font-bold text-primary-dark uppercase tracking-wider">Event Details</th>
+                                <th className="px-6 py-4 text-left text-xs font-bold text-primary-dark uppercase tracking-wider">Payment Breakdown</th>
+                                <th className="px-6 py-4 text-left text-xs font-bold text-primary-dark uppercase tracking-wider">Status</th>
+                                <th className="px-6 py-4 text-right text-xs font-bold text-primary-dark uppercase tracking-wider">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody className="divide-y divide-secondary/10">
+                            {isLoading ? (
+                                <tr>
+                                    <td colSpan={7} className="px-6 py-20 text-center">
+                                        <div className="flex flex-col items-center gap-2">
+                                            <Loader2 className="animate-spin text-secondary" size={40} />
+                                            <p className="text-primary/60 font-medium">Fetching registrations...</p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            ) : registrations.length === 0 ? (
+                                <tr>
+                                    <td colSpan={7} className="px-6 py-20 text-center">
+                                        <div className="flex flex-col items-center gap-2">
+                                            <SearchX className="text-primary/20" size={60} />
+                                            <p className="text-primary/60 font-cinzel-decorative text-lg">No registrations found</p>
+                                            <p className="text-xs text-primary/40">Try adjusting your filters or search terms</p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            ) : (
+                                registrations.map((reg) => (
+                                    <tr key={reg.id} className="hover:bg-secondary/2 transition-colors group">
+                                        <td className="px-6 py-4 whitespace-nowrap">
+                                            <div className="text-sm font-bold text-primary-dark">{new Date(reg.createdAt).toLocaleDateString('en-IN', { day: '2-digit', month: 'short' })}</div>
+                                            <div className="text-[10px] text-primary/40">{new Date(reg.createdAt).getFullYear()}</div>
+                                        </td>
+                                        <td className="px-6 py-4 whitespace-nowrap">
+                                            <span className="text-xs font-mono font-bold text-secondary-dark bg-secondary/10 px-2 py-1 rounded">
+                                                {reg.registrationNo || "LEGACY"}
+                                            </span>
+                                        </td>
+                                        <td className="px-6 py-4">
+                                            <div className="text-sm font-bold text-primary-dark group-hover:text-secondary-dark transition-colors">{reg.name}</div>
+                                            <div className="flex items-center gap-1 text-[11px] text-primary/60 mt-1">
+                                                <Briefcase size={12} className="text-secondary/60" /> {reg.organisation || "Individual"}
+                                            </div>
+                                            <div className="flex items-center gap-3 text-[11px] text-primary/40 mt-1">
+                                                <span className="flex items-center gap-1"><Phone size={10} /> {reg.phone || "No Phone"}</span>
+                                            </div>
+                                        </td>
+                                        <td className="px-6 py-4">
+                                            <div className="text-sm font-semibold text-primary-dark truncate max-w-[180px]">
+                                                {reg.eventTitle}
+                                            </div>
+                                            {!reg.eventId && (
+                                                <span className="text-[10px] bg-red-50 text-red-600 px-1 border border-red-100 rounded">Deleted Event</span>
+                                            )}
+                                            <div className="text-[11px] text-primary/50 mt-1">Ref: {reg.referredBy || "-"}</div>
+                                        </td>
+                                        <td className="px-6 py-4">
+                                            <div className="space-y-1">
+                                                <div className="flex items-center justify-between text-[11px] text-primary/60">
+                                                    <span>Fee:</span>
+                                                    <span className="font-bold">₹{reg.registrationFee}</span>
+                                                </div>
+                                                {reg.donationAmount > 0 && (
+                                                    <div className="flex items-center justify-between text-[11px] text-secondary-dark bg-secondary/5 px-1 rounded">
+                                                        <span>Donation:</span>
+                                                        <span className="font-bold">₹{reg.donationAmount}</span>
+                                                    </div>
+                                                )}
+                                                <div className="flex items-center justify-between text-xs font-black text-primary-dark pt-1 border-t border-secondary/10">
+                                                    <span>Total:</span>
+                                                    <span>₹{reg.totalAmount}</span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td className="px-6 py-4 whitespace-nowrap text-center">
+                                            <span className={`px-3 py-1 text-[10px] font-black uppercase tracking-widest rounded-full border shadow-sm ${getStatusStyle(reg.status)}`}>
+                                                {reg.status}
+                                            </span>
+                                        </td>
+                                        <td className="px-6 py-4 whitespace-nowrap text-right">
+                                            <div className="flex justify-end gap-2">
+                                                {reg.status !== 'confirmed' && (
+                                                    <button
+                                                        onClick={() => handleUpdateStatus(reg.id, 'confirmed')}
+                                                        className="p-2 text-green-600 hover:bg-green-50 rounded-lg transition-colors border border-transparent hover:border-green-100"
+                                                        title="Confirm"
+                                                    >
+                                                        <CheckCircle2 size={18} />
+                                                    </button>
+                                                )}
+                                                {reg.status !== 'cancelled' && (
+                                                    <button
+                                                        onClick={() => handleUpdateStatus(reg.id, 'cancelled')}
+                                                        className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors border border-transparent hover:border-red-100"
+                                                        title="Cancel"
+                                                    >
+                                                        <XCircle size={18} />
+                                                    </button>
+                                                )}
+                                            </div>
+                                        </td>
+                                    </tr>
+                                ))
+                            )}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+export default function RegistrationsPage() {
+    return (
+        <DashboardLayout>
+            <Suspense fallback={
+                <div className="flex flex-col items-center justify-center min-h-[400px] gap-4">
+                    <Loader2 className="animate-spin text-secondary" size={40} />
+                    <p className="text-primary/60 font-medium">Loading registration management...</p>
+                </div>
+            }>
+                <RegistrationsPageContent />
+            </Suspense>
         </DashboardLayout>
     );
 }
