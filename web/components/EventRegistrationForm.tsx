@@ -36,12 +36,21 @@ export default function EventRegistrationForm({ event, onSuccess }: EventRegistr
             if (result.success) {
                 toast.success(
                     (t) => (
-                        <div className="flex flex-col">
+                        <div className="flex flex-col gap-1">
                             <span className="font-bold">Successfully Registered!</span>
                             <span className="text-xs opacity-80">Registration No: {result.registrationNo}</span>
+                            <a
+                                href={`/api/receipts/download?id=${result.registrationId}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-xs text-secondary-dark font-bold underline mt-1 hover:text-secondary"
+                                onClick={() => toast.dismiss(t.id)}
+                            >
+                                📥 Download Receipt (PDF)
+                            </a>
                         </div>
                     ),
-                    { duration: 6000 }
+                    { duration: 10000 }
                 );
                 if (onSuccess) onSuccess();
             } else {

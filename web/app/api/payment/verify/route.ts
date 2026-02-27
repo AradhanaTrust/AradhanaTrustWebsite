@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import crypto from "crypto";
 import { prisma } from "@/lib/prisma";
 import { generateStandardId } from "@/lib/id-generator";
+import { generateReceiptPDF } from "@/lib/pdf-service";
+import { sendEmail, getRegistrationEmailTemplate, getDonationEmailTemplate } from "@/lib/mail";
 
 export async function POST(req: NextRequest) {
     // Re-validating Prisma types
@@ -49,6 +51,38 @@ export async function POST(req: NextRequest) {
                     }
                 });
 
+                // Generate and Send Email
+                try {
+                    const receiptData = {
+                        receiptType: 'Registration',
+                        receiptNo: regNo,
+                        date: new Date().toLocaleDateString('en-IN', { day: '2-digit', month: 'long', year: 'numeric' }),
+                        userName: donorDetails.name,
+                        email: donorDetails.email,
+                        phone: donorDetails.phone,
+                        eventTitle: metadata.eventTitle,
+                        amount: parseFloat(amount),
+                        paymentStatus: 'Paid'
+                    } as any;
+
+                    const pdfBuffer = await generateReceiptPDF(receiptData);
+
+                    await sendEmail({
+                        to: donorDetails.email,
+                        subject: `Payment Successful & Registration Confirmed: ${metadata.eventTitle}`,
+                        html: getRegistrationEmailTemplate(donorDetails.name, metadata.eventTitle, regNo),
+                        attachments: [
+                            {
+                                filename: `Registration_Receipt_${regNo}.pdf`,
+                                content: pdfBuffer,
+                                contentType: 'application/pdf'
+                            }
+                        ]
+                    });
+                } catch (emailError) {
+                    console.error("Event Verification Email Error:", emailError);
+                }
+
                 // If there's a donation amount, also create a DonationRecord for the donations management section
                 if (donAmount > 0) {
                     const receiptNo = generateStandardId('RCT');
@@ -74,7 +108,7 @@ export async function POST(req: NextRequest) {
                 }
             } else {
                 // Default: Create Donation
-                await prisma.donation.create({
+                const donation = await prisma.donation.create({
                     data: {
                         amount: parseFloat(amount),
                         status: "paid",
@@ -87,11 +121,44 @@ export async function POST(req: NextRequest) {
                         currency: "INR"
                     }
                 });
+
+                // Send Donation Receipt Email
+                try {
+                    const receiptNo = generateStandardId('RCT'); // We could store this in DB too
+                    const receiptData = {
+                        receiptType: 'Donation',
+                        receiptNo: receiptNo,
+                        date: new Date().toLocaleDateString('en-IN', { day: '2-digit', month: 'long', year: 'numeric' }),
+                        userName: donorDetails.name,
+                        email: donorDetails.email,
+                        phone: donorDetails.phone,
+                        amount: parseFloat(amount),
+                        paymentStatus: 'Paid'
+                    } as any;
+
+                    const pdfBuffer = await generateReceiptPDF(receiptData);
+
+                    await sendEmail({
+                        to: donorDetails.email,
+                        subject: `Donation Receipt: Aradhana Trust`,
+                        html: getDonationEmailTemplate(donorDetails.name, parseFloat(amount), receiptNo),
+                        attachments: [
+                            {
+                                filename: `Donation_Receipt_${receiptNo}.pdf`,
+                                content: pdfBuffer,
+                                contentType: 'application/pdf'
+                            }
+                        ]
+                    });
+                } catch (emailError) {
+                    console.error("Donation Verification Email Error:", emailError);
+                }
             }
 
             return NextResponse.json({
                 success: true,
-                registrationNo: registration?.registrationNo
+                registrationNo: registration?.registrationNo,
+                registrationId: registration?.id
             });
         } else {
             return NextResponse.json({ error: "Invalid signature" }, { status: 400 });
