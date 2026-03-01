@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { ArrowRight, Loader2 } from "lucide-react";
+import toast from "react-hot-toast";
 import RazorpayButton from "./RazorpayButton";
 import { registerForFreeEvent } from "@/app/actions/event-registration";
 import { Event } from "@/lib/events-data";
@@ -33,10 +34,27 @@ export default function EventRegistrationForm({ event, onSuccess }: EventRegistr
             const result = await registerForFreeEvent(event.id, event.title, formData);
 
             if (result.success) {
-                alert("Successfully registered for the event!");
+                toast.success(
+                    (t) => (
+                        <div className="flex flex-col gap-1">
+                            <span className="font-bold">Successfully Registered!</span>
+                            <span className="text-xs opacity-80">Registration No: {result.registrationNo}</span>
+                            <a
+                                href={`/api/receipts/download?id=${result.registrationId}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-xs text-secondary-dark font-bold underline mt-1 hover:text-secondary"
+                                onClick={() => toast.dismiss(t.id)}
+                            >
+                                📥 Download Receipt (PDF)
+                            </a>
+                        </div>
+                    ),
+                    { duration: 10000 }
+                );
                 if (onSuccess) onSuccess();
             } else {
-                alert(result.message || "Registration failed. Please try again.");
+                toast.error(result.message || "Registration failed. Please try again.");
             }
         } catch (error) {
             console.error("Registration error:", error);

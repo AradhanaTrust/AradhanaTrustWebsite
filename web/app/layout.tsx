@@ -30,6 +30,7 @@ export const metadata: Metadata = {
 
 import { LanguageProvider } from "@/context/LanguageContext";
 import AuthProvider from "@/components/AuthProvider";
+import ToastProvider from "@/components/providers/ToastProvider";
 
 export default function RootLayout({
   children,
@@ -44,6 +45,7 @@ export default function RootLayout({
       >
         <AuthProvider>
           <LanguageProvider>
+            <ToastProvider />
             {children}
           </LanguageProvider>
         </AuthProvider>

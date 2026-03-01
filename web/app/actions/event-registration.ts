@@ -2,6 +2,9 @@
 
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
+import { generateStandardId } from "@/lib/id-generator";
+import { generateReceiptPDF } from "@/lib/pdf-service";
+import { sendEmail, getRegistrationEmailTemplate } from "@/lib/mail";
 
 export async function registerForFreeEvent(eventId: string, eventTitle: string, userDetails: {
     name: string;
@@ -26,8 +29,10 @@ export async function registerForFreeEvent(eventId: string, eventTitle: string, 
             return { success: false, message: "This is a paid event. Payment is required." };
         }
 
-        await prisma.eventRegistration.create({
+        const regNo = generateStandardId('REG');
+        const registration = await prisma.eventRegistration.create({
             data: {
+                registrationNo: regNo,
                 eventId,
                 eventTitle,
                 name: userDetails.name,
@@ -44,8 +49,45 @@ export async function registerForFreeEvent(eventId: string, eventTitle: string, 
             }
         });
 
-        // revalidatePath(`/events`); // Optional: if we show attendee counts
-        return { success: true, message: "Registration successful!" };
+        // Generate and Send Email in background (non-blocking if possible, but let's await for reliability here)
+        try {
+            const receiptData = {
+                receiptType: 'Registration',
+                receiptNo: regNo,
+                date: new Date().toLocaleDateString('en-IN', { day: '2-digit', month: 'long', year: 'numeric' }),
+                userName: userDetails.name,
+                email: userDetails.email,
+                phone: userDetails.phone,
+                eventTitle: eventTitle,
+                amount: 0,
+                paymentStatus: 'Registered'
+            } as any;
+
+            const pdfBuffer = await generateReceiptPDF(receiptData);
+
+            await sendEmail({
+                to: userDetails.email,
+                subject: `Registration Confirmed: ${eventTitle}`,
+                html: getRegistrationEmailTemplate(userDetails.name, eventTitle, regNo),
+                attachments: [
+                    {
+                        filename: `Registration_Receipt_${regNo}.pdf`,
+                        content: pdfBuffer,
+                        contentType: 'application/pdf'
+                    }
+                ]
+            });
+        } catch (emailError) {
+            console.error("Background Email Error:", emailError);
+            // Don't fail the registration if email fails
+        }
+
+        return {
+            success: true,
+            message: "Registration successful! A confirmation email has been sent.",
+            registrationId: registration.id,
+            registrationNo: registration.registrationNo
+        };
     } catch (error) {
         console.error("Free Registration Error:", error);
         return { success: false, message: "Failed to register. Please try again." };

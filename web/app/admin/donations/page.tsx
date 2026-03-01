@@ -127,7 +127,7 @@ export default function DonationsPage() {
         <DashboardLayout>
             <div className="space-y-6">
                 {/* Header */}
-                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div>
                         <h2 className="text-2xl font-cinzel-decorative font-bold text-primary-dark">
                             Donations Management
@@ -139,10 +139,10 @@ export default function DonationsPage() {
                     <button
                         onClick={handleExport}
                         disabled={isLoading || donations.length === 0}
-                        className="flex items-center gap-2 px-4 py-2 bg-secondary text-surface-white rounded-lg hover:bg-secondary-dark transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="w-fit mx-auto sm:mx-0 flex items-center gap-2 px-6 py-2.5 bg-secondary text-surface-white rounded-lg hover:bg-secondary-dark transition-all transform hover:-translate-y-0.5 shadow-md shadow-secondary/20 font-bold disabled:opacity-50 disabled:cursor-not-allowed text-sm"
                     >
                         <Download className="w-4 h-4" />
-                        Export to Excel
+                        Export <span className="hidden sm:inline">to Excel</span>
                     </button>
                 </div>
 

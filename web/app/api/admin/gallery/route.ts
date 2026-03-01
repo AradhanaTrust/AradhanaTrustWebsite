@@ -35,6 +35,8 @@ export async function POST(req: Request) {
         // Upload to Vercel Blob
         const blob = await put(file.name, file, {
             access: 'public',
+            allowOverwrite: true,
+            addRandomSuffix: true
         });
 
         // Create DB record with Blob URL

@@ -1,20 +1,12 @@
 # Project TODO List
 
-## Urgent Fixes
-- [ ] **Fix 'About Us' Subheading Color Mismatch**
-  - Problem: The subheading "Promoting Dharma..." appears black/dark instead of the intended Gold (#B8860B).
-  - Goal: Ensure it matches the "Objectives" subheading style exactly (Solid Gold, No Opacity).
-  - Status: Modifications to remove `/80` opacity and use hex codes were attempted but reverted/not reflecting.
-
-## Refinements
-- [ ] **Polish Objective Tile Images**
-  - Goal: Refining the generated tile images (Temple, Annadanam, Pooja, etc.) to be more distinct, high-quality, and visually consistent with the new cream/gold theme.
-  - Current State: Using initial draft generations + placeholders.
-
-## General
-- [ ] Verify Global CSS Variables for `secondary-dark` to ensure it's not overriding to black in specific contexts.
-
-## Data Migration
-- [ ] **Migrate Static Gallery Images to Database**
-  - Problem: Static images in `galleryData.ts` and `Gallery.tsx` are hardcoded and not manageable via Admin Dashboard.
-  - Goal: Upload original static images to the database via Admin Dashboard and remove hardcoded references from `Gallery.tsx` and `galleryData.ts` so all images are dynamic.
+## Architecture & Scaling Improvements
+- [ ] **Implement Background Job Queue for Payment Processing**
+  - Problem: `api/payment/verify/route.ts` handles DB writes, PDF generation, and Email sending synchronously. If PDF engine is slow or email fails, the Razorpay webhook can timeout.
+  - Goal: Push PDF generation and Emails to a Background Queue (e.g., Inngest, Upstash QStash) to ensure the webhook responds instantly.
+- [ ] **Add Error Recovery for Receipt Generation**
+  - Problem: If PDF fails to generate during payment verification, user must manually intervene.
+  - Goal: Implement an automatic retry mechanism or fallback state for failed PDF generations.
+- [ ] **Abstract UI Components**
+  - Problem: UI logic and styling in components like `RazorpayButton` are tightly coupled.
+  - Goal: Fully abstract these into reusable design system components for better maintainability and consistency.

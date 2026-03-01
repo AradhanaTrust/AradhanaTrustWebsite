@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import Script from "next/script";
+import toast from "react-hot-toast";
 
 declare global {
     interface Window {
@@ -75,14 +76,36 @@ export default function RazorpayButton({ amount, donorDetails, metadata, disable
                         const verifyData = await verifyRes.json();
 
                         if (verifyData.success) {
-                            alert("Payment Successful! Thank you for your donation.");
+                            toast.success(
+                                (t) => (
+                                    <div className="flex flex-col gap-1">
+                                        <span className="font-bold">Payment Successful!</span>
+                                        {verifyData.registrationNo && (
+                                            <span className="text-xs opacity-80">Registration No: {verifyData.registrationNo}</span>
+                                        )}
+                                        {verifyData.registrationId && (
+                                            <a
+                                                href={`/api/receipts/download?id=${verifyData.registrationId}`}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="text-xs text-secondary-dark font-bold underline mt-1 hover:text-secondary"
+                                                onClick={() => toast.dismiss(t.id)}
+                                            >
+                                                📥 Download Receipt (PDF)
+                                            </a>
+                                        )}
+                                        <span className="text-[10px] mt-1 text-gray-500 italic">A copy has also been sent to your email.</span>
+                                    </div>
+                                ),
+                                { duration: 10000 }
+                            );
                             // Optional: Redirect or clear form
                         } else {
-                            alert("Payment Verification Failed.");
+                            toast.error(verifyData.error || "Payment Verification Failed.");
                         }
                     } catch (error) {
                         console.error("Verification error:", error);
-                        alert("Payment verified but failed to record locally. Please contact support.");
+                        toast.error("Payment verified but failed to record locally. Please contact support.");
                     }
                 },
                 prefill: {
