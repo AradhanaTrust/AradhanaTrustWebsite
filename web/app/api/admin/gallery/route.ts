@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { put, del } from "@vercel/blob";
+import { put, del } from "@/lib/storage";
 
 export async function GET() {
     try {

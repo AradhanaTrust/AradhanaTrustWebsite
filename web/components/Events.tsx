@@ -162,12 +162,10 @@ export default function Events() {
 
                                             {/* Image: Shortened h-36 */}
                                             <div className="h-36 w-full relative overflow-hidden border-b border-[#CFA14E]/50 flex-shrink-0">
-                                                <Image
+                                                <img
                                                     src={event.image}
                                                     alt={translatedEvent.title}
-                                                    fill
-                                                    sizes="(max-width: 768px) 100vw, 25vw"
-                                                    className="object-cover group-hover:scale-110 transition-transform duration-700"
+                                                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                                                 />
                                                 <div className="absolute top-2 right-2 flex flex-col items-end gap-1 z-20">
                                                     <div className="bg-secondary text-primary-dark px-2 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-widest shadow-md">

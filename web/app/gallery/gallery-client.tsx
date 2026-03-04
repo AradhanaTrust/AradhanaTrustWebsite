@@ -191,12 +191,10 @@ export default function GalleryClient({ initialImages }: GalleryClientProps) {
                                         {/* Image Container */}
                                         <div className="relative bg-[#4A3225] p-1.5 shadow-inner">
                                             <div className="relative h-64 w-full overflow-hidden border border-[#CFA14E]/50 rounded-[2px]">
-                                                <Image
+                                                <img
                                                     src={image.src}
                                                     alt={image.alt}
-                                                    fill
-                                                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                                                    className="object-cover group-hover:scale-110 transition-transform duration-1000"
+                                                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000"
                                                 />
                                                 {/* Vignette */}
                                                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60 group-hover:opacity-30 transition-opacity" />
@@ -272,11 +270,9 @@ export default function GalleryClient({ initialImages }: GalleryClientProps) {
                             onClick={(e) => e.stopPropagation()}
                         >
                             <div className="relative">
-                                <Image
+                                <img
                                     src={currentLightboxImage.src}
                                     alt={currentLightboxImage.alt}
-                                    width={1200}
-                                    height={800}
                                     className="max-h-[85vh] w-auto object-contain rounded-lg shadow-2xl"
                                 />
 

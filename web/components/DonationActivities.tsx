@@ -135,12 +135,10 @@ export default function DonationActivities() {
                                         />
                                     ) : activity.imageUrl ? (
                                         <>
-                                            <Image
+                                            <img
                                                 src={activity.imageUrl}
                                                 alt={activity.title}
-                                                fill
                                                 className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-[1.5s] z-10"
-                                                sizes="(max-width: 768px) 100vw, 50vw"
                                             />
                                             {/* Vignette */}
                                             <div className="absolute inset-0 bg-gradient-to-t from-[#5D4037]/50 via-transparent to-transparent pointer-events-none z-10" />

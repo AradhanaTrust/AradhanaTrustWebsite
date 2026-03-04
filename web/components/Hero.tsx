@@ -39,13 +39,10 @@ export default function Hero() {
         <section className="relative min-h-[100dvh] flex items-center justify-center overflow-hidden pt-32 lg:pt-40 pb-20 lg:pb-32">
             {/* Background Image with Overlay */}
             <div className="absolute inset-0 z-0">
-                <Image
+                <img
                     src="/assets/hero-bg-main.png"
                     alt="Aradhana Dharmika Trust Background"
-                    fill
-                    className="object-cover object-[center_center]"
-                    priority
-                    unoptimized
+                    className="absolute inset-0 w-full h-full object-cover object-[center_center]"
                 />
                 <div className="absolute inset-0 bg-gradient-to-b from-[#FFFDF8] via-[#FFFDF8]/15 to-transparent z-10" />
                 <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-black/20 z-0" />

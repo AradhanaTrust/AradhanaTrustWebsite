@@ -132,12 +132,10 @@ export default function Gallery({ dbImages = [] }: GalleryProps) {
                                         {/* Inner Sanctum (Image Container) */}
                                         <div className="relative bg-[#4A3225] p-1.5 shadow-inner">
                                             <div className="relative h-64 w-full overflow-hidden border border-[#CFA14E]/50 rounded-[2px]">
-                                                <Image
+                                                <img
                                                     src={img}
                                                     alt={`Gallery Image ${idx + 1}`}
-                                                    fill
-                                                    sizes="(max-width: 768px) 100vw, 33vw"
-                                                    className="object-cover group-hover:scale-110 transition-transform duration-1000"
+                                                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000"
                                                 />
                                                 {/* Vignette */}
                                                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60 group-hover:opacity-30 transition-opacity" />

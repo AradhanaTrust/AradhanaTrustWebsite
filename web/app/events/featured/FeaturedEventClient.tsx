@@ -175,13 +175,10 @@ export default function FeaturedEventClient({ event }: FeaturedEventClientProps)
                                             />
                                         ) : (
                                             <>
-                                                <Image
+                                                <img
                                                     src={event.imageUrl || event.image}
                                                     alt={translatedEvent.title}
-                                                    fill
                                                     className="w-full h-full object-cover object-center hover:scale-105 transition-transform duration-1000 z-10"
-                                                    priority
-                                                    sizes="(max-width: 768px) 100vw, 50vw"
                                                 />
                                                 {/* Vignette for Depth on Image */}
                                                 <div className="absolute inset-0 bg-gradient-to-t from-[#5D4037]/40 via-transparent to-transparent pointer-events-none z-10" />
@@ -233,12 +230,10 @@ export default function FeaturedEventClient({ event }: FeaturedEventClientProps)
                                             </div>
                                             {/* Rectangular Image Frame */}
                                             <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-lg md:shadow-xl border-[3px] md:border-4 border-[#D4AF37]/30 group lg:sticky lg:top-32 mb-6 lg:mb-0">
-                                                <Image
+                                                <img
                                                     src={event.imageUrl || event.image}
                                                     alt={translatedEvent.title}
-                                                    fill
                                                     className="w-full h-full object-cover object-center hover:scale-105 transition-transform duration-700"
-                                                    sizes="(max-width: 768px) 100vw, 50vw"
                                                 />
                                                 <div className="absolute inset-0 bg-gradient-to-t from-[#5D4037]/20 via-transparent to-transparent pointer-events-none z-10" />
                                             </div>

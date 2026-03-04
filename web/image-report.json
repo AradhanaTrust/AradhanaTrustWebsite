@@ -1,0 +1,58 @@
+{
+  "gallery": [
+    {
+      "id": "cmlrwqzbh00008ds0vpj042sa",
+      "title": "Temple Image",
+      "imageUrl": "/uploads/lead534-966x483.jpg"
+    }
+  ],
+  "events": [
+    {
+      "id": "rama-navami-2025",
+      "title": "Rama Navami 2025",
+      "imageUrl": "/assets/events/rama-navami.png"
+    },
+    {
+      "id": "shivaratri-2025",
+      "title": "Maha Shivaratri 2025",
+      "imageUrl": "/assets/events/shivaratri.png"
+    },
+    {
+      "id": "hanuman-jayanti-2026",
+      "title": "Hanuman Jayanti 2026",
+      "imageUrl": "/assets/events/hanuman.png"
+    },
+    {
+      "id": "deepavali-2026",
+      "title": "Deepavali 2026",
+      "imageUrl": "/assets/events/deepavali.png"
+    },
+    {
+      "id": "dasara-2026",
+      "title": "Dasara 2026",
+      "imageUrl": "/assets/events/dasara.png"
+    },
+    {
+      "id": "ganesh-chaturthi-2026",
+      "title": "Ganesh Chaturthi 2026",
+      "imageUrl": "/assets/events/ganesh.png"
+    },
+    {
+      "id": "cmm1p4q6a0000wd2sotkhvxe6",
+      "title": "Divine Temple Complex Construction",
+      "imageUrl": "/uploads/TempleSite.jpg-UJGQ6gaLDQD2St7jY6rgflj8jzDbpX.jpeg"
+    },
+    {
+      "id": "ugadi-2026",
+      "title": "Ugadi Festival 2026",
+      "imageUrl": "/assets/events/ugadi.png"
+    }
+  ],
+  "activities": [
+    {
+      "id": "cmlxni6he0000rmsd2nrk95xj",
+      "title": "Divine Temple Complex & Goshala Construction",
+      "imageUrl": "/uploads/TempleSite.jpg.jpeg"
+    }
+  ]
+}
