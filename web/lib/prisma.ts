@@ -13,4 +13,5 @@ const globalForPrisma = globalThis as unknown as {
 
 export const prisma = globalForPrisma.prisma ?? prismaClientSingleton()
 
-if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma
+// Strict singleton for resource-constrained environments (Hostinger)
+globalForPrisma.prisma = prisma
