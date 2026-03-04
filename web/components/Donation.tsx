@@ -67,12 +67,10 @@ export default function Donation() {
                         <h3 className="text-primary-dark font-serif font-bold text-xl uppercase tracking-widest">{t.scanTitle}</h3>
 
                         <div className="aspect-square bg-background-ivory rounded-xl border-4 border-double border-secondary/30 flex items-center justify-center relative overflow-hidden group p-2">
-                            <Image
+                            <img
                                 src={donationConfig.qrCodeImage}
                                 alt="Donate QR Code"
-                                fill
-                                sizes="(max-width: 768px) 100vw, 400px"
-                                className="object-contain p-1 group-hover:scale-105 transition-transform duration-500"
+                                className="w-full h-full object-contain p-1 group-hover:scale-105 transition-transform duration-500"
                             />
                         </div>
 
