@@ -32,9 +32,9 @@ export default function Gallery({ dbImages = [] }: GalleryProps) {
     // Responsive Carousel Logic
     useEffect(() => {
         const handleResize = () => {
-            if (window.innerWidth < 640) setVisibleCards(1);
+            if (window.innerWidth < 640) setVisibleCards(1.2);
             else if (window.innerWidth < 1024) setVisibleCards(2);
-            else setVisibleCards(4); // 4 Cards on Desktop
+            else setVisibleCards(4);
         };
         handleResize();
         window.addEventListener("resize", handleResize);
@@ -131,7 +131,7 @@ export default function Gallery({ dbImages = [] }: GalleryProps) {
 
                                         {/* Inner Sanctum (Image Container) */}
                                         <div className="relative bg-[#4A3225] p-1.5 shadow-inner">
-                                            <div className="relative h-64 w-full overflow-hidden border border-[#CFA14E]/50 rounded-[2px]">
+                                            <div className="relative h-48 sm:h-56 w-full overflow-hidden border border-[#CFA14E]/50 rounded-[2px]">
                                                 <img
                                                     src={img}
                                                     alt={`Gallery Image ${idx + 1}`}

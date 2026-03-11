@@ -226,7 +226,7 @@ export default function ContactPage() {
                                                 src="/location-qr.jpeg"
                                                 alt="Location QR Code"
                                                 fill
-                                                className="object-cover group-hover:scale-105 transition-transform duration-500"
+                                                className="object-contain group-hover:scale-105 transition-transform duration-500"
                                             />
                                         </div>
                                     </div>

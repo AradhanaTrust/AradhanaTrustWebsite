@@ -190,7 +190,7 @@ export default function GalleryClient({ initialImages }: GalleryClientProps) {
 
                                         {/* Image Container */}
                                         <div className="relative bg-[#4A3225] p-1.5 shadow-inner">
-                                            <div className="relative h-64 w-full overflow-hidden border border-[#CFA14E]/50 rounded-[2px]">
+                                            <div className="relative h-48 sm:h-56 w-full overflow-hidden border border-[#CFA14E]/50 rounded-[2px]">
                                                 <img
                                                     src={image.src}
                                                     alt={image.alt}

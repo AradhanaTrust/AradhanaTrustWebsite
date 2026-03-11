@@ -61,7 +61,7 @@ export default function Events() {
         const handleResize = () => {
             if (window.innerWidth < 640) setVisibleCards(1);
             else if (window.innerWidth < 1024) setVisibleCards(2);
-            else setVisibleCards(4); // Force 4 on desktops (1024px+)
+            else setVisibleCards(4);
         };
         handleResize();
         window.addEventListener("resize", handleResize);
@@ -161,7 +161,7 @@ export default function Events() {
                                             <div className="absolute inset-0 texture-parchment opacity-40 pointer-events-none z-10 mix-blend-multiply" />
 
                                             {/* Image: Shortened h-36 */}
-                                            <div className="h-36 w-full relative overflow-hidden border-b border-[#CFA14E]/50 flex-shrink-0">
+                                            <div className="h-32 sm:h-36 w-full relative overflow-hidden border-b border-[#CFA14E]/50 flex-shrink-0">
                                                 <img
                                                     src={event.image}
                                                     alt={translatedEvent.title}

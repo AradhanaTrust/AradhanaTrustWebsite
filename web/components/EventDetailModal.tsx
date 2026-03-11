@@ -49,7 +49,7 @@ export default function EventDetailModal({ event, onClose }: EventDetailModalPro
                 onClick={(e) => e.stopPropagation()}
             >
                 {/* Modal Header with Image */}
-                <div className="relative h-64 overflow-hidden rounded-t-2xl flex-shrink-0">
+                <div className="relative h-48 sm:h-64 overflow-hidden rounded-t-2xl flex-shrink-0">
                     <img src={event.image} alt={translatedEvent.title} className="w-full h-full object-cover" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
 

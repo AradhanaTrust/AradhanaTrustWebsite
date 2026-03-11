@@ -224,7 +224,7 @@ export default function EventsPage() {
                                         }}
                                     >
                                         {/* Event Image */}
-                                        <div className="relative h-48 overflow-hidden">
+                                        <div className="relative h-44 sm:h-48 overflow-hidden">
                                             <img src={event.image} alt={translatedEvent.title} className="w-full h-full object-cover" />
                                             {event.isFeatured && (
                                                 <div className="absolute inset-0 border-4 border-[#D4AF37]/50 pointer-events-none" />
