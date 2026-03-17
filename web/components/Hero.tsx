@@ -76,17 +76,22 @@ export default function Hero() {
                         </h1>
                     </div>
 
-                    <div className="w-full flex justify-center px-4">
-                        <p className="text-base md:text-lg lg:text-xl xl:text-2xl text-[#4A3225] font-sans font-medium w-fit mx-auto leading-relaxed drop-shadow-sm px-6 py-1 rounded-full bg-gradient-to-r from-[#FFF5D1]/30 via-[#F2C96D]/10 to-[#FFF5D1]/30 backdrop-blur-md border border-[#D4AF37]/30 shadow-sm">
+                    {/* Responsive Tagline - Compact wrapping pill (max 2 lines) on mobile */}
+                    <div className="w-full flex justify-center px-2 sm:px-4">
+                        <div className="flex flex-row flex-wrap justify-center items-center gap-y-1.5 gap-x-1.5 sm:gap-x-0 px-2 py-2 sm:px-6 sm:py-1.5 rounded-[15px] sm:rounded-full bg-gradient-to-r from-[#FFF5D1]/30 via-[#F2C96D]/10 to-[#FFF5D1]/30 backdrop-blur-md border border-[#D4AF37]/30 shadow-sm transition-all duration-300">
                             {t.quote.split("|").map((part, index, array) => (
-                                <span key={index}>
-                                    {part.trim()}
+                                <div key={index} className="flex items-center">
+                                    <span className="text-[10px] min-[400px]:text-[11px] sm:text-base md:text-lg lg:text-xl xl:text-2xl text-[#4A3225] font-sans font-medium drop-shadow-sm whitespace-nowrap tracking-wider uppercase">
+                                        {part.trim()}
+                                    </span>
+                                    
+                                    {/* Separators */}
                                     {index < array.length - 1 && (
-                                        <span className="mx-2 md:mx-3 text-[#D4AF37] font-serif">♦</span>
+                                        <span className="mx-1 min-[400px]:mx-1.5 md:mx-4 text-[#D4AF37] font-serif text-[10px] sm:text-lg">♦</span>
                                     )}
-                                </span>
+                                </div>
                             ))}
-                        </p>
+                        </div>
                     </div>
 
                     {/* Decorative Separator - Below Subtitle */}
