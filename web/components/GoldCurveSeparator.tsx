@@ -31,7 +31,10 @@ export default function GoldCurveSeparator({
     const pathLine2 = useMotionTemplate`M0,202 Q600,${curveControlY_Line2} 1200,202`;
 
     return (
-        <div ref={ref} className={`absolute bottom-0 left-0 w-full overflow-hidden leading-none z-20 pointer-events-none ${className}`}>
+        <div 
+            ref={ref} 
+            className={`absolute bottom-0 left-0 w-full overflow-hidden leading-none z-20 pointer-events-none ${className}`}
+        >
             <svg
                 className="relative block w-[calc(100%+1.3px)] h-[160px] md:h-[280px]"
                 data-name="Layer 1"
