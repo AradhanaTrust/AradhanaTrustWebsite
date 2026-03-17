@@ -172,19 +172,19 @@ export default function ServicesPage() {
             </section>
 
             {/* SECTIONS TABS / NAVIGATION */}
-            <div id="forms-section" className="sticky top-20 z-30 bg-white/80 backdrop-blur-md border-y border-[#CFA14E]/10 py-4 shadow-sm scroll-mt-20 flex justify-center w-full">
-                <div className="container-gold flex justify-center gap-8 md:gap-16">
-                    <button 
-                        onClick={() => setActiveSection('booking')} 
+            <div id="forms-section" className="sticky top-[63px] lg:top-[79px] z-30 bg-white/80 backdrop-blur-md border-b border-[#CFA14E]/10 py-4 shadow-sm scroll-mt-16 lg:scroll-mt-20 flex justify-center w-full">
+                <div className="container-gold flex justify-center gap-8 md:gap-16 text-xs md:text-base">
+                    <button
+                        onClick={() => setActiveSection('booking')}
                         className={`font-cinzel font-bold transition-all flex items-center gap-2 pb-2 border-b-2 ${activeSection === 'booking' ? 'text-[#D4AF37] border-[#D4AF37]' : 'text-[#5D4037] border-transparent hover:text-[#CFA14E]'}`}
                     >
-                        <Sparkles className="w-4 h-4" /> {s.booking.title}
+                        <Sparkles className="w-5 h-5 md:w-4 md:h-4" /> {s.booking.title}
                     </button>
-                    <button 
-                        onClick={() => setActiveSection('registration')} 
+                    <button
+                        onClick={() => setActiveSection('registration')}
                         className={`font-cinzel font-bold transition-all flex items-center gap-2 pb-2 border-b-2 ${activeSection === 'registration' ? 'text-[#D4AF37] border-[#D4AF37]' : 'text-[#5D4037] border-transparent hover:text-[#CFA14E]'}`}
                     >
-                        <UserCheck className="w-4 h-4" /> {s.priest.registerLabel}
+                        <UserCheck className="w-5 h-5 md:w-4 md:h-4" /> {s.priest.registerLabel}
                     </button>
                 </div>
             </div>
@@ -193,7 +193,7 @@ export default function ServicesPage() {
             <div className="relative overflow-hidden min-h-[800px] bg-surface-white">
                 <AnimatePresence mode="wait">
                     {activeSection === 'booking' ? (
-                        <motion.section 
+                        <motion.section
                             key="booking"
                             initial={{ opacity: 0, x: -50 }}
                             animate={{ opacity: 1, x: 0 }}
@@ -241,7 +241,7 @@ export default function ServicesPage() {
                             </div>
                         </motion.section>
                     ) : (
-                        <motion.section 
+                        <motion.section
                             key="registration"
                             initial={{ opacity: 0, x: 50 }}
                             animate={{ opacity: 1, x: 0 }}
