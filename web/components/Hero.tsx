@@ -85,7 +85,7 @@ export default function Hero() {
                                     {index > 0 && (
                                         <span className="mx-1 min-[400px]:mx-1.5 md:mx-4 text-[#D4AF37] font-serif text-[10px] sm:text-lg">♦</span>
                                     )}
-                                    <span className="text-[10px] min-[400px]:text-[11px] sm:text-base md:text-lg lg:text-xl xl:text-2xl text-[#4A3225] font-sans font-bold drop-shadow-sm whitespace-nowrap tracking-widest uppercase">
+                                    <span className="text-[10px] min-[400px]:text-[11px] sm:text-base md:text-lg lg:text-xl xl:text-2xl text-[#4A3225] font-sans font-bold sm:font-medium drop-shadow-sm whitespace-nowrap tracking-widest uppercase">
                                         {part.trim()}
                                     </span>
                                 </div>
