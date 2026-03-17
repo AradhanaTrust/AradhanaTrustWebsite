@@ -38,12 +38,13 @@ export default function Header() {
     ];
 
     return (
-        <header
-            className={`fixed top-0 w-full z-50 transition-all duration-500 border-b-4 border-double border-secondary/50 ${scrolled
-                ? "bg-background-cream/95 backdrop-blur-md py-1 shadow-md h-16 lg:h-20"
-                : "bg-background-cream/80 backdrop-blur-md py-3 h-20 lg:h-28"
-                }`}
-        >
+        <>
+            <header
+                className={`fixed top-0 w-full z-[100] transition-all duration-500 border-b-4 border-double border-secondary/50 ${scrolled
+                    ? "bg-background-cream/95 backdrop-blur-md py-1 shadow-md h-16 lg:h-20"
+                    : "bg-background-cream/80 backdrop-blur-md py-3 h-20 lg:h-28"
+                    }`}
+            >
             <div className="container-gold h-full flex items-center justify-between gap-4">
                 {/* Logo Section */}
                 <Link
@@ -174,29 +175,29 @@ export default function Header() {
                     </button>
                 </div>
             </div>
+        </header>
 
-            {/* Mobile Menu Backdrop */}
-            <AnimatePresence>
-                {isOpen && (
+        {/* Mobile Menu Overlay System - Outside header to avoid containing block issues */}
+        <AnimatePresence>
+            {isOpen && (
+                <>
+                    {/* Backdrop Overlay */}
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         onClick={() => setIsOpen(false)}
-                        className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[90] lg:hidden"
+                        className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[190] lg:hidden cursor-pointer pointer-events-auto"
                     />
-                )}
-            </AnimatePresence>
 
-            {/* Mobile Menu Popup */}
-            <AnimatePresence>
-                {isOpen && (
+                    {/* Mobile Menu Popup */}
                     <motion.div
                         initial={{ opacity: 0, scale: 0.9, x: 20, y: -20 }}
                         animate={{ opacity: 1, scale: 1, x: 0, y: 0 }}
                         exit={{ opacity: 0, scale: 0.9, x: 20, y: -20 }}
                         transition={{ type: "spring", stiffness: 300, damping: 25 }}
-                        className="fixed top-20 right-4 w-[75vw] h-[75vh] max-h-[600px] lg:hidden bg-background-ivory/95 backdrop-blur-xl border-4 border-double border-[#D4AF37] rounded-2xl shadow-2xl z-[100] overflow-hidden flex flex-col"
+                        className="fixed top-20 right-4 w-[75vw] h-[75vh] max-h-[600px] lg:hidden bg-background-ivory/95 backdrop-blur-xl border-4 border-double border-[#D4AF37] rounded-2xl shadow-2xl z-[200] overflow-hidden flex flex-col"
+                        onClick={(e) => e.stopPropagation()}
                     >
                         {/* Scrollable Container - Hidden Scrollbar */}
                         <div className="flex flex-col h-full relative p-6 overflow-y-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
@@ -264,14 +265,15 @@ export default function Header() {
                             </div>
                         </div>
                     </motion.div>
-                )}
-            </AnimatePresence>
+                </>
+            )}
+        </AnimatePresence>
 
             {/* Login Modal */}
             <LoginModal
                 isOpen={isLoginModalOpen}
                 onClose={() => setIsLoginModalOpen(false)}
             />
-        </header>
+        </>
     );
 }
