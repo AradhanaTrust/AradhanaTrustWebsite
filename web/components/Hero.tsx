@@ -49,16 +49,16 @@ export default function Hero() {
             </div>
 
             {/* Content Container */}
-            <div className="container-gold relative z-10 flex flex-col items-center text-center space-y-8">
+            <div className="container-gold relative z-10 flex flex-col items-center text-center space-y-4 md:space-y-8">
 
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8 }}
-                    className="space-y-0"
+                    className="flex flex-col items-center gap-3 md:gap-6"
                 >
 
-                    <div className="flex flex-col items-center gap-2 md:gap-4">
+                    <div className="flex flex-col items-center gap-1.5 md:gap-4">
                         <span className="text-lg md:text-2xl lg:text-3xl font-serif font-medium text-[#5D4037] tracking-[0.2em] uppercase drop-shadow-sm">
                             {t.title_line1}
                         </span>
@@ -77,25 +77,24 @@ export default function Hero() {
                     </div>
 
                     {/* Responsive Tagline - Compact wrapping pill (max 2 lines) on mobile */}
-                    <div className="w-full flex justify-center px-2 sm:px-4">
-                        <div className="flex flex-row flex-wrap justify-center items-center gap-y-1.5 gap-x-1.5 sm:gap-x-0 px-2 py-2 sm:px-6 sm:py-1.5 rounded-[15px] sm:rounded-full bg-gradient-to-r from-[#FFF5D1]/30 via-[#F2C96D]/10 to-[#FFF5D1]/30 backdrop-blur-md border border-[#D4AF37]/30 shadow-sm transition-all duration-300">
+                    <div className="w-full flex justify-center px-1 sm:px-4">
+                        <div className="flex flex-row flex-wrap justify-center items-center gap-y-1 sm:gap-y-1.5 gap-x-1.5 sm:gap-x-0 px-2 py-1.5 sm:px-6 sm:py-1.5 rounded-[12px] sm:rounded-full bg-gradient-to-r from-[#FFF5D1]/30 via-[#F2C96D]/10 to-[#FFF5D1]/30 backdrop-blur-md border border-[#D4AF37]/20 shadow-sm transition-all duration-300">
                             {t.quote.split("|").map((part, index, array) => (
                                 <div key={index} className="flex items-center">
-                                    <span className="text-[10px] min-[400px]:text-[11px] sm:text-base md:text-lg lg:text-xl xl:text-2xl text-[#4A3225] font-sans font-medium drop-shadow-sm whitespace-nowrap tracking-wider uppercase">
-                                        {part.trim()}
-                                    </span>
-                                    
-                                    {/* Separators */}
-                                    {index < array.length - 1 && (
+                                    {/* Separator before text (except first) to ensure it wraps with the next part */}
+                                    {index > 0 && (
                                         <span className="mx-1 min-[400px]:mx-1.5 md:mx-4 text-[#D4AF37] font-serif text-[10px] sm:text-lg">♦</span>
                                     )}
+                                    <span className="text-[10px] min-[400px]:text-[11px] sm:text-base md:text-lg lg:text-xl xl:text-2xl text-[#4A3225] font-sans font-bold drop-shadow-sm whitespace-nowrap tracking-widest uppercase">
+                                        {part.trim()}
+                                    </span>
                                 </div>
                             ))}
                         </div>
                     </div>
 
                     {/* Decorative Separator - Below Subtitle */}
-                    <div className="flex items-center justify-center w-full max-w-sm md:max-w-2xl lg:max-w-4xl mx-auto mt-2 mb-2 gap-3 md:gap-4 opacity-90">
+                    <div className="flex items-center justify-center w-full max-w-sm md:max-w-2xl lg:max-w-4xl mx-auto mt-1 mb-1 gap-3 md:gap-4 opacity-90">
                         {/* Left Line */}
                         <div className="h-[3px] flex-1 bg-gradient-to-r from-transparent via-[#D4AF37] to-[#B8860B] rounded-full"></div>
 
@@ -131,7 +130,7 @@ export default function Hero() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.2 }}
-                    className="flex flex-col sm:flex-row gap-5 pt-4 items-center"
+                    className="flex flex-col sm:flex-row gap-5 pt-1 items-center"
                 >
                     {/* Donate Button: Lighter Border (Matched to Events), Gold Gap, Light Inner Line */}
                     <Link href="/donate">

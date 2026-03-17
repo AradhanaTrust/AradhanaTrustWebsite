@@ -175,71 +175,92 @@ export default function Header() {
                 </div>
             </div>
 
-            {/* Mobile Menu */}
+            {/* Mobile Menu Backdrop */}
             <AnimatePresence>
                 {isOpen && (
                     <motion.div
-                        initial={{ opacity: 0, y: -20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -20 }}
-                        className="fixed inset-x-0 top-[60px] md:top-[70px] lg:hidden bg-white/95 backdrop-blur-xl border-b-2 border-secondary/20 shadow-2xl overflow-hidden z-40 h-[calc(100vh-60px)] md:h-[calc(100vh-70px)] flex flex-col pt-12"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        onClick={() => setIsOpen(false)}
+                        className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[90] lg:hidden"
+                    />
+                )}
+            </AnimatePresence>
+
+            {/* Mobile Menu Popup */}
+            <AnimatePresence>
+                {isOpen && (
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.9, x: 20, y: -20 }}
+                        animate={{ opacity: 1, scale: 1, x: 0, y: 0 }}
+                        exit={{ opacity: 0, scale: 0.9, x: 20, y: -20 }}
+                        transition={{ type: "spring", stiffness: 300, damping: 25 }}
+                        className="fixed top-20 right-4 w-[75vw] h-[75vh] max-h-[600px] lg:hidden bg-background-ivory/95 backdrop-blur-xl border-4 border-double border-[#D4AF37] rounded-2xl shadow-2xl z-[100] overflow-hidden flex flex-col"
                     >
-                        <nav className="flex flex-col p-8 space-y-8 items-center text-center">
-                            {navLinks.map((link) => (
-                                <Link
-                                    key={link.name}
-                                    href={link.href}
-                                    onClick={() => setIsOpen(false)}
-                                    className="text-primary-dark hover:text-secondary-dark font-cinzel text-2xl tracking-[0.1em] font-bold transition-colors"
-                                >
-                                    {link.name}
-                                </Link>
-                            ))}
-
-                            <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-secondary/30 to-transparent my-4" />
-
-                            {/* Mobile User Actions */}
-                            {session ? (
-                                <div className="flex flex-col items-center gap-6">
+                        {/* Scrollable Container - Hidden Scrollbar */}
+                        <div className="flex flex-col h-full relative p-6 overflow-y-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+                            {/* Decorative Corner Ornaments */}
+                            <div className="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-[#D4AF37]/30" />
+                            <div className="absolute bottom-2 right-2 w-4 h-4 border-b-2 border-r-2 border-[#D4AF37]/30" />
+                            
+                            <nav className="flex flex-col space-y-4 items-center text-center mt-4">
+                                {navLinks.map((link) => (
                                     <Link
-                                        href="/admin/dashboard"
+                                        key={link.name}
+                                        href={link.href}
                                         onClick={() => setIsOpen(false)}
-                                        className="text-secondary-dark hover:text-secondary font-serif text-xl tracking-wide font-bold"
+                                        className="text-primary-dark hover:text-secondary-dark font-cinzel text-lg tracking-[0.1em] font-bold transition-all hover:scale-105 active:scale-95"
                                     >
-                                        Admin Dashboard
+                                        {link.name}
                                     </Link>
+                                ))}
+
+                                <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-secondary/30 to-transparent my-2" />
+
+                                {/* Mobile User Actions */}
+                                {session ? (
+                                    <div className="flex flex-col items-center gap-3 w-full max-w-[200px] mx-auto">
+                                        <Link
+                                            href="/admin/dashboard"
+                                            onClick={() => setIsOpen(false)}
+                                            className="w-full px-4 py-2 bg-secondary/10 border border-secondary/20 rounded-xl text-secondary-dark hover:bg-secondary/20 font-serif text-base tracking-wide font-bold transition-all text-center"
+                                        >
+                                            Admin Dashboard
+                                        </Link>
+                                        <button
+                                            onClick={() => {
+                                                setIsOpen(false);
+                                                signOut({ callbackUrl: '/' });
+                                            }}
+                                            className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-accent-saffron/10 border border-accent-saffron/20 rounded-xl text-accent-saffron hover:bg-accent-saffron/20 font-serif text-base tracking-wide font-bold transition-all"
+                                        >
+                                            <LogOut className="w-4 h-4" />
+                                            Logout
+                                        </button>
+                                    </div>
+                                ) : (
                                     <button
                                         onClick={() => {
                                             setIsOpen(false);
-                                            signOut({ callbackUrl: '/' });
+                                            setIsLoginModalOpen(true);
                                         }}
-                                        className="flex items-center gap-2 text-accent-saffron hover:text-accent-saffron/80 font-serif text-xl tracking-wide font-bold"
+                                        className="px-8 py-2.5 bg-secondary/10 border-2 border-secondary text-secondary-dark rounded-full font-serif text-sm tracking-wide font-bold hover:bg-secondary/20 transition-all shadow-sm"
                                     >
-                                        <LogOut className="w-5 h-5" />
-                                        Logout
+                                        Admin Login
                                     </button>
-                                </div>
-                            ) : (
-                                <button
-                                    onClick={() => {
-                                        setIsOpen(false);
-                                        setIsLoginModalOpen(true);
-                                    }}
-                                    className="px-8 py-3 bg-secondary/10 border-2 border-secondary text-secondary-dark rounded-full font-serif text-lg tracking-wide font-bold"
-                                >
-                                    Admin Login
-                                </button>
-                            )}
-                        </nav>
+                                )}
+                            </nav>
 
-                        <div className="mt-auto pb-12 px-8 flex flex-col items-center">
-                            <p className="text-[#5D4037]/40 font-serif italic text-sm mb-4">
-                                Aradhana Dharmika Trust
-                            </p>
-                            <div className="flex items-center gap-4 text-secondary/40">
-                                <span className="h-[1px] w-12 bg-current" />
-                                <span className="text-xl">ॐ</span>
-                                <span className="h-[1px] w-12 bg-current" />
+                            <div className="mt-auto pt-8 flex flex-col items-center">
+                                <p className="text-[#5D4037]/40 font-serif italic text-xs mb-2 text-center">
+                                    Aradhana Dharmika Trust
+                                </p>
+                                <div className="flex items-center gap-4 text-secondary/40 scale-75">
+                                    <span className="h-[1px] w-12 bg-current" />
+                                    <span className="text-xl">ॐ</span>
+                                    <span className="h-[1px] w-12 bg-current" />
+                                </div>
                             </div>
                         </div>
                     </motion.div>
