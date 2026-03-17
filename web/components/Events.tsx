@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Calendar, MapPin, ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
@@ -20,9 +20,15 @@ export default function Events() {
     const router = useRouter();
     const t = translations[language].events;
     const [currentIndex, setCurrentIndex] = useState(0);
-    const [visibleCards, setVisibleCards] = useState(3);
+    const [visibleCards, setVisibleCards] = useState(4);
+    const [isTeleporting, setIsTeleporting] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
     const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
     const [allEvents, setAllEvents] = useState<Event[]>(events);
+    const containerRef = useRef<HTMLDivElement>(null);
+    const [containerWidth, setContainerWidth] = useState(0);
+    const touchStartX = useRef(0);
+    const touchDelta = useRef(0);
 
     useEffect(() => {
         const fetchEvents = async () => {
@@ -56,26 +62,86 @@ export default function Events() {
         .filter(e => e.isUpcoming)
         .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
 
-    // Simple responsive handler
+    // Clone events for infinite loop: [Set 1] [Set 2 (Original)] [Set 3]
+    const loopEvents = [...upcomingEvents, ...upcomingEvents, ...upcomingEvents];
+
+    // Initialize index at the start of the second set once events are loaded
     useEffect(() => {
-        const handleResize = () => {
-            if (window.innerWidth < 640) setVisibleCards(1);
-            else if (window.innerWidth < 1024) setVisibleCards(2);
+        if (upcomingEvents.length > 0 && currentIndex === 0) {
+            setCurrentIndex(upcomingEvents.length);
+        }
+    }, [upcomingEvents]);
+
+    // Responsive + container measurement
+    useEffect(() => {
+        const update = () => {
+            const w = window.innerWidth;
+            const mobile = w < 640;
+            const tablet = w < 1024;
+            setIsMobile(mobile || tablet);
+            if (mobile) setVisibleCards(1.15);
+            else if (tablet) setVisibleCards(2.2);
             else setVisibleCards(4);
+            if (containerRef.current) setContainerWidth(containerRef.current.offsetWidth);
         };
-        handleResize();
-        window.addEventListener("resize", handleResize);
-        return () => window.removeEventListener("resize", handleResize);
+        update();
+        window.addEventListener("resize", update);
+        return () => window.removeEventListener("resize", update);
     }, []);
 
-    const maxIndex = Math.max(0, upcomingEvents.length - visibleCards);
+    // Measure container after first render
+    useEffect(() => {
+        if (containerRef.current) setContainerWidth(containerRef.current.offsetWidth);
+    }, []);
+
+    // Pixel-based offset calculation
+    const gap = 24;
+    const itemWidth = containerWidth > 0
+        ? (containerWidth - gap * (visibleCards - 1)) / visibleCards
+        : 0;
+    const centerOffset = containerWidth > 0 && isMobile
+        ? (containerWidth - itemWidth) / 2
+        : 0;
+    const xOffset = `-${currentIndex * (itemWidth + gap) - centerOffset}px`;
+
+    // Teleportation logic to handle seamless looping
+    const handleAnimationComplete = () => {
+        if (upcomingEvents.length === 0) return;
+        if (currentIndex >= upcomingEvents.length * 2) {
+            setIsTeleporting(true);
+            setCurrentIndex(currentIndex - upcomingEvents.length);
+        } else if (currentIndex < upcomingEvents.length) {
+            setIsTeleporting(true);
+            setCurrentIndex(currentIndex + upcomingEvents.length);
+        }
+    };
+
+    // Keyboard navigation
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === "ArrowLeft") prevSlide();
+            if (e.key === "ArrowRight") nextSlide();
+        };
+        window.addEventListener("keydown", handleKeyDown);
+        return () => window.removeEventListener("keydown", handleKeyDown);
+    }, [isTeleporting, upcomingEvents.length]);
+
+    // Reset teleporting state after index update
+    useEffect(() => {
+        if (isTeleporting) {
+            const timer = setTimeout(() => setIsTeleporting(false), 50);
+            return () => clearTimeout(timer);
+        }
+    }, [isTeleporting]);
 
     const nextSlide = () => {
-        setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
+        if (isTeleporting || upcomingEvents.length === 0) return;
+        setCurrentIndex((prev) => prev + 1);
     };
 
     const prevSlide = () => {
-        setCurrentIndex((prev) => (prev <= 0 ? maxIndex : prev - 1));
+        if (isTeleporting || upcomingEvents.length === 0) return;
+        setCurrentIndex((prev) => prev - 1);
     };
 
     return (
@@ -115,7 +181,7 @@ export default function Events() {
                 {/* Carousel Section */}
                 <div className="relative group/carousel max-w-[1400px] mx-auto mb-10"> {/* Reduced mb-20 -> mb-10 */}
 
-                    {/* Left Button */}
+                    {/* Left Button - Premium Hover Style */}
                     <button
                         onClick={prevSlide}
                         className="absolute -left-2 md:-left-8 top-1/2 -translate-y-1/2 z-30 p-2 md:p-3 rounded-full bg-[#FFFEF9] border border-[#CFA14E] text-[#4A3225] shadow-lg hover:scale-110 active:scale-95 transition-all md:opacity-0 md:group-hover/carousel:opacity-100"
@@ -123,7 +189,7 @@ export default function Events() {
                         <ChevronLeft size={20} />
                     </button>
 
-                    {/* Right Button */}
+                    {/* Right Button - Premium Hover Style */}
                     <button
                         onClick={nextSlide}
                         className="absolute -right-2 md:-right-8 top-1/2 -translate-y-1/2 z-30 p-2 md:p-3 rounded-full bg-[#FFFEF9] border border-[#CFA14E] text-[#4A3225] shadow-lg hover:scale-110 active:scale-95 transition-all md:opacity-0 md:group-hover/carousel:opacity-100"
@@ -131,30 +197,54 @@ export default function Events() {
                         <ChevronRight size={20} />
                     </button>
 
-                    {/* Track */}
-                    <div className="overflow-hidden px-1 py-4 -my-4">
+                    {/* Track wrapper with swipe detection */}
+                    <div
+                        ref={containerRef}
+                        className="overflow-hidden px-1 py-4 -my-4"
+                        onTouchStart={(e) => {
+                            touchStartX.current = e.touches[0].clientX;
+                            touchDelta.current = 0;
+                        }}
+                        onTouchMove={(e) => {
+                            touchDelta.current = e.touches[0].clientX - touchStartX.current;
+                        }}
+                        onTouchEnd={() => {
+                            const delta = touchDelta.current;
+                            if (delta < -40) nextSlide();
+                            else if (delta > 40) prevSlide();
+                            touchDelta.current = 0;
+                        }}
+                        onMouseDown={(e) => {
+                            touchStartX.current = e.clientX;
+                            touchDelta.current = 0;
+                        }}
+                        onMouseMove={(e) => {
+                            if (e.buttons === 1) touchDelta.current = e.clientX - touchStartX.current;
+                        }}
+                        onMouseUp={() => {
+                            const delta = touchDelta.current;
+                            if (delta < -40) nextSlide();
+                            else if (delta > 40) prevSlide();
+                            touchDelta.current = 0;
+                        }}
+                    >
                         <motion.div
-                            className="flex gap-6 touch-pan-y"
-                            animate={{ x: `-${currentIndex * (100 / visibleCards)}%` }}
-                            transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                            drag="x"
-                            dragConstraints={{ left: -1000, right: 1000 }}
-                            dragElastic={1}
-                            onDragEnd={(e, { offset, velocity }) => {
-                                const swipe = offset.x;
-                                if (swipe < -50 || velocity.x < -500) {
-                                    nextSlide();
-                                } else if (swipe > 50 || velocity.x > 500) {
-                                    prevSlide();
-                                }
-                            }}
+                            className="flex gap-6 select-none"
+                            animate={{ x: xOffset }}
+                            transition={isTeleporting ? { duration: 0 } : { type: "spring", stiffness: 200, damping: 25, mass: 0.8 }}
+                            onAnimationComplete={handleAnimationComplete}
                         >
-                            {upcomingEvents.map((event, idx) => {
+                            {loopEvents.map((event, idx) => {
                                 const translatedEvent = getEventTranslation(event, language);
                                 return (
                                     <motion.div
-                                        key={event.id}
-                                        style={{ minWidth: `calc((100% - ${(visibleCards - 1) * 16}px) / ${visibleCards})` }} /* Gap 16px (gap-4) */
+                                        key={`${event.id}-${idx}`}
+                                        style={{ 
+                                            flex: `0 0 calc((100% - ${(visibleCards - 1) * 24}px) / ${visibleCards})`,
+                                            width: `calc((100% - ${(visibleCards - 1) * 24}px) / ${visibleCards})`,
+                                            minWidth: `calc((100% - ${(visibleCards - 1) * 24}px) / ${visibleCards})`,
+                                            maxWidth: `calc((100% - ${(visibleCards - 1) * 24}px) / ${visibleCards})`
+                                        }}
                                         className="relative group flex-shrink-0"
                                     >
                                         <div className="h-full bg-gradient-to-b from-[#FFFEF9] to-[#F3E5C5] rounded-xl border border-[#CFA14E] shadow-[inset_0_0_0_2px_#FFFDF8,inset_0_0_0_3px_#CFA14E,0_2px_4px_rgba(0,0,0,0.05)] hover:shadow-[inset_0_0_0_2px_#FFFDF8,inset_0_0_0_3px_#CFA14E,0_8px_16px_rgba(0,0,0,0.1)] hover:-translate-y-1 transition-all duration-300 relative overflow-hidden flex flex-col">

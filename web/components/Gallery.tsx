@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -24,32 +24,95 @@ interface GalleryProps {
 export default function Gallery({ dbImages = [] }: GalleryProps) {
     const { language } = useLanguage();
     const t = translations[language].gallery;
-    const [currentIndex, setCurrentIndex] = useState(0);
-    const [visibleCards, setVisibleCards] = useState(3);
-
     const allImages = [...dbImages, ...galleryImages];
+    const [currentIndex, setCurrentIndex] = useState(allImages.length);
+    const [visibleCards, setVisibleCards] = useState(4);
+    const [isTeleporting, setIsTeleporting] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
+    const containerRef = useRef<HTMLDivElement>(null);
+    const [containerWidth, setContainerWidth] = useState(0);
+    const touchStartX = useRef(0);
+    const touchDelta = useRef(0);
 
-    // Responsive Carousel Logic
+    // Clone images for infinite loop
+    const loopImages = [...allImages, ...allImages, ...allImages];
+
+    // Responsive + container measurement
     useEffect(() => {
-        const handleResize = () => {
-            if (window.innerWidth < 640) setVisibleCards(1.2);
-            else if (window.innerWidth < 1024) setVisibleCards(2);
+        const update = () => {
+            const w = window.innerWidth;
+            const mobile = w < 640;
+            const tablet = w < 1024;
+            setIsMobile(mobile || tablet);
+            if (mobile) setVisibleCards(1.15);
+            else if (tablet) setVisibleCards(2.2);
             else setVisibleCards(4);
+
+            if (containerRef.current) {
+                setContainerWidth(containerRef.current.offsetWidth);
+            }
         };
-        handleResize();
-        window.addEventListener("resize", handleResize);
-        return () => window.removeEventListener("resize", handleResize);
+        update();
+        window.addEventListener("resize", update);
+        return () => window.removeEventListener("resize", update);
     }, []);
 
-    const maxIndex = Math.max(0, allImages.length - visibleCards);
+    // Measure container after first render
+    useEffect(() => {
+        if (containerRef.current) {
+            setContainerWidth(containerRef.current.offsetWidth);
+        }
+    }, []);
+
+    // Pixel-based offset calculation
+    const gap = 24; // gap-6 = 24px
+    const itemWidth = containerWidth > 0
+        ? (containerWidth - gap * (visibleCards - 1)) / visibleCards
+        : 0;
+    const centerOffset = containerWidth > 0 && isMobile
+        ? (containerWidth - itemWidth) / 2
+        : 0;
+    const xOffset = `-${currentIndex * (itemWidth + gap) - centerOffset}px`;
+
+    // Teleportation logic to handle seamless looping
+    const handleAnimationComplete = () => {
+        if (currentIndex >= allImages.length * 2) {
+            setIsTeleporting(true);
+            setCurrentIndex(currentIndex - allImages.length);
+        } else if (currentIndex < allImages.length) {
+            setIsTeleporting(true);
+            setCurrentIndex(currentIndex + allImages.length);
+        }
+    };
+
+    // Keyboard navigation
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === "ArrowLeft") prevSlide();
+            if (e.key === "ArrowRight") nextSlide();
+        };
+        window.addEventListener("keydown", handleKeyDown);
+        return () => window.removeEventListener("keydown", handleKeyDown);
+    }, [isTeleporting, allImages.length]);
+
+    // Reset teleporting state after index update
+    useEffect(() => {
+        if (isTeleporting) {
+            const timer = setTimeout(() => setIsTeleporting(false), 50);
+            return () => clearTimeout(timer);
+        }
+    }, [isTeleporting]);
 
     const nextSlide = () => {
-        setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
+        if (isTeleporting) return;
+        setCurrentIndex((prev) => prev + 1);
     };
 
     const prevSlide = () => {
-        setCurrentIndex((prev) => (prev <= 0 ? maxIndex : prev - 1));
+        if (isTeleporting) return;
+        setCurrentIndex((prev) => prev - 1);
     };
+
 
     return (
         <section id="gallery" className="pt-20 pb-10 lg:pt-24 lg:pb-12 bg-background-ivory relative overflow-hidden text-primary">
@@ -74,7 +137,7 @@ export default function Gallery({ dbImages = [] }: GalleryProps) {
                 {/* Carousel Section */}
                 <div className="relative group/carousel max-w-[1400px] mx-auto mb-16">
 
-                    {/* Left Button */}
+                    {/* Left Button - Premium Hover Style */}
                     <button
                         onClick={prevSlide}
                         className="absolute -left-2 md:-left-8 top-1/2 -translate-y-1/2 z-30 p-2 md:p-3 rounded-full bg-[#FFFEF9] border border-[#CFA14E] text-[#4A3225] shadow-lg hover:scale-110 active:scale-95 transition-all md:opacity-0 md:group-hover/carousel:opacity-100"
@@ -82,7 +145,7 @@ export default function Gallery({ dbImages = [] }: GalleryProps) {
                         <ChevronLeft size={20} />
                     </button>
 
-                    {/* Right Button */}
+                    {/* Right Button - Premium Hover Style */}
                     <button
                         onClick={nextSlide}
                         className="absolute -right-2 md:-right-8 top-1/2 -translate-y-1/2 z-30 p-2 md:p-3 rounded-full bg-[#FFFEF9] border border-[#CFA14E] text-[#4A3225] shadow-lg hover:scale-110 active:scale-95 transition-all md:opacity-0 md:group-hover/carousel:opacity-100"
@@ -90,28 +153,52 @@ export default function Gallery({ dbImages = [] }: GalleryProps) {
                         <ChevronRight size={20} />
                     </button>
 
-                    {/* Track */}
-                    <div className="overflow-hidden px-1 py-4 -my-4">
+                    {/* Track wrapper with swipe detection */}
+                    <div
+                        ref={containerRef}
+                        className="overflow-hidden px-1 py-4 -my-4"
+                        onTouchStart={(e) => {
+                            touchStartX.current = e.touches[0].clientX;
+                            touchDelta.current = 0;
+                        }}
+                        onTouchMove={(e) => {
+                            touchDelta.current = e.touches[0].clientX - touchStartX.current;
+                        }}
+                        onTouchEnd={() => {
+                            const delta = touchDelta.current;
+                            if (delta < -40) nextSlide();
+                            else if (delta > 40) prevSlide();
+                            touchDelta.current = 0;
+                        }}
+                        onMouseDown={(e) => {
+                            touchStartX.current = e.clientX;
+                            touchDelta.current = 0;
+                        }}
+                        onMouseMove={(e) => {
+                            if (e.buttons === 1) touchDelta.current = e.clientX - touchStartX.current;
+                        }}
+                        onMouseUp={() => {
+                            const delta = touchDelta.current;
+                            if (delta < -40) nextSlide();
+                            else if (delta > 40) prevSlide();
+                            touchDelta.current = 0;
+                        }}
+                    >
                         <motion.div
-                            className="flex gap-6 touch-pan-y"
-                            animate={{ x: `-${currentIndex * (100 / visibleCards)}%` }}
-                            transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                            drag="x"
-                            dragConstraints={{ left: -1000, right: 1000 }}
-                            dragElastic={1}
-                            onDragEnd={(e, { offset, velocity }) => {
-                                const swipe = offset.x;
-                                if (swipe < -50 || velocity.x < -500) {
-                                    nextSlide();
-                                } else if (swipe > 50 || velocity.x > 500) {
-                                    prevSlide();
-                                }
-                            }}
+                            className="flex gap-6 select-none"
+                            animate={{ x: xOffset }}
+                            transition={isTeleporting ? { duration: 0 } : { type: "spring", stiffness: 200, damping: 25, mass: 0.8 }}
+                            onAnimationComplete={handleAnimationComplete}
                         >
-                            {allImages.map((img, idx) => (
+                            {loopImages.map((img, idx) => (
                                 <motion.div
                                     key={idx}
-                                    style={{ minWidth: `calc((100% - ${(visibleCards - 1) * 24}px) / ${visibleCards})` }}
+                                    style={{ 
+                                        flex: `0 0 calc((100% - ${(visibleCards - 1) * 24}px) / ${visibleCards})`,
+                                        width: `calc((100% - ${(visibleCards - 1) * 24}px) / ${visibleCards})`,
+                                        minWidth: `calc((100% - ${(visibleCards - 1) * 24}px) / ${visibleCards})`,
+                                        maxWidth: `calc((100% - ${(visibleCards - 1) * 24}px) / ${visibleCards})`
+                                    }}
                                     className="relative flex-shrink-0"
                                 >
                                     {/* Temple-Inspired Frame (Dravidian Style) */}
