@@ -30,9 +30,10 @@ export default function Header() {
     const navLinks = [
         { name: t.home, href: "/" },
         { name: t.about, href: "/about" },
+        { name: t.events, href: "/events" },
+        { name: t.services, href: "/services" },
         { name: t.gallery, href: "/gallery" },
         { name: t.donations, href: "/donate" },
-        { name: t.events, href: "/events" },
         { name: t.contact, href: "/contact" },
     ];
 

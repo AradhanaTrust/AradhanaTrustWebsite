@@ -2,13 +2,17 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Loader2, CheckCircle, GraduationCap, MapPin, Phone, BookOpen, Sparkles } from "lucide-react";
+import { Loader2, CheckCircle, GraduationCap, BookOpen, MapPin, Phone, Sparkles } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
+import { translations } from "@/lib/translations";
 
 interface PriestRegistrationFormProps {
     onSuccess?: () => void;
 }
 
 export default function PriestRegistrationForm({ onSuccess }: PriestRegistrationFormProps) {
+    const { language } = useLanguage();
+    const t = translations[language].servicesPage.priestRegistrationForm;
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
     const [error, setError] = useState<string | null>(null);
@@ -96,17 +100,11 @@ export default function PriestRegistrationForm({ onSuccess }: PriestRegistration
 
     return (
         <div className="bg-white rounded-3xl shadow-2xl overflow-hidden border border-[#CFA14E]/20 relative">
-            {/* Elegant Header */}
-            <div className="bg-gradient-to-b from-[#FFF9E6] to-[#FFFDF9] p-8 md:p-10 text-center relative border-b border-[#CFA14E]/20">
+            <div className="bg-[#FFF9E6] p-6 text-center border-b border-[#CFA14E]/10 relative">
                 <div className="absolute inset-0 opacity-[0.03] bg-[url('/assets/mandala-bg.svg')] bg-[length:200px]" />
-                <h3 className="text-3xl md:text-3xl font-cinzel-decorative font-bold bg-gradient-to-r from-[#B8860B] via-[#D4AF37] to-[#B8860B] bg-clip-text text-transparent relative z-10 mb-2 drop-shadow-sm filter mt-2 px-4 leading-snug">
-                    Register to offer your divine services
+                <h3 className="text-2xl md:text-2xl font-cinzel font-bold text-[#5D4037] relative z-10">
+                    {t.formTitle}
                 </h3>
-                <div className="flex items-center justify-center gap-4 text-[#B8860B]/60 mt-5 relative z-10">
-                    <span className="h-[1px] w-12 sm:w-16 bg-gradient-to-r from-transparent to-[#D4AF37]" />
-                    <Sparkles className="w-5 h-5 text-[#D4AF37]" />
-                    <span className="h-[1px] w-12 sm:w-16 bg-gradient-to-l from-transparent to-[#D4AF37]" />
-                </div>
             </div>
 
             <form onSubmit={handleSubmit} className="p-8 md:p-10 space-y-8">
@@ -124,24 +122,24 @@ export default function PriestRegistrationForm({ onSuccess }: PriestRegistration
                         <div className="p-2 rounded-lg bg-primary/5 text-primary">
                             <Sparkles className="w-5 h-5" />
                         </div>
-                        <h4 className="text-xl font-cinzel font-semibold text-primary-dark">Personal Information</h4>
+                        <h4 className="text-xl font-cinzel font-semibold text-primary-dark">{t.personalInfo}</h4>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="space-y-2">
-                            <label className="text-sm font-semibold text-gray-700">Full Name (Purohit/Pandit Name) *</label>
+                            <label className="text-sm font-semibold text-gray-700">{t.fullName}</label>
                             <input
                                 type="text"
                                 required
                                 value={formData.fullName}
                                 onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
                                 className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:border-secondary focus:ring-2 focus:ring-secondary/20 transition-all outline-none"
-                                placeholder="Sri..."
+                                placeholder={t.fullNamePlaceholder}
                             />
                         </div>
 
                         <div className="space-y-2">
-                            <label className="text-sm font-semibold text-gray-700">Phone Number *</label>
+                            <label className="text-sm font-semibold text-gray-700">{t.phone}</label>
                             <input
                                 type="tel"
                                 required
@@ -153,24 +151,24 @@ export default function PriestRegistrationForm({ onSuccess }: PriestRegistration
                         </div>
 
                         <div className="space-y-2">
-                            <label className="text-sm font-semibold text-gray-700">WhatsApp Number</label>
+                            <label className="text-sm font-semibold text-gray-700">{t.whatsapp}</label>
                             <input
                                 type="tel"
                                 value={formData.whatsappNumber}
                                 onChange={(e) => setFormData({ ...formData, whatsappNumber: e.target.value })}
                                 className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:border-secondary focus:ring-2 focus:ring-secondary/20 transition-all outline-none"
-                                placeholder="Same as phone if left blank"
+                                placeholder={t.whatsappPlaceholder}
                             />
                         </div>
 
                         <div className="space-y-2">
-                            <label className="text-sm font-semibold text-gray-700">Email Address (Optional)</label>
+                            <label className="text-sm font-semibold text-gray-700">{t.email}</label>
                             <input
                                 type="email"
                                 value={formData.email}
                                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                                 className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:border-secondary focus:ring-2 focus:ring-secondary/20 transition-all outline-none"
-                                placeholder="email@example.com"
+                                placeholder={t.emailPlaceholder}
                             />
                         </div>
                     </div>
@@ -182,52 +180,52 @@ export default function PriestRegistrationForm({ onSuccess }: PriestRegistration
                         <div className="p-2 rounded-lg bg-primary/5 text-primary">
                             <BookOpen className="w-5 h-5" />
                         </div>
-                        <h4 className="text-xl font-cinzel font-semibold text-primary-dark">Vedic Lineage & Expertise</h4>
+                        <h4 className="text-xl font-cinzel font-semibold text-primary-dark">{t.vedicInfo}</h4>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="space-y-2">
-                            <label className="text-sm font-semibold text-gray-700">Gothram</label>
+                            <label className="text-sm font-semibold text-gray-700">{t.gothram}</label>
                             <input
                                 type="text"
                                 value={formData.gothram}
                                 onChange={(e) => setFormData({ ...formData, gothram: e.target.value })}
                                 className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:border-secondary focus:ring-2 focus:ring-secondary/20 transition-all outline-none"
-                                placeholder="e.g. Kashyapa, Bharadwaja"
+                                placeholder={t.gothramPlaceholder}
                             />
                         </div>
 
                         <div className="space-y-2">
-                            <label className="text-sm font-semibold text-gray-700">Vedic Tradition / Sampradaya</label>
+                            <label className="text-sm font-semibold text-gray-700">{t.tradition}</label>
                             <input
                                 type="text"
                                 value={formData.vedicTradition}
                                 onChange={(e) => setFormData({ ...formData, vedicTradition: e.target.value })}
                                 className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:border-secondary focus:ring-2 focus:ring-secondary/20 transition-all outline-none"
-                                placeholder="e.g. Rig Veda, Smartha"
+                                placeholder={t.traditionPlaceholder}
                             />
                         </div>
 
                         <div className="space-y-2">
-                            <label className="text-sm font-semibold text-gray-700">Years of Experience</label>
+                            <label className="text-sm font-semibold text-gray-700">{t.experience}</label>
                             <input
                                 type="number"
                                 min="0"
                                 value={formData.experienceYears}
                                 onChange={(e) => setFormData({ ...formData, experienceYears: e.target.value })}
                                 className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:border-secondary focus:ring-2 focus:ring-secondary/20 transition-all outline-none"
-                                placeholder="Years performing pujas"
+                                placeholder={t.experiencePlaceholder}
                             />
                         </div>
 
                         <div className="space-y-2">
-                            <label className="text-sm font-semibold text-gray-700">Specialization (Vishesha)</label>
+                            <label className="text-sm font-semibold text-gray-700">{t.specialization}</label>
                             <input
                                 type="text"
                                 value={formData.specialization}
                                 onChange={(e) => setFormData({ ...formData, specialization: e.target.value })}
                                 className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:border-secondary focus:ring-2 focus:ring-secondary/20 transition-all outline-none"
-                                placeholder="e.g. Alankaram, Homa, Veda Parayanam"
+                                placeholder={t.specializationPlaceholder}
                             />
                         </div>
                     </div>
@@ -239,29 +237,29 @@ export default function PriestRegistrationForm({ onSuccess }: PriestRegistration
                         <div className="p-2 rounded-lg bg-primary/5 text-primary">
                             <MapPin className="w-5 h-5" />
                         </div>
-                        <h4 className="text-xl font-cinzel font-semibold text-primary-dark">Current Location</h4>
+                        <h4 className="text-xl font-cinzel font-semibold text-primary-dark">{t.locationInfo}</h4>
                     </div>
 
                     <div className="grid grid-cols-1 gap-6">
                         <div className="space-y-2">
-                            <label className="text-sm font-semibold text-gray-700">Currently Associated Temple (If any)</label>
+                            <label className="text-sm font-semibold text-gray-700">{t.temple}</label>
                             <input
                                 type="text"
                                 value={formData.currentTemple}
                                 onChange={(e) => setFormData({ ...formData, currentTemple: e.target.value })}
                                 className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:border-secondary focus:ring-2 focus:ring-secondary/20 transition-all outline-none"
-                                placeholder="Temple Name, City"
+                                placeholder={t.templePlaceholder}
                             />
                         </div>
 
                         <div className="space-y-2">
-                            <label className="text-sm font-semibold text-gray-700">Residential Address</label>
+                            <label className="text-sm font-semibold text-gray-700">{t.address}</label>
                             <textarea
                                 rows={3}
                                 value={formData.address}
                                 onChange={(e) => setFormData({ ...formData, address: e.target.value })}
                                 className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:border-secondary focus:ring-2 focus:ring-secondary/20 transition-all outline-none resize-none"
-                                placeholder="Full address"
+                                placeholder={t.addressPlaceholder}
                             />
                         </div>
                     </div>
@@ -276,17 +274,17 @@ export default function PriestRegistrationForm({ onSuccess }: PriestRegistration
                         {isSubmitting ? (
                             <>
                                 <Loader2 className="w-6 h-6 animate-spin" />
-                                Submitting Details...
+                                {t.submitting}
                             </>
                         ) : (
                             <>
-                                Submit Registration
+                                {t.submit}
                                 <Sparkles className="w-6 h-6 opacity-70" />
                             </>
                         )}
                     </button>
                     <p className="text-center text-xs text-gray-500 font-serif mt-5 mb-2">
-                        Your details are submitted securely and will be reviewed by the temple authoritative committee.
+                        {t.note}
                     </p>
                 </div>
             </form>

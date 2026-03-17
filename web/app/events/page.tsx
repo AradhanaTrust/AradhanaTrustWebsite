@@ -11,7 +11,6 @@ import { getEventTranslation, getCategoryName, getCategoryColor } from "@/lib/ev
 import Link from "next/link";
 import GoldCurveSeparator from "@/components/GoldCurveSeparator";
 import EventDetailModal from "@/components/EventDetailModal";
-import PriestRegistrationForm from "@/components/events/PriestRegistrationForm";
 import { useLanguage } from "@/context/LanguageContext";
 import { useRouter } from "next/navigation";
 import { translations } from "@/lib/translations";
@@ -140,18 +139,6 @@ export default function EventsPage() {
                                     </button>
                                 </div>
 
-                                {/* Priest Registration Scroll Link */}
-                                <div className="flex justify-center mt-2">
-                                    <button
-                                        onClick={() => {
-                                            document.getElementById('priest-registration-section')?.scrollIntoView({ behavior: 'smooth' });
-                                        }}
-                                        className="text-[#D4AF37] hover:text-[#B8860B] font-medium text-sm flex items-center gap-2 transition-colors border-b border-transparent hover:border-[#B8860B] pb-0.5"
-                                    >
-                                        <BookOpen className="w-4 h-4" />
-                                        Register as a Purohit or Pandit
-                                    </button>
-                                </div>
                             </div>
                         </motion.div>
 
@@ -296,32 +283,6 @@ export default function EventsPage() {
                             <p className="text-[#5D4037]/60 text-lg">No {showUpcoming ? 'upcoming' : 'past'} events found.</p>
                         </div>
                     )}
-                </div>
-            </section>
-
-            {/* Purohit/Pandit Registration Section */}
-            <section id="priest-registration-section" className="py-24 bg-[#FFFDF9] relative border-t border-[#D4AF37]/10">
-                {/* Floral pattern background */}
-                <div className="absolute inset-0 opacity-[0.03] bg-[url('/assets/mandala-bg.svg')] bg-[length:300px_300px]" />
-
-                <div className="container mx-auto px-4 lg:px-12 relative z-10">
-                    <div className="max-w-4xl mx-auto space-y-12">
-                        <div className="text-center space-y-4">
-                            <div className="flex items-center justify-center gap-4 text-[#B8860B]/80 font-medium mb-2">
-                                <span className="h-[1px] w-12 bg-gradient-to-r from-transparent to-[#B8860B]" />
-                                <span className="font-serif italic tracking-wider text-sm md:text-base text-[#8D6E63] uppercase">Divine Service</span>
-                                <span className="h-[1px] w-12 bg-gradient-to-l from-transparent to-[#B8860B]" />
-                            </div>
-                            <h2 className="text-4xl md:text-5xl font-cinzel-decorative font-bold text-[#5D4037]">
-                                Purohit or Pandit Registration
-                            </h2>
-                            <p className="text-gray-600 font-serif text-lg leading-relaxed max-w-2xl mx-auto">
-                                We invite respected Purohits and Pandits to register with the Aradhana Dharmika Trust to offer their divine services during upcoming events and rituals.
-                            </p>
-                        </div>
-
-                        <PriestRegistrationForm />
-                    </div>
                 </div>
             </section>
 

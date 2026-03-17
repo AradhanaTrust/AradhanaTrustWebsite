@@ -15,7 +15,8 @@ import {
     X,
     Image as ImageIcon, // Renamed Image to ImageIcon to avoid conflict
     Activity,
-    BookOpen // Added BookOpen for Priest Registrations
+    BookOpen, // Added BookOpen for Priest Registrations
+    Heart // Added Heart for Ritual Requests
 } from "lucide-react";
 import { signOut } from "next-auth/react";
 import { useState } from "react";
@@ -46,7 +47,8 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
             items: [
                 { name: "Events", href: "/admin/events", icon: Calendar, adminOnly: false },
                 { name: "Activities", href: "/admin/donations/activities", icon: Activity, adminOnly: false },
-                { name: "Purohit Registrations", href: "/admin/events/priests", icon: BookOpen, adminOnly: false },
+                { name: "Ritual Requests", href: "/admin/services", icon: Heart, adminOnly: false },
+                { name: "Purohit Registrations", href: "/admin/priests", icon: BookOpen, adminOnly: false },
                 { name: "Gallery", href: "/admin/gallery", icon: ImageIcon, adminOnly: false },
             ]
         },

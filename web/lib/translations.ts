@@ -6,6 +6,7 @@ export const translations = {
             gallery: "Gallery",
             donations: "Donations",
             events: "Events",
+            services: "Services",
             contact: "Contact",
             toggleBtn: "ಕನ್ನಡ", // Button shows the target language (Kannada)
             trustNameLine1: "Aradhana",
@@ -441,7 +442,7 @@ export const translations = {
                 title: "Quick Links",
                 puja: {
                     title: "Puja Services",
-                    desc: "Book special pujas and sevas for your family"
+                    desc: "Book special pujas and divine services for your family"
                 },
                 donate: {
                     title: "Make a Donation",
@@ -457,7 +458,87 @@ export const translations = {
                 }
             }
         },
-},
+        servicesPage: {
+            hero: {
+                tagline: "Divine Offerings & Guidance",
+                title1: "Spiritual",
+                title2: "SERVICES",
+                description: "Experience the profound grace of Vedic traditions through our sacred poojas, homas, and personalized spiritual guidance."
+            },
+            features: {
+                vedic: "Vedic Traditions",
+                expert: "Expert Pandits"
+            },
+            booking: {
+                title: "Book a Divine Service",
+                subtitle: "Request a personalized ritual or pooja at the temple or your home.",
+                formTitle: "Ritual Request Form",
+                formSubtitle: "Fill out the details below to request a sacred service. Our office will contact you within 24 hours.",
+                submit: "Request Booking",
+                bullets: [
+                    "At-Home Rituals",
+                    "Temple Poojas",
+                    "Vedic Chanting",
+                    "Sampradaya Guidance"
+                ]
+            },
+            bookingForm: {
+                fullName: "Full Name *",
+                fullNamePlaceholder: "John Doe",
+                phone: "Phone Number *",
+                email: "Email Address",
+                date: "Preferred Date",
+                type: "Type of Ritual / Seva",
+                typeSelect: "Select a service",
+                additionalInfo: "Additional Information",
+                additionalInfoPlaceholder: "Any specific requirements or location details...",
+                submitting: "Submitting...",
+                nonBinding: "Your request is non-binding. Our office will call you to confirm availability and priest dakshina.",
+                options: {
+                    ganapathi: "Ganapathi Homam",
+                    satyanarayana: "Satyanarayana Pooja",
+                    navagraha: "Navagraha Homam",
+                    lakshmi: "Lakshmi Pooja",
+                    houseWarming: "House Warming (Grihapravesha)",
+                    marriage: "Marriage Rituals",
+                    other: "Other Rituals"
+                }
+            },
+            priest: {
+                title: "Purohit Registration",
+                subtitle: "We invite qualified Pandits and Purohits to register and serve the community.",
+                registerLabel: "Pandit Registration"
+            },
+            priestRegistrationForm: {
+                formTitle: "Register to Offer Your Divine Services",
+                personalInfo: "Personal Information",
+                fullName: "Full Name (Purohit/Pandit Name) *",
+                fullNamePlaceholder: "Sri...",
+                phone: "Phone Number *",
+                whatsapp: "WhatsApp Number",
+                whatsappPlaceholder: "Same as phone if left blank",
+                email: "Email Address (Optional)",
+                emailPlaceholder: "email@example.com",
+                vedicInfo: "Vedic Lineage & Expertise",
+                gothram: "Gothram",
+                gothramPlaceholder: "e.g. Kashyapa, Bharadwaja",
+                tradition: "Vedic Tradition / Sampradaya",
+                traditionPlaceholder: "e.g. Rig Veda, Smartha",
+                experience: "Years of Experience",
+                experiencePlaceholder: "Years performing pujas",
+                specialization: "Specialization (Vishesha)",
+                specializationPlaceholder: "e.g. Alankaram, Homa, Veda Parayanam",
+                locationInfo: "Current Location",
+                temple: "Currently Associated Temple (If any)",
+                templePlaceholder: "Temple Name, City",
+                address: "Residential Address",
+                addressPlaceholder: "Full address",
+                submitting: "Submitting Details...",
+                submit: "Submit Registration",
+                note: "Your details are submitted securely and will be reviewed by the temple authoritative committee."
+            }
+        },
+    },
     kn: {
         nav: {
             home: "ಮುಖಪುಟ",
@@ -465,6 +546,7 @@ export const translations = {
             gallery: "ಚಿತ್ರ ಸಂಗ್ರಹ",
             donations: "ದೇಣಿಗೆ",
             events: "ಕಾರ್ಯಕ್ರಮಗಳು",
+            services: "ಸೇವೆಗಳು",
             contact: "ಸಂಪರ್ಕ",
             toggleBtn: "ENGLISH", // Button shows the target language (English)
             trustNameLine1: "ಆರಾಧನಾ",
@@ -914,7 +996,87 @@ export const translations = {
                     title: "ಸ್ವಯಂಸೇವಕರಾಗಿ",
                     desc: "ಸಮುದಾಯಕ್ಕೆ ಸೇವೆ ಸಲ್ಲಿಸಿ ಮತ್ತು ಆಶೀರ್ವಾದ ಪಡೆಯಿರಿ"
                 }
+            },
+        },
+        servicesPage: {
+            hero: {
+                tagline: "ದೈವಿಕ ಕೊಡುಗೆಗಳು ಮತ್ತು ಮಾರ್ಗದರ್ಶನ",
+                title1: "ಆಧ್ಯಾತ್ಮಿಕ",
+                title2: "ಸೇವೆಗಳು",
+                description: "ನಮ್ಮ ಪವಿತ್ರ ಪೂಜೆಗಳು, ಹೋಮಗಳು ಮತ್ತು ವೈಯಕ್ತಿಕ ಆಧ್ಯಾತ್ಮಿಕ ಮಾರ್ಗದರ್ಶನದ ಮೂಲಕ ವೇದ ಸಂಪ್ರದಾಯಗಳ ಆಳವಾದ ಅನುಗ್ರಹವನ್ನು ಅನುಭವಿಸಿ."
+            },
+            features: {
+                vedic: "ವೇದ ಸಂಪ್ರದಾಯಗಳು",
+                expert: "ಅನುಭವಿ ಪಂಡಿತರು"
+            },
+            booking: {
+                title: "ಸೇವೆಯನ್ನು ಬುಕ್ ಮಾಡಿ",
+                subtitle: "ದೇವಾಲಯದಲ್ಲಿ ಅಥವಾ ನಿಮ್ಮ ಮನೆಯಲ್ಲಿ ವೈಯಕ್ತಿಕ ಆಚರಣೆ ಅಥವಾ ಪೂಜೆಯನ್ನು ವಿನಂತಿಸಿ.",
+                formTitle: "ಧಾರ್ಮಿಕ ಪೂಜಾ ವಿನಂತಿ ಫಾರ್ಮ್",
+                formSubtitle: "ಪವಿತ್ರ ಸೇವೆಯನ್ನು ವಿನಂತಿಸಲು ಕೆಳಗಿನ ವಿವರಗಳನ್ನು ಭರ್ತಿ ಮಾಡಿ. ನಮ್ಮ ಕಚೇರಿಯು 24 ಗಂಟೆಗಳೊಳಗೆ ನಿಮ್ಮನ್ನು ಸಂಪರ್ಕಿಸುತ್ತದೆ.",
+                submit: "ಬುಕ್ಕಿಂಗ್ ವಿನಂತಿಸಿ",
+                bullets: [
+                    "ಮನೆಯಲ್ಲಿ ಆಚರಣೆಗಳು",
+                    "ದೇವಾಲಯದ ಪೂಜೆಗಳು",
+                    "ವೇದ ಪಠಣ",
+                    "ಸಂಪ್ರದಾಯ ಮಾರ್ಗದರ್ಶನ"
+                ]
+            },
+            bookingForm: {
+                fullName: "ಪೂರ್ಣ ಹೆಸರು *",
+                fullNamePlaceholder: "ಉದಾಹರಣೆ: ಮಂಜುನಾಥ್ ಜಿ.ಆರ್",
+                phone: "ದೂರವಾಣಿ ಸಂಖ್ಯೆ *",
+                email: "ಇಮೇಲ್ ವಿಳಾಸ",
+                date: "ಸೂಕ್ತ ದಿನಾಂಕ/ದಿನ",
+                type: "ಆಚರಣೆ / ಸೇವೆಯ ಪ್ರಕಾರ",
+                typeSelect: "ಸೇವೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ",
+                additionalInfo: "ಹೆಚ್ಚುವರಿ ಮಾಹಿತಿ",
+                additionalInfoPlaceholder: "ಯಾವುದೇ ನಿರ್ದಿಷ್ಟ ಅವಶ್ಯಕತೆಗಳು ಅಥವಾ ಸ್ಥಳದ ವಿವರಗಳು...",
+                submitting: "ಸಲ್ಲಿಸಲಾಗುತ್ತಿದೆ...",
+                nonBinding: "ನಿಮ್ಮ ವಿನಂತಿಯು ಅಂತಿಮವಲ್ಲ. ಲಭ್ಯತೆ ಮತ್ತು ದಕ್ಷಿಣೆಯನ್ನು ಖಚಿತಪಡಿಸಲು ನಮ್ಮ ಕಚೇರಿ ನಿಮಗೆ ಕರೆ ಮಾಡುತ್ತದೆ.",
+                options: {
+                    ganapathi: "ಗಣಪತಿ ಹೋಮ",
+                    satyanarayana: "ಸತ್ಯನಾರಾಯಣ ಪೂಜೆ",
+                    navagraha: "ನವಗ್ರಹ ಹೋಮ",
+                    lakshmi: "ಲಕ್ಷ್ಮಿ ಪೂಜೆ",
+                    houseWarming: "ಗೃಹಪ್ರವೇಶ",
+                    marriage: "ಮದುವೆ ಆಚರಣೆಗಳು",
+                    other: "ಇತರ ಆಚರಣೆಗಳು"
+                }
+            },
+            priest: {
+                title: "ಪುರೋಹಿತರ ನೋಂದಣಿ",
+                subtitle: "ಸಮುದಾಯಕ್ಕೆ ಸೇವೆ ಸಲ್ಲಿಸಲು ಅರ್ಹ ಪಂಡಿತರು ಮತ್ತು ಪುರೋಹಿತರನ್ನು ನಾವು ಆಹ್ವಾನಿಸುತ್ತೇವೆ.",
+                registerLabel: "ಪಂಡಿತರ ನೋಂದಣಿ"
+            },
+            priestRegistrationForm: {
+                formTitle: "ನಿಮ್ಮ ದೈವಿಕ ಸೇವೆಗಳನ್ನು ನೀಡಲು ನೋಂದಾಯಿಸಿ",
+                personalInfo: "ವೈಯಕ್ತಿಕ ಮಾಹಿತಿ",
+                fullName: "ಪೂರ್ಣ ಹೆಸರು (ಪುರೋಹಿತರು/ಪಂಡಿತರ ಹೆಸರು) *",
+                fullNamePlaceholder: "ಶ್ರೀ...",
+                phone: "ದೂರವಾಣಿ ಸಂಖ್ಯೆ *",
+                whatsapp: "ವಾಟ್ಸಾಪ್ ಸಂಖ್ಯೆ",
+                whatsappPlaceholder: "ಖಾಲಿ ಬಿಟ್ಟರೆ ಫೋನ್ ಸಂಖ್ಯೆಯನ್ನೇ ಪರಿಗಣಿಸಲಾಗುತ್ತದೆ",
+                email: "ಇಮೇಲ್ ವಿಳಾಸ (ಐಚ್ಛಿಕ)",
+                emailPlaceholder: "ಉದಾಹರಣೆ: email@example.com",
+                vedicInfo: "ವೇದ ಪರಂಪರೆ ಮತ್ತು ಪರಿಣತಿ",
+                gothram: "ಗೋತ್ರ",
+                gothramPlaceholder: "ಉದಾ: ಕಶ್ಯಪ, ಭಾರದ್ವಾಜ",
+                tradition: "ವೇದ ಸಂಪ್ರದಾಯ",
+                traditionPlaceholder: "ಉದಾ: ಋಗ್ವೇದ, ಸ್ಮಾರ್ತ",
+                experience: "ಅನುಭವದ ವರ್ಷಗಳು",
+                experiencePlaceholder: "ಪೂಜೆ ನಿರ್ವಹಿಸುವ ವರ್ಷಗಳು",
+                specialization: "ವಿಶೇಷತೆ",
+                specializationPlaceholder: "ಉದಾ: ಅಲಂಕಾರ, ಹೋಮ, ವೇದ ಪಾರಾಯಣ",
+                locationInfo: "ಪ್ರಸ್ತುತ ಸ್ಥಳ",
+                temple: "ಪ್ರಸ್ತುತ ಸಂಬಂಧ ಹೊಂದಿರುವ ದೇವಾಲಯ (ಯಾವುದಾದರೂ ಇದ್ದರೆ)",
+                templePlaceholder: "ದೇವಾಲಯದ ಹೆಸರು, ನಗರ",
+                address: "ವಸತಿ ವಿಳಾಸ",
+                addressPlaceholder: "ಪೂರ್ಣ ವಿಳಾಸ",
+                submitting: "ಸಲ್ಲಿಸಲಾಗುತ್ತಿದೆ...",
+                submit: "ನೋಂದಣಿಯನ್ನು ಸಲ್ಲಿಸಿ",
+                note: "ನಿಮ್ಮ ವಿವರಗಳನ್ನು ಸುರಕ್ಷಿತವಾಗಿ ಸಲ್ಲಿಸಲಾಗುತ್ತದೆ ಮತ್ತು ಆಡಳಿತ ಸಮಿತಿಯಿಂದ ಪರಿಶೀಲಿಸಲಾಗುತ್ತದೆ."
             }
         },
-}
+    }
 };
