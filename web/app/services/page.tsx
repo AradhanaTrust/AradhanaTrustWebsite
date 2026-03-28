@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -13,7 +13,7 @@ import Image from "next/image";
 import BookingForm from "@/components/services/BookingForm";
 import PriestRegistrationForm from "@/components/events/PriestRegistrationForm";
 
-export default function ServicesPage() {
+function ServicesContent() {
     const { language } = useLanguage();
     const t = translations[language];
     const s = t.servicesPage;
@@ -306,5 +306,17 @@ export default function ServicesPage() {
 
             <Footer />
         </main>
+    );
+}
+
+export default function ServicesPage() {
+    return (
+        <Suspense fallback={
+            <div className="min-h-screen bg-background-cream flex items-center justify-center">
+                <div className="text-secondary animate-pulse font-cinzel text-xl tracking-widest">ॐ</div>
+            </div>
+        }>
+            <ServicesContent />
+        </Suspense>
     );
 }
