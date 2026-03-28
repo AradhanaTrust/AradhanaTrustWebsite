@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { motion, AnimatePresence } from "framer-motion";
@@ -16,8 +17,19 @@ export default function ServicesPage() {
     const { language } = useLanguage();
     const t = translations[language];
     const s = t.servicesPage;
+    const searchParams = useSearchParams();
 
     const [activeSection, setActiveSection] = useState<'booking' | 'registration'>('booking');
+
+    // Sync active section with URL query param (e.g. ?section=registration)
+    useEffect(() => {
+        const section = searchParams.get("section");
+        if (section === "registration") {
+            setActiveSection("registration");
+        } else {
+            setActiveSection("booking");
+        }
+    }, [searchParams]);
 
     const fadeInUp = {
         initial: { opacity: 0, y: 20 },

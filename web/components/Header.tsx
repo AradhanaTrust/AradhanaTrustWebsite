@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Menu, X, UserCircle, LogOut } from "lucide-react";
+import { Menu, X, UserCircle, LogOut, Sparkles, UserCheck } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "@/context/LanguageContext";
 import { translations } from "@/lib/translations";
@@ -14,6 +14,7 @@ export default function Header() {
     const [isOpen, setIsOpen] = useState(false);
     const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
     const [showUserMenu, setShowUserMenu] = useState(false);
+    const [showServicesMenu, setShowServicesMenu] = useState(false);
 
     const { data: session } = useSession();
     const { language, toggleLanguage } = useLanguage();
@@ -73,18 +74,87 @@ export default function Header() {
                     </div>
                 </Link>
 
-                {/* Desktop Navigation - Compact (gap-4) -> Spacious (gap-10) */}
+                {/* Desktop Navigation */}
                 <nav className="hidden lg:flex items-center gap-2 xl:gap-10 ml-auto">
-                    {navLinks.map((link) => (
-                        <Link
-                            key={link.name}
-                            href={link.href}
-                            className="relative text-[10px] lg:text-[13px] xl:text-sm font-serif font-bold uppercase tracking-[0.15em] text-primary-dark/80 hover:text-secondary-dark transition-colors group py-2 whitespace-nowrap"
-                        >
-                            {link.name}
-                            <span className="absolute left-0 bottom-0 w-0 h-[1.5px] bg-gradient-to-r from-secondary-light via-secondary to-secondary-dark transition-all duration-300 group-hover:w-full" />
-                        </Link>
-                    ))}
+                    {navLinks.map((link) => {
+                        // Special case: Services gets a hover submenu
+                        if (link.href === "/services") {
+                            return (
+                                <div
+                                    key={link.name}
+                                    className="relative"
+                                    onMouseEnter={() => setShowServicesMenu(true)}
+                                    onMouseLeave={() => setShowServicesMenu(false)}
+                                >
+                                    <Link
+                                        href={link.href}
+                                        className="relative text-[10px] lg:text-[13px] xl:text-sm font-serif font-bold uppercase tracking-[0.15em] text-primary-dark/80 hover:text-secondary-dark transition-colors group py-2 whitespace-nowrap flex items-center gap-1"
+                                    >
+                                        {link.name}
+                                        <span className="absolute left-0 bottom-0 w-0 h-[1.5px] bg-gradient-to-r from-secondary-light via-secondary to-secondary-dark transition-all duration-300 group-hover:w-full" />
+                                    </Link>
+
+                                    {/* Services Hover Submenu Popup */}
+                                    <AnimatePresence>
+                                        {showServicesMenu && (
+                                            <motion.div
+                                                initial={{ opacity: 0, scale: 0.92, y: -8 }}
+                                                animate={{ opacity: 1, scale: 1, y: 0 }}
+                                                exit={{ opacity: 0, scale: 0.92, y: -8 }}
+                                                transition={{ type: "spring", stiffness: 350, damping: 28 }}
+                                                className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-72 bg-background-ivory border-4 border-double border-[#D4AF37] rounded-xl shadow-2xl z-[1200] overflow-hidden"
+                                            >
+                                                {/* Corner ornaments */}
+                                                <div className="absolute top-1.5 left-1.5 w-3 h-3 border-t-2 border-l-2 border-[#D4AF37]/40" />
+                                                <div className="absolute bottom-1.5 right-1.5 w-3 h-3 border-b-2 border-r-2 border-[#D4AF37]/40" />
+
+                                                <div className="p-3 flex flex-col gap-1">
+                                                    <Link
+                                                        href="/services?section=booking"
+                                                        onClick={() => setShowServicesMenu(false)}
+                                                        className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-secondary/10 transition-colors group/item"
+                                                    >
+                                                        <div className="p-1.5 rounded-full bg-secondary/10 group-hover/item:bg-secondary/20 transition-colors">
+                                                            <Sparkles className="w-4 h-4 text-secondary-dark" />
+                                                        </div>
+                                                        <span className="text-sm font-serif font-bold text-primary-dark group-hover/item:text-secondary-dark transition-colors tracking-wide whitespace-nowrap">
+                                                            Book A Divine Service
+                                                        </span>
+                                                    </Link>
+
+                                                    <div className="h-px bg-gradient-to-r from-transparent via-secondary/20 to-transparent mx-3" />
+
+                                                    <Link
+                                                        href="/services?section=registration"
+                                                        onClick={() => setShowServicesMenu(false)}
+                                                        className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-secondary/10 transition-colors group/item"
+                                                    >
+                                                        <div className="p-1.5 rounded-full bg-secondary/10 group-hover/item:bg-secondary/20 transition-colors">
+                                                            <UserCheck className="w-4 h-4 text-secondary-dark" />
+                                                        </div>
+                                                        <span className="text-sm font-serif font-bold text-primary-dark group-hover/item:text-secondary-dark transition-colors tracking-wide whitespace-nowrap">
+                                                            Pandit Registration
+                                                        </span>
+                                                    </Link>
+                                                </div>
+                                            </motion.div>
+                                        )}
+                                    </AnimatePresence>
+                                </div>
+                            );
+                        }
+
+                        return (
+                            <Link
+                                key={link.name}
+                                href={link.href}
+                                className="relative text-[10px] lg:text-[13px] xl:text-sm font-serif font-bold uppercase tracking-[0.15em] text-primary-dark/80 hover:text-secondary-dark transition-colors group py-2 whitespace-nowrap"
+                            >
+                                {link.name}
+                                <span className="absolute left-0 bottom-0 w-0 h-[1.5px] bg-gradient-to-r from-secondary-light via-secondary to-secondary-dark transition-all duration-300 group-hover:w-full" />
+                            </Link>
+                        );
+                    })}
                 </nav>
 
                 {/* Right Section: User Icon + Language Toggle */}
