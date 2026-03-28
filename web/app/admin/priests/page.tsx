@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from "react";
 import DashboardLayout from "@/components/admin/DashboardLayout";
-import { Loader2, Search, CheckCircle, XCircle, Clock, MapPin, BookOpen, Star, RefreshCw } from "lucide-react";
+import { Loader2, Search, CheckCircle, XCircle, Clock, MapPin, BookOpen, Star, RefreshCw, Download } from "lucide-react";
+import * as XLSX from 'xlsx';
 
 type RegistrationStatus = "CANDIDATE" | "SELECTED" | "REJECTED";
 
@@ -115,6 +116,28 @@ export default function PriestRegistrationsAdminPage() {
         }
     };
 
+    const exportToExcel = () => {
+        const dataToExport = registrations.map(reg => ({
+            'Submission Date': new Date(reg.createdAt).toLocaleDateString('en-IN'),
+            'Full Name': reg.fullName,
+            'Phone': reg.phoneNumber,
+            'WhatsApp': reg.whatsappNumber || '-',
+            'Email': reg.email || '-',
+            'Gothram': reg.gothram || '-',
+            'Vedic Tradition': reg.vedicTradition || '-',
+            'Experience (Years)': reg.experienceYears ?? '-',
+            'Current Temple': reg.currentTemple || '-',
+            'Specialization': reg.specialization || '-',
+            'Address': reg.address || '-',
+            'Status': reg.status,
+            'Admin Notes': reg.adminNotes || '-',
+        }));
+        const worksheet = XLSX.utils.json_to_sheet(dataToExport);
+        const workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, worksheet, 'Purohit Registrations');
+        XLSX.writeFile(workbook, `Aradhana_Trust_Purohit_Registrations_${new Date().toISOString().split('T')[0]}.xlsx`);
+    };
+
 
     const filteredRegistrations = registrations.filter(reg => {
         const matchesTab = reg.status === activeTab;
@@ -154,7 +177,14 @@ export default function PriestRegistrationsAdminPage() {
                         className="flex items-center gap-2 px-4 py-2 text-primary-dark bg-secondary/10 hover:bg-secondary/20 rounded-xl transition-colors font-medium text-sm"
                     >
                         <RefreshCw className={`w-4 h-4 ${isLoading ? 'animate-spin' : ''}`} />
-                        Refresh List
+                        Refresh
+                    </button>
+                    <button
+                        onClick={exportToExcel}
+                        className="flex items-center gap-2 px-4 py-2 bg-secondary text-white rounded-xl hover:bg-secondary-dark transition-colors font-medium text-sm shadow-sm"
+                    >
+                        <Download className="w-4 h-4" />
+                        Export to Excel
                     </button>
                 </div>
 

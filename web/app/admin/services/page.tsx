@@ -2,22 +2,8 @@
 
 import { useState, useEffect } from "react";
 import DashboardLayout from "@/components/admin/DashboardLayout";
-import { 
-    Loader2, 
-    Search, 
-    CheckCircle, 
-    XCircle, 
-    Clock, 
-    User, 
-    Phone, 
-    Mail, 
-    Calendar, 
-    Info, 
-    Edit, 
-    Trash2,
-    RefreshCw,
-    Check
-} from "lucide-react";
+import { Loader2, Search, CheckCircle, XCircle, Clock, User, Phone, Mail, Calendar, Info, Edit, Trash2, RefreshCw, Check, Download } from "lucide-react";
+import * as XLSX from 'xlsx';
 import { motion, AnimatePresence } from "framer-motion";
 
 type RequestStatus = "PENDING" | "CONFIRMED" | "COMPLETED" | "CANCELLED";
@@ -132,6 +118,26 @@ export default function ServiceRequestsAdminPage() {
         }
     };
 
+    const exportToExcel = () => {
+        const dataToExport = requests.map(req => ({
+            'Request Date': new Date(req.createdAt).toLocaleDateString('en-IN'),
+            'Name': req.fullName,
+            'Phone': req.phoneNumber,
+            'Email': req.email || '-',
+            'Ritual Type': req.ritualType,
+            'Preferred Date': req.preferredDate ? new Date(req.preferredDate).toLocaleDateString('en-IN') : '-',
+            'Status': req.status,
+            'Assigned Priest': req.priest?.fullName || '-',
+            'Priest Phone': req.priest?.phoneNumber || '-',
+            'Additional Info': req.additionalInfo || '-',
+            'Admin Notes': req.adminNotes || '-',
+        }));
+        const worksheet = XLSX.utils.json_to_sheet(dataToExport);
+        const workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, worksheet, 'Ritual Requests');
+        XLSX.writeFile(workbook, `Aradhana_Trust_Ritual_Requests_${new Date().toISOString().split('T')[0]}.xlsx`);
+    };
+
     const filteredRequests = requests.filter(req => {
         const matchesTab = req.status === activeTab;
         const searchLower = searchTerm.toLowerCase();
@@ -178,7 +184,14 @@ export default function ServiceRequestsAdminPage() {
                         className="flex items-center gap-2 px-4 py-2 text-primary-dark bg-secondary/10 hover:bg-secondary/20 rounded-xl transition-colors font-medium text-sm"
                     >
                         <RefreshCw className={`w-4 h-4 ${isLoading ? 'animate-spin' : ''}`} />
-                        Refresh List
+                        Refresh
+                    </button>
+                    <button
+                        onClick={exportToExcel}
+                        className="flex items-center gap-2 px-4 py-2 bg-secondary text-white rounded-xl hover:bg-secondary-dark transition-colors font-medium text-sm shadow-sm"
+                    >
+                        <Download className="w-4 h-4" />
+                        Export to Excel
                     </button>
                 </div>
 
