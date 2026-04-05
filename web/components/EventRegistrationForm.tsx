@@ -4,6 +4,7 @@ import { useState } from "react";
 import { ArrowRight, Loader2 } from "lucide-react";
 import toast from "react-hot-toast";
 import RazorpayButton from "./RazorpayButton";
+import RegistrationStatusModal from "./RegistrationStatusModal";
 import { registerForFreeEvent } from "@/app/actions/event-registration";
 import { Event } from "@/lib/events-data";
 import { useLanguage } from "@/context/LanguageContext";
@@ -27,6 +28,14 @@ export default function EventRegistrationForm({ event, onSuccess }: EventRegistr
     const [donationAmount, setDonationAmount] = useState(0);
     const [customDonation, setCustomDonation] = useState("");
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [modalData, setModalData] = useState<{
+        isOpen: boolean;
+        status: 'success' | 'error' | null;
+        title?: string;
+        message?: string;
+        registrationNo?: string;
+        receiptUrl?: string;
+    }>({ isOpen: false, status: null });
 
     const handleFreeRegistration = async () => {
         setIsSubmitting(true);
@@ -34,31 +43,30 @@ export default function EventRegistrationForm({ event, onSuccess }: EventRegistr
             const result = await registerForFreeEvent(event.id, event.title, formData);
 
             if (result.success) {
-                toast.success(
-                    (t) => (
-                        <div className="flex flex-col gap-1">
-                            <span className="font-bold">Successfully Registered!</span>
-                            <span className="text-xs opacity-80">Registration No: {result.registrationNo}</span>
-                            <a
-                                href={`/api/receipts/download?id=${result.registrationId}`}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="text-xs text-secondary-dark font-bold underline mt-1 hover:text-secondary"
-                                onClick={() => toast.dismiss(t.id)}
-                            >
-                                📥 Download Receipt (PDF)
-                            </a>
-                        </div>
-                    ),
-                    { duration: 10000 }
-                );
-                if (onSuccess) onSuccess();
+                setModalData({
+                    isOpen: true,
+                    status: 'success',
+                    title: 'Successfully Registered!',
+                    message: 'Your registration has been confirmed. A receipt is available for download.',
+                    registrationNo: result.registrationNo || undefined,
+                    receiptUrl: result.registrationId ? `/api/receipts/download?id=${result.registrationId}` : undefined
+                });
             } else {
-                toast.error(result.message || "Registration failed. Please try again.");
+                setModalData({
+                    isOpen: true,
+                    status: 'error',
+                    title: 'Registration Failed',
+                    message: result.message || "Registration failed. Please try again."
+                });
             }
         } catch (error) {
             console.error("Registration error:", error);
-            alert("An error occurred during registration");
+            setModalData({
+                isOpen: true,
+                status: 'error',
+                title: 'Error',
+                message: "An error occurred during registration. Please try again."
+            });
         } finally {
             setIsSubmitting(false);
         }
@@ -69,6 +77,21 @@ export default function EventRegistrationForm({ event, onSuccess }: EventRegistr
 
     return (
         <div className="bg-[#FDFBF7] p-8 rounded-2xl border border-[#D4AF37]/30 shadow-inner">
+            <RegistrationStatusModal
+                isOpen={modalData.isOpen}
+                onClose={() => {
+                    setModalData({ ...modalData, isOpen: false });
+                    // Only trigger the parent onClose if registration was successful
+                    if (modalData.status === 'success' && onSuccess) {
+                        onSuccess();
+                    }
+                }}
+                status={modalData.status}
+                title={modalData.title}
+                message={modalData.message}
+                registrationNo={modalData.registrationNo}
+                receiptUrl={modalData.receiptUrl}
+            />
             <div className="space-y-8 mb-8">
                 <div className="relative group">
                     <input

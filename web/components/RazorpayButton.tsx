@@ -2,6 +2,7 @@
 import { useState } from "react";
 import Script from "next/script";
 import toast from "react-hot-toast";
+import RegistrationStatusModal from "./RegistrationStatusModal";
 
 declare global {
     interface Window {
@@ -32,6 +33,14 @@ interface RazorpayResponse {
 
 export default function RazorpayButton({ amount, donorDetails, metadata, disabled }: RazorpayButtonProps) {
     const [loading, setLoading] = useState(false);
+    const [modalData, setModalData] = useState<{
+        isOpen: boolean;
+        status: 'success' | 'error' | null;
+        title?: string;
+        message?: string;
+        registrationNo?: string;
+        receiptUrl?: string;
+    }>({ isOpen: false, status: null });
 
     const handlePayment = async () => {
         if (amount <= 0) {
@@ -76,36 +85,31 @@ export default function RazorpayButton({ amount, donorDetails, metadata, disable
                         const verifyData = await verifyRes.json();
 
                         if (verifyData.success) {
-                            toast.success(
-                                (t) => (
-                                    <div className="flex flex-col gap-1">
-                                        <span className="font-bold">Payment Successful!</span>
-                                        {verifyData.registrationNo && (
-                                            <span className="text-xs opacity-80">Registration No: {verifyData.registrationNo}</span>
-                                        )}
-                                        {verifyData.registrationId && (
-                                            <a
-                                                href={`/api/receipts/download?id=${verifyData.registrationId}`}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="text-xs text-secondary-dark font-bold underline mt-1 hover:text-secondary"
-                                                onClick={() => toast.dismiss(t.id)}
-                                            >
-                                                📥 Download Receipt (PDF)
-                                            </a>
-                                        )}
-                                        <span className="text-[10px] mt-1 text-gray-500 italic">A copy has also been sent to your email.</span>
-                                    </div>
-                                ),
-                                { duration: 10000 }
-                            );
+                            setModalData({
+                                isOpen: true,
+                                status: 'success',
+                                title: 'Payment Successful!',
+                                message: 'Your transaction has been verified successfully. A copy of the receipt has been sent to your email.',
+                                registrationNo: verifyData.registrationNo,
+                                receiptUrl: verifyData.registrationId ? `/api/receipts/download?id=${verifyData.registrationId}` : undefined
+                            });
                             // Optional: Redirect or clear form
                         } else {
-                            toast.error(verifyData.error || "Payment Verification Failed.");
+                            setModalData({
+                                isOpen: true,
+                                status: 'error',
+                                title: 'Verification Failed',
+                                message: verifyData.error || "Payment Verification Failed."
+                            });
                         }
                     } catch (error) {
                         console.error("Verification error:", error);
-                        toast.error("Payment verified but failed to record locally. Please contact support.");
+                        setModalData({
+                            isOpen: true,
+                            status: 'error',
+                            title: 'Recording Failed',
+                            message: "Payment verified but failed to record locally. Please contact support."
+                        });
                     }
                 },
                 prefill: {
@@ -125,13 +129,23 @@ export default function RazorpayButton({ amount, donorDetails, metadata, disable
 
             const rzp1 = new window.Razorpay(options);
             rzp1.on("payment.failed", function (response: any) {
-                alert("Payment Failed: " + response.error.description);
+                setModalData({
+                    isOpen: true,
+                    status: 'error',
+                    title: 'Payment Failed',
+                    message: response.error.description
+                });
                 setLoading(false);
             });
             rzp1.open();
         } catch (error) {
             console.error("Payment initialization error:", error);
-            alert("Failed to initialize payment. Please try again.");
+            setModalData({
+                isOpen: true,
+                status: 'error',
+                title: 'Initialization Error',
+                message: 'Failed to initialize payment. Please try again.'
+            });
             setLoading(false);
         }
     };
@@ -139,6 +153,15 @@ export default function RazorpayButton({ amount, donorDetails, metadata, disable
     return (
         <>
             <Script src="https://checkout.razorpay.com/v1/checkout.js" />
+            <RegistrationStatusModal
+                isOpen={modalData.isOpen}
+                onClose={() => setModalData({ ...modalData, isOpen: false })}
+                status={modalData.status}
+                title={modalData.title}
+                message={modalData.message}
+                registrationNo={modalData.registrationNo}
+                receiptUrl={modalData.receiptUrl}
+            />
             <button
                 onClick={handlePayment}
                 disabled={loading || disabled}
