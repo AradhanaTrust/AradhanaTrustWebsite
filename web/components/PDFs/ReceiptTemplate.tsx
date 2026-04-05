@@ -145,6 +145,7 @@ interface ReceiptData {
     amount: number;
     paymentStatus: string;
     details?: string;
+    logoDataUrl?: string;
 }
 
 export const ReceiptTemplate = ({ data }: { data: ReceiptData }) => (
@@ -153,7 +154,7 @@ export const ReceiptTemplate = ({ data }: { data: ReceiptData }) => (
             {/* Header */}
             <View style={styles.header}>
                 <Image
-                    src={path.join(process.cwd(), "public/assets/Logo_Main.png")}
+                    src={data.logoDataUrl || path.join(process.cwd(), "public/assets/Logo_Main.png")}
                     style={styles.logo}
                 />
                 <View style={styles.titleContainer}>
@@ -161,7 +162,7 @@ export const ReceiptTemplate = ({ data }: { data: ReceiptData }) => (
                     <Text style={styles.trustDetails}>
                         Helping Hands for Divine Service{"\n"}
                         Visit us: www.aradhanatrust.org{"\n"}
-                        Contact: +91 9110825363
+                        Contact: +91 85500 93111
                     </Text>
                 </View>
             </View>

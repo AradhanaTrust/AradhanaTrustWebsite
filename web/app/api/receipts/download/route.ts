@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { generateReceiptPDF } from "@/lib/pdf-service";
+import fs from "fs";
+import path from "path";
 
 export async function GET(req: NextRequest) {
     try {
@@ -20,6 +22,17 @@ export async function GET(req: NextRequest) {
             return NextResponse.json({ error: "Registration not found" }, { status: 404 });
         }
 
+        // Prepare logo base64
+        let logoDataUrl = undefined;
+        try {
+            const logoPath = path.join(process.cwd(), "public/assets/Logo_Main.png");
+            const logoBuffer = fs.readFileSync(logoPath);
+            const base64 = logoBuffer.toString("base64");
+            logoDataUrl = `data:image/png;base64,${base64}`;
+        } catch (e) {
+            console.error("Failed to read logo for PDF generation:", e);
+        }
+
         // Prepare data for the PDF template
         const receiptData = {
             receiptType: registration.donationAmount > 0 && registration.registrationFee === 0 ? 'Donation' : 'Registration',
@@ -34,7 +47,8 @@ export async function GET(req: NextRequest) {
             phone: registration.phone || undefined,
             eventTitle: registration.eventTitle,
             amount: registration.totalAmount,
-            paymentStatus: registration.status === 'registered' || registration.status === 'confirmed' ? 'Paid' : 'Pending'
+            paymentStatus: registration.status === 'registered' || registration.status === 'confirmed' ? 'Paid' : 'Pending',
+            logoDataUrl
         };
 
         const pdfBuffer = await generateReceiptPDF(receiptData);
