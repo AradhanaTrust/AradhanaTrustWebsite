@@ -229,7 +229,7 @@ export default function DonationActivitiesPage() {
                                             </td>
                                             <td className="p-4">
                                                 <div className="font-semibold text-primary-dark">{activity.title}</div>
-                                                <div className="text-sm text-primary/60 max-w-xs truncate">{activity.description}</div>
+                                                <div className="text-sm text-primary/60 max-w-xs line-clamp-2">{activity.description}</div>
                                             </td>
                                             <td className="p-4 text-sm font-medium text-primary/80">{activity.order}</td>
                                             <td className="p-4">
