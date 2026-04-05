@@ -7,6 +7,7 @@ import {
     Image,
     Font
 } from "@react-pdf/renderer";
+import path from "path";
 
 // Define styles
 const styles = StyleSheet.create({
@@ -152,7 +153,7 @@ export const ReceiptTemplate = ({ data }: { data: ReceiptData }) => (
             {/* Header */}
             <View style={styles.header}>
                 <Image
-                    src="https://aradhanatrust.org/assets/Logo_Main.png" // Fallback to absolute URL if local fails in server render
+                    src={path.join(process.cwd(), "public/assets/Logo_Main.png")}
                     style={styles.logo}
                 />
                 <View style={styles.titleContainer}>
