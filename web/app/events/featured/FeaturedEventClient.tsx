@@ -11,6 +11,8 @@ import type { Event } from "@/lib/events-data";
 import { useLanguage } from "@/context/LanguageContext";
 import { getEventTranslation, getCategoryName } from "@/lib/event-utils";
 import { motion } from "framer-motion";
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 interface FeaturedEventClientProps {
     event: Event;
@@ -226,7 +228,9 @@ export default function FeaturedEventClient({ event }: FeaturedEventClientProps)
                                     {event.videoUrl ? (
                                         <div className="flex flex-col-reverse lg:grid lg:grid-cols-2 gap-8 lg:gap-10 items-start">
                                             <div className="prose prose-lg prose-brown max-w-none text-gray-700 leading-relaxed font-serif whitespace-pre-wrap text-left">
-                                                {translatedEvent.description}
+                                                <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                                                    {translatedEvent.description}
+                                                </ReactMarkdown>
                                             </div>
                                             {/* Rectangular Image Frame */}
                                             <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-lg md:shadow-xl border-[3px] md:border-4 border-[#D4AF37]/30 group lg:sticky lg:top-32 mb-6 lg:mb-0">
@@ -240,7 +244,9 @@ export default function FeaturedEventClient({ event }: FeaturedEventClientProps)
                                         </div>
                                     ) : (
                                         <div className="prose prose-lg prose-brown max-w-none text-gray-700 leading-relaxed font-serif whitespace-pre-wrap text-left">
-                                            {translatedEvent.description}
+                                            <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                                                {translatedEvent.description}
+                                            </ReactMarkdown>
                                         </div>
                                     )}
                                 </div>

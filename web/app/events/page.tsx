@@ -14,6 +14,8 @@ import EventDetailModal from "@/components/EventDetailModal";
 import { useLanguage } from "@/context/LanguageContext";
 import { useRouter } from "next/navigation";
 import { translations } from "@/lib/translations";
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 
 export default function EventsPage() {
@@ -255,9 +257,11 @@ export default function EventsPage() {
 
                                             </div>
 
-                                            <p className="text-[#5D4037]/60 text-sm mb-4 line-clamp-2">
-                                                {translatedEvent.description}
-                                            </p>
+                                            <div className="text-[#5D4037]/60 text-sm mb-4 line-clamp-3 prose prose-sm prose-brown">
+                                                <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                                                    {translatedEvent.description}
+                                                </ReactMarkdown>
+                                            </div>
 
                                             <div className="flex justify-center">
                                                 {event.isUpcoming && event.registrationOpen ? (

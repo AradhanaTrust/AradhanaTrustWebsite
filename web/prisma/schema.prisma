@@ -80,8 +80,8 @@ model Event {
   time        String
   location    String
   locationKn  String?
-  description String
-  descriptionKn String?
+  description String   @db.Text
+  descriptionKn String? @db.Text
   imageUrl    String
   videoUrl    String?
   capacity    Int?
@@ -195,8 +195,8 @@ model DonationActivity {
   id            String   @id @default(cuid())
   title         String
   titleKn       String?
-  description   String
-  descriptionKn String?
+  description   String   @db.Text
+  descriptionKn String?  @db.Text
   imageUrl      String?
   videoUrl      String?
   isActive      Boolean  @default(true)

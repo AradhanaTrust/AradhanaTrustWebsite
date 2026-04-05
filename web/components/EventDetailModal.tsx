@@ -9,6 +9,8 @@ import { createPortal } from "react-dom";
 import { useEffect, useState } from "react";
 import EventRegistrationForm from "./EventRegistrationForm";
 import RazorpayButton from "./RazorpayButton";
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 interface EventDetailModalProps {
     event: Event;
@@ -97,9 +99,11 @@ export default function EventDetailModal({ event, onClose }: EventDetailModalPro
                     {/* Description */}
                     <div className="mb-6">
                         <h3 className="font-serif font-bold text-xl text-[#5D4037] mb-3">About This Event</h3>
-                        <p className="text-[#5D4037]/80 leading-relaxed whitespace-pre-wrap">
-                            {translatedEvent.description}
-                        </p>
+                        <div className="prose prose-brown max-w-none text-[#5D4037]/80 leading-relaxed whitespace-pre-wrap">
+                            <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                                {translatedEvent.description}
+                            </ReactMarkdown>
+                        </div>
                     </div>
 
                     {/* Gallery */}
