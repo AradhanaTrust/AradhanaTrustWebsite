@@ -24,7 +24,7 @@ export async function POST(req: NextRequest) {
             if (metadata?.type === 'event') {
                 const regFee = parseFloat(metadata.registrationFee || 0);
                 const donAmount = parseFloat(metadata.donationAmount || 0);
-                const regNo = generateStandardId('REG');
+                const regNo = await generateStandardId('REG');
 
                 // Create Event Registration
                 registration = await prisma.eventRegistration.create({
@@ -85,7 +85,7 @@ export async function POST(req: NextRequest) {
 
                 // If there's a donation amount, also create a DonationRecord for the donations management section
                 if (donAmount > 0) {
-                    const receiptNo = generateStandardId('RCT');
+                    const receiptNo = await generateStandardId('RCT');
 
                     await prisma.donationRecord.create({
                         data: {
@@ -124,7 +124,7 @@ export async function POST(req: NextRequest) {
 
                 // Send Donation Receipt Email
                 try {
-                    const receiptNo = generateStandardId('RCT'); // We could store this in DB too
+                    const receiptNo = await generateStandardId('RCT'); // We could store this in DB too
                     const receiptData = {
                         receiptType: 'Donation',
                         receiptNo: receiptNo,

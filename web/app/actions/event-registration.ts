@@ -29,7 +29,7 @@ export async function registerForFreeEvent(eventId: string, eventTitle: string, 
             return { success: false, message: "This is a paid event. Payment is required." };
         }
 
-        const regNo = generateStandardId('REG');
+        const regNo = await generateStandardId('REG');
         const registration = await prisma.eventRegistration.create({
             data: {
                 registrationNo: regNo,
