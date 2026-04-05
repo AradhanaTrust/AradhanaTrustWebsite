@@ -5,6 +5,8 @@ import { prisma } from "@/lib/prisma";
 
 import { put, del } from "@/lib/storage";
 
+export const dynamic = 'force-dynamic';
+
 // GET all activities
 export async function GET() {
     try {
