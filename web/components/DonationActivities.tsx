@@ -5,6 +5,8 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { Loader2 } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 interface DonationActivity {
     id: string;
@@ -98,7 +100,9 @@ export default function DonationActivities() {
                                 </h2>
 
                                 <div className={`prose prose-lg prose-brown max-w-none text-gray-700 leading-relaxed font-serif whitespace-pre-wrap ${language === 'kn' ? 'font-kannada leading-loose' : ''}`}>
-                                    {language === 'kn' && activity.descriptionKn ? activity.descriptionKn : activity.description}
+                                    <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                                        {language === 'kn' && activity.descriptionKn ? activity.descriptionKn : activity.description}
+                                    </ReactMarkdown>
                                 </div>
 
                                 <div className="pt-6">
