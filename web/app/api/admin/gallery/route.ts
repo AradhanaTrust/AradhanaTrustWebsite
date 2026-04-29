@@ -32,11 +32,12 @@ export async function POST(req: Request) {
             return new NextResponse("Missing file or category", { status: 400 });
         }
 
-        // Upload to Vercel Blob
+        // Upload to Vercel Blob / Local Storage Proxy
         const blob = await put(file.name, file, {
             access: 'public',
             allowOverwrite: true,
-            addRandomSuffix: true
+            addRandomSuffix: true,
+            category: 'gallery' // Instructs lib/storage.ts to use absolute path
         });
 
         // Create DB record with Blob URL

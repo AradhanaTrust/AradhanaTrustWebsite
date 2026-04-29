@@ -2,15 +2,21 @@ import { writeFile, unlink, mkdir } from 'fs/promises';
 import { join } from 'path';
 import { existsSync } from 'fs';
 
-const UPLOAD_DIR = join(process.cwd(), 'public', 'uploads');
+const isWindows = process.platform === 'win32';
+// Fallback for local Windows development, absolute for Hostinger Linux Node environment
+const EXTERNAL_UPLOAD_DIR = isWindows ? join(process.cwd(), '..', 'node_uploads') : '/home/node_uploads/';
+const DEFAULT_UPLOAD_DIR = join(process.cwd(), 'public', 'uploads');
 
 /**
  * Minimal replacement for @vercel/blob's put
  * Stores files in public/uploads/
  */
 export async function put(filename: string, file: File | Buffer | string, options?: any) {
-    if (!existsSync(UPLOAD_DIR)) {
-        await mkdir(UPLOAD_DIR, { recursive: true });
+    const isGallery = options?.category === 'gallery';
+    const TARGET_DIR = isGallery ? EXTERNAL_UPLOAD_DIR : DEFAULT_UPLOAD_DIR;
+
+    if (!existsSync(TARGET_DIR)) {
+        await mkdir(TARGET_DIR, { recursive: true });
     }
 
     // Add random suffix to filename if requested (matching Vercel Blob behavior)
@@ -23,7 +29,7 @@ export async function put(filename: string, file: File | Buffer | string, option
         finalFilename = `${name}-${suffix}.${ext}`;
     }
 
-    const filePath = join(UPLOAD_DIR, finalFilename);
+    const filePath = join(TARGET_DIR, finalFilename);
     const buffer = file instanceof File
         ? Buffer.from(await file.arrayBuffer())
         : Buffer.from(file as any);
@@ -31,6 +37,15 @@ export async function put(filename: string, file: File | Buffer | string, option
     await writeFile(filePath, buffer);
 
     // Return the relative URL for public access
+    if (isGallery) {
+        return {
+            url: `/api/uploads/gallery/${finalFilename}`,
+            pathname: `api/uploads/gallery/${finalFilename}`,
+            size: buffer.length,
+            uploadedAt: new Date()
+        };
+    }
+
     return {
         url: `/uploads/${finalFilename}`,
         pathname: `uploads/${finalFilename}`,
@@ -48,11 +63,20 @@ export async function del(url: string | string[]) {
 
     for (const u of urls) {
         try {
-            // Only attempt to delete if it's a local path
-            if (u.startsWith('/uploads/')) {
+            if (u.startsWith('/api/uploads/gallery/')) {
+                // Handle external gallery path deletion
                 const filename = u.split('/').pop();
                 if (filename) {
-                    const filePath = join(UPLOAD_DIR, filename);
+                    const filePath = join(EXTERNAL_UPLOAD_DIR, filename);
+                    if (existsSync(filePath)) {
+                        await unlink(filePath);
+                    }
+                }
+            } else if (u.startsWith('/uploads/')) {
+                // Handle default public path deletion
+                const filename = u.split('/').pop();
+                if (filename) {
+                    const filePath = join(DEFAULT_UPLOAD_DIR, filename);
                     if (existsSync(filePath)) {
                         await unlink(filePath);
                     }
