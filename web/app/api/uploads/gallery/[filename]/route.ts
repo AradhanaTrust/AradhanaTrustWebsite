@@ -16,7 +16,7 @@ const mimeTypes: Record<string, string> = {
     '.svg': 'image/svg+xml'
 };
 
-export async function GET(req: NextRequest, { params }: { params: { filename: string } }) {
+export async function GET(req: NextRequest, { params }: { params: Promise<{ filename: string }> }) {
     try {
         const { filename } = await params;
         
