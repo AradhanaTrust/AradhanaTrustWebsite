@@ -3,8 +3,8 @@ import { createReadStream, existsSync } from "fs";
 import { stat } from "fs/promises";
 import { join } from "path";
 
-const isWindows = process.platform === 'win32';
-const EXTERNAL_UPLOAD_DIR = isWindows ? join(process.cwd(), '..', 'node_uploads') : '/home/node_uploads/';
+const homeDir = process.env.HOME || join(process.cwd(), '..');
+const EXTERNAL_UPLOAD_DIR = join(homeDir, 'node_uploads');
 
 // Simple mime type map for standard images
 const mimeTypes: Record<string, string> = {

@@ -2,9 +2,10 @@ import { writeFile, unlink, mkdir } from 'fs/promises';
 import { join } from 'path';
 import { existsSync } from 'fs';
 
-const isWindows = process.platform === 'win32';
-// Fallback for local Windows development, absolute for Hostinger Linux Node environment
-const EXTERNAL_UPLOAD_DIR = isWindows ? join(process.cwd(), '..', 'node_uploads') : '/home/node_uploads/';
+// Resolve absolute path dynamically based on hosting environment
+// We use process.env.HOME on Linux (Hostinger) to ensure we write to the user's home directory, not the server's root /home
+const homeDir = process.env.HOME || join(process.cwd(), '..');
+const EXTERNAL_UPLOAD_DIR = join(homeDir, 'node_uploads');
 const DEFAULT_UPLOAD_DIR = join(process.cwd(), 'public', 'uploads');
 
 /**
