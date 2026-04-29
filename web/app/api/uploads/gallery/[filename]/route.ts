@@ -41,7 +41,7 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ file
         const fileStream = createReadStream(filePath);
         const webStream = new ReadableStream({
             start(controller) {
-                fileStream.on("data", (chunk: Buffer) => controller.enqueue(new Uint8Array(chunk)));
+                fileStream.on("data", (chunk: any) => controller.enqueue(new Uint8Array(chunk)));
                 fileStream.on("end", () => controller.close());
                 fileStream.on("error", (err: Error) => controller.error(err));
             },
