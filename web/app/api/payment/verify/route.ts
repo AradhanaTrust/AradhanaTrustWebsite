@@ -10,6 +10,10 @@ export async function POST(req: NextRequest) {
     try {
         const { razorpay_order_id, razorpay_payment_id, razorpay_signature, amount, donorDetails, metadata } = await req.json();
 
+        if (!razorpay_order_id || !razorpay_payment_id || !razorpay_signature) {
+            return NextResponse.json({ error: "Missing required payment fields" }, { status: 400 });
+        }
+
         const body = razorpay_order_id + "|" + razorpay_payment_id;
 
         const expectedSignature = crypto

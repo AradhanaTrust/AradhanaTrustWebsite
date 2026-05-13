@@ -6,6 +6,10 @@ export async function POST(req: NextRequest) {
     try {
         const { amount, currency = "INR" } = await req.json();
 
+        if (!amount || amount < 1) {
+            return NextResponse.json({ error: "Invalid amount. Minimum amount is 1 INR (100 paise)." }, { status: 400 });
+        }
+
         // Instantiate inside the handler to prevent build-time errors
         // when environment variables are missing
         const razorpay = new Razorpay({
