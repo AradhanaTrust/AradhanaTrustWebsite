@@ -1,17 +1,19 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import DashboardLayout from "@/components/admin/DashboardLayout";
 import { useSession } from "next-auth/react";
-import { User, Mail, Phone, Lock, Camera, Save } from "lucide-react";
+import { User, Mail, Phone, Lock, Camera, Save, Loader2 } from "lucide-react";
 
 export default function SettingsPage() {
     const { data: session, update } = useSession();
     const [isEditing, setIsEditing] = useState(false);
     const [showPasswordSection, setShowPasswordSection] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+    const [isSettingsLoading, setIsSettingsLoading] = useState(false);
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
+    const [systemSettings, setSystemSettings] = useState({ enableDeletions: false });
 
     const [userData, setUserData] = useState({
         name: session?.user?.name || "",
@@ -26,6 +28,24 @@ export default function SettingsPage() {
         newPassword: "",
         confirmPassword: "",
     });
+
+    useEffect(() => {
+        const fetchSystemSettings = async () => {
+            setIsSettingsLoading(true);
+            try {
+                const res = await fetch("/api/admin/settings");
+                if (res.ok) {
+                    const data = await res.json();
+                    setSystemSettings(data);
+                }
+            } catch (err) {
+                console.error("Failed to fetch settings", err);
+            } finally {
+                setIsSettingsLoading(false);
+            }
+        };
+        fetchSystemSettings();
+    }, []);
 
     const handleProfileUpdate = async () => {
         setError("");
@@ -112,6 +132,33 @@ export default function SettingsPage() {
             setIsLoading(false);
         }
     };
+
+    const handleSystemSettingsUpdate = async (val: boolean) => {
+        setError("");
+        setSuccess("");
+        
+        const originalVal = systemSettings.enableDeletions;
+        setSystemSettings({ ...systemSettings, enableDeletions: val });
+
+        try {
+            const res = await fetch("/api/admin/settings", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ enableDeletions: val }),
+            });
+
+            if (!res.ok) {
+                const msg = await res.text();
+                throw new Error(msg);
+            }
+
+            setSuccess("System settings updated successfully");
+        } catch (err: any) {
+            setError(err.message || "Failed to update settings");
+            setSystemSettings({ ...systemSettings, enableDeletions: originalVal });
+        }
+    };
+
 
     return (
         <DashboardLayout>
@@ -410,6 +457,48 @@ export default function SettingsPage() {
                         </div>
                     )}
                 </div>
+
+                {/* System Settings Section - Only for Primary Admin */}
+                {session?.user?.role === "PRIMARY_ADMIN" && (
+                    <div className="bg-surface-white border-2 border-secondary/20 rounded-xl p-8">
+                        <div className="mb-6">
+                            <h3 className="text-lg font-cinzel-decorative font-bold text-primary-dark">
+                                System Settings
+                            </h3>
+                            <p className="text-sm text-primary/60 mt-1">
+                                Critical system-wide configurations and permissions
+                            </p>
+                        </div>
+
+                        <div className="space-y-6 pt-4 border-t border-secondary/20">
+                            <div className="flex items-center justify-between p-4 bg-accent-saffron/5 border border-accent-saffron/20 rounded-lg">
+                                <div className="space-y-1">
+                                    <h4 className="font-bold text-primary-dark flex items-center gap-2">
+                                        Enable Record Deletions
+                                        {isSettingsLoading && <Loader2 className="w-3 h-3 animate-spin text-secondary" />}
+                                    </h4>
+                                    <p className="text-xs text-primary/70 max-w-md">
+                                        When enabled, delete buttons will appear next to donation records and event registrations. 
+                                        Use with caution as this action is permanent.
+                                    </p>
+                                </div>
+                                <button
+                                    onClick={() => handleSystemSettingsUpdate(!systemSettings.enableDeletions)}
+                                    disabled={isSettingsLoading}
+                                    className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none ${
+                                        systemSettings.enableDeletions ? 'bg-accent-saffron' : 'bg-primary/20'
+                                    }`}
+                                >
+                                    <span
+                                        className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                                            systemSettings.enableDeletions ? 'translate-x-6' : 'translate-x-1'
+                                        }`}
+                                    />
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                )}
 
                 {/* Security Info */}
                 <div className="bg-accent-saffron/5 border-l-4 border-accent-saffron p-6 rounded-lg">

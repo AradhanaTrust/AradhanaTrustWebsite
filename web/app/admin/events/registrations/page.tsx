@@ -18,7 +18,8 @@ import {
     ChevronDown,
     IndianRupee,
     Briefcase,
-    Phone
+    Phone,
+    Trash2
 } from "lucide-react";
 import * as XLSX from 'xlsx';
 
@@ -51,6 +52,9 @@ function RegistrationsPageContent() {
     const searchParams = useSearchParams();
     const [registrations, setRegistrations] = useState<registration[]>([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [enableDeletions, setEnableDeletions] = useState(false);
+    const [isDeleting, setIsDeleting] = useState<string | null>(null);
+
     const [events, setEvents] = useState<{ id: string, title: string }[]>([]);
 
     // Filters
@@ -73,7 +77,20 @@ function RegistrationsPageContent() {
             }
         };
         fetchEventsList();
+        fetchSystemSettings();
     }, []);
+
+    const fetchSystemSettings = async () => {
+        try {
+            const res = await fetch("/api/admin/settings");
+            if (res.ok) {
+                const data = await res.json();
+                setEnableDeletions(data.enableDeletions);
+            }
+        } catch (error) {
+            console.error("Failed to fetch settings", error);
+        }
+    };
 
     const fetchRegistrations = useCallback(async () => {
         setIsLoading(true);
@@ -114,6 +131,29 @@ function RegistrationsPageContent() {
             }
         } catch (error) {
             console.error("Failed to update status", error);
+        }
+    };
+
+    const handleDeleteRegistration = async (id: string) => {
+        if (!confirm("Are you sure you want to delete this registration? This action cannot be undone.")) return;
+
+        setIsDeleting(id);
+        try {
+            const res = await fetch(`/api/admin/events/registrations/${id}`, {
+                method: "DELETE",
+            });
+
+            if (res.ok) {
+                setRegistrations(prev => prev.filter(reg => reg.id !== id));
+            } else {
+                const msg = await res.text();
+                alert(msg || "Failed to delete registration");
+            }
+        } catch (error) {
+            console.error("Failed to delete registration", error);
+            alert("Internal server error");
+        } finally {
+            setIsDeleting(null);
         }
     };
 
@@ -345,6 +385,20 @@ function RegistrationsPageContent() {
                                                         title="Cancel"
                                                     >
                                                         <XCircle size={18} />
+                                                    </button>
+                                                )}
+                                                {enableDeletions && (
+                                                    <button
+                                                        onClick={() => handleDeleteRegistration(reg.id)}
+                                                        disabled={isDeleting === reg.id}
+                                                        className="p-1.5 md:p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors border border-transparent hover:border-red-100 disabled:opacity-50"
+                                                        title="Delete Record"
+                                                    >
+                                                        {isDeleting === reg.id ? (
+                                                            <Loader2 size={18} className="animate-spin" />
+                                                        ) : (
+                                                            <Trash2 size={18} />
+                                                        )}
                                                     </button>
                                                 )}
                                             </div>

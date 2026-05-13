@@ -2,13 +2,16 @@
 
 import { useState, useEffect } from "react";
 import DashboardLayout from "@/components/admin/DashboardLayout";
-import { Search, Filter, Download, Calendar as CalendarIcon, Loader2 } from "lucide-react";
+import { Search, Filter, Download, Calendar as CalendarIcon, Loader2, Trash2 } from "lucide-react";
 import * as XLSX from "xlsx";
 
 export default function DonationsPage() {
     const [donations, setDonations] = useState<any[]>([]);
     const [events, setEvents] = useState<any[]>([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [enableDeletions, setEnableDeletions] = useState(false);
+    const [isDeleting, setIsDeleting] = useState<string | null>(null);
+
 
     // Filters
     const [search, setSearch] = useState("");
@@ -24,7 +27,20 @@ export default function DonationsPage() {
 
     useEffect(() => {
         fetchEvents();
+        fetchSystemSettings();
     }, []);
+
+    const fetchSystemSettings = async () => {
+        try {
+            const res = await fetch("/api/admin/settings");
+            if (res.ok) {
+                const data = await res.json();
+                setEnableDeletions(data.enableDeletions);
+            }
+        } catch (error) {
+            console.error("Failed to fetch settings", error);
+        }
+    };
 
     useEffect(() => {
         // Debounce search
@@ -67,6 +83,29 @@ export default function DonationsPage() {
             console.error("Failed to fetch donations", error);
         } finally {
             setIsLoading(false);
+        }
+    };
+
+    const handleDeleteDonation = async (id: string) => {
+        if (!confirm("Are you sure you want to delete this donation record? This action cannot be undone.")) return;
+
+        setIsDeleting(id);
+        try {
+            const res = await fetch(`/api/admin/donations/${id}`, {
+                method: "DELETE",
+            });
+
+            if (res.ok) {
+                setDonations(prev => prev.filter(d => d.id !== id));
+            } else {
+                const msg = await res.text();
+                alert(msg || "Failed to delete donation");
+            }
+        } catch (error) {
+            console.error("Failed to delete donation", error);
+            alert("Internal server error");
+        } finally {
+            setIsDeleting(null);
         }
     };
 
@@ -254,6 +293,7 @@ export default function DonationsPage() {
                                         <th className="p-4 font-semibold text-primary-dark whitespace-nowrap">Category</th>
                                         <th className="p-4 font-semibold text-primary-dark whitespace-nowrap">Method</th>
                                         <th className="p-4 font-semibold text-primary-dark whitespace-nowrap">Status</th>
+                                        {enableDeletions && <th className="p-4 font-semibold text-primary-dark whitespace-nowrap text-right">Actions</th>}
                                     </tr>
                                 </thead>
                                 <tbody className="divide-y divide-secondary/10">
@@ -296,6 +336,22 @@ export default function DonationsPage() {
                                                     {donation.status}
                                                 </span>
                                             </td>
+                                            {enableDeletions && (
+                                                <td className="p-4 text-right">
+                                                    <button
+                                                        onClick={() => handleDeleteDonation(donation.id)}
+                                                        disabled={isDeleting === donation.id}
+                                                        className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors disabled:opacity-50"
+                                                        title="Delete Record"
+                                                    >
+                                                        {isDeleting === donation.id ? (
+                                                            <Loader2 className="w-4 h-4 animate-spin" />
+                                                        ) : (
+                                                            <Trash2 className="w-4 h-4" />
+                                                        )}
+                                                    </button>
+                                                </td>
+                                            )}
                                         </tr>
                                     ))}
                                 </tbody>

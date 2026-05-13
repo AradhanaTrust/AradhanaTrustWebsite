@@ -255,3 +255,9 @@ model ServiceRequest {
   @@index([status])
   @@index([priestId])
 }
+// ==================== System Settings ====================
+model SystemSettings {
+  id               String   @id @default("system")
+  enableDeletions  Boolean  @default(false)
+  updatedAt        DateTime @updatedAt
+}
