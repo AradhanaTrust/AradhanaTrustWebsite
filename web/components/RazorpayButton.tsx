@@ -75,6 +75,7 @@ export default function RazorpayButton({ amount, donorDetails, metadata, disable
                     try {
                         const verifyRes = await fetch("/api/payment/verify", {
                             method: "POST",
+                            headers: { "Content-Type": "application/json" },
                             body: JSON.stringify({
                                 ...response,
                                 amount,
@@ -82,9 +83,18 @@ export default function RazorpayButton({ amount, donorDetails, metadata, disable
                                 metadata
                             }),
                         });
-                        const verifyData = await verifyRes.json();
+                        
+                        let verifyData;
+                        const contentType = verifyRes.headers.get("content-type");
+                        if (contentType && contentType.indexOf("application/json") !== -1) {
+                            verifyData = await verifyRes.json();
+                        } else {
+                            const textData = await verifyRes.text();
+                            console.error("Non-JSON response from verify:", textData);
+                            throw new Error("Server returned an invalid response (500 Internal Error)");
+                        }
 
-                        if (verifyData.success) {
+                        if (verifyRes.ok && verifyData.success) {
                             setModalData({
                                 isOpen: true,
                                 status: 'success',

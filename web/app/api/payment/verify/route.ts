@@ -21,8 +21,12 @@ export async function POST(req: NextRequest) {
             .update(body.toString())
             .digest("hex");
 
+        console.log(`[VERIFY_PAYMENT] Signature generated for order ${razorpay_order_id}. Expecting: ${expectedSignature}, Received: ${razorpay_signature}`);
+
         if (expectedSignature === razorpay_signature) {
             // 1. Signature matches - Payment Successful
+            console.log(`[VERIFY_PAYMENT] Signature MATCHED for order ${razorpay_order_id}. Proceeding with DB operations.`);
+
 
             let registration;
             if (metadata?.type === 'event') {
@@ -111,27 +115,40 @@ export async function POST(req: NextRequest) {
                     });
                 }
             } else {
-                // Default: Create Donation
-                const donation = await prisma.donation.create({
-                    data: {
-                        amount: parseFloat(amount),
-                        status: "paid",
-                        razorpayOrderId: razorpay_order_id,
-                        razorpayPaymentId: razorpay_payment_id,
-                        razorpaySignature: razorpay_signature,
-                        donorName: donorDetails?.name,
-                        donorEmail: donorDetails?.email,
-                        donorPhone: donorDetails?.phone,
-                        currency: "INR"
-                    }
-                });
+                // Default: Create Donation Record (for Admin Dashboard)
+                console.log(`[VERIFY_PAYMENT] Processing General Donation for order ${razorpay_order_id}`);
+                const receiptNo = await generateStandardId('RCT');
+                
+                try {
+                    const donation = await prisma.donationRecord.create({
+                        data: {
+                            amount: parseFloat(amount),
+                            status: "completed",
+                            donorName: donorDetails?.name || "Anonymous",
+                            email: donorDetails?.email || "",
+                            phone: donorDetails?.phone || "",
+                            address: donorDetails?.address || "",
+                            organisation: donorDetails?.organisation || "",
+                            referredBy: donorDetails?.referredBy || "None",
+                            category: "General", // Default category
+                            method: "Razorpay",
+                            receiptNo: receiptNo,
+                            date: new Date()
+                        }
+                    });
+                    console.log(`[VERIFY_PAYMENT] Successfully created DonationRecord with ID: ${donation.id}, Receipt: ${receiptNo}`);
+                } catch (dbError) {
+                    console.error(`[VERIFY_PAYMENT] Database creation failed for DonationRecord. Error:`, dbError);
+                    throw dbError; // Bubble up to trigger 500 error properly
+                }
 
                 // Send Donation Receipt Email
                 try {
-                    const receiptNo = await generateStandardId('RCT'); // We could store this in DB too
+                    console.log(`[VERIFY_PAYMENT] Generating PDF and sending email for Receipt: ${receiptNo}`);
                     const receiptData = {
                         receiptType: 'Donation',
                         receiptNo: receiptNo,
+
                         date: new Date().toLocaleDateString('en-IN', { day: '2-digit', month: 'long', year: 'numeric' }),
                         userName: donorDetails.name,
                         email: donorDetails.email,
@@ -159,16 +176,18 @@ export async function POST(req: NextRequest) {
                 }
             }
 
+            console.log(`[VERIFY_PAYMENT] Transaction successfully completed for order ${razorpay_order_id}. Returning success to frontend.`);
             return NextResponse.json({
                 success: true,
                 registrationNo: registration?.registrationNo,
                 registrationId: registration?.id
             });
         } else {
+            console.error(`[VERIFY_PAYMENT] Signature MISMATCH for order ${razorpay_order_id}`);
             return NextResponse.json({ error: "Invalid signature" }, { status: 400 });
         }
     } catch (error) {
-        console.error("Verification Error:", error);
-        return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+        console.error("[VERIFY_PAYMENT_FATAL] Verification Error:", error);
+        return NextResponse.json({ error: "Internal Server Error. Check server logs." }, { status: 500 });
     }
 }

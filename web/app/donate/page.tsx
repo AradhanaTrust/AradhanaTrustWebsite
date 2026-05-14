@@ -244,11 +244,17 @@ export default function DonatePage() {
                                         const val = e.target.value;
                                         setCustomAmount(val);
                                         const numVal = parseInt(val);
-                                        if (amounts.includes(numVal)) {
-                                            setSelectedAmount(numVal);
-                                        } else {
-                                            setSelectedAmount(0);
-                                        }
+                                        
+                                        // --- TEMPORARY FIX FOR TESTING ---
+                                        // To revert, uncomment the original code and delete this temporary fix.
+                                        // ORIGINAL:
+                                        // if (amounts.includes(numVal)) {
+                                        //     setSelectedAmount(numVal);
+                                        // } else {
+                                        //     setSelectedAmount(0);
+                                        // }
+                                        
+                                        setSelectedAmount(isNaN(numVal) ? 0 : numVal);
                                     }}
                                     className="w-full p-4 bg-white/60 border border-white/40 rounded-xl focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/20 outline-none text-lg transition-all placeholder:text-primary/40 text-[#5D4037]"
                                 />
