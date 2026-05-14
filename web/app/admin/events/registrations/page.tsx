@@ -165,6 +165,7 @@ function RegistrationsPageContent() {
             'Attendee Name': reg.name,
             'Email': reg.email,
             'Phone': reg.phone || '-',
+            'Address': reg.address || '-',
             'Attendees': reg.attendees,
             'Registration Fee': reg.registrationFee,
             'Donation Amount': reg.donationAmount,
@@ -334,11 +335,16 @@ function RegistrationsPageContent() {
                                         <td className="px-4 md:px-6 py-4">
                                             <div className="text-xs md:text-sm font-bold text-primary-dark group-hover:text-secondary-dark transition-colors truncate max-w-[120px] md:max-w-none">{reg.name}</div>
                                             <div className="flex items-center gap-1 text-[10px] md:text-[11px] text-primary/60 mt-1">
-                                                <Briefcase size={10} className="text-secondary/60" /> <span className="truncate max-w-[100px]">{reg.organisation || "Individual"}</span>
+                                                <Briefcase size={10} className="text-secondary/60" /> <span className="truncate max-w-[100px]" title={reg.organisation || "Individual"}>{reg.organisation || "Individual"}</span>
                                             </div>
                                             <div className="flex items-center gap-3 text-[10px] md:text-[11px] text-primary/40 mt-1">
                                                 <span className="flex items-center gap-1 whitespace-nowrap"><Phone size={10} /> {reg.phone || "N/A"}</span>
                                             </div>
+                                            {reg.address && (
+                                                <div className="text-[9px] md:text-[10px] text-primary/40 mt-1 truncate max-w-[150px]" title={reg.address}>
+                                                    {reg.address}
+                                                </div>
+                                            )}
                                         </td>
                                         <td className="px-4 md:px-6 py-4">
                                             <div className="text-xs md:text-sm font-semibold text-primary-dark truncate max-w-[140px] md:max-w-[200px]">

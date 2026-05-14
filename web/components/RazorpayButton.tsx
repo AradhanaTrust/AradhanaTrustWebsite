@@ -103,6 +103,7 @@ export default function RazorpayButton({ amount, donorDetails, metadata, disable
                                 registrationNo: verifyData.registrationNo,
                                 receiptUrl: verifyData.registrationId ? `/api/receipts/download?id=${verifyData.registrationId}` : undefined
                             });
+                            setLoading(false);
                             // Optional: Redirect or clear form
                         } else {
                             setModalData({
@@ -111,6 +112,7 @@ export default function RazorpayButton({ amount, donorDetails, metadata, disable
                                 title: 'Verification Failed',
                                 message: verifyData.details ? `${verifyData.error}: ${verifyData.details}` : (verifyData.error || "Payment Verification Failed.")
                             });
+                            setLoading(false);
                         }
                     } catch (error: any) {
                         console.error("Verification error:", error);
@@ -120,6 +122,7 @@ export default function RazorpayButton({ amount, donorDetails, metadata, disable
                             title: 'Recording Failed',
                             message: "Payment verified but failed to record locally. Please contact support."
                         });
+                        setLoading(false);
                     }
                 },
                 prefill: {
