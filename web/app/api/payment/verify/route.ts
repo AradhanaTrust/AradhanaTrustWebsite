@@ -208,8 +208,11 @@ export async function POST(req: NextRequest) {
             console.error(`[VERIFY_PAYMENT] Signature MISMATCH for order ${razorpay_order_id}`);
             return NextResponse.json({ error: "Invalid signature" }, { status: 400 });
         }
-    } catch (error) {
+    } catch (error: any) {
         console.error("[VERIFY_PAYMENT_FATAL] Verification Error:", error);
-        return NextResponse.json({ error: "Internal Server Error. Check server logs." }, { status: 500 });
+        return NextResponse.json({ 
+            error: "Internal Server Error. Check server logs.", 
+            details: error?.message || String(error)
+        }, { status: 500 });
     }
 }

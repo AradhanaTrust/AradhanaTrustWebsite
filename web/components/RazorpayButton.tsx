@@ -109,10 +109,10 @@ export default function RazorpayButton({ amount, donorDetails, metadata, disable
                                 isOpen: true,
                                 status: 'error',
                                 title: 'Verification Failed',
-                                message: verifyData.error || "Payment Verification Failed."
+                                message: verifyData.details ? `${verifyData.error}: ${verifyData.details}` : (verifyData.error || "Payment Verification Failed.")
                             });
                         }
-                    } catch (error) {
+                    } catch (error: any) {
                         console.error("Verification error:", error);
                         setModalData({
                             isOpen: true,
