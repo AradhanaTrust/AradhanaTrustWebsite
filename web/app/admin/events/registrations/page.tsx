@@ -342,7 +342,12 @@ function RegistrationsPageContent() {
                                             </div>
                                             {reg.address && (
                                                 <div className="text-[9px] md:text-[10px] text-primary/40 mt-1 truncate max-w-[150px]" title={reg.address}>
-                                                    {reg.address}
+                                                    📍 {reg.address}
+                                                </div>
+                                            )}
+                                            {reg.referredBy && reg.referredBy.toLowerCase() !== "none" && (
+                                                <div className="text-[9px] md:text-[10px] text-primary/40 mt-1 truncate max-w-[150px]" title={`Referred by: ${reg.referredBy}`}>
+                                                    👥 Ref: {reg.referredBy}
                                                 </div>
                                             )}
                                         </td>
