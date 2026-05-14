@@ -25,7 +25,9 @@ export async function POST(req: NextRequest) {
 
         const order = await razorpay.orders.create(options);
 
-        return NextResponse.json(order);
+        // Send back the key_id used to create the order to ensure the frontend uses the exact same key.
+        // This prevents mismatches if NEXT_PUBLIC_ variables were baked in with different values during build.
+        return NextResponse.json({ ...order, key_id: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID! });
     } catch (error) {
         console.error("Razorpay Order Error:", error);
         return NextResponse.json({ error: "Error creating order" }, { status: 500 });

@@ -63,7 +63,7 @@ export default function RazorpayButton({ amount, donorDetails, metadata, disable
 
             // 2. Initialize Options
             const options = {
-                key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+                key: order.key_id || process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
                 amount: order.amount,
                 currency: order.currency,
                 name: "Aradhana Dharmika Trust",
