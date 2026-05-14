@@ -8,16 +8,25 @@ import { sendEmail, getRegistrationEmailTemplate, getDonationEmailTemplate } fro
 export async function POST(req: NextRequest) {
     // Re-validating Prisma types
     try {
-        const { razorpay_order_id, razorpay_payment_id, razorpay_signature, amount, donorDetails, metadata } = await req.json();
+        const payload = await req.json();
+        console.log("[VERIFY_PAYMENT] Payload received:", JSON.stringify(payload, null, 2));
+
+        const { razorpay_order_id, razorpay_payment_id, razorpay_signature, amount, donorDetails, metadata } = payload;
 
         if (!razorpay_order_id || !razorpay_payment_id || !razorpay_signature) {
+            console.error("[VERIFY_PAYMENT] Missing required payment fields");
             return NextResponse.json({ error: "Missing required payment fields" }, { status: 400 });
         }
 
-        const body = razorpay_order_id + "|" + razorpay_payment_id;
+        const secret = (process.env.RAZORPAY_KEY_SECRET || "").trim();
+        if (!secret) {
+            console.error("[VERIFY_PAYMENT] RAZORPAY_KEY_SECRET is not configured in environment variables");
+            return NextResponse.json({ error: "Internal Server Error: Secret key missing" }, { status: 500 });
+        }
 
+        const body = razorpay_order_id + "|" + razorpay_payment_id;
         const expectedSignature = crypto
-            .createHmac("sha256", process.env.RAZORPAY_KEY_SECRET!)
+            .createHmac("sha256", secret)
             .update(body.toString())
             .digest("hex");
 
@@ -30,34 +39,42 @@ export async function POST(req: NextRequest) {
 
             let registration;
             if (metadata?.type === 'event') {
+                console.log(`[VERIFY_PAYMENT] Processing Event Registration for order ${razorpay_order_id}`);
+                const regNo = await generateStandardId('REG');
                 const regFee = parseFloat(metadata.registrationFee || 0);
                 const donAmount = parseFloat(metadata.donationAmount || 0);
-                const regNo = await generateStandardId('REG');
+
+                if (isNaN(regFee) || isNaN(donAmount)) {
+                    console.error(`[VERIFY_PAYMENT] Invalid amounts received: regFee=${metadata.registrationFee}, donAmount=${metadata.donationAmount}`);
+                }
 
                 // Create Event Registration
-                registration = await prisma.eventRegistration.create({
-                    data: {
-                        registrationNo: regNo,
-                        eventId: metadata.eventId,
-                        eventTitle: metadata.eventTitle, // Ensure this is passed
-                        name: donorDetails.name,
-                        email: donorDetails.email,
-                        phone: donorDetails.phone,
-                        address: donorDetails.address,
-                        organisation: donorDetails.organisation,
-                        referredBy: donorDetails.referredBy,
-                        attendees: 1, // Default to 1 for now
-                        totalAmount: parseFloat(amount),
-                        registrationFee: regFee,
-                        donationAmount: donAmount,
-                        status: "registered",
-                        razorpayOrderId: razorpay_order_id,
-                        razorpayPaymentId: razorpay_payment_id,
-                        razorpaySignature: razorpay_signature,
-                        // Relational connection
-                        event: metadata.eventId ? { connect: { id: metadata.eventId } } : undefined
-                    }
-                });
+                try {
+                    registration = await prisma.eventRegistration.create({
+                        data: {
+                            registrationNo: regNo,
+                            eventId: metadata.eventId,
+                            eventTitle: metadata.eventTitle || "Unknown Event",
+                            name: donorDetails?.name || "Anonymous",
+                            email: donorDetails?.email || "",
+                            phone: donorDetails?.phone || "",
+                            address: donorDetails?.address || "",
+                            organisation: donorDetails?.organisation || "",
+                            referredBy: donorDetails?.referredBy || "None",
+                            registrationFee: isNaN(regFee) ? 0 : regFee,
+                            donationAmount: isNaN(donAmount) ? 0 : donAmount,
+                            totalAmount: (isNaN(regFee) ? 0 : regFee) + (isNaN(donAmount) ? 0 : donAmount),
+                            razorpayOrderId: razorpay_order_id,
+                            razorpayPaymentId: razorpay_payment_id,
+                            razorpaySignature: razorpay_signature,
+                            status: "confirmed"
+                        }
+                    });
+                    console.log(`[VERIFY_PAYMENT] Successfully created EventRegistration ID: ${registration.id}, RegNo: ${regNo}`);
+                } catch (regError) {
+                    console.error(`[VERIFY_PAYMENT] EventRegistration creation failed:`, regError);
+                    throw regError;
+                }
 
                 // Generate and Send Email
                 try {
@@ -94,35 +111,41 @@ export async function POST(req: NextRequest) {
                 // If there's a donation amount, also create a DonationRecord for the donations management section
                 if (donAmount > 0) {
                     const receiptNo = await generateStandardId('RCT');
-
-                    await prisma.donationRecord.create({
-                        data: {
-                            donorName: donorDetails.name,
-                            email: donorDetails.email,
-                            phone: donorDetails.phone,
-                            amount: donAmount,
-                            category: "Event Donation",
-                            method: "Razorpay",
-                            address: donorDetails.address,
-                            organisation: donorDetails.organisation,
-                            referredBy: donorDetails.referredBy || "None",
-                            receiptNo,
-                            status: "completed",
-                            date: new Date(),
-                            eventId: metadata.eventId,
-                            registrationId: registration.id
-                        }
-                    });
+                    try {
+                        await prisma.donationRecord.create({
+                            data: {
+                                donorName: donorDetails?.name || "Anonymous",
+                                email: donorDetails?.email || "",
+                                phone: donorDetails?.phone || "",
+                                amount: isNaN(donAmount) ? 0 : donAmount,
+                                category: "Event Donation",
+                                method: "Razorpay",
+                                address: donorDetails?.address || "",
+                                organisation: donorDetails?.organisation || "",
+                                referredBy: donorDetails?.referredBy || "None",
+                                receiptNo,
+                                status: "completed",
+                                date: new Date(),
+                                eventId: metadata.eventId,
+                                registrationId: registration.id
+                            }
+                        });
+                        console.log(`[VERIFY_PAYMENT] Successfully created DonationRecord linked to EventRegistration. Receipt: ${receiptNo}`);
+                    } catch (donError) {
+                        console.error(`[VERIFY_PAYMENT] DonationRecord (from Event) creation failed:`, donError);
+                        // We don't throw here to avoid failing the whole registration if only donation record fails
+                    }
                 }
             } else {
                 // Default: Create Donation Record (for Admin Dashboard)
                 console.log(`[VERIFY_PAYMENT] Processing General Donation for order ${razorpay_order_id}`);
                 const receiptNo = await generateStandardId('RCT');
+                const parsedAmount = parseFloat(amount);
                 
                 try {
                     const donation = await prisma.donationRecord.create({
                         data: {
-                            amount: parseFloat(amount),
+                            amount: isNaN(parsedAmount) ? 0 : parsedAmount,
                             status: "completed",
                             donorName: donorDetails?.name || "Anonymous",
                             email: donorDetails?.email || "",
@@ -148,12 +171,11 @@ export async function POST(req: NextRequest) {
                     const receiptData = {
                         receiptType: 'Donation',
                         receiptNo: receiptNo,
-
                         date: new Date().toLocaleDateString('en-IN', { day: '2-digit', month: 'long', year: 'numeric' }),
-                        userName: donorDetails.name,
-                        email: donorDetails.email,
-                        phone: donorDetails.phone,
-                        amount: parseFloat(amount),
+                        userName: donorDetails?.name || "Donor",
+                        email: donorDetails?.email || "",
+                        phone: donorDetails?.phone || "",
+                        amount: isNaN(parsedAmount) ? 0 : parsedAmount,
                         paymentStatus: 'Paid'
                     } as any;
 
