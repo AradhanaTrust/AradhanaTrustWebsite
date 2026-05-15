@@ -6,35 +6,69 @@ import { generateReceiptPDF } from "@/lib/pdf-service";
 import { sendEmail, getRegistrationEmailTemplate, getDonationEmailTemplate } from "@/lib/mail";
 
 export async function POST(req: NextRequest) {
-    // Re-validating Prisma types
     try {
-        const payload = await req.json();
-        console.log("[VERIFY_PAYMENT] Payload received:", JSON.stringify(payload, null, 2));
+        const bodyText = await req.text();
+        const signature = req.headers.get("x-razorpay-signature");
 
-        const { razorpay_order_id, razorpay_payment_id, razorpay_signature, amount, donorDetails, metadata } = payload;
-
-        if (!razorpay_order_id || !razorpay_payment_id || !razorpay_signature) {
-            console.error("[VERIFY_PAYMENT] Missing required payment fields");
-            return NextResponse.json({ error: "Missing required payment fields" }, { status: 400 });
+        if (!signature) {
+            return NextResponse.json({ error: "Missing signature" }, { status: 400 });
         }
 
-        const secret = (process.env.RAZORPAY_KEY_SECRET || "").trim();
+        const secret = process.env.RAZORPAY_WEBHOOK_SECRET;
         if (!secret) {
-            console.error("[VERIFY_PAYMENT] RAZORPAY_KEY_SECRET is not configured in environment variables");
-            return NextResponse.json({ error: "Internal Server Error: Secret key missing" }, { status: 500 });
+            console.error("[WEBHOOK] RAZORPAY_WEBHOOK_SECRET is missing");
+            return NextResponse.json({ error: "Configuration Error" }, { status: 500 });
         }
 
-        const body = razorpay_order_id + "|" + razorpay_payment_id;
         const expectedSignature = crypto
             .createHmac("sha256", secret)
-            .update(body.toString())
+            .update(bodyText)
             .digest("hex");
 
-        console.log(`[VERIFY_PAYMENT] Signature generated for order ${razorpay_order_id}. Expecting: ${expectedSignature}, Received: ${razorpay_signature}`);
+        if (expectedSignature !== signature) {
+            console.error("[WEBHOOK] Invalid signature");
+            return NextResponse.json({ error: "Invalid signature" }, { status: 400 });
+        }
 
-        if (expectedSignature === razorpay_signature) {
-            // 1. Signature matches - Payment Successful
-            console.log(`[VERIFY_PAYMENT] Signature MATCHED for order ${razorpay_order_id}. Proceeding with DB operations.`);
+        const payload = JSON.parse(bodyText);
+        
+        // We handle payment.captured or order.paid
+        if (payload.event === "order.paid" || payload.event === "payment.captured") {
+            const paymentEntity = payload.payload.payment?.entity || {};
+            const orderEntity = payload.payload.order?.entity || {};
+            
+            const razorpay_order_id = paymentEntity.order_id || orderEntity.id;
+            const razorpay_payment_id = paymentEntity.id || "unknown";
+            
+            // We don't have the client's signature in webhook, but the webhook itself is signed and secure.
+            const razorpay_signature = "webhook_verified";
+            
+            // Use order notes (as they were set during order creation)
+            const notes = orderEntity.notes || paymentEntity.notes || {};
+            const amount = paymentEntity.amount ? (paymentEntity.amount / 100).toString() : (orderEntity.amount / 100).toString(); 
+            
+            const metadata = {
+                type: notes.type,
+                eventId: notes.eventId,
+                eventTitle: notes.eventTitle,
+                registrationFee: notes.regFee,
+                donationAmount: notes.donAmount
+            };
+            
+            const donorDetails = {
+                name: notes.name || "Anonymous",
+                email: notes.email || "",
+                phone: notes.phone || "",
+                address: "", 
+                organisation: "",
+                referredBy: "None"
+            };
+
+            if (!razorpay_order_id) {
+                 return NextResponse.json({ success: true, message: "No order id, ignoring" });
+            }
+
+            console.log(`[WEBHOOK] Processing event ${payload.event} for order ${razorpay_order_id}`);
 
             // Deduplication Check
             const existingEventRegistration = await prisma.eventRegistration.findFirst({
@@ -45,39 +79,29 @@ export async function POST(req: NextRequest) {
             });
 
             if (existingEventRegistration || existingDonationRecord) {
-                console.log(`[VERIFY_PAYMENT] Duplicate processing detected for order ${razorpay_order_id}. Skipping DB creation.`);
-                return NextResponse.json({
-                    success: true,
-                    registrationNo: existingEventRegistration?.registrationNo || existingDonationRecord?.receiptNo,
-                    registrationId: existingEventRegistration?.id || existingDonationRecord?.id
-                });
+                console.log(`[WEBHOOK] Duplicate processing detected for order ${razorpay_order_id}. Skipping DB creation.`);
+                return NextResponse.json({ success: true, message: "Already processed" });
             }
-
 
             let registration;
             if (metadata?.type === 'event') {
-                console.log(`[VERIFY_PAYMENT] Processing Event Registration for order ${razorpay_order_id}`);
+                console.log(`[WEBHOOK] Processing Event Registration for order ${razorpay_order_id}`);
                 const regNo = await generateStandardId('REG');
-                const regFee = parseFloat(metadata.registrationFee || 0);
-                const donAmount = parseFloat(metadata.donationAmount || 0);
+                const regFee = parseFloat(metadata.registrationFee || "0");
+                const donAmount = parseFloat(metadata.donationAmount || "0");
 
-                if (isNaN(regFee) || isNaN(donAmount)) {
-                    console.error(`[VERIFY_PAYMENT] Invalid amounts received: regFee=${metadata.registrationFee}, donAmount=${metadata.donationAmount}`);
-                }
-
-                // Create Event Registration
                 try {
                     registration = await prisma.eventRegistration.create({
                         data: {
                             registrationNo: regNo,
                             eventId: metadata.eventId,
                             eventTitle: metadata.eventTitle || "Unknown Event",
-                            name: donorDetails?.name || "Anonymous",
-                            email: donorDetails?.email || "",
-                            phone: donorDetails?.phone || "",
-                            address: donorDetails?.address || "",
-                            organisation: donorDetails?.organisation || "",
-                            referredBy: donorDetails?.referredBy || "None",
+                            name: donorDetails.name,
+                            email: donorDetails.email,
+                            phone: donorDetails.phone,
+                            address: donorDetails.address,
+                            organisation: donorDetails.organisation,
+                            referredBy: donorDetails.referredBy,
                             registrationFee: isNaN(regFee) ? 0 : regFee,
                             donationAmount: isNaN(donAmount) ? 0 : donAmount,
                             totalAmount: (isNaN(regFee) ? 0 : regFee) + (isNaN(donAmount) ? 0 : donAmount),
@@ -87,13 +111,11 @@ export async function POST(req: NextRequest) {
                             status: "confirmed"
                         }
                     });
-                    console.log(`[VERIFY_PAYMENT] Successfully created EventRegistration ID: ${registration.id}, RegNo: ${regNo}`);
                 } catch (regError) {
-                    console.error(`[VERIFY_PAYMENT] EventRegistration creation failed:`, regError);
+                    console.error(`[WEBHOOK] EventRegistration creation failed:`, regError);
                     throw regError;
                 }
 
-                // Generate and Send Email
                 try {
                     const receiptData = {
                         receiptType: 'Registration',
@@ -122,24 +144,23 @@ export async function POST(req: NextRequest) {
                         ]
                     });
                 } catch (emailError) {
-                    console.error("Event Verification Email Error:", emailError);
+                    console.error("[WEBHOOK] Event Verification Email Error:", emailError);
                 }
 
-                // If there's a donation amount, also create a DonationRecord for the donations management section
                 if (donAmount > 0) {
                     const receiptNo = await generateStandardId('RCT');
                     try {
                         await prisma.donationRecord.create({
                             data: {
-                                donorName: donorDetails?.name || "Anonymous",
-                                email: donorDetails?.email || "",
-                                phone: donorDetails?.phone || "",
+                                donorName: donorDetails.name,
+                                email: donorDetails.email,
+                                phone: donorDetails.phone,
                                 amount: isNaN(donAmount) ? 0 : donAmount,
                                 category: "Event Donation",
                                 method: "Razorpay",
-                                address: donorDetails?.address || "",
-                                organisation: donorDetails?.organisation || "",
-                                referredBy: donorDetails?.referredBy || "None",
+                                address: donorDetails.address,
+                                organisation: donorDetails.organisation,
+                                referredBy: donorDetails.referredBy,
                                 receiptNo,
                                 status: "completed",
                                 date: new Date(),
@@ -148,52 +169,46 @@ export async function POST(req: NextRequest) {
                                 razorpayOrderId: razorpay_order_id
                             }
                         });
-                        console.log(`[VERIFY_PAYMENT] Successfully created DonationRecord linked to EventRegistration. Receipt: ${receiptNo}`);
                     } catch (donError) {
-                        console.error(`[VERIFY_PAYMENT] DonationRecord (from Event) creation failed:`, donError);
-                        // We don't throw here to avoid failing the whole registration if only donation record fails
+                        console.error(`[WEBHOOK] DonationRecord creation failed:`, donError);
                     }
                 }
             } else {
-                // Default: Create Donation Record (for Admin Dashboard)
-                console.log(`[VERIFY_PAYMENT] Processing General Donation for order ${razorpay_order_id}`);
+                console.log(`[WEBHOOK] Processing General Donation for order ${razorpay_order_id}`);
                 const receiptNo = await generateStandardId('RCT');
                 const parsedAmount = parseFloat(amount);
                 
                 try {
-                    const donation = await prisma.donationRecord.create({
+                    await prisma.donationRecord.create({
                         data: {
                             amount: isNaN(parsedAmount) ? 0 : parsedAmount,
                             status: "completed",
-                            donorName: donorDetails?.name || "Anonymous",
-                            email: donorDetails?.email || "",
-                            phone: donorDetails?.phone || "",
-                            address: donorDetails?.address || "",
-                            organisation: donorDetails?.organisation || "",
-                            referredBy: donorDetails?.referredBy || "None",
-                            category: "General", // Default category
+                            donorName: donorDetails.name,
+                            email: donorDetails.email,
+                            phone: donorDetails.phone,
+                            address: donorDetails.address,
+                            organisation: donorDetails.organisation,
+                            referredBy: donorDetails.referredBy,
+                            category: "General", 
                             method: "Razorpay",
                             receiptNo: receiptNo,
                             date: new Date(),
                             razorpayOrderId: razorpay_order_id
                         }
                     });
-                    console.log(`[VERIFY_PAYMENT] Successfully created DonationRecord with ID: ${donation.id}, Receipt: ${receiptNo}`);
                 } catch (dbError) {
-                    console.error(`[VERIFY_PAYMENT] Database creation failed for DonationRecord. Error:`, dbError);
-                    throw dbError; // Bubble up to trigger 500 error properly
+                    console.error(`[WEBHOOK] Database creation failed for DonationRecord. Error:`, dbError);
+                    throw dbError; 
                 }
 
-                // Send Donation Receipt Email
                 try {
-                    console.log(`[VERIFY_PAYMENT] Generating PDF and sending email for Receipt: ${receiptNo}`);
                     const receiptData = {
                         receiptType: 'Donation',
                         receiptNo: receiptNo,
                         date: new Date().toLocaleDateString('en-IN', { day: '2-digit', month: 'long', year: 'numeric' }),
-                        userName: donorDetails?.name || "Donor",
-                        email: donorDetails?.email || "",
-                        phone: donorDetails?.phone || "",
+                        userName: donorDetails.name,
+                        email: donorDetails.email,
+                        phone: donorDetails.phone,
                         amount: isNaN(parsedAmount) ? 0 : parsedAmount,
                         paymentStatus: 'Paid'
                     } as any;
@@ -213,25 +228,19 @@ export async function POST(req: NextRequest) {
                         ]
                     });
                 } catch (emailError) {
-                    console.error("Donation Verification Email Error:", emailError);
+                    console.error("[WEBHOOK] Donation Verification Email Error:", emailError);
                 }
             }
 
-            console.log(`[VERIFY_PAYMENT] Transaction successfully completed for order ${razorpay_order_id}. Returning success to frontend.`);
-            return NextResponse.json({
-                success: true,
-                registrationNo: registration?.registrationNo,
-                registrationId: registration?.id
-            });
-        } else {
-            console.error(`[VERIFY_PAYMENT] Signature MISMATCH for order ${razorpay_order_id}`);
-            return NextResponse.json({ error: "Invalid signature" }, { status: 400 });
+            return NextResponse.json({ success: true, message: "Processed successfully" });
         }
+
+        return NextResponse.json({ success: true, message: "Event ignored" });
+
     } catch (error: any) {
-        console.error("[VERIFY_PAYMENT_FATAL] Verification Error:", error);
+        console.error("[WEBHOOK_FATAL] Webhook Error:", error);
         return NextResponse.json({ 
-            error: "Internal Server Error. Check server logs.", 
-            details: error?.message || String(error)
+            error: "Internal Server Error", 
         }, { status: 500 });
     }
 }

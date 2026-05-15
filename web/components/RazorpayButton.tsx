@@ -53,7 +53,8 @@ export default function RazorpayButton({ amount, donorDetails, metadata, disable
             // 1. Create Order
             const res = await fetch("/api/payment/create-order", {
                 method: "POST",
-                body: JSON.stringify({ amount }),
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ amount, donorDetails, metadata }),
             });
             const order = await res.json();
 

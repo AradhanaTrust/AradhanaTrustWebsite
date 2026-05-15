@@ -4,7 +4,7 @@ import Razorpay from "razorpay";
 
 export async function POST(req: NextRequest) {
     try {
-        const { amount, currency = "INR" } = await req.json();
+        const { amount, currency = "INR", donorDetails = {}, metadata = {} } = await req.json();
 
         if (!amount || amount < 1) {
             return NextResponse.json({ error: "Invalid amount. Minimum amount is 1 INR (100 paise)." }, { status: 400 });
@@ -17,10 +17,24 @@ export async function POST(req: NextRequest) {
             key_secret: process.env.RAZORPAY_KEY_SECRET!,
         });
 
+        const notes: Record<string, string> = {
+            name: donorDetails.name?.substring(0, 254) || "Anonymous",
+            email: donorDetails.email?.substring(0, 254) || "",
+            phone: donorDetails.phone?.substring(0, 254) || "",
+            type: metadata.type?.substring(0, 254) || "general",
+            eventId: metadata.eventId?.substring(0, 254) || "",
+            eventTitle: metadata.eventTitle?.substring(0, 254) || "",
+            regFee: metadata.registrationFee?.toString().substring(0, 254) || "0",
+            donAmount: metadata.donationAmount?.toString().substring(0, 254) || "0",
+        };
+        // Clean up empty notes
+        Object.keys(notes).forEach(key => (!notes[key]) && delete notes[key]);
+
         const options = {
             amount: Math.round(amount * 100), // Amount in paise (e.g. 100 INR = 10000 paise). Math.round to avoid floating point errors
             currency,
             receipt: `rcpt_${Date.now().toString().slice(-6)}`,
+            notes,
         };
 
         const order = await razorpay.orders.create(options);
