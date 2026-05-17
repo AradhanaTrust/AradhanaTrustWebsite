@@ -59,9 +59,9 @@ export async function POST(req: NextRequest) {
                 name: notes.name || "Anonymous",
                 email: notes.email || "",
                 phone: notes.phone || "",
-                address: "", 
-                organisation: "",
-                referredBy: "None"
+                address: notes.address || "", 
+                organisation: notes.org || notes.organisation || "",
+                referredBy: notes.referredBy || "None"
             };
 
             if (!razorpay_order_id) {
