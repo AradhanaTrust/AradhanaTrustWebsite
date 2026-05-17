@@ -18,10 +18,6 @@ export async function GET(req: NextRequest) {
             include: { event: true }
         });
 
-        if (!registration) {
-            return NextResponse.json({ error: "Registration not found" }, { status: 404 });
-        }
-
         // Prepare logo base64
         let logoDataUrl = undefined;
         try {
@@ -33,23 +29,52 @@ export async function GET(req: NextRequest) {
             console.error("Failed to read logo for PDF generation:", e);
         }
 
-        // Prepare data for the PDF template
-        const receiptData = {
-            receiptType: registration.donationAmount > 0 && registration.registrationFee === 0 ? 'Donation' : 'Registration',
-            receiptNo: registration.registrationNo || "LEGACY",
-            date: new Date(registration.createdAt).toLocaleDateString('en-IN', {
-                day: '2-digit',
-                month: 'long',
-                year: 'numeric'
-            }),
-            userName: registration.name,
-            email: registration.email,
-            phone: registration.phone || undefined,
-            eventTitle: registration.eventTitle,
-            amount: registration.totalAmount,
-            paymentStatus: registration.status === 'registered' || registration.status === 'confirmed' ? 'Paid' : 'Pending',
-            logoDataUrl
-        };
+        let receiptData;
+
+        if (registration) {
+            receiptData = {
+                receiptType: registration.donationAmount > 0 && registration.registrationFee === 0 ? 'Donation' : 'Registration',
+                receiptNo: registration.registrationNo || "LEGACY",
+                date: new Date(registration.createdAt).toLocaleDateString('en-IN', {
+                    day: '2-digit',
+                    month: 'long',
+                    year: 'numeric'
+                }),
+                userName: registration.name,
+                email: registration.email,
+                phone: registration.phone || undefined,
+                eventTitle: registration.eventTitle,
+                amount: registration.totalAmount,
+                paymentStatus: registration.status === 'registered' || registration.status === 'confirmed' ? 'Paid' : 'Pending',
+                logoDataUrl
+            };
+        } else {
+            const donation = await prisma.donationRecord.findUnique({
+                where: { id: registrationId },
+                include: { event: true }
+            });
+
+            if (!donation) {
+                return NextResponse.json({ error: "Receipt record not found" }, { status: 404 });
+            }
+
+            receiptData = {
+                receiptType: 'Donation',
+                receiptNo: donation.receiptNo,
+                date: new Date(donation.date).toLocaleDateString('en-IN', {
+                    day: '2-digit',
+                    month: 'long',
+                    year: 'numeric'
+                }),
+                userName: donation.donorName,
+                email: donation.email || "",
+                phone: donation.phone || undefined,
+                eventTitle: donation.event?.title || undefined,
+                amount: donation.amount,
+                paymentStatus: donation.status === 'completed' ? 'Paid' : 'Pending',
+                logoDataUrl
+            };
+        }
 
         const pdfBuffer = await generateReceiptPDF(receiptData);
 

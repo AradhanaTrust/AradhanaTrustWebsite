@@ -55,6 +55,7 @@ export async function POST(req: NextRequest) {
 
 
             let registration;
+            let donation;
             if (metadata?.type === 'event') {
                 console.log(`[VERIFY_PAYMENT] Processing Event Registration for order ${razorpay_order_id}`);
                 const regNo = await generateStandardId('REG');
@@ -165,7 +166,7 @@ export async function POST(req: NextRequest) {
                 const parsedAmount = parseFloat(amount);
                 
                 try {
-                    const donation = await prisma.donationRecord.create({
+                    donation = await prisma.donationRecord.create({
                         data: {
                             amount: isNaN(parsedAmount) ? 0 : parsedAmount,
                             status: "completed",
@@ -228,8 +229,8 @@ export async function POST(req: NextRequest) {
             console.log(`[VERIFY_PAYMENT] Transaction successfully completed for order ${razorpay_order_id}. Returning success to frontend.`);
             return NextResponse.json({
                 success: true,
-                registrationNo: registration?.registrationNo,
-                registrationId: registration?.id
+                registrationNo: registration?.registrationNo || donation?.receiptNo,
+                registrationId: registration?.id || donation?.id
             });
         } else {
             console.error(`[VERIFY_PAYMENT] Signature MISMATCH for order ${razorpay_order_id}`);
