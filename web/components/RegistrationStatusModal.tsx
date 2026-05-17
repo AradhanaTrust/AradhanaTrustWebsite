@@ -2,6 +2,8 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { CheckCircle2, XCircle, Download, X } from "lucide-react";
+import { createPortal } from "react-dom";
+import { useEffect, useState } from "react";
 
 interface RegistrationStatusModalProps {
     isOpen: boolean;
@@ -22,11 +24,17 @@ export default function RegistrationStatusModal({
     registrationNo,
     receiptUrl
 }: RegistrationStatusModalProps) {
-    if (!isOpen || !status) return null;
+    const [mounted, setMounted] = useState(false);
+    
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    if (!isOpen || !status || !mounted) return null;
 
     const isSuccess = status === 'success';
 
-    return (
+    return createPortal(
         <AnimatePresence>
             <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 sm:p-6">
                 {/* Backdrop */}
@@ -119,6 +127,7 @@ export default function RegistrationStatusModal({
                     </div>
                 </motion.div>
             </div>
-        </AnimatePresence>
+        </AnimatePresence>,
+        document.body
     );
 }
