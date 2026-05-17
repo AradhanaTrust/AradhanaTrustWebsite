@@ -127,7 +127,7 @@ export async function POST(req: NextRequest) {
                         eventTitle: metadata.eventTitle,
                         amount: parseFloat(amount),
                         paymentStatus: 'Paid'
-                    } as any;
+                    };
 
                     const pdfBuffer = await generateReceiptPDF(receiptData);
 
@@ -211,7 +211,7 @@ export async function POST(req: NextRequest) {
                         phone: donorDetails.phone,
                         amount: isNaN(parsedAmount) ? 0 : parsedAmount,
                         paymentStatus: 'Paid'
-                    } as any;
+                    };
 
                     const pdfBuffer = await generateReceiptPDF(receiptData);
 
@@ -237,7 +237,7 @@ export async function POST(req: NextRequest) {
 
         return NextResponse.json({ success: true, message: "Event ignored" });
 
-    } catch (error: any) {
+    } catch (error: unknown) {
         console.error("[WEBHOOK_FATAL] Webhook Error:", error);
         return NextResponse.json({ 
             error: "Internal Server Error", 
