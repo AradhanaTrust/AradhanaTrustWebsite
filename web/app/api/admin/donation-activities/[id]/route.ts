@@ -36,7 +36,8 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
             const blob = await put(file.name, file, {
                 access: 'public',
                 allowOverwrite: true,
-                addRandomSuffix: true
+                addRandomSuffix: true,
+                category: 'activities'
             });
             imageUrl = blob.url;
         }
