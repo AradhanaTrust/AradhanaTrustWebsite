@@ -115,9 +115,11 @@ export default function DonationsPage() {
             "Receipt No": d.receiptNo,
             "Date": new Date(d.date).toLocaleDateString("en-IN"),
             "Donor Name": d.donorName,
+            "Organisation": d.organisation || "N/A",
             "Referred By": d.referredBy || "None",
-            "Email": d.email,
-            "Phone": d.phone,
+            "Email": d.email || "N/A",
+            "Phone": d.phone || "N/A",
+            "Address": d.address || "N/A",
             "Amount (₹)": d.amount,
             "Category": d.category,
             "Event": d.event?.title || "N/A",
@@ -140,9 +142,11 @@ export default function DonationsPage() {
             { wch: 15 }, // Receipt
             { wch: 12 }, // Date
             { wch: 25 }, // Donor
+            { wch: 20 }, // Organisation
             { wch: 20 }, // Referred By
             { wch: 25 }, // Email
             { wch: 15 }, // Phone
+            { wch: 30 }, // Address
             { wch: 12 }, // Amount
             { wch: 20 }, // Category
             { wch: 25 }, // Event
@@ -286,7 +290,7 @@ export default function DonationsPage() {
                                     <tr>
                                         <th className="p-4 font-semibold text-primary-dark whitespace-nowrap">Receipt No</th>
                                         <th className="p-4 font-semibold text-primary-dark whitespace-nowrap">Date</th>
-                                        <th className="p-4 font-semibold text-primary-dark whitespace-nowrap">Donor</th>
+                                        <th className="p-4 font-semibold text-primary-dark whitespace-nowrap">Donor Details</th>
                                         <th className="p-4 font-semibold text-primary-dark whitespace-nowrap">Referred By</th>
                                         <th className="p-4 font-semibold text-primary-dark whitespace-nowrap">Event</th>
                                         <th className="p-4 font-semibold text-primary-dark whitespace-nowrap">Amount</th>
@@ -307,7 +311,10 @@ export default function DonationsPage() {
                                             </td>
                                             <td className="p-4">
                                                 <div className="font-semibold text-primary-dark">{donation.donorName}</div>
-                                                <div className="text-xs text-primary/50">{donation.email}</div>
+                                                {donation.organisation && <div className="text-xs font-medium text-secondary-dark">{donation.organisation}</div>}
+                                                <div className="text-xs text-primary/50 mt-1">{donation.email}</div>
+                                                {donation.phone && <div className="text-xs text-primary/50">{donation.phone}</div>}
+                                                {donation.address && <div className="text-xs text-primary/40 truncate max-w-[200px]" title={donation.address}>{donation.address}</div>}
                                             </td>
                                             <td className="p-4 text-sm text-primary/80">
                                                 {donation.referredBy || <span className="text-primary/40">None</span>}
