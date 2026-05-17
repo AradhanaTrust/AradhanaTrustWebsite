@@ -88,7 +88,11 @@ export async function POST(req: NextRequest) {
                         }
                     });
                     console.log(`[VERIFY_PAYMENT] Successfully created EventRegistration ID: ${registration.id}, RegNo: ${regNo}`);
-                } catch (regError) {
+                } catch (regError: any) {
+                    if (regError?.code === 'P2002') {
+                        console.log(`[VERIFY_PAYMENT] Duplicate caught by DB unique constraint for order ${razorpay_order_id}.`);
+                        return NextResponse.json({ success: true, message: "Already processed" });
+                    }
                     console.error(`[VERIFY_PAYMENT] EventRegistration creation failed:`, regError);
                     throw regError;
                 }
@@ -179,7 +183,11 @@ export async function POST(req: NextRequest) {
                         }
                     });
                     console.log(`[VERIFY_PAYMENT] Successfully created DonationRecord with ID: ${donation.id}, Receipt: ${receiptNo}`);
-                } catch (dbError) {
+                } catch (dbError: any) {
+                    if (dbError?.code === 'P2002') {
+                        console.log(`[VERIFY_PAYMENT] Duplicate caught by DB unique constraint for order ${razorpay_order_id}.`);
+                        return NextResponse.json({ success: true, message: "Already processed" });
+                    }
                     console.error(`[VERIFY_PAYMENT] Database creation failed for DonationRecord. Error:`, dbError);
                     throw dbError; // Bubble up to trigger 500 error properly
                 }

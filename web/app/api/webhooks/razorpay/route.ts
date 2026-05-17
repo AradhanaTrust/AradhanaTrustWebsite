@@ -111,7 +111,11 @@ export async function POST(req: NextRequest) {
                             status: "confirmed"
                         }
                     });
-                } catch (regError) {
+                } catch (regError: any) {
+                    if (regError?.code === 'P2002') {
+                        console.log(`[WEBHOOK] Duplicate caught by DB unique constraint for order ${razorpay_order_id}.`);
+                        return NextResponse.json({ success: true, message: "Already processed" });
+                    }
                     console.error(`[WEBHOOK] EventRegistration creation failed:`, regError);
                     throw regError;
                 }
@@ -196,7 +200,11 @@ export async function POST(req: NextRequest) {
                             razorpayOrderId: razorpay_order_id
                         }
                     });
-                } catch (dbError) {
+                } catch (dbError: any) {
+                    if (dbError?.code === 'P2002') {
+                        console.log(`[WEBHOOK] Duplicate caught by DB unique constraint for order ${razorpay_order_id}.`);
+                        return NextResponse.json({ success: true, message: "Already processed" });
+                    }
                     console.error(`[WEBHOOK] Database creation failed for DonationRecord. Error:`, dbError);
                     throw dbError; 
                 }
