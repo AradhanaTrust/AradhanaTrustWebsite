@@ -73,7 +73,9 @@ export default function RazorpayButton({ amount, donorDetails, metadata, disable
                 amount: order.amount,
                 currency: order.currency,
                 name: "Aradhana Dharmika Trust",
-                description: "Donation",
+                description: metadata?.type === 'event'
+                    ? `Event Registration: ${metadata.eventTitle}`
+                    : "Trust Donation",
                 // image: "/logo.png", // Ensure you have a logo at public/logo.png
                 order_id: order.id,
                 handler: async function (response: RazorpayResponse) {
