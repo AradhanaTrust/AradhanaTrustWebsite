@@ -72,8 +72,21 @@ export default function Footer() {
                                 { id: 'whatsappUrl', icon: <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg> },
                                 { id: 'callUrl', icon: <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg> }
                             ].map((item, index) => {
-                                const href = socialLinks[item.id] || (item.id === 'callUrl' ? `tel:${t.contactInfo.phone}` : null);
+                                let href = socialLinks[item.id] || (item.id === 'callUrl' ? t.contactInfo.phone : null);
                                 if (!href) return null;
+
+                                // Format WhatsApp and Call URLs if they are just numbers
+                                if (item.id === 'whatsappUrl' && !href.startsWith('http')) {
+                                    // Remove any non-digit characters except + and assume country code is present or default to +91
+                                    let cleanNum = href.replace(/[^\d+]/g, '');
+                                    if (!cleanNum.startsWith('+') && cleanNum.length <= 10) {
+                                        cleanNum = '+91' + cleanNum;
+                                    }
+                                    href = `https://wa.me/${cleanNum.replace('+', '')}`;
+                                } else if (item.id === 'callUrl' && !href.startsWith('tel:')) {
+                                    href = `tel:${href}`;
+                                }
+
                                 return (
                                     <a
                                         key={index}

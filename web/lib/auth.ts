@@ -63,7 +63,11 @@ export const authOptions: NextAuthOptions = {
                 token.picture = user.image;
             }
             if (trigger === "update" && session) {
-                return { ...token, ...session.user };
+                const updatedToken = { ...token, ...session.user };
+                if (session.user.image !== undefined) {
+                    updatedToken.picture = session.user.image;
+                }
+                return updatedToken;
             }
             return token;
         },
