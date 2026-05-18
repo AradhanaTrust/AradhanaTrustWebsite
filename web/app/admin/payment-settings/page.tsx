@@ -136,7 +136,7 @@ export default function PaymentSettingsPage() {
                             <CreditCard className="w-5 h-5" />
                         </div>
                         <div>
-                            <h3 className="text-lg font-cinzel-decorative font-bold text-primary-dark">
+                            <h3 className="text-lg font-bold text-primary-dark">
                                 UPI QR & Gateway Settings
                             </h3>
                             <p className="text-xs text-primary/60">
