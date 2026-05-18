@@ -267,5 +267,7 @@ model SystemSettings {
   youtubeUrl       String?
   whatsappUrl      String?
   callUrl          String?
+  upiId            String?  @default("ppr.04789.19022024.00513152@cnrb")
+  upiQrCodeImage   String?  @default("/assets/QR_Code.jpg")
   updatedAt        DateTime @updatedAt
 }

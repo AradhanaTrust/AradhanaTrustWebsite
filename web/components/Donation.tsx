@@ -13,9 +13,31 @@ export default function Donation() {
     const { language } = useLanguage();
     const t = translations[language].donation;
     const [copied, setCopied] = React.useState(false);
+    const [upiSettings, setUpiSettings] = React.useState({
+        upiId: donationConfig.upiId,
+        upiQrCodeImage: donationConfig.qrCodeImage
+    });
+
+    React.useEffect(() => {
+        const fetchSettings = async () => {
+            try {
+                const res = await fetch("/api/settings");
+                if (res.ok) {
+                    const data = await res.json();
+                    setUpiSettings({
+                        upiId: data.upiId || donationConfig.upiId,
+                        upiQrCodeImage: data.upiQrCodeImage || donationConfig.qrCodeImage
+                    });
+                }
+            } catch (err) {
+                console.error("Failed to load dynamic UPI settings", err);
+            }
+        };
+        fetchSettings();
+    }, []);
 
     const handleCopy = () => {
-        navigator.clipboard.writeText(donationConfig.upiId);
+        navigator.clipboard.writeText(upiSettings.upiId);
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);
     };
@@ -47,7 +69,7 @@ export default function Donation() {
                             >
                                 <div className="text-left flex-1 min-w-0">
                                     <p className="text-[10px] sm:text-xs text-secondary-dark uppercase tracking-widest font-bold mb-1">UPI ID</p>
-                                    <p className="text-xs sm:text-sm md:text-base font-mono font-bold text-primary break-all">{donationConfig.upiId}</p>
+                                    <p className="text-xs sm:text-sm md:text-base font-mono font-bold text-primary break-all">{upiSettings.upiId}</p>
                                 </div>
                                 <div className={`p-2 rounded-lg transition-colors flex-shrink-0 ${copied ? "bg-green-100 text-green-600" : "bg-secondary/10 text-secondary-dark group-hover:bg-secondary group-hover:text-white"}`}>
                                     {copied ? <Check size={16} className="sm:w-5 sm:h-5" /> : <Copy size={16} className="sm:w-5 sm:h-5" />}
@@ -68,7 +90,7 @@ export default function Donation() {
 
                         <div className="aspect-square bg-background-ivory rounded-xl border-4 border-double border-secondary/30 flex items-center justify-center relative overflow-hidden group p-2">
                             <img
-                                src={donationConfig.qrCodeImage}
+                                src={upiSettings.upiQrCodeImage}
                                 alt="Donate QR Code"
                                 className="w-full h-full object-contain p-1 group-hover:scale-105 transition-transform duration-500"
                             />

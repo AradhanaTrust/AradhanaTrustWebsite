@@ -16,7 +16,8 @@ import {
     Image as ImageIcon, // Renamed Image to ImageIcon to avoid conflict
     Activity,
     BookOpen, // Added BookOpen for Priest Registrations
-    HelpingHand // Added HelpingHand for Ritual Requests
+    HelpingHand, // Added HelpingHand for Ritual Requests
+    CreditCard
 } from "lucide-react";
 import { signOut } from "next-auth/react";
 import { useState } from "react";
@@ -68,6 +69,12 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                 { name: "Events", href: "/admin/events", icon: Calendar, adminOnly: false },
                 { name: "Activities", href: "/admin/donations/activities", icon: Activity, adminOnly: false },
                 { name: "Gallery", href: "/admin/gallery", icon: ImageIcon, adminOnly: false },
+            ]
+        },
+        {
+            name: "Payment Management",
+            items: [
+                { name: "Payment Settings", href: "/admin/payment-settings", icon: CreditCard, adminOnly: false }
             ]
         },
         {

@@ -13,6 +13,8 @@ export async function GET() {
                 youtubeUrl: true,
                 whatsappUrl: true,
                 callUrl: true,
+                upiId: true,
+                upiQrCodeImage: true,
             },
         });
 

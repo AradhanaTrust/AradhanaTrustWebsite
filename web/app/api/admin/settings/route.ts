@@ -34,11 +34,11 @@ export async function POST(req: Request) {
     try {
         const session = await getServerSession(authOptions);
 
-        if (!session || session.user?.role !== "PRIMARY_ADMIN") {
-            return new NextResponse("Unauthorized. Only Primary Admin can change system settings.", { status: 401 });
+        if (!session) {
+            return new NextResponse("Unauthorized.", { status: 401 });
         }
 
-        const { enableDeletions, facebookUrl, instagramUrl, youtubeUrl, whatsappUrl, callUrl } = await req.json();
+        const { enableDeletions, facebookUrl, instagramUrl, youtubeUrl, whatsappUrl, callUrl, upiId, upiQrCodeImage } = await req.json();
 
         const updateData: any = {};
         if (enableDeletions !== undefined) updateData.enableDeletions = enableDeletions;
@@ -47,6 +47,8 @@ export async function POST(req: Request) {
         if (youtubeUrl !== undefined) updateData.youtubeUrl = youtubeUrl;
         if (whatsappUrl !== undefined) updateData.whatsappUrl = whatsappUrl;
         if (callUrl !== undefined) updateData.callUrl = callUrl;
+        if (upiId !== undefined) updateData.upiId = upiId;
+        if (upiQrCodeImage !== undefined) updateData.upiQrCodeImage = upiQrCodeImage;
 
         const settings = await prisma.systemSettings.upsert({
             where: { id: "system" },
