@@ -125,7 +125,10 @@ export default function DonationsPage() {
             "Event": d.event?.title || "N/A",
             "Payment Method": d.method,
             "Status": d.status,
-            "PAN": d.panNumber || "N/A"
+            "PAN": d.panNumber || "N/A",
+            "Razorpay Order ID": d.razorpayOrderId || "N/A",
+            "Razorpay Payment ID": d.razorpayPaymentId || "N/A",
+            "Razorpay Signature": d.razorpaySignature || "N/A"
         }));
 
         // Create worksheet
@@ -153,6 +156,9 @@ export default function DonationsPage() {
             { wch: 15 }, // Method
             { wch: 12 }, // Status
             { wch: 15 }, // PAN
+            { wch: 25 }, // Razorpay Order ID
+            { wch: 25 }, // Razorpay Payment ID
+            { wch: 25 }, // Razorpay Signature
         ];
 
         const wb = XLSX.utils.book_new();
@@ -315,6 +321,12 @@ export default function DonationsPage() {
                                                 <div className="text-xs text-primary/50 mt-1">{donation.email}</div>
                                                 {donation.phone && <div className="text-xs text-primary/50">{donation.phone}</div>}
                                                 {donation.address && <div className="text-xs text-primary/40 truncate max-w-[200px]" title={donation.address}>{donation.address}</div>}
+                                                {(donation.razorpayOrderId || donation.razorpayPaymentId) && (
+                                                    <div className="mt-1.5 pt-1.5 border-t border-secondary/10 text-[10px] font-mono text-secondary-dark/70 space-y-0.5">
+                                                        {donation.razorpayOrderId && <div>Order: {donation.razorpayOrderId}</div>}
+                                                        {donation.razorpayPaymentId && <div>Payment: {donation.razorpayPaymentId}</div>}
+                                                    </div>
+                                                )}
                                             </td>
                                             <td className="p-4 text-sm text-primary/80">
                                                 {donation.referredBy || <span className="text-primary/40">None</span>}

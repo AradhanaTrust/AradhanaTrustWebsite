@@ -170,7 +170,9 @@ export async function POST(req: NextRequest) {
                                 date: new Date(),
                                 eventId: metadata.eventId,
                                 registrationId: registration.id,
-                                razorpayOrderId: razorpay_order_id
+                                razorpayOrderId: razorpay_order_id,
+                                razorpayPaymentId: razorpay_payment_id,
+                                razorpaySignature: razorpay_signature
                             }
                         });
                     } catch (donError) {
@@ -197,7 +199,9 @@ export async function POST(req: NextRequest) {
                             method: "Razorpay",
                             receiptNo: receiptNo,
                             date: new Date(),
-                            razorpayOrderId: razorpay_order_id
+                            razorpayOrderId: razorpay_order_id,
+                            razorpayPaymentId: razorpay_payment_id,
+                            razorpaySignature: razorpay_signature
                         }
                     });
                 } catch (dbError: any) {

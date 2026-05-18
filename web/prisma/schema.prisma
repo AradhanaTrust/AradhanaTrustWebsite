@@ -132,6 +132,8 @@ model DonationRecord {
   eventId      String?
   registrationId String?
   razorpayOrderId String? @unique
+  razorpayPaymentId String?
+  razorpaySignature String?
   event        Event?   @relation(fields: [eventId], references: [id], onDelete: SetNull)
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt

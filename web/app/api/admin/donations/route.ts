@@ -55,6 +55,8 @@ export async function GET(req: Request) {
                 { phone: { contains: search, mode: 'insensitive' } },
                 { receiptNo: { contains: search, mode: 'insensitive' } },
                 { referredBy: { contains: search, mode: 'insensitive' } },
+                { razorpayOrderId: { contains: search, mode: 'insensitive' } },
+                { razorpayPaymentId: { contains: search, mode: 'insensitive' } },
             ];
         }
 
