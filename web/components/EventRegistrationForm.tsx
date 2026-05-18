@@ -8,6 +8,7 @@ import RegistrationStatusModal from "./RegistrationStatusModal";
 import { registerForFreeEvent } from "@/app/actions/event-registration";
 import { Event } from "@/lib/events-data";
 import { useLanguage } from "@/context/LanguageContext";
+import { translations } from "@/lib/translations";
 
 interface EventRegistrationFormProps {
     event: Event;
@@ -16,6 +17,7 @@ interface EventRegistrationFormProps {
 
 export default function EventRegistrationForm({ event, onSuccess }: EventRegistrationFormProps) {
     const { language } = useLanguage();
+    const t = translations[language].eventRegistration;
 
     const [formData, setFormData] = useState({
         name: "",
@@ -46,8 +48,8 @@ export default function EventRegistrationForm({ event, onSuccess }: EventRegistr
                 setModalData({
                     isOpen: true,
                     status: 'success',
-                    title: 'Successfully Registered!',
-                    message: 'Your registration has been confirmed. A receipt is available for download.',
+                    title: t.successTitle,
+                    message: t.successMessage,
                     registrationNo: result.registrationNo || undefined,
                     receiptUrl: result.registrationId ? `/api/receipts/download?id=${result.registrationId}` : undefined
                 });
@@ -55,8 +57,8 @@ export default function EventRegistrationForm({ event, onSuccess }: EventRegistr
                 setModalData({
                     isOpen: true,
                     status: 'error',
-                    title: 'Registration Failed',
-                    message: result.message || "Registration failed. Please try again."
+                    title: t.failedTitle,
+                    message: result.message || t.failedMessage
                 });
             }
         } catch (error) {
@@ -64,8 +66,8 @@ export default function EventRegistrationForm({ event, onSuccess }: EventRegistr
             setModalData({
                 isOpen: true,
                 status: 'error',
-                title: 'Error',
-                message: "An error occurred during registration. Please try again."
+                title: t.errorTitle,
+                message: t.errorMessage
             });
         } finally {
             setIsSubmitting(false);
@@ -100,14 +102,14 @@ export default function EventRegistrationForm({ event, onSuccess }: EventRegistr
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                         className="w-full p-4 bg-white border border-[#D4AF37]/30 rounded-xl focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/10 outline-none text-[#5D4037] placeholder-transparent peer transition-all"
                         id="name"
-                        placeholder="Full Name"
+                        placeholder={t.namePlaceholder}
                         required
                     />
                     <label
                         htmlFor="name"
                         className="absolute left-4 top-4 text-[#8D6E63]/70 text-base transition-all peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:-translate-y-7 peer-focus:scale-75 peer-focus:text-[#D4AF37] peer-focus:bg-[#FDFBF7] peer-focus:px-2 -translate-y-7 scale-75 bg-[#FDFBF7] px-2 pointer-events-none"
                     >
-                        Full Name *
+                        {t.nameLabel}
                     </label>
                 </div>
 
@@ -118,14 +120,14 @@ export default function EventRegistrationForm({ event, onSuccess }: EventRegistr
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                         className="w-full p-4 bg-white border border-[#D4AF37]/30 rounded-xl focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/10 outline-none text-[#5D4037] placeholder-transparent peer transition-all"
                         id="email"
-                        placeholder="Email Address"
+                        placeholder={t.emailPlaceholder}
                         required
                     />
                     <label
                         htmlFor="email"
                         className="absolute left-4 top-4 text-[#8D6E63]/70 text-base transition-all peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:-translate-y-7 peer-focus:scale-75 peer-focus:text-[#D4AF37] peer-focus:bg-[#FDFBF7] peer-focus:px-2 -translate-y-7 scale-75 bg-[#FDFBF7] px-2 pointer-events-none"
                     >
-                        Email Address *
+                        {t.emailLabel}
                     </label>
                 </div>
 
@@ -136,14 +138,14 @@ export default function EventRegistrationForm({ event, onSuccess }: EventRegistr
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                         className="w-full p-4 bg-white border border-[#D4AF37]/30 rounded-xl focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/10 outline-none text-[#5D4037] placeholder-transparent peer transition-all"
                         id="phone"
-                        placeholder="Phone Number"
+                        placeholder={t.phonePlaceholder}
                         required
                     />
                     <label
                         htmlFor="phone"
                         className="absolute left-4 top-4 text-[#8D6E63]/70 text-base transition-all peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:-translate-y-7 peer-focus:scale-75 peer-focus:text-[#D4AF37] peer-focus:bg-[#FDFBF7] peer-focus:px-2 -translate-y-7 scale-75 bg-[#FDFBF7] px-2 pointer-events-none"
                     >
-                        Phone Number *
+                        {t.phoneLabel}
                     </label>
                 </div>
 
@@ -154,14 +156,14 @@ export default function EventRegistrationForm({ event, onSuccess }: EventRegistr
                         rows={2}
                         className="w-full p-4 bg-white border border-[#D4AF37]/30 rounded-xl focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/10 outline-none text-[#5D4037] placeholder-transparent peer transition-all resize-none"
                         id="address"
-                        placeholder="Complete Address"
+                        placeholder={t.addressPlaceholder}
                         required
                     />
                     <label
                         htmlFor="address"
                         className="absolute left-4 top-4 text-[#8D6E63]/70 text-base transition-all peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:-translate-y-7 peer-focus:scale-75 peer-focus:text-[#D4AF37] peer-focus:bg-[#FDFBF7] peer-focus:px-2 -translate-y-7 scale-75 bg-[#FDFBF7] px-2 pointer-events-none"
                     >
-                        Complete Address *
+                        {t.addressLabel}
                     </label>
                 </div>
 
@@ -179,7 +181,7 @@ export default function EventRegistrationForm({ event, onSuccess }: EventRegistr
                             htmlFor="organisation"
                             className="absolute left-4 top-4 text-[#8D6E63]/70 text-base transition-all peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:-translate-y-7 peer-focus:scale-75 peer-focus:text-[#D4AF37] peer-focus:bg-[#FDFBF7] peer-focus:px-2 -translate-y-7 scale-75 bg-[#FDFBF7] px-2 pointer-events-none"
                         >
-                            Organisation (Optional)
+                            {t.organisationLabel}
                         </label>
                     </div>
 
@@ -196,7 +198,7 @@ export default function EventRegistrationForm({ event, onSuccess }: EventRegistr
                             htmlFor="referredBy"
                             className="absolute left-4 top-4 text-[#8D6E63]/70 text-base transition-all peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:-translate-y-7 peer-focus:scale-75 peer-focus:text-[#D4AF37] peer-focus:bg-[#FDFBF7] peer-focus:px-2 -translate-y-7 scale-75 bg-[#FDFBF7] px-2 pointer-events-none"
                         >
-                            Referred By (Optional)
+                            {t.referredByLabel}
                         </label>
                     </div>
                 </div>
@@ -204,10 +206,10 @@ export default function EventRegistrationForm({ event, onSuccess }: EventRegistr
                 {/* Optional Donation Section */}
                 <div className="border border-[#D4AF37]/20 rounded-xl bg-white p-6 my-6 shadow-sm">
                     <h4 className="font-serif font-bold text-lg text-[#5D4037] mb-2 flex items-center justify-between">
-                        Support Our Noble Causes
-                        <span className="text-xs font-normal bg-[#D4AF37]/10 text-[#B8860B] px-2 py-1 rounded">Optional Support</span>
+                        {t.supportTitle}
+                        <span className="text-xs font-normal bg-[#D4AF37]/10 text-[#B8860B] px-2 py-1 rounded">{t.optionalSupport}</span>
                     </h4>
-                    <p className="text-sm text-[#8D6E63] mb-4">Your voluntary contribution helps sustain Annadanam and temple maintenance.</p>
+                    <p className="text-sm text-[#8D6E63] mb-4">{t.supportDesc}</p>
 
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
                         {[500, 1000, 2500, 5000].map(amt => (
@@ -232,7 +234,7 @@ export default function EventRegistrationForm({ event, onSuccess }: EventRegistr
 
             {/* Total Summary */}
             <div className="flex justify-center items-baseline gap-4 mb-8 p-4 bg-white rounded-xl border border-[#D4AF37]/20">
-                <span className="font-serif text-[#8D6E63] font-medium text-lg">Total Amount:</span>
+                <span className="font-serif text-[#8D6E63] font-medium text-lg">{t.totalAmount}</span>
                 <span className="text-2xl font-bold text-[#D4AF37]">
                     ₹{totalAmount}
                 </span>
@@ -244,7 +246,7 @@ export default function EventRegistrationForm({ event, onSuccess }: EventRegistr
                     disabled
                     className="w-full md:w-auto px-10 py-4 bg-gray-200 text-gray-500 font-semibold rounded-xl cursor-not-allowed block mx-auto"
                 >
-                    Please Fill Required Fields
+                    {t.fillRequired}
                 </button>
             ) : totalAmount > 0 ? (
                 <div className="pt-2">
@@ -259,9 +261,10 @@ export default function EventRegistrationForm({ event, onSuccess }: EventRegistr
                             donationAmount: donationAmount
                         }}
                         disabled={!formData.name || !formData.email || !formData.phone}
+                        label={t.registerPaid}
                     />
                     <p className="text-xs text-center text-[#8D6E63] mt-3 flex items-center justify-center gap-1">
-                        Secure Payment via Razorpay
+                        {t.securePayment}
                     </p>
                 </div>
             ) : (
@@ -272,10 +275,10 @@ export default function EventRegistrationForm({ event, onSuccess }: EventRegistr
                 >
                     {isSubmitting ? (
                         <>
-                            <Loader2 size={20} className="animate-spin" /> Processing...
+                            <Loader2 size={20} className="animate-spin" /> {t.submitting}
                         </>
                     ) : (
-                        <>Register (Free) <ArrowRight size={20} /></>
+                        <>{t.registerFree} <ArrowRight size={20} /></>
                     )}
                 </button>
             )}

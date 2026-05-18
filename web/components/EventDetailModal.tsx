@@ -11,6 +11,7 @@ import EventRegistrationForm from "./EventRegistrationForm";
 import RazorpayButton from "./RazorpayButton";
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import { translations } from "@/lib/translations";
 
 interface EventDetailModalProps {
     event: Event;
@@ -19,6 +20,7 @@ interface EventDetailModalProps {
 
 export default function EventDetailModal({ event, onClose }: EventDetailModalProps) {
     const { language } = useLanguage();
+    const t = translations[language].eventsPage;
     const translatedEvent = getEventTranslation(event, language);
     const [mounted, setMounted] = useState(false);
     const [showRegistration, setShowRegistration] = useState(false);
@@ -98,7 +100,7 @@ export default function EventDetailModal({ event, onClose }: EventDetailModalPro
 
                     {/* Description */}
                     <div className="mb-6">
-                        <h3 className="font-serif font-bold text-xl text-[#5D4037] mb-3">About This Event</h3>
+                        <h3 className="font-serif font-bold text-xl text-[#5D4037] mb-3">{t.popup.aboutTitle}</h3>
                         <div className="prose prose-brown max-w-none text-[#5D4037]/80 leading-relaxed whitespace-pre-wrap">
                             <ReactMarkdown remarkPlugins={[remarkGfm]}>
                                 {translatedEvent.description}
@@ -109,7 +111,7 @@ export default function EventDetailModal({ event, onClose }: EventDetailModalPro
                     {/* Gallery */}
                     {event.gallery && event.gallery.length > 0 && (
                         <div className="mb-6">
-                            <h3 className="font-serif font-bold text-xl text-[#5D4037] mb-3">Photo Gallery</h3>
+                            <h3 className="font-serif font-bold text-xl text-[#5D4037] mb-3">{t.popup.galleryTitle}</h3>
                             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                                 {event.gallery.map((img, idx) => (
                                     <img key={idx} src={img} alt={`Gallery ${idx + 1}`} className="rounded-xl w-full h-40 object-cover" />
@@ -124,16 +126,16 @@ export default function EventDetailModal({ event, onClose }: EventDetailModalPro
                             {!showRegistration ? (
                                 <div className="flex flex-col items-center gap-4">
                                     <div className="text-center mb-4">
-                                        <div className="text-lg font-semibold text-[#5D4037]">Registration Fee</div>
+                                        <div className="text-lg font-semibold text-[#5D4037]">{t.popup.feeLabel}</div>
                                         <div className="text-3xl font-bold text-[#D4AF37]">
-                                            {event.price ? `₹${event.price}` : 'Free'}
+                                            {event.price ? `₹${event.price}` : t.popup.free}
                                         </div>
                                     </div>
                                     <button
                                         onClick={() => setShowRegistration(true)}
                                         className="px-10 py-3 bg-gradient-to-b from-[#F2C96D] to-[#9E731C] text-white font-medium text-lg rounded-xl border border-[#CFA14E] shadow-[inset_0_0_0_2px_#DFA848,inset_0_0_0_3px_#FFF5D1,0_4px_8px_rgba(0,0,0,0.3)] hover:shadow-[inset_0_0_0_2px_#DFA848,inset_0_0_0_3px_#FFF5D1,0_6px_12px_rgba(0,0,0,0.4)] hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2 drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)]"
                                     >
-                                        Register Now <ArrowRight size={20} />
+                                        {t.popup.registerButton} <ArrowRight size={20} />
                                     </button>
                                 </div>
                             ) : (

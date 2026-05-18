@@ -379,7 +379,42 @@ export const translations = {
                 pastEvents: "Past Events",
                 registerNow: "Register Now",
                 viewDetails: "View Details"
+            },
+            popup: {
+                aboutTitle: "About This Event",
+                galleryTitle: "Photo Gallery",
+                feeLabel: "Registration Fee",
+                free: "Free",
+                registerButton: "Register Now"
             }
+        },
+        eventRegistration: {
+            title: "Register for Event",
+            nameLabel: "Full Name *",
+            namePlaceholder: "Enter your name",
+            emailLabel: "Email Address *",
+            emailPlaceholder: "your@email.com",
+            phoneLabel: "Phone Number *",
+            phonePlaceholder: "Enter phone number",
+            addressLabel: "Complete Address *",
+            addressPlaceholder: "Enter your full address",
+            organisationLabel: "Organisation (Optional)",
+            referredByLabel: "Referred By (Optional)",
+            supportTitle: "Support Our Noble Causes",
+            optionalSupport: "Optional Support",
+            supportDesc: "Your voluntary contribution helps sustain Annadanam and temple maintenance.",
+            totalAmount: "Total Amount:",
+            fillRequired: "Please Fill Required Fields",
+            securePayment: "Secure Payment via Razorpay",
+            registerFree: "Register (Free)",
+            registerPaid: "Register & Pay",
+            submitting: "Processing...",
+            successTitle: "Successfully Registered!",
+            successMessage: "Your registration has been confirmed. A receipt is available for download.",
+            failedTitle: "Registration Failed",
+            failedMessage: "Registration failed. Please try again.",
+            errorTitle: "Error",
+            errorMessage: "An error occurred during registration. Please try again."
         },
         contact: {
             hero: {
@@ -921,7 +956,42 @@ export const translations = {
                 pastEvents: "ಹಿಂದಿನ ಕಾರ್ಯಕ್ರಮಗಳು",
                 registerNow: "ಈಗ ನೋಂದಾಯಿಸಿ",
                 viewDetails: "ವಿವರಗಳನ್ನು ವೀಕ್ಷಿಸಿ"
+            },
+            popup: {
+                aboutTitle: "ಕಾರ್ಯಕ್ರಮದ ಬಗ್ಗೆ",
+                galleryTitle: "ಛಾಯಾಚಿತ್ರ ಗ್ಯಾಲರಿ",
+                feeLabel: "ನೋಂದಣಿ ಶುಲ್ಕ",
+                free: "ಉಚಿತ",
+                registerButton: "ಈಗ ನೋಂದಾಯಿಸಿ"
             }
+        },
+        eventRegistration: {
+            title: "ಕಾರ್ಯಕ್ರಮಕ್ಕೆ ನೋಂದಾಯಿಸಿ",
+            nameLabel: "ಪೂರ್ಣ ಹೆಸರು *",
+            namePlaceholder: "ನಿಮ್ಮ ಹೆಸರನ್ನು ನಮೂದಿಸಿ",
+            emailLabel: "ಇಮೇಲ್ ವಿಳಾಸ *",
+            emailPlaceholder: "your@email.com",
+            phoneLabel: "ದೂರವಾಣಿ ಸಂಖ್ಯೆ *",
+            phonePlaceholder: "ದೂರವಾಣಿ ಸಂಖ್ಯೆ ನಮೂದಿಸಿ",
+            addressLabel: "ಪೂರ್ಣ ವಿಳಾಸ *",
+            addressPlaceholder: "ನಿಮ್ಮ ಪೂರ್ಣ ವಿಳಾಸ ನಮೂದಿಸಿ",
+            organisationLabel: "ಸಂಸ್ಥೆ (ಐಚ್ಛಿಕ)",
+            referredByLabel: "ಶಿಫಾರಸು ಮಾಡಿದವರು (ಐಚ್ಛಿಕ)",
+            supportTitle: "ನಮ್ಮ ಉದಾತ್ತ ಕಾರ್ಯಗಳಿಗೆ ಬೆಂಬಲ ನೀಡಿ",
+            optionalSupport: "ಐಚ್ಛಿಕ ಬೆಂಬಲ",
+            supportDesc: "ನಿಮ್ಮ ಸ್ವಯಂಪ್ರೇರಿತ ಕೊಡುಗೆಯು ಅನ್ನದಾನ ಮತ್ತು ದೇವಾಲಯದ ನಿರ್ವಹಣೆಯನ್ನು ಉಳಿಸಿಕೊಳ್ಳಲು ಸಹಾಯ ಮಾಡುತ್ತದೆ.",
+            totalAmount: "ಒಟ್ಟು ಮೊತ್ತ:",
+            fillRequired: "ದಯವಿಟ್ಟು ಅಗತ್ಯವಿರುವ ಕ್ಷೇತ್ರಗಳನ್ನು ಭರ್ತಿ ಮಾಡಿ",
+            securePayment: "ರೇಜರ್‌ಪೇ ಮೂಲಕ ಸುರಕ್ಷಿತ ಪಾವತಿ",
+            registerFree: "ನೋಂದಾಯಿಸಿ (ಉಚಿತ)",
+            registerPaid: "ನೋಂದಾಯಿಸಿ ಮತ್ತು ಪಾವತಿಸಿ",
+            submitting: "ಪ್ರಕ್ರಿಯೆಗೊಳಿಸಲಾಗುತ್ತಿದೆ...",
+            successTitle: "ನೋಂದಣಿ ಯಶಸ್ವಿಯಾಗಿದೆ!",
+            successMessage: "ನಿಮ್ಮ ನೋಂದಣಿಯನ್ನು ದೃಢೀಕರಿಸಲಾಗಿದೆ. ರಸೀದಿಯನ್ನು ಡೌನ್‌ಲೋಡ್ ಮಾಡಲು ಲಭ್ಯವಿದೆ.",
+            failedTitle: "ನೋಂದಣಿ ವಿಫಲವಾಗಿದೆ",
+            failedMessage: "ನೋಂದಣಿ ವಿಫಲವಾಗಿದೆ. ದಯವಿಟ್ಟು ಮತ್ತೊಮ್ಮೆ ಪ್ರಯತ್ನಿಸಿ.",
+            errorTitle: "ದೋಷ",
+            errorMessage: "ನೋಂದಣಿ ಸಮಯದಲ್ಲಿ ದೋಷ ಸಂಭವಿಸಿದೆ. ದಯವಿಟ್ಟು ಮತ್ತೊಮ್ಮೆ ಪ್ರಯತ್ನಿಸಿ."
         },
         contact: {
             hero: {
