@@ -168,9 +168,20 @@ export default function Header() {
                                 } hover:border-secondary hover:bg-secondary/10`}
                             aria-label={session ? "User menu" : "Login"}
                         >
-                            <div className="bg-secondary/20 rounded-full p-1 flex-shrink-0">
-                                <UserCircle className="w-6 h-6 text-secondary-dark" />
-                            </div>
+                            {session?.user?.image ? (
+                                <img 
+                                    src={session.user.image} 
+                                    alt="Profile" 
+                                    className="w-8 h-8 rounded-full object-cover border-2 border-secondary/30 flex-shrink-0"
+                                    onError={(e) => {
+                                        (e.target as HTMLImageElement).src = "/assets/Logo_Round.png";
+                                    }}
+                                />
+                            ) : (
+                                <div className="bg-secondary/20 rounded-full p-1 flex-shrink-0">
+                                    <UserCircle className="w-6 h-6 text-secondary-dark" />
+                                </div>
+                            )}
                             {session && (
                                 <span className="text-xs lg:text-sm font-bold font-serif tracking-wider text-primary-dark hidden lg:inline-block">
                                     {session.user?.name?.split(' ')[0]}
