@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import DashboardLayout from "@/components/admin/DashboardLayout";
 import { useSession } from "next-auth/react";
-import { User, Mail, Phone, Lock, Camera, Save, Loader2 } from "lucide-react";
+import { User, Mail, Phone, Lock, Camera, Save, Loader2, Upload } from "lucide-react";
 
 export default function SettingsPage() {
     const { data: session, update } = useSession();
@@ -29,6 +29,20 @@ export default function SettingsPage() {
         confirmPassword: "",
     });
 
+    const fileInputRef = useRef<HTMLInputElement>(null);
+
+    useEffect(() => {
+        if (session?.user) {
+            setUserData({
+                name: session.user.name || "",
+                email: session.user.email || "",
+                phone: (session.user as any).phone || "",
+                photo: session.user.image || "",
+                role: session.user.role || "PRIMARY_ADMIN",
+            });
+        }
+    }, [session]);
+
     useEffect(() => {
         const fetchSystemSettings = async () => {
             setIsSettingsLoading(true);
@@ -44,8 +58,40 @@ export default function SettingsPage() {
                 setIsSettingsLoading(false);
             }
         };
-        fetchSystemSettings();
-    }, []);
+        if (session?.user?.role === "PRIMARY_ADMIN") {
+            fetchSystemSettings();
+        }
+    }, [session]);
+
+    const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (!e.target.files || e.target.files.length === 0) return;
+        
+        const file = e.target.files[0];
+        setIsLoading(true);
+        setError("");
+
+        try {
+            const formData = new FormData();
+            formData.append("file", file);
+
+            const res = await fetch("/api/admin/profile/upload", {
+                method: "POST",
+                body: formData,
+            });
+
+            if (!res.ok) {
+                throw new Error("Failed to upload image");
+            }
+
+            const data = await res.json();
+            setUserData(prev => ({ ...prev, photo: data.url }));
+            setSuccess("Image uploaded. Click Save Changes to update your profile.");
+        } catch (err: any) {
+            setError(err.message || "Failed to upload image");
+        } finally {
+            setIsLoading(false);
+        }
+    };
 
     const handleProfileUpdate = async () => {
         setError("");
@@ -217,17 +263,44 @@ export default function SettingsPage() {
                                 </div>
                             </div>
                             <div className="flex-1">
-                                <p className="font-semibold text-primary-dark">Profile Photo URL</p>
-                                <input
-                                    type="text"
-                                    value={userData.photo}
-                                    onChange={(e) => setUserData({ ...userData, photo: e.target.value })}
-                                    disabled={!isEditing || isLoading}
-                                    className="w-full mt-2 px-4 py-2 border-2 border-secondary/20 rounded-lg focus:border-secondary focus:outline-none disabled:bg-background-cream/50 disabled:cursor-not-allowed"
-                                    placeholder="https://example.com/photo.jpg"
-                                />
-                                <p className="text-xs text-primary/60 mt-1">
-                                    Enter a direct URL to your profile image. Use a square image for best results.
+                                <p className="font-semibold text-primary-dark">Profile Photo</p>
+                                {isEditing ? (
+                                    <div className="mt-2 flex items-center gap-4">
+                                        <input
+                                            type="file"
+                                            accept="image/*"
+                                            className="hidden"
+                                            ref={fileInputRef}
+                                            onChange={handleImageUpload}
+                                            disabled={isLoading}
+                                        />
+                                        <button
+                                            type="button"
+                                            onClick={() => fileInputRef.current?.click()}
+                                            disabled={isLoading}
+                                            className="px-4 py-2 flex items-center gap-2 border-2 border-secondary/30 text-secondary-dark rounded-lg hover:bg-secondary/5 transition-colors font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+                                        >
+                                            <Upload className="w-4 h-4" />
+                                            Browse Image
+                                        </button>
+                                        {userData.photo && (
+                                            <button
+                                                type="button"
+                                                onClick={() => setUserData({ ...userData, photo: "" })}
+                                                disabled={isLoading}
+                                                className="text-sm text-red-500 hover:text-red-700 font-medium"
+                                            >
+                                                Remove
+                                            </button>
+                                        )}
+                                    </div>
+                                ) : (
+                                    <p className="mt-2 text-sm text-primary/70">
+                                        {userData.photo ? "Custom profile photo uploaded" : "Using default profile photo"}
+                                    </p>
+                                )}
+                                <p className="text-xs text-primary/60 mt-2">
+                                    Upload a square image for best results. Maximum size 5MB.
                                 </p>
                             </div>
                         </div>

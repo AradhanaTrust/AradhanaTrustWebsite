@@ -16,7 +16,8 @@ export async function put(filename: string, file: File | Buffer | string, option
     const isGallery = options?.category === 'gallery';
     const isEvents = options?.category === 'events';
     const isActivities = options?.category === 'activities';
-    const isPersistent = isGallery || isEvents || isActivities;
+    const isProfile = options?.category === 'profile';
+    const isPersistent = isGallery || isEvents || isActivities || isProfile;
     const TARGET_DIR = isPersistent ? EXTERNAL_UPLOAD_DIR : DEFAULT_UPLOAD_DIR;
 
     if (!existsSync(TARGET_DIR)) {
@@ -62,6 +63,13 @@ export async function put(filename: string, file: File | Buffer | string, option
             size: buffer.length,
             uploadedAt: new Date()
         };
+    } else if (isProfile) {
+        return {
+            url: `/api/uploads/profile/${finalFilename}`,
+            pathname: `api/uploads/profile/${finalFilename}`,
+            size: buffer.length,
+            uploadedAt: new Date()
+        };
     }
 
     return {
@@ -81,7 +89,7 @@ export async function del(url: string | string[]) {
 
     for (const u of urls) {
         try {
-            if (u.startsWith('/api/uploads/gallery/') || u.startsWith('/api/uploads/events/') || u.startsWith('/api/uploads/activities/')) {
+            if (u.startsWith('/api/uploads/gallery/') || u.startsWith('/api/uploads/events/') || u.startsWith('/api/uploads/activities/') || u.startsWith('/api/uploads/profile/')) {
                 // Handle external path deletion
                 const filename = u.split('/').pop();
                 if (filename) {
