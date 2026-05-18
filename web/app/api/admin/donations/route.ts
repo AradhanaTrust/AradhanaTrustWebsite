@@ -21,44 +21,73 @@ export async function GET(req: Request) {
         const endDate = searchParams.get("endDate");
         const referredBy = searchParams.get("referredBy");
 
-        const whereClause: any = {};
+        const conditions: any[] = [];
 
         if (category && category !== "all") {
-            whereClause.category = category;
+            conditions.push({ category });
         }
 
         if (method && method !== "all") {
-            whereClause.method = method;
+            if (method === "UPI") {
+                conditions.push({
+                    OR: [
+                        { method: "UPI" },
+                        { method: { contains: "UPI" } }
+                    ]
+                });
+            } else if (method === "Credit/Debit Card") {
+                conditions.push({
+                    OR: [
+                        { method: "Credit/Debit Card" },
+                        { method: { contains: "CARD" } }
+                    ]
+                });
+            } else if (method === "Net Banking") {
+                conditions.push({
+                    OR: [
+                        { method: "Net Banking" },
+                        { method: { contains: "NETBANKING" } }
+                    ]
+                });
+            } else {
+                conditions.push({ method });
+            }
         }
 
         if (eventId && eventId !== "all") {
-            whereClause.eventId = eventId;
+            conditions.push({ eventId });
         }
 
         if (referredBy) {
-            whereClause.referredBy = { contains: referredBy };
+            conditions.push({ referredBy: { contains: referredBy } });
         }
 
         if (startDate && endDate) {
             const end = new Date(endDate);
             end.setHours(23, 59, 59, 999);
-            whereClause.date = {
-                gte: new Date(startDate),
-                lte: end,
-            };
+            conditions.push({
+                date: {
+                    gte: new Date(startDate),
+                    lte: end,
+                }
+            });
         }
 
         if (search) {
-            whereClause.OR = [
-                { donorName: { contains: search } },
-                { email: { contains: search } },
-                { phone: { contains: search } },
-                { receiptNo: { contains: search } },
-                { referredBy: { contains: search } },
-                { razorpayOrderId: { contains: search } },
-                { razorpayPaymentId: { contains: search } },
-            ];
+            conditions.push({
+                OR: [
+                    { donorName: { contains: search } },
+                    { email: { contains: search } },
+                    { phone: { contains: search } },
+                    { receiptNo: { contains: search } },
+                    { referredBy: { contains: search } },
+                    { razorpayOrderId: { contains: search } },
+                    { razorpayPaymentId: { contains: search } },
+                ]
+            });
         }
+
+        const whereClause = conditions.length > 0 ? { AND: conditions } : {};
 
         const donations = await prisma.donationRecord.findMany({
             where: whereClause,
