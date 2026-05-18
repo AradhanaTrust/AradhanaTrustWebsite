@@ -29,11 +29,13 @@ export async function GET(request: Request) {
         }
         if (search) {
             where.OR = [
-                { registrationNo: { contains: search, mode: 'insensitive' } },
-                { name: { contains: search, mode: 'insensitive' } },
-                { email: { contains: search, mode: 'insensitive' } },
-                { phone: { contains: search, mode: 'insensitive' } },
-                { eventTitle: { contains: search, mode: 'insensitive' } }
+                { registrationNo: { contains: search } },
+                { name: { contains: search } },
+                { email: { contains: search } },
+                { phone: { contains: search } },
+                { eventTitle: { contains: search } },
+                { razorpayOrderId: { contains: search } },
+                { razorpayPaymentId: { contains: search } }
             ];
         }
 

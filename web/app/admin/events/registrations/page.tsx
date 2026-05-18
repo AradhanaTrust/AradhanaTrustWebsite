@@ -38,6 +38,7 @@ interface registration {
     status: string;
     razorpayOrderId: string | null;
     razorpayPaymentId: string | null;
+    razorpaySignature: string | null;
     address: string | null;
     organisation: string | null;
     referredBy: string | null;
@@ -174,7 +175,8 @@ function RegistrationsPageContent() {
             'Organisation': reg.organisation || '-',
             'Referred By': reg.referredBy || '-',
             'Razorpay Order ID': reg.razorpayOrderId || 'FREE',
-            'Razorpay Payment ID': reg.razorpayPaymentId || '-'
+            'Razorpay Payment ID': reg.razorpayPaymentId || '-',
+            'Razorpay Signature': reg.razorpaySignature || '-'
         }));
 
         const worksheet = XLSX.utils.json_to_sheet(dataToExport);
@@ -348,6 +350,12 @@ function RegistrationsPageContent() {
                                             {reg.referredBy && reg.referredBy.toLowerCase() !== "none" && (
                                                 <div className="text-[9px] md:text-[10px] text-primary/40 mt-1 truncate max-w-[150px]" title={`Referred by: ${reg.referredBy}`}>
                                                     👥 Ref: {reg.referredBy}
+                                                </div>
+                                            )}
+                                            {(reg.razorpayOrderId || reg.razorpayPaymentId) && (
+                                                <div className="mt-1.5 pt-1.5 border-t border-secondary/10 text-[10px] font-mono text-secondary-dark/70 space-y-0.5">
+                                                    {reg.razorpayOrderId && <div>Order: {reg.razorpayOrderId}</div>}
+                                                    {reg.razorpayPaymentId && <div>Payment: {reg.razorpayPaymentId}</div>}
                                                 </div>
                                             )}
                                         </td>

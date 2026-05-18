@@ -4,6 +4,7 @@ import { prisma } from "@/lib/prisma";
 import { generateStandardId } from "@/lib/id-generator";
 import { generateReceiptPDF } from "@/lib/pdf-service";
 import { sendEmail, getRegistrationEmailTemplate, getDonationEmailTemplate } from "@/lib/mail";
+import Razorpay from "razorpay";
 
 export async function POST(req: NextRequest) {
     // Re-validating Prisma types
@@ -35,6 +36,20 @@ export async function POST(req: NextRequest) {
         if (expectedSignature === razorpay_signature) {
             // 1. Signature matches - Payment Successful
             console.log(`[VERIFY_PAYMENT] Signature MATCHED for order ${razorpay_order_id}. Proceeding with DB operations.`);
+
+            let paymentMethodStr = "Razorpay";
+            try {
+                const razorpay = new Razorpay({
+                    key_id: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID!,
+                    key_secret: process.env.RAZORPAY_KEY_SECRET!,
+                });
+                const payment = await razorpay.payments.fetch(razorpay_payment_id) as any;
+                if (payment && payment.method) {
+                    paymentMethodStr = `Razorpay (${payment.method.toUpperCase()})`;
+                }
+            } catch (err) {
+                console.error("[VERIFY_PAYMENT] Failed to fetch payment details from Razorpay:", err);
+            }
 
             // Deduplication Check
             const existingEventRegistration = await prisma.eventRegistration.findFirst({
@@ -141,7 +156,7 @@ export async function POST(req: NextRequest) {
                                 phone: donorDetails?.phone || "",
                                 amount: isNaN(donAmount) ? 0 : donAmount,
                                 category: "Event Donation",
-                                method: "Razorpay",
+                                method: paymentMethodStr,
                                 address: donorDetails?.address || "",
                                 organisation: donorDetails?.organisation || "",
                                 referredBy: donorDetails?.referredBy || "None",
@@ -179,7 +194,7 @@ export async function POST(req: NextRequest) {
                             organisation: donorDetails?.organisation || "",
                             referredBy: donorDetails?.referredBy || "None",
                             category: "General", // Default category
-                            method: "Razorpay",
+                            method: paymentMethodStr,
                             receiptNo: receiptNo,
                             date: new Date(),
                             razorpayOrderId: razorpay_order_id,

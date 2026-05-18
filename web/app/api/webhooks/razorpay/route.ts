@@ -43,6 +43,8 @@ export async function POST(req: NextRequest) {
             // We don't have the client's signature in webhook, but the webhook itself is signed and secure.
             const razorpay_signature = "webhook_verified";
             
+            const paymentMethodStr = paymentEntity.method ? `Razorpay (${paymentEntity.method.toUpperCase()})` : "Razorpay";
+            
             // Use order notes (as they were set during order creation)
             const notes = orderEntity.notes || paymentEntity.notes || {};
             const amount = paymentEntity.amount ? (paymentEntity.amount / 100).toString() : (orderEntity.amount / 100).toString(); 
@@ -161,7 +163,7 @@ export async function POST(req: NextRequest) {
                                 phone: donorDetails.phone,
                                 amount: isNaN(donAmount) ? 0 : donAmount,
                                 category: "Event Donation",
-                                method: "Razorpay",
+                                method: paymentMethodStr,
                                 address: donorDetails.address,
                                 organisation: donorDetails.organisation,
                                 referredBy: donorDetails.referredBy,
@@ -196,7 +198,7 @@ export async function POST(req: NextRequest) {
                             organisation: donorDetails.organisation,
                             referredBy: donorDetails.referredBy,
                             category: "General", 
-                            method: "Razorpay",
+                            method: paymentMethodStr,
                             receiptNo: receiptNo,
                             date: new Date(),
                             razorpayOrderId: razorpay_order_id,

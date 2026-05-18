@@ -36,7 +36,7 @@ export async function GET(req: Request) {
         }
 
         if (referredBy) {
-            whereClause.referredBy = { contains: referredBy, mode: 'insensitive' };
+            whereClause.referredBy = { contains: referredBy };
         }
 
         if (startDate && endDate) {
@@ -50,13 +50,13 @@ export async function GET(req: Request) {
 
         if (search) {
             whereClause.OR = [
-                { donorName: { contains: search, mode: 'insensitive' } },
-                { email: { contains: search, mode: 'insensitive' } },
-                { phone: { contains: search, mode: 'insensitive' } },
-                { receiptNo: { contains: search, mode: 'insensitive' } },
-                { referredBy: { contains: search, mode: 'insensitive' } },
-                { razorpayOrderId: { contains: search, mode: 'insensitive' } },
-                { razorpayPaymentId: { contains: search, mode: 'insensitive' } },
+                { donorName: { contains: search } },
+                { email: { contains: search } },
+                { phone: { contains: search } },
+                { receiptNo: { contains: search } },
+                { referredBy: { contains: search } },
+                { razorpayOrderId: { contains: search } },
+                { razorpayPaymentId: { contains: search } },
             ];
         }
 
