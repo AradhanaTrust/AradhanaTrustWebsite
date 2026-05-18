@@ -118,7 +118,7 @@ export default function Header() {
                                                             <Sparkles className="w-4 h-4 text-secondary-dark" />
                                                         </div>
                                                         <span className="text-sm font-serif font-bold text-primary-dark group-hover/item:text-secondary-dark transition-colors tracking-wide whitespace-nowrap">
-                                                            Book A Divine Service
+                                                            {t.bookService}
                                                         </span>
                                                     </Link>
 
@@ -133,7 +133,7 @@ export default function Header() {
                                                             <UserCheck className="w-4 h-4 text-secondary-dark" />
                                                         </div>
                                                         <span className="text-sm font-serif font-bold text-primary-dark group-hover/item:text-secondary-dark transition-colors tracking-wide whitespace-nowrap">
-                                                            Pandit Registration
+                                                            {t.panditRegister}
                                                         </span>
                                                     </Link>
                                                 </div>

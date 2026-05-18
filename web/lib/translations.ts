@@ -10,7 +10,9 @@ export const translations = {
             contact: "Contact",
             toggleBtn: "ಕನ್ನಡ", // Button shows the target language (Kannada)
             trustNameLine1: "Aradhana",
-            trustNameLine2: "Dharmika Trust"
+            trustNameLine2: "Dharmika Trust",
+            bookService: "Book A Divine Service",
+            panditRegister: "Pandit Registration"
         },
         hero: {
             est: "EST. 2024",
@@ -550,7 +552,9 @@ export const translations = {
             contact: "ಸಂಪರ್ಕ",
             toggleBtn: "ENGLISH", // Button shows the target language (English)
             trustNameLine1: "ಆರಾಧನಾ",
-            trustNameLine2: "ಧಾರ್ಮಿಕ ಟ್ರಸ್ಟ್"
+            trustNameLine2: "ಧಾರ್ಮಿಕ ಟ್ರಸ್ಟ್",
+            bookService: "ಸೇವೆ ಕಾಯ್ದಿರಿಸಿ",
+            panditRegister: "ಪುರೋಹಿತರ ನೋಂದಣಿ"
         },
         hero: {
             est: "ಸ್ಥಾಪನೆ 2024",
