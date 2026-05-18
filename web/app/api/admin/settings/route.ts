@@ -38,12 +38,20 @@ export async function POST(req: Request) {
             return new NextResponse("Unauthorized. Only Primary Admin can change system settings.", { status: 401 });
         }
 
-        const { enableDeletions } = await req.json();
+        const { enableDeletions, facebookUrl, instagramUrl, youtubeUrl, whatsappUrl, callUrl } = await req.json();
+
+        const updateData: any = {};
+        if (enableDeletions !== undefined) updateData.enableDeletions = enableDeletions;
+        if (facebookUrl !== undefined) updateData.facebookUrl = facebookUrl;
+        if (instagramUrl !== undefined) updateData.instagramUrl = instagramUrl;
+        if (youtubeUrl !== undefined) updateData.youtubeUrl = youtubeUrl;
+        if (whatsappUrl !== undefined) updateData.whatsappUrl = whatsappUrl;
+        if (callUrl !== undefined) updateData.callUrl = callUrl;
 
         const settings = await prisma.systemSettings.upsert({
             where: { id: "system" },
-            update: { enableDeletions },
-            create: { id: "system", enableDeletions },
+            update: updateData,
+            create: { id: "system", enableDeletions: false, ...updateData },
         });
 
         return NextResponse.json(settings);

@@ -260,5 +260,10 @@ model ServiceRequest {
 model SystemSettings {
   id               String   @id @default("system")
   enableDeletions  Boolean  @default(false)
+  facebookUrl      String?
+  instagramUrl     String?
+  youtubeUrl       String?
+  whatsappUrl      String?
+  callUrl          String?
   updatedAt        DateTime @updatedAt
 }

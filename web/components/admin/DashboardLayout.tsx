@@ -120,15 +120,31 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                 </div>
 
                 {/* User Info */}
-                <div className="p-4 border-b-2 border-secondary/20 bg-secondary/5">
-                    <p className="text-sm font-semibold text-primary-dark truncate">
-                        {session?.user?.name}
-                    </p>
-                    <p className="text-xs text-primary/60 truncate">{session?.user?.email}</p>
-                    <div className="mt-2">
-                        <span className="text-xs px-2 py-1 bg-secondary/20 text-secondary-dark rounded-full">
-                            {session?.user?.role?.replace('_', ' ')}
-                        </span>
+                <div className="p-4 border-b-2 border-secondary/20 bg-secondary/5 flex items-center gap-3">
+                    {session?.user?.image ? (
+                        <img 
+                            src={session.user.image} 
+                            alt="Profile" 
+                            className="w-10 h-10 rounded-full object-cover border-2 border-secondary/30 flex-shrink-0"
+                            onError={(e) => {
+                                (e.target as HTMLImageElement).src = "/assets/Logo_Round.png";
+                            }}
+                        />
+                    ) : (
+                        <div className="w-10 h-10 rounded-full bg-secondary/20 border-2 border-secondary/30 flex items-center justify-center flex-shrink-0">
+                            <Users className="w-5 h-5 text-secondary" />
+                        </div>
+                    )}
+                    <div className="overflow-hidden">
+                        <p className="text-sm font-semibold text-primary-dark truncate">
+                            {session?.user?.name}
+                        </p>
+                        <p className="text-xs text-primary/60 truncate">{session?.user?.email}</p>
+                        <div className="mt-1">
+                            <span className="text-[10px] px-2 py-0.5 bg-secondary/20 text-secondary-dark rounded-full font-bold">
+                                {session?.user?.role?.replace('_', ' ')}
+                            </span>
+                        </div>
                     </div>
                 </div>
 

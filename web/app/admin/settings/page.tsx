@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import DashboardLayout from "@/components/admin/DashboardLayout";
 import { useSession } from "next-auth/react";
-import { User, Mail, Phone, Lock, Camera, Save, Loader2, Upload } from "lucide-react";
+import { User, Mail, Phone, Lock, Camera, Save, Loader2, Upload, Globe } from "lucide-react";
 
 export default function SettingsPage() {
     const { data: session, update } = useSession();
@@ -13,7 +13,14 @@ export default function SettingsPage() {
     const [isSettingsLoading, setIsSettingsLoading] = useState(false);
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
-    const [systemSettings, setSystemSettings] = useState({ enableDeletions: false });
+    const [systemSettings, setSystemSettings] = useState({ 
+        enableDeletions: false,
+        facebookUrl: "",
+        instagramUrl: "",
+        youtubeUrl: "",
+        whatsappUrl: "",
+        callUrl: "",
+    });
 
     const [userData, setUserData] = useState({
         name: session?.user?.name || "",
@@ -122,6 +129,8 @@ export default function SettingsPage() {
                     ...session?.user,
                     name: userData.name,
                     email: userData.email,
+                    phone: userData.phone,
+                    image: userData.photo,
                 },
             });
 
@@ -204,6 +213,38 @@ export default function SettingsPage() {
             setSystemSettings({ ...systemSettings, enableDeletions: originalVal });
         }
     };
+
+    const handleSocialLinksUpdate = async () => {
+        setError("");
+        setSuccess("");
+        setIsSettingsLoading(true);
+
+        try {
+            const res = await fetch("/api/admin/settings", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ 
+                    facebookUrl: systemSettings.facebookUrl,
+                    instagramUrl: systemSettings.instagramUrl,
+                    youtubeUrl: systemSettings.youtubeUrl,
+                    whatsappUrl: systemSettings.whatsappUrl,
+                    callUrl: systemSettings.callUrl,
+                }),
+            });
+
+            if (!res.ok) {
+                const msg = await res.text();
+                throw new Error(msg);
+            }
+
+            setSuccess("Social links updated successfully");
+        } catch (err: any) {
+            setError(err.message || "Failed to update social links");
+        } finally {
+            setIsSettingsLoading(false);
+        }
+    };
+
 
 
     return (
@@ -567,6 +608,62 @@ export default function SettingsPage() {
                                             systemSettings.enableDeletions ? 'translate-x-6' : 'translate-x-1'
                                         }`}
                                     />
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                )}
+
+                {/* Social Media Links Section - Only for Primary Admin */}
+                {session?.user?.role === "PRIMARY_ADMIN" && (
+                    <div className="bg-surface-white border-2 border-secondary/20 rounded-xl p-8">
+                        <div className="mb-6">
+                            <h3 className="text-lg font-cinzel-decorative font-bold text-primary-dark">
+                                Social Media Links
+                            </h3>
+                            <p className="text-sm text-primary/60 mt-1">
+                                Update the URLs for footer social icons and call link
+                            </p>
+                        </div>
+
+                        <div className="space-y-4 pt-4 border-t border-secondary/20">
+                            {[
+                                { id: 'facebookUrl', label: 'Facebook URL', placeholder: 'https://facebook.com/...' },
+                                { id: 'instagramUrl', label: 'Instagram URL', placeholder: 'https://instagram.com/...' },
+                                { id: 'youtubeUrl', label: 'YouTube URL', placeholder: 'https://youtube.com/...' },
+                                { id: 'whatsappUrl', label: 'WhatsApp URL (wa.me)', placeholder: 'https://wa.me/...' },
+                                { id: 'callUrl', label: 'Call URL (tel:)', placeholder: 'tel:+91...' },
+                            ].map((field) => (
+                                <div key={field.id}>
+                                    <label className="block text-sm font-semibold text-primary-dark mb-2">
+                                        {field.label}
+                                    </label>
+                                    <div className="relative">
+                                        <Globe className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-secondary/60" />
+                                        <input
+                                            type="text"
+                                            value={(systemSettings as any)[field.id] || ""}
+                                            onChange={(e) =>
+                                                setSystemSettings({
+                                                    ...systemSettings,
+                                                    [field.id]: e.target.value,
+                                                })
+                                            }
+                                            className="w-full pl-11 pr-4 py-3 border-2 border-secondary/20 rounded-lg focus:border-secondary focus:outline-none"
+                                            placeholder={field.placeholder}
+                                        />
+                                    </div>
+                                </div>
+                            ))}
+
+                            <div className="pt-4">
+                                <button
+                                    onClick={handleSocialLinksUpdate}
+                                    disabled={isSettingsLoading}
+                                    className="px-6 py-3 bg-secondary text-surface-white rounded-lg hover:bg-secondary-dark transition-colors font-semibold flex items-center gap-2 disabled:opacity-50"
+                                >
+                                    <Save className="w-5 h-5" />
+                                    {isSettingsLoading ? "Saving..." : "Save Links"}
                                 </button>
                             </div>
                         </div>
