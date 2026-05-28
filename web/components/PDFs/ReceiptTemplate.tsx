@@ -158,7 +158,7 @@ export const ReceiptTemplate = ({ data }: { data: ReceiptData }) => (
                     style={styles.logo}
                 />
                 <View style={styles.titleContainer}>
-                    <Text style={styles.trustName}>ARADHANA TRUST</Text>
+                    <Text style={styles.trustName}>ARADHANA DHARMIKA TRUST</Text>
                     <Text style={styles.trustDetails}>
                         Helping Hands for Divine Service{"\n"}
                         Visit us: www.aradhanatrust.org{"\n"}
@@ -230,7 +230,7 @@ export const ReceiptTemplate = ({ data }: { data: ReceiptData }) => (
             <View style={styles.signature}>
                 <View style={styles.sigLine}>
                     <Text style={styles.sigText}>Authorized Signatory</Text>
-                    <Text style={[styles.sigText, { fontSize: 8 }]}>Aradhana Trust</Text>
+                    <Text style={[styles.sigText, { fontSize: 8 }]}>Aradhana Dharmika Trust</Text>
                 </View>
             </View>
 
@@ -238,7 +238,7 @@ export const ReceiptTemplate = ({ data }: { data: ReceiptData }) => (
             <View style={styles.footer}>
                 <Text style={styles.footerText}>
                     This is a computer-generated receipt. No physical signature required.{"\n"}
-                    Aradhana Trust is a registered charitable trust. Thank you for your contribution.
+                    Aradhana Dharmika Trust is a registered charitable trust. Thank you for your contribution.
                 </Text>
             </View>
         </Page>
