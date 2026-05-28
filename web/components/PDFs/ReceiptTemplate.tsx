@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     trustDetails: {
         fontSize: 10,
         color: '#666',
-        maxWidth: 250,
+        maxWidth: 320,
         textAlign: 'right',
     },
     receiptLabel: {
@@ -160,7 +160,7 @@ export const ReceiptTemplate = ({ data }: { data: ReceiptData }) => (
                 <View style={styles.titleContainer}>
                     <Text style={styles.trustName}>ARADHANA DHARMIKA TRUST</Text>
                     <Text style={styles.trustDetails}>
-                        Helping Hands for Divine Service{"\n"}
+                        Helping Hands for Divine Service and Community Welfare{"\n"}
                         Visit us: www.aradhanatrust.org{"\n"}
                         Contact: +91 85500 93111
                     </Text>
