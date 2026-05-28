@@ -39,11 +39,19 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         marginBottom: 4,
     },
-    trustDetails: {
-        fontSize: 10,
+    trustTagline: {
+        fontSize: 10.5,
         color: '#666',
         maxWidth: 320,
         textAlign: 'right',
+        marginBottom: 3,
+    },
+    trustContact: {
+        fontSize: 8.5,
+        color: '#888',
+        maxWidth: 250,
+        textAlign: 'right',
+        lineHeight: 1.3,
     },
     receiptLabel: {
         fontSize: 28,
@@ -159,8 +167,10 @@ export const ReceiptTemplate = ({ data }: { data: ReceiptData }) => (
                 />
                 <View style={styles.titleContainer}>
                     <Text style={styles.trustName}>ARADHANA DHARMIKA TRUST</Text>
-                    <Text style={styles.trustDetails}>
-                        Helping Hands for Divine Service and Community Welfare{"\n"}
+                    <Text style={styles.trustTagline}>
+                        Helping Hands for Divine Service and Community Welfare
+                    </Text>
+                    <Text style={styles.trustContact}>
                         Visit us: www.aradhanatrust.org{"\n"}
                         Contact: +91 85500 93111
                     </Text>
