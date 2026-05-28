@@ -47,9 +47,9 @@ const styles = StyleSheet.create({
         marginBottom: 3,
     },
     trustContact: {
-        fontSize: 8.5,
+        fontSize: 9.5,
         color: '#888',
-        maxWidth: 250,
+        maxWidth: 320,
         textAlign: 'right',
         lineHeight: 1.3,
     },
@@ -171,8 +171,7 @@ export const ReceiptTemplate = ({ data }: { data: ReceiptData }) => (
                         Helping Hands for Divine Service and Community Welfare
                     </Text>
                     <Text style={styles.trustContact}>
-                        Visit us: www.aradhanatrust.org{"\n"}
-                        Contact: +91 85500 93111
+                        Visit us: www.aradhanatrust.org | Contact: +91 85500 93111
                     </Text>
                 </View>
             </View>
