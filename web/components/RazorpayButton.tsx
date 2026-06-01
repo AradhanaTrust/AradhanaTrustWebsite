@@ -107,7 +107,11 @@ export default function RazorpayButton({ amount, donorDetails, metadata, disable
                                 isOpen: true,
                                 status: 'success',
                                 title: metadata?.type === 'event' ? t.successTitle : (language === 'kn' ? 'ಪಾವತಿ ಯಶಸ್ವಿಯಾಗಿದೆ!' : 'Payment Successful!'),
-                                message: metadata?.type === 'event' ? t.successMessage : (language === 'kn' ? 'ನಿಮ್ಮ ವಹಿವಾಟನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಪರಿಶೀಲಿಸಲಾಗಿದೆ. ರಸೀದಿಯನ್ನು ನಿಮ್ಮ ಇಮೇಲ್‌ಗೆ ಕಳುಹಿಸಲಾಗಿದೆ.' : 'Your transaction has been verified successfully. A copy of the receipt has been sent to your email.'),
+                                message: metadata?.type === 'event'
+                                    ? t.successMessage
+                                    : donorDetails.email
+                                        ? (language === 'kn' ? 'ನಿಮ್ಮ ವಹಿವಾಟನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಪರಿಶೀಲಿಸಲಾಗಿದೆ. ರಸೀದಿಯನ್ನು ನಿಮ್ಮ ಇಮೇಲ್‌ಗೆ ಕಳುಹಿಸಲಾಗಿದೆ.' : 'Your transaction has been verified successfully. A copy of the receipt has been sent to your email.')
+                                        : (language === 'kn' ? 'ನಿಮ್ಮ ವಹಿವಾಟನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಪರಿಶೀಲಿಸಲಾಗಿದೆ. ಕೆಳಗಿನಿಂದ ನಿಮ್ಮ ರಸೀದಿಯನ್ನು ಡೌನ್‌ಲೋಡ್ ಮಾಡಬಹುದು.' : 'Your transaction has been verified successfully. You can download your receipt below.'),
                                 registrationNo: verifyData.registrationNo,
                                 receiptUrl: verifyData.registrationId ? `/api/receipts/download?id=${verifyData.registrationId}` : undefined
                             });

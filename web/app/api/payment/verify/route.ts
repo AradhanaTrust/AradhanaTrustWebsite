@@ -228,18 +228,22 @@ export async function POST(req: NextRequest) {
 
                     const pdfBuffer = await generateReceiptPDF(receiptData);
 
-                    await sendEmail({
-                        to: donorDetails.email,
-                        subject: `Donation Receipt: Aradhana Trust`,
-                        html: getDonationEmailTemplate(donorDetails.name, parseFloat(amount), receiptNo),
-                        attachments: [
-                            {
-                                filename: `Donation_Receipt_${receiptNo}.pdf`,
-                                content: pdfBuffer,
-                                contentType: 'application/pdf'
-                            }
-                        ]
-                    });
+                    if (donorDetails?.email) {
+                        await sendEmail({
+                            to: donorDetails.email,
+                            subject: `Donation Receipt: Aradhana Trust`,
+                            html: getDonationEmailTemplate(donorDetails.name, parseFloat(amount), receiptNo),
+                            attachments: [
+                                {
+                                    filename: `Donation_Receipt_${receiptNo}.pdf`,
+                                    content: pdfBuffer,
+                                    contentType: 'application/pdf'
+                                }
+                            ]
+                        });
+                    } else {
+                        console.log(`[VERIFY_PAYMENT] No email address provided for receipt ${receiptNo}. Skipping email receipt.`);
+                    }
                 } catch (emailError) {
                     console.error("Donation Verification Email Error:", emailError);
                 }
