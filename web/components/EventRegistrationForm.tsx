@@ -74,7 +74,7 @@ export default function EventRegistrationForm({ event, onSuccess }: EventRegistr
         }
     };
 
-    const isFormValid = formData.name.trim() !== "" && formData.email.trim() !== "" && formData.phone.trim() !== "" && formData.address.trim() !== "";
+    const isFormValid = formData.name.trim() !== "" && formData.phone.trim() !== "" && formData.address.trim() !== "";
     const totalAmount = (event.price || 0) + donationAmount;
 
     return (
@@ -260,7 +260,7 @@ export default function EventRegistrationForm({ event, onSuccess }: EventRegistr
                             registrationFee: event.price || 0,
                             donationAmount: donationAmount
                         }}
-                        disabled={!formData.name || !formData.email || !formData.phone}
+                        disabled={!formData.name || !formData.phone}
                         label={t.registerPaid}
                     />
                     <p className="text-xs text-center text-[#8D6E63] mt-3 flex items-center justify-center gap-1">

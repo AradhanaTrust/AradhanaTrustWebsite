@@ -99,7 +99,7 @@ export async function POST(req: NextRequest) {
                             eventId: metadata.eventId,
                             eventTitle: metadata.eventTitle || "Unknown Event",
                             name: donorDetails.name,
-                            email: donorDetails.email,
+                            email: donorDetails.email || null,
                             phone: donorDetails.phone,
                             address: donorDetails.address,
                             organisation: donorDetails.organisation,
@@ -137,18 +137,22 @@ export async function POST(req: NextRequest) {
 
                     const pdfBuffer = await generateReceiptPDF(receiptData);
 
-                    await sendEmail({
-                        to: donorDetails.email,
-                        subject: `Payment Successful & Registration Confirmed: ${metadata.eventTitle}`,
-                        html: getRegistrationEmailTemplate(donorDetails.name, metadata.eventTitle, regNo),
-                        attachments: [
-                            {
-                                filename: `Registration_Receipt_${regNo}.pdf`,
-                                content: pdfBuffer,
-                                contentType: 'application/pdf'
-                            }
-                        ]
-                    });
+                    if (donorDetails.email) {
+                        await sendEmail({
+                            to: donorDetails.email,
+                            subject: `Payment Successful & Registration Confirmed: ${metadata.eventTitle}`,
+                            html: getRegistrationEmailTemplate(donorDetails.name, metadata.eventTitle, regNo),
+                            attachments: [
+                                {
+                                    filename: `Registration_Receipt_${regNo}.pdf`,
+                                    content: pdfBuffer,
+                                    contentType: 'application/pdf'
+                                }
+                            ]
+                        });
+                    } else {
+                        console.log(`[WEBHOOK] No email address provided for registration ${regNo}. Skipping email receipt.`);
+                    }
                 } catch (emailError) {
                     console.error("[WEBHOOK] Event Verification Email Error:", emailError);
                 }
@@ -159,7 +163,7 @@ export async function POST(req: NextRequest) {
                         await prisma.donationRecord.create({
                             data: {
                                 donorName: donorDetails.name,
-                                email: donorDetails.email,
+                                email: donorDetails.email || null,
                                 phone: donorDetails.phone,
                                 amount: isNaN(donAmount) ? 0 : donAmount,
                                 category: "Event Donation",

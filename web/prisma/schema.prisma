@@ -150,7 +150,7 @@ model EventRegistration {
   registrationFee Float    @default(0)
   donationAmount  Float    @default(0)
   name        String
-  email       String
+  email       String?
   phone       String?
   attendees       Int      @default(1)
   totalAmount     Float    @default(0)

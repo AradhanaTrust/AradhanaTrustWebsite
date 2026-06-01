@@ -8,7 +8,7 @@ import { sendEmail, getRegistrationEmailTemplate } from "@/lib/mail";
 
 export async function registerForFreeEvent(eventId: string, eventTitle: string, userDetails: {
     name: string;
-    email: string;
+    email?: string;
     phone: string;
     address?: string;
     organisation?: string;
@@ -16,8 +16,8 @@ export async function registerForFreeEvent(eventId: string, eventTitle: string, 
 }) {
     // Re-validating Prisma types after generation
     try {
-        if (!userDetails.name || !userDetails.email || !userDetails.phone) {
-            return { success: false, message: "All fields are required" };
+        if (!userDetails.name || !userDetails.phone) {
+            return { success: false, message: "Name and Phone are required" };
         }
 
         // Security Check: Verify event is actually free
@@ -36,7 +36,7 @@ export async function registerForFreeEvent(eventId: string, eventTitle: string, 
                 eventId,
                 eventTitle,
                 name: userDetails.name,
-                email: userDetails.email,
+                email: userDetails.email || null,
                 phone: userDetails.phone,
                 address: userDetails.address,
                 organisation: userDetails.organisation,
@@ -65,18 +65,22 @@ export async function registerForFreeEvent(eventId: string, eventTitle: string, 
 
             const pdfBuffer = await generateReceiptPDF(receiptData);
 
-            await sendEmail({
-                to: userDetails.email,
-                subject: `Registration Confirmed: ${eventTitle}`,
-                html: getRegistrationEmailTemplate(userDetails.name, eventTitle, regNo),
-                attachments: [
-                    {
-                        filename: `Registration_Receipt_${regNo}.pdf`,
-                        content: pdfBuffer,
-                        contentType: 'application/pdf'
-                    }
-                ]
-            });
+            if (userDetails.email) {
+                await sendEmail({
+                    to: userDetails.email,
+                    subject: `Registration Confirmed: ${eventTitle}`,
+                    html: getRegistrationEmailTemplate(userDetails.name, eventTitle, regNo),
+                    attachments: [
+                        {
+                            filename: `Registration_Receipt_${regNo}.pdf`,
+                            content: pdfBuffer,
+                            contentType: 'application/pdf'
+                        }
+                    ]
+                });
+            } else {
+                console.log(`[FREE_REGISTRATION] No email address provided for registration ${regNo}. Skipping email receipt.`);
+            }
         } catch (emailError) {
             console.error("Background Email Error:", emailError);
             // Don't fail the registration if email fails

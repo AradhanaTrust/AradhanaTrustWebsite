@@ -79,26 +79,27 @@ export async function PATCH(request: Request) {
             data: { status }
         });
 
-        // Send Status Update Email
         try {
-            const statusLabel = status.charAt(0).toUpperCase() + status.slice(1);
-            await sendEmail({
-                to: updated.email,
-                subject: `Registration Status Updated: ${statusLabel}`,
-                html: `
-                    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #eee; padding: 20px;">
-                        <h2 style="color: #D4AF37;">Registration Status Update</h2>
-                        <p>Dear <strong>${updated.name}</strong>,</p>
-                        <p>The status of your registration for <strong>${updated.eventTitle}</strong> has been updated to:</p>
-                        <div style="background: #f9f9f9; padding: 15px; border-radius: 5px; text-align: center; margin: 20px 0;">
-                            <span style="font-size: 18px; font-weight: bold; color: #D4AF37; text-transform: uppercase;">${statusLabel}</span>
+            if (updated.email) {
+                const statusLabel = status.charAt(0).toUpperCase() + status.slice(1);
+                await sendEmail({
+                    to: updated.email,
+                    subject: `Registration Status Updated: ${statusLabel}`,
+                    html: `
+                        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #eee; padding: 20px;">
+                            <h2 style="color: #D4AF37;">Registration Status Update</h2>
+                            <p>Dear <strong>${updated.name}</strong>,</p>
+                            <p>The status of your registration for <strong>${updated.eventTitle}</strong> has been updated to:</p>
+                            <div style="background: #f9f9f9; padding: 15px; border-radius: 5px; text-align: center; margin: 20px 0;">
+                                <span style="font-size: 18px; font-weight: bold; color: #D4AF37; text-transform: uppercase;">${statusLabel}</span>
+                            </div>
+                            <p>Registration No: <strong>${updated.registrationNo || 'LEGACY'}</strong></p>
+                            <hr style="border: none; border-top: 1px solid #eee; margin: 20px 0;" />
+                            <p style="color: #888; font-size: 12px;">Thank you for your association with Aradhana Trust.</p>
                         </div>
-                        <p>Registration No: <strong>${updated.registrationNo || 'LEGACY'}</strong></p>
-                        <hr style="border: none; border-top: 1px solid #eee; margin: 20px 0;" />
-                        <p style="color: #888; font-size: 12px;">Thank you for your association with Aradhana Trust.</p>
-                    </div>
-                `
-            });
+                    `
+                });
+            }
         } catch (emailError) {
             console.error("Status Update Email Error:", emailError);
         }
