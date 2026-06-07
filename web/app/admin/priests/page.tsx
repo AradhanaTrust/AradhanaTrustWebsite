@@ -328,6 +328,14 @@ export default function PriestRegistrationsAdminPage() {
                                                 </div>
                                             )}
                                         </div>
+                                        {reg.address && (
+                                            <div className="text-sm md:col-span-2 pt-3 border-t border-gray-100">
+                                                <span className="text-gray-500 block text-xs font-medium uppercase tracking-wider flex items-center gap-1">
+                                                    <MapPin className="w-3 h-3" /> Address
+                                                </span>
+                                                <span className="font-medium text-gray-900 block mt-0.5">{reg.address}</span>
+                                            </div>
+                                        )}
                                     </div>
 
                                     {/* Admin Notes Section */}
