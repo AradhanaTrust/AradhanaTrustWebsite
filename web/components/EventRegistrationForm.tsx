@@ -211,8 +211,8 @@ export default function EventRegistrationForm({ event, onSuccess }: EventRegistr
                     </h4>
                     <p className="text-sm text-[#8D6E63] mb-4">{t.supportDesc}</p>
 
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
-                        {[500, 1000, 2500, 5000].map(amt => (
+                    <div className="grid grid-cols-3 md:grid-cols-6 gap-3 mb-4">
+                        {[300, 500, 1000, 2500, 5000, 10000].map(amt => (
                             <button
                                 key={amt}
                                 type="button"
