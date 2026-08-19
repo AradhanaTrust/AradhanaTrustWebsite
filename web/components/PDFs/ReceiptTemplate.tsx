@@ -9,11 +9,34 @@ import {
 } from "@react-pdf/renderer";
 import path from "path";
 
+// Register fonts
+Font.register({
+    family: 'Noto Sans',
+    src: path.join(process.cwd(), 'public/fonts/NotoSans.ttf')
+});
+
+Font.register({
+    family: 'Noto Sans Kannada',
+    src: path.join(process.cwd(), 'public/fonts/NotoSansKannada.ttf')
+});
+
+Font.register({
+    family: 'Noto Sans Devanagari',
+    src: path.join(process.cwd(), 'public/fonts/NotoSansDevanagari.ttf')
+});
+
+const getFontFamily = (text?: string) => {
+    if (!text) return 'Noto Sans';
+    if (/[\u0900-\u097F]/.test(text)) return 'Noto Sans Devanagari';
+    if (/[\u0C80-\u0CFF]/.test(text)) return 'Noto Sans Kannada';
+    return 'Noto Sans';
+};
+
 // Define styles
 const styles = StyleSheet.create({
     page: {
         padding: 40,
-        fontFamily: 'Helvetica',
+        fontFamily: 'Noto Sans',
         backgroundColor: '#fff',
     },
     header: {
@@ -197,7 +220,7 @@ export const ReceiptTemplate = ({ data }: { data: ReceiptData }) => (
             <View style={styles.section}>
                 <View style={styles.row}>
                     <Text style={styles.label}>Member Name:</Text>
-                    <Text style={styles.value}>{data.userName}</Text>
+                    <Text style={[styles.value, { fontFamily: getFontFamily(data.userName) }]}>{data.userName}</Text>
                 </View>
                 <View style={styles.row}>
                     <Text style={styles.label}>Email Address:</Text>
@@ -216,7 +239,7 @@ export const ReceiptTemplate = ({ data }: { data: ReceiptData }) => (
                 {data.eventTitle && (
                     <View style={styles.row}>
                         <Text style={styles.label}>Event/Activity:</Text>
-                        <Text style={styles.value}>{data.eventTitle}</Text>
+                        <Text style={[styles.value, { fontFamily: getFontFamily(data.eventTitle) }]}>{data.eventTitle}</Text>
                     </View>
                 )}
                 <View style={styles.row}>
