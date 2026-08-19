@@ -45,7 +45,7 @@ export async function registerForFreeEvent(eventId: string, eventTitle: string, 
                 totalAmount: 0,
                 status: "registered",
                 // specific for free events
-                razorpayOrderId: "FREE_REGISTRATION"
+                razorpayOrderId: `FREE_${regNo}`
             }
         });
 
