@@ -16,19 +16,19 @@ Font.register({
 });
 
 Font.register({
-    family: 'Noto Sans Kannada',
-    src: path.join(process.cwd(), 'public/fonts/NotoSansKannada.ttf')
+    family: 'Tiro Kannada',
+    src: path.join(process.cwd(), 'public/fonts/TiroKannada.ttf')
 });
 
 Font.register({
-    family: 'Noto Sans Devanagari',
-    src: path.join(process.cwd(), 'public/fonts/NotoSansDevanagari.ttf')
+    family: 'Tiro Devanagari Hindi',
+    src: path.join(process.cwd(), 'public/fonts/TiroDevanagariHindi.ttf')
 });
 
 const getFontFamily = (text?: string) => {
     if (!text) return 'Noto Sans';
-    if (/[\u0900-\u097F]/.test(text)) return 'Noto Sans Devanagari';
-    if (/[\u0C80-\u0CFF]/.test(text)) return 'Noto Sans Kannada';
+    if (/[\u0900-\u097F]/.test(text)) return 'Tiro Devanagari Hindi';
+    if (/[\u0C80-\u0CFF]/.test(text)) return 'Tiro Kannada';
     return 'Noto Sans';
 };
 
