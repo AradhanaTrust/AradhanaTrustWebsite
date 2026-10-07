@@ -19,7 +19,8 @@ import {
     IndianRupee,
     Briefcase,
     Phone,
-    Trash2
+    Trash2,
+    Printer
 } from "lucide-react";
 import * as XLSX from 'xlsx';
 
@@ -388,6 +389,15 @@ function RegistrationsPageContent() {
                                         </td>
                                         <td className="px-4 md:px-6 py-4 whitespace-nowrap text-right">
                                             <div className="flex justify-end gap-1 md:gap-2">
+                                                <a
+                                                    href={`/api/receipts/download?id=${reg.id}`}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="p-1.5 md:p-2 text-secondary-dark hover:bg-secondary/10 rounded-lg transition-colors border border-transparent hover:border-secondary/20"
+                                                    title="Print Receipt"
+                                                >
+                                                    <Printer size={18} />
+                                                </a>
                                                 {reg.status !== 'confirmed' && (
                                                     <button
                                                         onClick={() => handleUpdateStatus(reg.id, 'confirmed')}

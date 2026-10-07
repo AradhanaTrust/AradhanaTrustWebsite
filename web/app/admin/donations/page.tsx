@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import DashboardLayout from "@/components/admin/DashboardLayout";
-import { Search, Filter, Download, Calendar as CalendarIcon, Loader2, Trash2 } from "lucide-react";
+import { Search, Filter, Download, Calendar as CalendarIcon, Loader2, Trash2, Printer } from "lucide-react";
 import * as XLSX from "xlsx";
 
 export default function DonationsPage() {
@@ -303,7 +303,7 @@ export default function DonationsPage() {
                                         <th className="p-4 font-semibold text-primary-dark whitespace-nowrap">Category</th>
                                         <th className="p-4 font-semibold text-primary-dark whitespace-nowrap">Method</th>
                                         <th className="p-4 font-semibold text-primary-dark whitespace-nowrap">Status</th>
-                                        {enableDeletions && <th className="p-4 font-semibold text-primary-dark whitespace-nowrap text-right">Actions</th>}
+                                        <th className="p-4 font-semibold text-primary-dark whitespace-nowrap text-right">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody className="divide-y divide-secondary/10">
@@ -355,22 +355,33 @@ export default function DonationsPage() {
                                                     {donation.status}
                                                 </span>
                                             </td>
-                                            {enableDeletions && (
-                                                <td className="p-4 text-right">
-                                                    <button
-                                                        onClick={() => handleDeleteDonation(donation.id)}
-                                                        disabled={isDeleting === donation.id}
-                                                        className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors disabled:opacity-50"
-                                                        title="Delete Record"
+                                            <td className="p-4 text-right">
+                                                <div className="flex items-center justify-end gap-2">
+                                                    <a
+                                                        href={`/api/receipts/download?id=${donation.id}`}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="p-2 text-secondary-dark hover:bg-secondary/10 rounded-lg transition-colors"
+                                                        title="Print Receipt"
                                                     >
-                                                        {isDeleting === donation.id ? (
-                                                            <Loader2 className="w-4 h-4 animate-spin" />
-                                                        ) : (
-                                                            <Trash2 className="w-4 h-4" />
-                                                        )}
-                                                    </button>
-                                                </td>
-                                            )}
+                                                        <Printer className="w-4 h-4" />
+                                                    </a>
+                                                    {enableDeletions && (
+                                                        <button
+                                                            onClick={() => handleDeleteDonation(donation.id)}
+                                                            disabled={isDeleting === donation.id}
+                                                            className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors disabled:opacity-50"
+                                                            title="Delete Record"
+                                                        >
+                                                            {isDeleting === donation.id ? (
+                                                                <Loader2 className="w-4 h-4 animate-spin" />
+                                                            ) : (
+                                                                <Trash2 className="w-4 h-4" />
+                                                            )}
+                                                        </button>
+                                                    )}
+                                                </div>
+                                            </td>
                                         </tr>
                                     ))}
                                 </tbody>
